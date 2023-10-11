@@ -1,0 +1,104 @@
+/* 
+    SUMÁRIO
+    1. LAYOUT
+    2. TIPOGRAFIA
+    3. INPUTS AND BUTTONS
+*/
+
+/* 
+    1. LAYOUT
+*/
+
+@import url("assets/css/login.css");
+@import url("assets/css/cadastro-user.css");
+:root {
+    --cor-branco: #FFFFFF;
+    --cor-preto: #000000;
+    --cor-rosa-principal: #FFAFCC;
+    --cor-rosa-secundario: #FFC8DD;
+    --cor-rosa-hover:(--ffc-8-dd-50, rgba(255, 200, 221, 0.50));
+    --cor-azul-claro: #D1E7ED;
+    --cor-roxa: #CDB4DB;
+    --cor-cinza: #DDDDDD;
+    --cor-cinza-opacity: #dddddd29;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--cor-preto);
+}
+
+/* 
+    2. TIPOGRAFIA
+*/
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+p, span, a {
+    font-size: 16px;
+}
+
+.p-small {
+    font-size: 14px;
+}
+
+/* 
+    3. INPUTS AND BUTTONS
+*/
+
+input[type="text"], input[type="password"], input[type="email"] {
+    border: 1px solid var(--cor-preto);
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor-preto);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.input-simples, .input-rosa, .input-simples-outline {
+    border-radius: 8px;
+    padding: 8px 32px;
+}
+
+.input-simples {
+    background: var(--cor-branco);
+    border: 1px solid var(--cor-cinza);
+}
+
+.input-simples:hover {
+    background-color: var(--cor-rosa-principal);
+}
+
+.input-rosa {
+    background: var(--cor-rosa-secundario);
+    border: 1px solid var(--cor-cinza);
+}
+
+.input-rosa:hover {
+    background-color: var(--cor-rosa-principal);
+}
+
+.input-simples-outline {
+    background: var(--cor-branco);
+    border: 1px solid var(--cor-preto);
+}
+
+.input-simples-outline:hover {
+    background-color: var(--cor-rosa-principal);
+}
+

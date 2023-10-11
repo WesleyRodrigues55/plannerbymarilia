@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 class User extends BaseController
 {
-    public function index(): string
+    public function login(): string
     {
-        return view('welcome_message');
+        return view('login/login');
     }
 }
