@@ -1,6 +1,6 @@
 <?php
-    $data['title'] = "Página Inicial";
-    $data['link_css'] = "assets/css/home.css";
+    $data['title'] = "Cadastro Usuário";
+    $data['link_css'] = "assets/css/cadastro-user.css";
 ?>
 
 <?= view("include/head", $data) ?>
