@@ -15,8 +15,12 @@ h1 {
     margin-bottom: 59px;
 }
 
-
 /* .formulario {
     max-width: 400px;
     margin: 0 auto;
 } */
+
+.botao-check {
+    margin-bottom: 1em;
+    color: var(--cor-preto);
+}
