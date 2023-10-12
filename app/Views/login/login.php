@@ -10,7 +10,7 @@
         <img src="assets/img/logo-projeto.png" alt="logo-pojeto" class="logo">
         <h1 class="titulo">Acesse sua Conta</h1>
         <div class="usuario-senha">
-            <form method="post" action="" class="formulario">
+            <form method="post" action="/user/verificarLogin" class="formulario">
                 <div class="mb-3 d-flex align-items-center">
                     <div style="position: relative; width: 100%;">
                         <input class="w-100 form-control" type="email" placeholder="E-mail" required id="EMAIL" name="EMAIL" value="" />
@@ -25,7 +25,11 @@
                     </div>
                 </div>
                 
-                <input class="mb-3 w-100 btn input-rosa" type="submit" value="Entrar">
+                <div>
+                    <input class="mb-3 w-100 btn input-rosa" type="submit" value="Entrar">
+                    <?php if (isset($_GET['error'])) { echo '<br><b style="color: red;">Credências incorretas!</b>'; } ?>
+                </div>
+                
 
             </form>
             <div class="text-center">
