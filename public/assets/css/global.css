@@ -5,6 +5,7 @@
     3. INPUTS AND BUTTONS
 */
 
+
 /* 
     1. LAYOUT
 */
@@ -16,7 +17,7 @@
     --cor-preto: #000000;
     --cor-rosa-principal: #FFAFCC;
     --cor-rosa-secundario: #FFC8DD;
-    --cor-rosa-hover:(--ffc-8-dd-50, rgba(255, 200, 221, 0.50));
+    --cor-rosa-hover: rgba(255, 200, 221, 0.50);
     --cor-azul-claro: #D1E7ED;
     --cor-roxa: #CDB4DB;
     --cor-cinza: #DDDDDD;
@@ -27,6 +28,11 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: var(--cor-preto);
 }
+
+footer {
+    background-color: var(--cor-cinza-opacity);
+}
+
 
 /* 
     2. TIPOGRAFIA
@@ -41,11 +47,17 @@ h2 {
     font-size: 22px;
 }
 
+.h2-titles {
+    font-size: 32px;
+}
+
 h3 {
     font-size: 20px;
 }
 
-p, span, a {
+p,
+span,
+a {
     font-size: 16px;
 }
 
@@ -53,11 +65,14 @@ p, span, a {
     font-size: 14px;
 }
 
+
 /* 
     3. INPUTS AND BUTTONS
 */
 
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     border: 1px solid var(--cor-preto);
 }
 
@@ -70,35 +85,40 @@ a:hover {
     text-decoration: underline;
 }
 
-.input-simples, .input-rosa, .input-simples-outline {
+.input-simples,
+.input-rosa,
+.input-simples-outline {
     border-radius: 8px;
-    padding: 8px 32px;
+    padding: 8px 16px;
 }
 
 .input-simples {
-    background: var(--cor-branco);
+    background: transparent;
     border: 1px solid var(--cor-cinza);
 }
 
 .input-simples:hover {
     background-color: var(--cor-rosa-principal);
+    text-decoration: none;
 }
 
 .input-rosa {
     background: var(--cor-rosa-secundario);
     border: 1px solid var(--cor-cinza);
+    text-decoration: none;
 }
 
 .input-rosa:hover {
     background-color: var(--cor-rosa-principal);
+    text-decoration: none;
 }
 
 .input-simples-outline {
-    background: var(--cor-branco);
+    background: transparent;
     border: 1px solid var(--cor-preto);
 }
 
 .input-simples-outline:hover {
     background-color: var(--cor-rosa-principal);
+    text-decoration: none;
 }
-

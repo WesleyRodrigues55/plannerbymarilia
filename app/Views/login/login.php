@@ -14,14 +14,14 @@
                 <div class="mb-3 d-flex align-items-center">
                     <div style="position: relative; width: 100%;">
                         <input class="w-100 form-control" type="email" placeholder="E-mail" required id="EMAIL" name="EMAIL" value="" />
-                        <img src="assets/img/icone-user.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone user" />
+                        <img src="assets/icons/icone-user.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone user" />
                     </div>
                 </div>
                 
                 <div class="mb-3 d-flex align-items-center">
                     <div style="position: relative; width: 100%;">
                         <input class="mb- w-100 form-control" id="password" type="password" placeholder="Senha" required maxlength="64" name="SENHA" />
-                        <img src="assets/img/icone-password.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Senha" />
+                        <img src="assets/icons/icone-password.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Senha" />
                     </div>
                 </div>
                 

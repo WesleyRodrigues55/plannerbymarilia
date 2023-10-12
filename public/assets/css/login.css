@@ -1,18 +1,20 @@
-body, html {
+body,
+html {
     height: 100%;
     margin: 0;
 }
 
-h1{
+h1 {
     color: var(--cor-rosa-principal);
-    text-align:center;
+    text-align: center;
     margin-bottom: 1em;
-} 
+}
 
-.logo{
+.logo {
     width: 308px;
     margin-bottom: 59px;
 }
+
 
 /* .formulario {
     max-width: 400px;
