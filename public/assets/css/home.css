@@ -1,0 +1,43 @@
+.bg-planner-2024 {
+    background-color: var(--cor-rosa-principal);
+    background-image: url("../img/planner-2024.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 600px auto, cover;
+}
+
+.bg-planner-2024 .testee {
+    position: relative;
+}
+
+.bg-planner-2024 .testee h2 {
+    position: absolute;
+    top: -18px;
+}
+
+.bg-planner-2024 ul {
+    padding-top: 100px;
+}
+
+.box-slider-depoimentos {
+    background-color: var(--cor-rosa-hover);
+}
+
+.box-slider-depoimentos .container {
+    width: 600px;
+}
+
+.borda-depoimentos {
+    border-radius: 8px;
+    border: 1px solid var(--cor-preto);
+}
+
+.borda-depoimentos:hover {
+    background-color: var(--cor-rosa-principal);
+}
+
+@media screen and (max-width: 768px) {
+    .box-slider-depoimentos .container {
+        width: 100%;
+    }
+}
