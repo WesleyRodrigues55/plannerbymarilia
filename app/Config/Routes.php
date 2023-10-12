@@ -8,3 +8,4 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 $routes->get('/login', 'User::login');
+$routes->get('/esqueceu-senha', 'User::esqueceuSenha');

@@ -21,12 +21,18 @@ class User extends BaseController
         $login = $user_model
             ->where('EMAIL', $dados['EMAIL'])
             ->where('SENHA', $dados['SENHA'])
-            ->first();
+            ->first();  
 
         // if (!empty($login)) {
         //     return redirect()->to($url);
         // } else {
         //     return redirect()->to('login');
         // }
+    }
+
+    public function esqueceuSenha(): string
+    {
+        return view('login/esqueci-senha');
+
     }
 }
