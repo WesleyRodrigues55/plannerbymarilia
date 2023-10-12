@@ -35,8 +35,8 @@ $data['link_css'] = "assets/css/login.css";
 
         </form>
         <div class="text-center">
-            <a href="#" class="link"> Esqueci minha senha </a>
-            <br /><a href="#" class="link"> Ainda não possui cadastro? Crie uma conta! </a>
+            <a href="esqueceu-senha" class="link"> Esqueci minha senha </a>
+            <br /><a href="cadastrar" class="link"> Ainda não possui cadastro? Crie uma conta! </a>
         </div>
     </div>
 </div>

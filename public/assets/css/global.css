@@ -3,6 +3,7 @@
     1. LAYOUT
     2. TIPOGRAFIA
     3. INPUTS AND BUTTONS
+    4. LOGO LOGIN
 */
 
 
@@ -12,6 +13,7 @@
 
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
+
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -22,10 +24,11 @@
     --cor-roxa: #CDB4DB;
     --cor-cinza: #DDDDDD;
     --cor-cinza-opacity: #dddddd29;
+    --fonte-principal: 'Montserrat', sans-serif;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte-principal);
     color: var(--cor-preto);
 }
 
@@ -76,6 +79,14 @@ input[type="email"] {
     border: 1px solid var(--cor-preto);
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border: 1px solid var(--cor-preto);
+    outline: none;
+    box-shadow: none;
+}
+
 a {
     text-decoration: none;
     color: var(--cor-preto);
@@ -121,4 +132,13 @@ a:hover {
 .input-simples-outline:hover {
     background-color: var(--cor-rosa-principal);
     text-decoration: none;
+}
+
+/* 
+    4. LOGO LOGIN
+*/
+
+.logo {
+    width: 308px;
+    margin-bottom: 44px;
 }

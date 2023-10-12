@@ -8,4 +8,9 @@ class User extends BaseController
     {
         return view('login/login');
     }
+
+    public function esqueceuSenha(): string
+    {
+        return view('login/esqueci-senha');
+    }
 }
