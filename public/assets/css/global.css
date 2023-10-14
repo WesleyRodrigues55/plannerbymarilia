@@ -4,6 +4,7 @@
     2. TIPOGRAFIA
     3. INPUTS AND BUTTONS
     4. LOGO LOGIN
+    5. NAVEGAÇÃO
 */
 
 
@@ -13,7 +14,7 @@
 
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
-
+@import url("assets/css/nav.css");
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -30,6 +31,17 @@
 body {
     font-family: var(--fonte-principal);
     color: var(--cor-preto);
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul li,
+ol li {
+    list-style: none;
 }
 
 footer {
@@ -60,7 +72,9 @@ h3 {
 
 p,
 span,
-a {
+a,
+ul li,
+ol li {
     font-size: 16px;
 }
 
@@ -75,13 +89,17 @@ a {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="search"],
+input[type="checkbox"] {
     border: 1px solid var(--cor-preto);
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="email"]:focus {
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="checkbox"]:focus {
     border: 1px solid var(--cor-preto);
     outline: none;
     box-shadow: none;
@@ -134,6 +152,12 @@ a:hover {
     text-decoration: none;
 }
 
+.input-navegacao {
+    border: none !important;
+    border-bottom: 1px solid var(--cor-preto) !important;
+}
+
+
 /* 
     4. LOGO LOGIN
 */
@@ -141,4 +165,57 @@ a:hover {
 .logo {
     width: 308px;
     margin-bottom: 44px;
+}
+
+
+/* 
+    5. NAVEGAÇÃO
+*/
+
+.header-top {
+    background-color: var(--cor-azul-claro);
+}
+
+.border-header {
+    margin-top: 4px;
+    width: 100%;
+    border: 2px solid var(--cor-azul-claro);
+}
+
+.content-icons-nav {
+    gap: 32px;
+}
+
+.icon-nav {
+    width: 32px;
+}
+
+@media screen and (max-width: 992px) {
+    .box-logo-header {
+        width: 100% !important;
+    }
+    .form-search-nav,
+    .content-icons-nav-desktop {
+        display: none !important;
+    }
+}
+
+nav {
+    background-color: var(--cor-azul-claro);
+    color: var(--cor-preto);
+    width: 100% !important;
+}
+
+.menu-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 992px) {
+    .menu-nav {
+        display: block !important;
+    }
+    .instagram-media {
+        width: 100% !important;
+    }
 }
