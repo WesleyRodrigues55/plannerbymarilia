@@ -19,17 +19,26 @@
                 <img src="assets/icons/carrinho-compras.png" alt="" class="icon-nav" style="width: 32px">
                 carrinho
             </a>
+            
             <!-- SEM LOGIN -->
+            <?php if (!session()->has('usuario')): ?>
             <a href="" class="d-flex flex-column align-items-center">
                 <img src="assets/icons/user.png" alt=""  class="icon-nav" style="width: 32px">
                 iniciar sessão
             </a>
 
             <!-- COM LOGIN -->
-            <!-- <a href="" class="d-flex flex-column align-items-center">
+            <?php else: ?>
+            <a href="" class="d-flex flex-column align-items-center">
                 <img src="assets/icons/user.png" alt=""  class="icon-nav" style="width: 32px">
                 profile
-            </a> -->
+            </a>
+            <?php endif; ?>
+            
+            <a href="user/logout">Logout</a>
+
+            
+
         </div>
     </div>
 
@@ -44,16 +53,19 @@
                         carrinho
                     </a>
                     <!-- SEM LOGIN -->
+                    <?php if (!session()->has('usuario')): ?>
                     <a href="" class="d-flex flex-column align-items-center">
                         <img src="assets/icons/user.png" alt=""  class="icon-nav" style="width: 32px">
                         iniciar sessão
                     </a>
 
                     <!-- COM LOGIN -->
-                    <!-- <a href="" class="d-flex flex-column align-items-center">
+                    <?php else: ?>
+                    <a href="" class="d-flex flex-column align-items-center">
                         <img src="assets/icons/user.png" alt=""  class="icon-nav" style="width: 32px">
                         profile
-                    </a> -->
+                    </a>
+                    <?php endif; ?>
                 </div>
                 <div class="header-item-center">
                     <div class="overlay"></div>

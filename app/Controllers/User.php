@@ -18,7 +18,7 @@ class User extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login/login');
+        return redirect()->to('login');
     }
 
     //============================================================================
@@ -44,7 +44,7 @@ class User extends BaseController
         $query = $builder->get()->getResultArray();
 
         if ($query == false) {
-            return redirect()->to('usuario/login?error'); //pesquisar sobre erro
+            return redirect()->to('usuario/login?error'); //pesquisar sobre erro   --------------------------------------------------------
         } else {
             session()->set([
             'id' => $query[0]['ID'],
