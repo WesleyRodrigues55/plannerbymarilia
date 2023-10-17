@@ -8,7 +8,7 @@ $data['link_css'] = "assets/css/esqueci-senha.css";
 
 <div class="h-100 d-flex  justify-content-center align-items-center">
     <div class="text-center" style="width:420px;">
-        <a href="../">
+        <a href="<?= base_url('home') ?>">
             <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo">
         </a>
         <h1 class="titulo"><b>Esqueceu sua senha?</b></h1>
