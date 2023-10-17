@@ -1,4 +1,4 @@
-.form-label {
+.preencher {
     margin-bottom: -0.5rem;
     margin-top: 15px;
 }
@@ -22,17 +22,6 @@ p {
     line-height: 1.5;
 }
 
-
-.form-check {
-    display: block;
-    min-height: 1.5rem;
-    padding-left: 2em;
-    padding-right: 1em;
-    margin-bottom: 0.125rem;
-    margin-left: 5px;
-    margin-top: 5px;
-}
-
 .form-check-input:checked {
     background-color: #FFAFCC;
     border-color: #FFAFCC;
@@ -44,13 +33,24 @@ p1 {
     margin-bottom: -2rem;
 }
 
+.h2-titles {
+    font-size: 32px;
+    margin-top: 25px;
+    padding-top: 40px;
+}
+
 .cadastro {
     --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    width: 80%;
+    --bs-gutter-y: 2;
+    /*width: 80%;*/
     padding-right: calc(var(--bs-gutter-x) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: 65px;
     margin-right: auto;
     margin-left: auto;
     background: #DDDDDD15;
+    margin-block-end: 65px;
+    width: 60vw;
+    max-width: auto; 
+
 }
