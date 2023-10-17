@@ -6,7 +6,7 @@ $data['link_css'] = "assets/css/login.css";
 <?= view("include/head", $data) ?>
 
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
-    <a href="../">
+    <a href="<?= base_url('home') ?>">
         <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo">
     </a>
     <h1 class="titulo">Acesse sua Conta</h1>
