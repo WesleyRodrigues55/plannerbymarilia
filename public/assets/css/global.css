@@ -15,8 +15,6 @@
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
-@import url("assets/css/create-account.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -33,7 +31,7 @@
 body {
     font-family: var(--fonte-principal);
     color: var(--cor-preto);
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 ul,
@@ -94,8 +92,13 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="search"],
-input[type="checkbox"] {
+input[type="checkbox"],
+select {
     border: 1px solid var(--cor-preto);
+}
+
+select {
+    border: 1px solid var(--cor-preto) !important;
 }
 
 input[type="text"]:focus,
@@ -106,6 +109,16 @@ input[type="checkbox"]:focus {
     border: 1px solid var(--cor-preto);
     outline: none;
     box-shadow: none;
+}
+
+select:focus {
+    border: 1px solid var(--cor-preto) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+select:hover {
+    cursor: pointer;
 }
 
 a {
