@@ -8,7 +8,9 @@ $data['link_css'] = "assets/css/esqueci-senha.css";
 
 <div class="h-100 d-flex  justify-content-center align-items-center">
     <div class="text-center" style="width:420px;">
-        <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo text-center">
+        <a href="../">
+            <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo">
+        </a>
         <h1 class="titulo"><b>Esqueceu sua senha?</b></h1>
         <p class="text-center">Informe seu e-mail abaixo – Você receberá um link para redefinir sua senha. </p>
         <br>
@@ -26,7 +28,7 @@ $data['link_css'] = "assets/css/esqueci-senha.css";
 
             </form>
             <div class="text-center mt-2">
-                <a href="login" class="text-center voltar mt-2">Voltar</a>
+                <a href="../login" class="text-center voltar mt-2">Voltar</a>
             </div>
         </div>
 

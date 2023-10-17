@@ -11,34 +11,34 @@
         </form>
 
         <div class="w-50 text-center box-logo-header">
-            <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="">
+            <a href="<?= base_url('') ?>">
+                <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto">
+            </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                carrinho
-            </a>
-            
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')): ?>
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                iniciar sessão
-            </a>
+                <a href="" class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                    iniciar sessão
+                </a>
 
-            <!-- COM LOGIN -->
-            <?php else: ?>
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                profile
-            </a>
-            <?php endif; ?>
-            
-            <a href="user/logout">Logout</a>
-
-            
-
+                <!-- COM LOGIN -->
+                <?php else: ?>
+                    <a href="" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        carrinho
+                    </a>
+                    <a href="" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                        profile
+                    </a>
+                    <a href="user/logout" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                        Logout
+                    </a>
+                <?php endif; ?>
         </div>
     </div>
 
@@ -48,10 +48,7 @@
                 <div class="header-item-left  content-icons-nav content-icons-nav-mobile">
                     <!-- por ícone projeto no mobile (apenas) -->
                     <!-- <a href="#" class="brand"><img src="assets/img/logo-projeto.png" alt="" style="width: 120px;"></a> -->
-                    <a href="" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        carrinho
-                    </a>
+                    
                     <!-- SEM LOGIN -->
                     <?php if (!session()->has('usuario')): ?>
                     <a href="" class="d-flex flex-column align-items-center">
@@ -61,10 +58,18 @@
 
                     <!-- COM LOGIN -->
                     <?php else: ?>
-                    <a href="" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                        profile
-                    </a>
+                        <a href="" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                            carrinho
+                        </a>
+                        <a href="" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            profile
+                        </a>
+                        <a href="user/logout" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            Logout
+                        </a>
                     <?php endif; ?>
                 </div>
                 <div class="header-item-center">
