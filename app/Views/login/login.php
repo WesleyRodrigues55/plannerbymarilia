@@ -5,17 +5,15 @@ $data['link_css'] = "assets/css/login.css";
 
 <?= view("include/head", $data) ?>
 
-
-
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
-    <img src="assets/img/logo-projeto.png" alt="logo-pojeto" class="logo">
+    <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-pojeto" class="logo">
     <h1 class="titulo">Acesse sua Conta</h1>
     <div class="usuario-senha">
         <form method="post" action="<?= base_url('user/verificarlogin') ?>"  class="formulario">
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
                     <input class="w-100 form-control" type="email" placeholder="E-mail" required id="EMAIL" name="EMAIL" value="" />
-                    <img src="assets/icons/icone-user.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone user" />
+                    <img src="<?= base_url('assets/icons/icone-user.png') ?>" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone user" />
                 </div>
 
             </div>
@@ -23,7 +21,7 @@ $data['link_css'] = "assets/css/login.css";
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
                     <input class="mb- w-100 form-control" id="password" type="password" placeholder="Senha" required maxlength="64" name="SENHA" />
-                    <img src="assets/icons/icone-password.png" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Senha" />
+                    <img src="<?= base_url('assets/icons/icone-password.png') ?>" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Senha" />
                 </div>
             </div>
             <div class="form-check botao-check">

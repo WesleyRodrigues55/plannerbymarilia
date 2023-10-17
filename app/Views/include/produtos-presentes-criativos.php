@@ -6,9 +6,9 @@
 
     <!-- row -->
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
             <div class="card">
-                <img src="assets/img/produtos-mais-vendidos/planner1.png" class="bd-placeholder-img card-img-top" width="100%" height="100%">
+                <img src="<?= base_url('assets/img/produtos-mais-vendidos/planner1.png') ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
                 <div class="card-body">
                     <h3>Planners 2024</h3>
                     <p class="card-text">
@@ -17,7 +17,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a class="btn input-simples w-100" style="margin-right: 8px" href="">SAIBA MAIS</a>
-                        <a href=""><img src="assets/img/shopping-cart.png" alt="" style="width:36px; height: 36px"></a>
+                        <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
 
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
             <div class="card">
-                <img src="assets/img/produtos-mais-vendidos/planner2.png" class="bd-placeholder-img card-img-top" width="100%" height="100%">
+                <img src="<?= base_url('assets/img/produtos-mais-vendidos/planner2.png') ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
                 <div class="card-body">
                     <h3>Planners 2024</h3>
                     <p class="card-text">
@@ -34,7 +34,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a class="btn input-simples w-100" style="margin-right: 8px" href="">SAIBA MAIS</a>
-                        <a href=""><img src="assets/img/shopping-cart.png" alt="" style="width:36px; height: 36px"></a>
+                        <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
 
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
             <div class="card">
-                <img src="assets/img/produtos-mais-vendidos/planner3.png" class="bd-placeholder-img card-img-top" width="100%" height="100%">
+                <img src="<?= base_url('assets/img/produtos-mais-vendidos/planner3.png') ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
                 <div class="card-body">
                     <h3>Planners 2024</h3>
                     <p class="card-text">
@@ -51,7 +51,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a class="btn input-simples w-100" style="margin-right: 8px" href="">SAIBA MAIS</a>
-                        <a href=""><img src="assets/img/shopping-cart.png" alt="" style="width:36px; height: 36px"></a>
+                        <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
 
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
             <div class="card">
-                <img src="assets/img/produtos-mais-vendidos/planner4.png" class="bd-placeholder-img card-img-top" width="100%" height="100%">
+                <img src="<?= base_url('assets/img/produtos-mais-vendidos/planner4.png') ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
                 <div class="card-body">
                     <h3>Planners 2024</h3>
                     <p class="card-text">
@@ -68,7 +68,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a class="btn input-simples w-100" style="margin-right: 8px" href="">SAIBA MAIS</a>
-                        <a href=""><img src="assets/img/shopping-cart.png" alt="" style="width:36px; height: 36px"></a>
+                        <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                     </div>
                 </div>
             </div>
