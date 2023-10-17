@@ -33,6 +33,7 @@
 body {
     font-family: var(--fonte-principal);
     color: var(--cor-preto);
+    overflow-x:hidden;
 }
 
 ul,
