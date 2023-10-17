@@ -11,7 +11,9 @@
         </form>
 
         <div class="w-50 text-center box-logo-header">
-            <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="">
+            <a href="<?= base_url('') ?>">
+                <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto">
+            </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
