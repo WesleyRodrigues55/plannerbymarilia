@@ -1,11 +1,11 @@
 <?php
     $data['title'] = "Cadastro Usuário";
-    $data['link_css'] = "assets/css/cadastro-user.css";
+    $data['link_css'] = "assets/css/nav.css";
 ?>
 
 <?= view("include/head", $data) ?>
-    
     <?= view("include/nav") ?>
+        
     
     <main>
         <div class="container">
@@ -192,6 +192,7 @@
             </div>
             </div>
     </main>
+
 
     <?= view("include/footer") ?>
 

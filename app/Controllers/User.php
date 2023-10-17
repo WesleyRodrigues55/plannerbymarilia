@@ -13,6 +13,13 @@ class User extends BaseController
             view('/login/login');
     }
 
+    public function cadastroUser()
+    {
+        return
+            view('/login/cadastrar');
+    }
+
+
     //============================================================================
     # LOGOUT
     public function logout()
