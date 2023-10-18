@@ -5,189 +5,235 @@ namespace App\Controllers;
 class Product extends BaseController
 {
     public function planners() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('CATEGORIA', 'planner');
-        $builder->where('ATIVO', 1);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('CATEGORIA', 'planner');
+            $builder->where('ATIVO', 1);
+    
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        $query = $builder->get()->getResultArray();
-
-        $data = ['planners' => $query];
-
-        return view('produtos/planners', $data);
+            $data = ['planners' => $query];
+    
+            return view('produtos/planners', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
     }
     public function cadernos() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('CATEGORIA', 'caderno');
-        $builder->where('ATIVO', 1);
-
-        $query = $builder->get()->getResultArray();
-
-        $data = ['cadernos' => $query];
-
-        return view('produtos/cadernos', $data);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('CATEGORIA', 'caderno');
+            $builder->where('ATIVO', 1);
+    
+            $query = $builder->get()->getResultArray();
+            $db->close();
+            
+            $data = ['cadernos' => $query];
+    
+            return view('produtos/cadernos', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
+        
     }
 
     public function agendas() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('CATEGORIA', 'agenda');
-        $builder->where('ATIVO', 1);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('CATEGORIA', 'agenda');
+            $builder->where('ATIVO', 1);
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        $data = ['agendas' => $query];
+            $data = ['agendas' => $query];
 
-        return view('produtos/agendas', $data);
+            return view('produtos/agendas', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function blocos() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('CATEGORIA', 'bloco');
-        $builder->where('ATIVO', 1);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('CATEGORIA', 'bloco');
+            $builder->where('ATIVO', 1);
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        $data = ['blocos' => $query];
+            $data = ['blocos' => $query];
 
-        return view('produtos/blocos', $data);
+            return view('produtos/blocos', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function maisVendidosSemana() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS  
-        $builder->where('ATIVO', 1);
-        $builder->orderBy('ID', 'RANDOM');
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS  
+            $builder->where('ATIVO', 1);
+            $builder->orderBy('ID', 'RANDOM');
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        $data = ['mais_vendidos' => $query];
+            $data = ['mais_vendidos' => $query];
 
-        return view('produtos/mais-vendidos-semana', $data);
+            return view('produtos/mais-vendidos-semana', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function presentesCriativos() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');  
-        $builder->where('ATIVO', 1);
-        $builder->orderBy('ID', 'RANDOM');
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');  
+            $builder->where('ATIVO', 1);
+            $builder->orderBy('ID', 'RANDOM');
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        $data = ['presentes_criativos' => $query];
+            $data = ['presentes_criativos' => $query];
 
-        return view('produtos/presentes-criativos', $data);
+            return view('produtos/presentes-criativos', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function plannersHome() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('CATEGORIA', 'planner');
-        $builder->where('ATIVO', 1);
-        $builder->limit(4);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('CATEGORIA', 'planner');
+            $builder->where('ATIVO', 1);
+            $builder->limit(4);
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        return $query;
+            return $query;
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function presentesCriativosHome() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('ATIVO', 1);
-        $builder->orderBy('ID', 'RANDOM');
-        $builder->limit(4);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('ATIVO', 1);
+            $builder->orderBy('ID', 'RANDOM');
+            $builder->limit(4);
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        return $query;
+            return $query;
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 
     public function maisVendidosHome() {
-        $db = \Config\Database::connect();
-        $builder = $db->table('produto');
-        $builder->select('
-            ID,
-            NOME,
-            IMAGEM,
-            PRECO,
-            SLUG,
-            CATEGORIA
-        ');
-        $builder->where('ATIVO', 1);
-        //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS
-        $builder->orderBy('ID', 'RANDOM');
-        $builder->limit(4);
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->select('
+                ID,
+                NOME,
+                IMAGEM,
+                PRECO,
+                SLUG,
+                CATEGORIA
+            ');
+            $builder->where('ATIVO', 1);
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS
+            $builder->orderBy('ID', 'RANDOM');
+            $builder->limit(4);
 
-        $query = $builder->get()->getResultArray();
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
-        return $query;
+            return $query;
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
 }
