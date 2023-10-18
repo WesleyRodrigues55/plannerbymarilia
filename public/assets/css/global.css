@@ -3,6 +3,8 @@
     1. LAYOUT
     2. TIPOGRAFIA
     3. INPUTS AND BUTTONS
+    4. LOGO LOGIN
+    5. NAVEGAÇÃO
 */
 
 
@@ -12,6 +14,7 @@
 
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
+@import url("assets/css/nav.css");
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -22,11 +25,41 @@
     --cor-roxa: #CDB4DB;
     --cor-cinza: #DDDDDD;
     --cor-cinza-opacity: #dddddd29;
+    --fonte-principal: 'Montserrat', sans-serif;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte-principal);
     color: var(--cor-preto);
+    overflow-x: hidden;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul li,
+ol li {
+    list-style: none;
+}
+
+.card-img-top {
+    height: 260px;
+    object-fit: contain;
+}
+
+.card-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+@media screen and (max-width: 575px) {
+    .card-img-top {
+        height: auto;
+    }
 }
 
 footer {
@@ -57,7 +90,9 @@ h3 {
 
 p,
 span,
-a {
+a,
+ul li,
+ol li {
     font-size: 16px;
 }
 
@@ -72,8 +107,35 @@ a {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="search"],
+input[type="checkbox"],
+select {
     border: 1px solid var(--cor-preto);
+}
+
+select {
+    border: 1px solid var(--cor-preto) !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="checkbox"]:focus {
+    border: 1px solid var(--cor-preto);
+    outline: none;
+    box-shadow: none;
+}
+
+select:focus {
+    border: 1px solid var(--cor-preto) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+select:hover {
+    cursor: pointer;
 }
 
 a {
@@ -121,4 +183,72 @@ a:hover {
 .input-simples-outline:hover {
     background-color: var(--cor-rosa-principal);
     text-decoration: none;
+}
+
+.input-navegacao {
+    border: none !important;
+    border-bottom: 1px solid var(--cor-preto) !important;
+}
+
+
+/* 
+    4. LOGO LOGIN
+*/
+
+.logo {
+    width: 308px;
+    margin-bottom: 44px;
+}
+
+
+/* 
+    5. NAVEGAÇÃO
+*/
+
+.header-top {
+    background-color: var(--cor-azul-claro);
+}
+
+.border-header {
+    margin-top: 4px;
+    width: 100%;
+    border: 2px solid var(--cor-azul-claro);
+}
+
+.content-icons-nav {
+    gap: 32px;
+}
+
+.icon-nav {
+    width: 32px;
+}
+
+@media screen and (max-width: 992px) {
+    .box-logo-header {
+        width: 100% !important;
+    }
+    .form-search-nav,
+    .content-icons-nav-desktop {
+        display: none !important;
+    }
+}
+
+nav {
+    background-color: var(--cor-azul-claro);
+    color: var(--cor-preto);
+    width: 100% !important;
+}
+
+.menu-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 992px) {
+    .menu-nav {
+        display: block !important;
+    }
+    .instagram-media {
+        width: 100% !important;
+    }
 }
