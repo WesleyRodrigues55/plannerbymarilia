@@ -9,10 +9,10 @@
 
     <!-- conteúdo home vai aqui -->
     <main>
-        <?= view("include/produtos-mais-vendidos") ?>
+        <?= view("include/produtos-mais-vendidos", $mais_vendidos) ?>
 
         <!-- planner 2024 -->
-        <div class="bg-planner-2024 pb-5">
+        <div class="bg-planner-2024 pb-5 mt-5">
             <div class="container">
                 <div class="testee">
                     <h2 class="h2-titles"><b>PLANNER<br>2024</b></h2>
@@ -28,8 +28,8 @@
         </div>  
         <!-- ../planner 2024 -->
 
-        <?= view("include/produtos-planners") ?>
-        <?= view("include/produtos-presentes-criativos") ?>
+        <?= view("include/produtos-planners", $planners) ?>
+        <?= view("include/produtos-presentes-criativos", $presentes_criativos) ?>
         <?= view("include/instagram") ?>
 
         <!-- depoimentos -->
