@@ -19,15 +19,6 @@ class User extends BaseController
             view('/login/cadastrar');
     }
 
-    //============================================================================
-    # ADMINISTRADOR 
-    public function cadastroAdm()
-    {
-        return
-            view('/adm/cadastro-adm');
-    }
-
-
 
     //============================================================================
     # LOGOUT
