@@ -22,3 +22,4 @@ $routes->add('/blocos', 'Product::blocos');
 $routes->add('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->add('/presentes-criativos', 'Product::presentesCriativos');
 
+$routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
