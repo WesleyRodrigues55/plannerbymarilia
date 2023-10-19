@@ -15,8 +15,6 @@
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
-@import url("assets/css/cadastro-adm.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -229,7 +227,6 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -251,7 +248,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }
