@@ -47,6 +47,23 @@ ol li {
     list-style: none;
 }
 
+.card-img-top {
+    height: 260px;
+    object-fit: contain;
+}
+
+.card-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+@media screen and (max-width: 575px) {
+    .card-img-top {
+        height: auto;
+    }
+}
+
 footer {
     background-color: var(--cor-cinza-opacity);
 }
