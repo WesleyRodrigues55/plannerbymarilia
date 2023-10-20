@@ -22,3 +22,9 @@ $routes->get('/agendas', 'Product::agendas');
 $routes->get('/blocos', 'Product::blocos');
 $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
+
+$routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
+$routes->get('/carrinho', 'BuyCart::carrinho');
+$routes->post('carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
+$routes->post('carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
+

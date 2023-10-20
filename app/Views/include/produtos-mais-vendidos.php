@@ -18,7 +18,7 @@
                             <br><span><b><?php echo number_format($mv['PRECO'], 2, '.', ''); ?></b></span>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url($mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
+                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
                             <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                         </div>
                     </div>

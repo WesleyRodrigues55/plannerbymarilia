@@ -17,6 +17,7 @@ class Product extends Model
     protected $allowedFields = [
         'ID',
         'NOME',
+        'IMAGEM',
         'PRECO',
         'TIPO_CAPA',
         'CATEGORIA',

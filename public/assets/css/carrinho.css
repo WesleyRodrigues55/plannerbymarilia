@@ -1,0 +1,9 @@
+.box-img-carrinho {}
+
+.box-img-carrinho img {
+    width: 100px
+}
+
+.valor-quantidade:hover {
+    background-color: var(--cor-branco);
+}
