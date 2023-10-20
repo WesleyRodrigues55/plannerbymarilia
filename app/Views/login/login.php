@@ -6,7 +6,9 @@ $data['link_css'] = "assets/css/login.css";
 <?= view("include/head", $data) ?>
 
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
-    <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-pojeto" class="logo">
+    <a href="<?= base_url('home') ?>">
+        <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo">
+    </a>
     <h1 class="titulo">Acesse sua Conta</h1>
     <div class="usuario-senha">
         <form method="post" action="<?= base_url('user/verificarlogin') ?>"  class="formulario">
@@ -25,8 +27,8 @@ $data['link_css'] = "assets/css/login.css";
                 </div>
             </div>
             <div class="form-check botao-check">
-                <input class="form-check-input" type="checkbox" name="check" value="true" id="flexCheckChecked" checked style="background-color: lightblue; border-color: lightblue; outline: none;">
-                <label class=" form-check-label" for="flexCheckChecked">
+                <input class="form-check-input" type="checkbox" name="check" value="true" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
                     Lembrar de mim
                 </label>
             </div>
@@ -38,8 +40,8 @@ $data['link_css'] = "assets/css/login.css";
 
         </form>
         <div class="text-center">
-            <a href="esqueceu-senha" class="link"> Esqueci minha senha </a>
-            <br /><a href="cadastrar" class="link"> Ainda não possui cadastro? Crie uma conta! </a>
+            <a href="login/esqueceu-senha" class="link"> Esqueci minha senha </a>
+            <br /><a href="login/cadastro-usuario" class="link"> Ainda não possui cadastro? Crie uma conta! </a>
         </div>
     </div>
 </div>

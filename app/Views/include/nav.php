@@ -11,34 +11,34 @@
         </form>
 
         <div class="w-50 text-center box-logo-header">
-            <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="">
+            <a href="<?= base_url('') ?>">
+                <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto">
+            </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                carrinho
-            </a>
-            
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')): ?>
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                iniciar sessão
-            </a>
+                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                    iniciar sessão
+                </a>
 
-            <!-- COM LOGIN -->
-            <?php else: ?>
-            <a href="" class="d-flex flex-column align-items-center">
-                <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                profile
-            </a>
-            <?php endif; ?>
-            
-            <a href="user/logout">Logout</a>
-
-            
-
+                <!-- COM LOGIN -->
+                <?php else: ?>
+                    <a href="" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        carrinho
+                    </a>
+                    <a href="" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                        profile
+                    </a>
+                    <a href="user/logout" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                        Logout
+                    </a>
+                <?php endif; ?>
         </div>
     </div>
 
@@ -48,23 +48,28 @@
                 <div class="header-item-left  content-icons-nav content-icons-nav-mobile">
                     <!-- por ícone projeto no mobile (apenas) -->
                     <!-- <a href="#" class="brand"><img src="assets/img/logo-projeto.png" alt="" style="width: 120px;"></a> -->
-                    <a href="" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        carrinho
-                    </a>
+                    
                     <!-- SEM LOGIN -->
                     <?php if (!session()->has('usuario')): ?>
-                    <a href="" class="d-flex flex-column align-items-center">
+                    <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
                         <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
                         iniciar sessão
                     </a>
 
                     <!-- COM LOGIN -->
                     <?php else: ?>
-                    <a href="" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                        profile
-                    </a>
+                        <a href="" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                            carrinho
+                        </a>
+                        <a href="" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            profile
+                        </a>
+                        <a href="user/logout" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            Logout
+                        </a>
                     <?php endif; ?>
                 </div>
                 <div class="header-item-center">
@@ -88,7 +93,7 @@
                                 <a href="#">PLANNERS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#">Item 01</a></li>
+                                        <li><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
@@ -100,7 +105,7 @@
                                 <a href="#">AGENDA<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#">Item 01</a></li>
+                                        <li><a href="<?= base_url('/agendas')  ?>">Ver agendas</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
@@ -112,7 +117,7 @@
                                 <a href="#">BLOCO DE NOTAS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#">Item 01</a></li>
+                                        <li><a href="<?= base_url('/blocos')  ?>">Ver blocos</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
@@ -124,7 +129,7 @@
                                 <a href="#">CADERNOS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#">Item 01</a></li>
+                                        <li><a href="<?= base_url('/cadernos')  ?>">Ver cadernos</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
