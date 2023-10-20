@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="email" class="preencher">E-MAIL*</label>
-                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com.br">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email@dominio.com.br">
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -27,7 +27,7 @@
 
                     <div class="col-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Digite sua senha" required>
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
                         <div class="invalid-feedback">
                             Uma senha é requirida.
@@ -37,7 +37,7 @@
 
                 <div class="col-12">
                     <label for="password" class="preencher">CONFIRMAR SENHA*</label>
-                    <input type="password" class="form-control" id="password" placeholder="Confirme sua senha" required>
+                    <input type="password" class="form-control"  name="passwordConfirm" id="password" placeholder="Confirme sua senha" required>
                     <div class="invalid-feedback">
                         Uma senha é requirida.
                     </div>
@@ -50,7 +50,7 @@
 
                 <div class="col-md-12">
                     <label for="name" class="preencher">NOME*</label>
-                    <input type="text" class="form-control" id="name" placeholder="Digite o seu nome" required>
+                    <input type="text" class="form-control"  name="nome" id="name" placeholder="Digite o seu nome" required>
                     <div class="invalid-feedback">
                         Por favor preencha o seu nome.
                     </div>
@@ -58,7 +58,7 @@
 
                 <div class="col-12">
                     <label for="sobrenome" class="preencher">SOBRENOME*</label>
-                    <input type="text" class="form-control" id="sobrenome" placeholder="Digite o seu sobrenome">
+                    <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Digite o seu sobrenome">
                     <div class="invalid-feedback">
                         Por favor preencha o seu sobrenome.
                     </div>
@@ -66,7 +66,7 @@
 
                 <div class="col-12">
                     <label for="telefone" class="preencher">NÚMERO DE TELEFONE*</label>
-                    <input type="text" class="form-control" id="telefone" placeholder="(XX)XXXXX-XXXX">
+                    <input type="text" class="form-control"  name="telefone" id="telefone" placeholder="(XX)XXXXX-XXXX">
                     <div class="invalid-feedback">
                         Por favor preencha o seu telefone de contato.
                     </div>
@@ -74,7 +74,7 @@
 
                 <div class="col-12">
                     <label for="cpf" class="preencher">CPF*</label>
-                    <input type="text" class="form-control" id="cpf" placeholder="XXX.XXX.XXX-XX">
+                    <input type="text" class="form-control"  name="cpf" id="cpf" placeholder="XXX.XXX.XXX-XX">
 
                     <div class="d-flex gap-4">
 
@@ -96,7 +96,7 @@
 
                 <div class="col-12">
                     <label for="cep" class="preencher">CEP*</label>
-                    <input type="text" class="form-control" id="cep" placeholder="XXXXX-XXX">
+                    <input type="text" class="form-control"  name="cep" id="cep" placeholder="XXXXX-XXX">
                     <div class="invalid-feedback">
                         Por favor preencha o seu CEP.
                     </div>
@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <label for="rua" class="preencher">RUA*</label>
-                        <input type="text" class="form-control" id="rua" placeholder="Digite o nome da sua rua">
+                        <input type="text" class="form-control"  name="rua" id="rua" placeholder="Digite o nome da sua rua">
                         <div class="invalid-feedback">
                             Por favor preencha o seu endereço.
                         </div>
@@ -113,7 +113,7 @@
 
                     <div class="col-md-2">
                         <label for="numero" class="preencher">Nº*</label>
-                        <input type="text" class="form-control" id="numero" placeholder="XX">
+                        <input type="text" class="form-control"  name="numero" id="numero" placeholder="XX">
                         <div class="invalid-feedback">
                             Por favor preencha o número do seu endereço.
                         </div>
@@ -123,12 +123,12 @@
                 <div class="row">
                     <div class="col">
                         <label for="complemento" class="preencher">COMPLEMENTO</label>
-                        <input type="text" class="form-control" id="complemento" placeholder="apto, bloco, vila">
+                        <input type="text" class="form-control" name="complemento" id="complemento" placeholder="apto, bloco, vila">
                     </div>
 
                     <div class="col">
                         <label for="bairro" class="preencher">BAIRRO</label>
-                        <input type="text" class="form-control" id="bairro" placeholder="Digite o nome do seu bairro">
+                        <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Digite o nome do seu bairro">
                     </div>
                 </div>
 
@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="termos">
+                        <input type="checkbox" class="form-check-input"  name="termos" id="termos">
                         <label class="form-check-label" for="termos">Ao usar este formulário de cadastro, você concorda
                             com
                             o
