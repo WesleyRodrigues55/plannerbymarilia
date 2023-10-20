@@ -1,6 +1,6 @@
 <?php
-    $data['title'] = "Cadastro Usuário";
-    $data['link_css'] = "assets/css/cadastro-user.css";
+$data['title'] = "Cadastro Usuário";
+$data['link_css'] = "assets/css/cadastro-user.css";
 ?>
 
 <?= view("include/head", $data) ?>
@@ -31,7 +31,7 @@
                             Uma senha é requirida.
                         </div>
                     </div>
-                
+
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
                         <input type="password" class="form-control" id="password" placeholder="Confirme sua senha" required>
@@ -85,7 +85,7 @@
                                 <input id="pessoaJuridica" name="tipoPessoa" type="radio" class="form-check-input" required>
                                 <label class="form-check-label" for="pessoaJuridica">Pessoa jurídica</label>
                             </div>
-                            
+
                         </div>
                         <div class="invalid-feedback">
                             Por favor preencha o seu CPF.
@@ -175,8 +175,8 @@
                     <div class="col-md-12 mt-1">
                         <input type="checkbox" class="form-check-input" id="termos">
                         <label class="form-check-label" for="termos" style="display: inline"><i>
-                            Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de seus dados por esse site.
-                        </i></label>
+                                Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de seus dados por esse site.
+                            </i></label>
                     </div>
                 </div>
                 <!-- ../row -->
@@ -189,7 +189,7 @@
 
                 <div class="text-center my-5">
                     <a href="<?= base_url("login") ?>" class=""><b>Voltar</b></a>
-                
+                </div>
 
             </form>
         </div>
