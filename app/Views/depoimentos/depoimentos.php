@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="name" class="preencher">MENSAGEM</label>
-                    <textarea class="form-control message-field" id="name" rows="5"></textarea>
+                    <textarea class="form-control message-field" name = "mensagem" id="name" rows="5"></textarea>
                 </div>
             </div>
 
