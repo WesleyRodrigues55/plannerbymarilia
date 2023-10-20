@@ -109,11 +109,17 @@ ol li {
 
 input[type="text"],
 input[type="password"],
-input[type="email"],
+input[type="email"], 
 input[type="search"],
 input[type="checkbox"],
-select {
+select,
+textarea
+{
     border: 1px solid var(--cor-preto);
+}
+
+textarea {
+    border: 1px solid var(--cor-preto) !important;
 }
 
 select {
