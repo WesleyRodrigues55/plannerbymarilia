@@ -19,7 +19,6 @@ class User extends BaseController
             view('/login/cadastrar');
     }
 
-
     //============================================================================
     # LOGOUT
     public function logout()

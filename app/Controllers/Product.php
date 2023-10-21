@@ -236,4 +236,52 @@ class Product extends BaseController
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         }
     }
+
+    public function pagePlanners($categoria = false, $slug = false, $id = false)
+    {
+        if ($categoria == "" || $slug == "" || $id == "") {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } 
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->where('ID', $id);
+            $builder->where('CATEGORIA', $categoria);
+            $builder->where('SLUG', $slug);
+            $builder->where('ATIVO', 1);
+    
+            $query = $builder->get()->getResultArray();
+            $db->close();
+            $opcoes_adicionais = $this->getOpcoesAdicionais();
+
+            if ($query == null || $opcoes_adicionais == null) {
+                //produto não existe - fazer página de erro
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            }
+
+            $data = [
+                'produto_selecionado' => $query,
+                'opcoes_adicionais' => $opcoes_adicionais
+            ];
+            return view('produtos/produto-selecionado', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }   
+    }
+
+    private function getOpcoesAdicionais() {
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('opcoes_adicionais');
+            $builder->where('ATIVO', 1);
+
+            $query = $builder->get()->getResultArray();
+            $db->close();
+
+            return $query;
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
 }

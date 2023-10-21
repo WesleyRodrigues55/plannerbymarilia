@@ -16,7 +16,6 @@
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
 @import url("assets/css/cadastro-adm.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -108,6 +107,7 @@ ol li {
 */
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
 input[type="email"], 
 input[type="search"],
@@ -127,6 +127,7 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="search"]:focus,
@@ -235,7 +236,6 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -257,7 +257,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }
