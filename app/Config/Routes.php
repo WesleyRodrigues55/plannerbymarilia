@@ -13,8 +13,8 @@ $routes->get('/login/esqueceu-senha', 'User::esqueceuSenha');
 $routes->get('/login/cadastro-usuario', 'User::cadastroUser');
 $routes->post('/login/forgot', 'User::confirmacaoSenha');
 
-$routes->add('user/verificarlogin', 'User::verificarLogin');
-$routes->add('user/logout', 'User::logout');
+$routes->post('user/verificarlogin', 'User::verificarLogin');
+$routes->get('user/logout', 'User::logout');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
 
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
