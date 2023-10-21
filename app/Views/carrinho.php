@@ -37,10 +37,10 @@
 
                 <?php if ($carrinho_compras != null): ?>
                     <!-- <div class="text-center"> -->
-                        <h1 class="h2-titles"><b>CARRINHO DE COMPRAS!</b></h1>
+                        <h1 class="h2-titles mb-5"><b>CARRINHO DE COMPRAS!</b></h1>
                         <?php //echo "<pre>"; var_dump($carrinho_compras); ?>
                         <?php foreach($carrinho_compras as $cc): ?>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center box-carrinho my-1 p-4">
                                 <div class="box-img-carrinho">
                                     <img src="<?php echo base_url('assets/img/teste/'.$cc['IMAGEM']) ?>" alt="img-produto">
                                 </div>
@@ -69,9 +69,9 @@
                                         
                                         <span class="d-block">2 disponíveis</span>
                                     </div>
-                                    <div>
+                                    <div class="box-preco-carrinho">
                                         <span>R$ </span>
-                                        <span id="valor-total">100</span>
+                                        <span id="valor-total"><?php echo $cc['PRECO']*$cc['QUANTIDADE']; ?></span>
                                     </div>
                                 </div>
                             </div>

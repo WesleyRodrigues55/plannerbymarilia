@@ -43,7 +43,7 @@ class BuyCart extends BaseController
                 echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
             } 
         } else {
-            echo "nada feito.";
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         
     }
