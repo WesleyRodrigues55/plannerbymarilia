@@ -27,7 +27,7 @@ $data['link_css'] = "assets/css/login.css";
                 </div>
             </div>
             <div class="form-check botao-check">
-                <input class="form-check-input" type="checkbox" name="check" value="true" id="flexCheckChecked" checked style="background-color: lightblue; border-color: lightblue; outline: none;">
+                <input class="form-check-input" type="checkbox" name="LEMBRAR_DE_MIM" value="true" id="flexCheckChecked" checked style="background-color: lightblue; border-color: lightblue; outline: none;">
                 <label class=" form-check-label" for="flexCheckChecked">
                     Lembrar de mim
                 </label>

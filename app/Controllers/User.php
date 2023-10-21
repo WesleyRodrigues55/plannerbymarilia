@@ -68,9 +68,60 @@ class User extends BaseController
 
 
 
-    public function esqueceuSenha(): string
+    public function esqueceuSenha()
     {
         return view('login/esqueci-senha');
 
     }
+
+    public function confirmacaoSenha()
+    {
+        $destinatario = $this->request->getPost('EMAIL');
+
+        $db      = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->select('ID, PESSOA_ID, USUARIO, ATIVO, NIVEL');
+        $builder->where('USUARIO', $destinatario);
+        $query = $builder->get()->getResultArray();
+
+        // echo "<pre>";
+        // var_dump($query);
+
+        if ($query == false) {
+            return redirect()->to('login/esqueceu-senha?error'); // Redirecione com uma mensagem de erro
+        } else {
+
+            // echo '<pre>';
+            // var_dump($query);
+            $usuarioModel = new \App\Models\User();
+    
+            $token = bin2hex(random_bytes(32)); // Gere um token único
+            $usuarioModel->update($query[0]['ID'], [
+                'RECUPERA_SENHA' => $token
+            ]);
+            
+
+            $resetLink = site_url("reset-senha?token=$token");
+          
+            $config['mailType']       = 'html';
+            
+            $email = \Config\Services::email();
+            $email->initialize($config);
+            $email->setFrom('plannerbymarilia@gmail.com', 'Marilia');
+            $email->setTo('lucassuzuki13@gmail.com');
+            $email->setSubject('Recuperação de Senha - Planner By Marilia');
+            $email->setMessage("Para redefinir sua senha, clique no link a seguir:\n$resetLink");
+            
+            $email->send();
+
+            echo '<pre>';
+            var_dump($email->send());
+            if ($email->send()) {
+                return redirect()->to('login/esqueceu-senha')->with('mensagem', 'Um e-mail de recuperação foi enviado para o seu endereço de e-mail.');
+            } else {
+                return redirect()->to('login/esqueceu-senha?error');
+            }
+        }
+    }
+
 }
