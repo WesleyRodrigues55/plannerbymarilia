@@ -3,6 +3,7 @@ $data['title'] = "Login";
 $data['link_css'] = "assets/css/login.css";
 ?>
 
+
 <?= view("include/head", $data) ?>
 
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
@@ -34,7 +35,7 @@ $data['link_css'] = "assets/css/login.css";
             </div>
             <div>
                 <input class="mb-3 w-100 btn input-rosa" type="submit" value="Entrar">
-                <?php if (isset($_GET['error'])) { echo '<br><b style="color: red;">Credências incorretas!</b>'; } ?>
+                <?php if (isset($_GET['iniciar-sessao'])) { echo '<br><b style="color: red;">Credências incorretas!</b>'; } ?>
             </div>
 
 
