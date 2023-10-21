@@ -15,6 +15,7 @@ $routes->add('user/verificarlogin', 'User::verificarLogin');
 $routes->add('user/logout', 'User::logout');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
 
+$routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
 
 $routes->get('/planners', 'Product::planners');
 $routes->get('/cadernos', 'Product::cadernos');

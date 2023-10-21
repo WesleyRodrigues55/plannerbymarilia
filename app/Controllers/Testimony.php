@@ -18,4 +18,7 @@ class Testimony extends BaseController
         } 
     }
 
+    public function depoimentosClientes() {
+        return view('depoimentos/depoimentos');
+  }
 }
