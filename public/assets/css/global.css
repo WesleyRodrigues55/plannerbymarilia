@@ -15,6 +15,7 @@
 @import url("assets/css/login.css");
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
+@import url("assets/css/cadastro-adm.css");
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -31,6 +32,7 @@
 body {
     font-family: var(--fonte-principal);
     color: var(--cor-preto);
+    overflow-x: hidden;
 }
 
 ul,
@@ -42,6 +44,23 @@ ol {
 ul li,
 ol li {
     list-style: none;
+}
+
+.card-img-top {
+    height: 260px;
+    object-fit: contain;
+}
+
+.card-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+@media screen and (max-width: 575px) {
+    .card-img-top {
+        height: auto;
+    }
 }
 
 footer {
@@ -88,14 +107,27 @@ ol li {
 */
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
-input[type="email"],
+input[type="email"], 
 input[type="search"],
-input[type="checkbox"] {
+input[type="checkbox"],
+select,
+textarea
+{
     border: 1px solid var(--cor-preto);
 }
 
+textarea {
+    border: 1px solid var(--cor-preto) !important;
+}
+
+select {
+    border: 1px solid var(--cor-preto) !important;
+}
+
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="search"]:focus,
@@ -103,6 +135,16 @@ input[type="checkbox"]:focus {
     border: 1px solid var(--cor-preto);
     outline: none;
     box-shadow: none;
+}
+
+select:focus {
+    border: 1px solid var(--cor-preto) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+select:hover {
+    cursor: pointer;
 }
 
 a {

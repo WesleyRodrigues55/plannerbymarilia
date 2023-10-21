@@ -1,0 +1,28 @@
+.preencher {
+    margin-bottom: -0.5rem;
+    margin-top: 15px;
+}
+
+.cadastro {
+    background-color: var(--cor-cinza-opacity);
+    padding: 32px 64px;
+}
+
+.content-tipo-pessoa {
+    display: flex;
+    gap: 8px;
+}
+
+.content-tipo-pessoa label {
+    margin-top: .25em;
+}
+
+@media screen and (max-width: 768px) {
+    .cadastro {
+        padding: 32px 16px;
+    }
+    .content-tipo-pessoa {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
