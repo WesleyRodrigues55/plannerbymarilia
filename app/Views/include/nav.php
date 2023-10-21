@@ -19,7 +19,7 @@
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')): ?>
-                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                <a href="<?= base_url('login/iniciar-sessao') ?>" class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
                     iniciar sessão
                 </a>
@@ -51,7 +51,7 @@
                     
                     <!-- SEM LOGIN -->
                     <?php if (!session()->has('usuario')): ?>
-                    <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                    <a href="<?= base_url('login/iniciar-sessao') ?>" class="d-flex flex-column align-items-center">
                         <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
                         iniciar sessão
                     </a>
