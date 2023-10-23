@@ -1,7 +1,8 @@
 <?php
-$data['title'] = "Login";
-$data['link_css'] = "assets/css/login.css";
+    $data['title'] = "Login";
+    $data['link_css'] = "assets/css/login.css";
 ?>
+
 
 <?= view("include/head", $data) ?>
 
@@ -22,19 +23,23 @@ $data['link_css'] = "assets/css/login.css";
 
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
-                    <input class="mb- w-100 form-control" id="password" type="password" placeholder="Senha" required maxlength="64" name="SENHA" />
+                    <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Senha" required maxlength="64" name="SENHA" />
                     <img src="<?= base_url('assets/icons/icone-password.png') ?>" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Senha" />
                 </div>
             </div>
             <div class="form-check botao-check">
-                <input class="form-check-input" type="checkbox" name="check" value="true" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
+                <input class="form-check-input" type="checkbox" name="LEMBRAR_DE_MIM" value="true" id="flexCheckChecked" style="background-color: lightblue; border-color: lightblue; outline: none;">
+                <label class=" form-check-label" for="flexCheckChecked">
                     Lembrar de mim
                 </label>
             </div>
+            <div class="mb-3 d-flex align-items-center justify-content-center">
+                <?php if (isset($_GET['error'])): ?>
+                    <span style="color: red;">Credências incorretas!</span>
+                <?php endif; ?>
+            </div>
             <div>
                 <input class="mb-3 w-100 btn input-rosa" type="submit" value="Entrar">
-                <?php if (isset($_GET['error'])) { echo '<br><b style="color: red;">Credências incorretas!</b>'; } ?>
             </div>
 
 

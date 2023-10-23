@@ -26,7 +26,7 @@
 
                 <!-- COM LOGIN -->
                 <?php else: ?>
-                    <a href="" class="d-flex flex-column align-items-center">
+                    <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
                         <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
                         carrinho
                     </a>
