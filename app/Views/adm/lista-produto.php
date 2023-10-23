@@ -21,29 +21,30 @@ $data['link_css'] = "assets/css/listaProduto-adm.css";
         </div>
     </nav>
 </div>
-<table class="tabela table table-hover text-center mt-3" style="margin-bottom: 10em;">
-    <thead class=" table-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Descrição </th>
-            <th scope="col">Imagem</th>
-            <th scope="col">Ações</th>
-        </tr>
-    </thead>
+<div class="container">
+    <table class="tabela table table-hover text-center mt-3" style="margin-bottom: 10em;">
+        <thead class=" table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descrição </th>
+                <th scope="col">Descrição imagem</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
 
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Descrição </th>
-            <th scope="col">Imagem</th>
-            <th scope="col"><button class="input-simples">Editar</button>
-                <button class="input-simples">Salvar</button>
-                <button class="input-simples">Excluir</button>
-            </th>
-        </tr>
-    </thead>
-</table>
-
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descrição </th>
+                <th scope="col">Descrição imagem</th>
+                <th scope="col"><button class="input-simples">Editar</button>
+                    <button class="input-simples">Salvar</button>
+                    <button class="input-simples">Excluir</button>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>

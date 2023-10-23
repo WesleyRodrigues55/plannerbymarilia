@@ -34,5 +34,3 @@ $routes->post('carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 
 
 $routes->get('teste', 'User::cookie');
-
-
