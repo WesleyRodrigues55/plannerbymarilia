@@ -30,17 +30,17 @@ class User extends BaseController
         $builder->where('ATIVO', 1);
         $query = $builder->get()->getResultArray();
 
-        if ($query == false) {
-            return redirect()->to('/login?error=true'); //pesquisar sobre erro   --------------------------------------------------------
-        } else {
-            session()->set([
-                'id' => $query[0]['ID'],
-                'usuario' => $query[0]['USUARIO'],
-                'pessoa_id' => $query[0]['PESSOA_ID'],
-                'nivel' => $query[0]['NIVEL'],
-                'ativo' => $query[0]['ATIVO'],
-            ]);    
+        if (!$query) {
+            session()->setFlashdata('login-failed', 'Credencias incorretas!');
+            return redirect()->back();
         }
+        session()->set([
+            'id' => $query[0]['ID'],
+            'usuario' => $query[0]['USUARIO'],
+            'pessoa_id' => $query[0]['PESSOA_ID'],
+            'nivel' => $query[0]['NIVEL'],
+            'ativo' => $query[0]['ATIVO'],
+        ]);    
 
         // Redireciona com base no nível
         if (session()->get('nivel') == 1) {
@@ -48,11 +48,13 @@ class User extends BaseController
         } elseif (session()->get('nivel') == 2) {
             return redirect()->to('pagina-de-administrador');
         }
-        // print_r(session()->get());
     }
 
-    public function esqueceuSenha()
-    {
+    public function idUser() {
+        return session()->get('id');
+    }
+
+    public function esqueceuSenha(){
         return view('login/esqueci-senha');
 
     }
@@ -105,6 +107,10 @@ class User extends BaseController
                 return redirect()->to('login/esqueceu-senha?error');
             }
         }
+    }
+
+    public function meusDepoimentos() {
+        view('perfil-usuario/meus-depoimentos');
     }
 
 }
