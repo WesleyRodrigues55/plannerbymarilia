@@ -9,4 +9,10 @@ class Administrator extends BaseController
         return
             view('/adm/cadastro-produto');
     }
+
+    public function listaProduto()
+    {
+        return
+            view('/adm/lista-produto');
+    }
 }

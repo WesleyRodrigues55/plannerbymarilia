@@ -16,6 +16,7 @@
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
 @import url("assets/css/cadastro-adm.css");
+@import url("assets/css/listaProduto-adm.css");
 
 :root {
     --cor-branco: #FFFFFF;
