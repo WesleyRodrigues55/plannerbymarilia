@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Controllers;
-
+use Config\Services;
 
 class User extends BaseController
 {
-
-    public function login($status = false)
+    public function login()
     {
-        return
-            view('/login/login');
+        return  view('/login/login');
     }
 
     public function logout()
@@ -33,17 +31,17 @@ class User extends BaseController
         $query = $builder->get()->getResultArray();
 
         if ($query == false) {
-            return redirect()->to('/login'); //pesquisar sobre erro   --------------------------------------------------------
+            return redirect()->to('/login?error=true'); //pesquisar sobre erro   --------------------------------------------------------
         } else {
             session()->set([
-            'id' => $query[0]['ID'],
-            'usuario' => $query[0]['USUARIO'],
-            'pessoa_id' => $query[0]['PESSOA_ID'],
-            'nivel' => $query[0]['NIVEL'],
-            'ativo' => $query[0]['ATIVO'],
-        ]);
+                'id' => $query[0]['ID'],
+                'usuario' => $query[0]['USUARIO'],
+                'pessoa_id' => $query[0]['PESSOA_ID'],
+                'nivel' => $query[0]['NIVEL'],
+                'ativo' => $query[0]['ATIVO'],
+            ]);    
         }
-        
+
         // Redireciona com base no nível
         if (session()->get('nivel') == 1) {
             return redirect()->to('../');
@@ -51,9 +49,6 @@ class User extends BaseController
             return redirect()->to('pagina-de-administrador');
         }
         // print_r(session()->get());
-        
-        
-
     }
 
     public function esqueceuSenha()
