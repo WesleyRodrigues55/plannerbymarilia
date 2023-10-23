@@ -38,7 +38,6 @@ $data['link_css'] = "assets/css/listaProduto-adm.css";
                 <th scope="col">Descrição </th>
                 <th scope="col">Descrição imagem</th>
                 <th scope="col"><button class="input-simples">Editar</button>
-                    <button class="input-simples">Salvar</button>
                     <button class="input-simples">Excluir</button>
                 </th>
             </tr>
