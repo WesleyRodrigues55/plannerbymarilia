@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Product extends Model
+class ProductCategoryType extends Model
 {
-    protected $table      = 'produto';
+    protected $table      = 'tipo_categoria_produto';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true;
@@ -16,19 +16,7 @@ class Product extends Model
 
     protected $allowedFields = [
         'ID',
-        'TIPO_CATEGORIA_PRODUTO_ID',
-        'NOME',
-        'IMAGEM',
-        'PRECO',
-        'TIPO_CAPA',
-        'CATEGORIA',
-        'DESCRICAO_ELASTICO',
-        'ENCADERNACAO',
-        'TAMANHO_CAPA_SEM_DIVISORIA',
-        'TAMANHO_CAPA_COM_DIVISORIA',
-        'TAMANHO_INTERNO',
-        'QUANTIDADE_FOLHA',
-        'DESCRICAO_TECNICA',
+        'TIPO_CATEGORIA',
         'DELETED_AT',
         'UPDATED_AT',
         'CREATED_AT',

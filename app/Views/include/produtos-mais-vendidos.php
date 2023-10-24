@@ -7,6 +7,12 @@
 
     <!-- row -->
     <div class="row">
+        <?php $message_failed = session()->getFlashdata('query-mais-vendidos-failed'); ?>
+        <?php if ($message_failed): ?>
+            <div class="alert alert-danger text-center" role="alert">
+                <?= $message_failed; ?>
+            </div>
+        <?php endif; ?>
         <?php foreach($mais_vendidos as $mv):  ?>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                 <div class="card h-100">
@@ -18,7 +24,7 @@
                             <br><span><b><?php echo number_format($mv['PRECO'], 2, '.', ''); ?></b></span>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url($mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
+                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
                             <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                         </div>
                     </div>

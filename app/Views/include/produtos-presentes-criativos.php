@@ -6,6 +6,12 @@
 
     <!-- row -->
     <div class="row">
+        <?php $message_failed = session()->getFlashdata('query-presentes-criativos-failed'); ?>
+        <?php if ($message_failed): ?>
+            <div class="alert alert-danger text-center" role="alert">
+                <?= $message_failed; ?>
+            </div>
+        <?php endif; ?>
         <?php foreach($presentes_criativos as $pc):  ?>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                 <div class="card h-100">
@@ -17,7 +23,7 @@
                             <br><span><b><?php echo number_format($pc['PRECO'], 2, '.', ''); ?></b></span>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url($pc['CATEGORIA'].'/'.$pc['SLUG'].'/'. $pc['ID']) ?>">SAIBA MAIS</a>
+                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$pc['CATEGORIA'].'/'.$pc['SLUG'].'/'. $pc['ID']) ?>">SAIBA MAIS</a>
                             <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
                         </div>
                     </div>
