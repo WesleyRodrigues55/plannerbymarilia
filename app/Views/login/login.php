@@ -11,14 +11,20 @@
         <img src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto" class="logo">
     </a>
     <h1 class="titulo">Acesse sua Conta</h1>
+
     <div class="usuario-senha">
+        <?php $message_failed = session()->getFlashdata('login-failed'); ?>
+        <?php if ($message_failed): ?>
+            <div class="alert alert-danger w-100 text-center" role="alert">
+                <?= $message_failed; ?>
+            </div>
+        <?php endif; ?>
         <form method="post" action="<?= base_url('user/verificarlogin') ?>"  class="formulario">
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
                     <input class="w-100 form-control" type="email" placeholder="E-mail" required id="EMAIL" name="EMAIL" value="" />
                     <img src="<?= base_url('assets/icons/icone-user.png') ?>" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone user" />
                 </div>
-
             </div>
 
             <div class="mb-3 d-flex align-items-center">
@@ -32,11 +38,6 @@
                 <label class=" form-check-label" for="flexCheckChecked">
                     Lembrar de mim
                 </label>
-            </div>
-            <div class="mb-3 d-flex align-items-center justify-content-center">
-                <?php if (isset($_GET['error'])): ?>
-                    <span style="color: red;">Credências incorretas!</span>
-                <?php endif; ?>
             </div>
             <div>
                 <input class="mb-3 w-100 btn input-rosa" type="submit" value="Entrar">
