@@ -23,3 +23,5 @@ $routes->add('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->add('/presentes-criativos', 'Product::presentesCriativos');
 
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
+$routes->get('/politicas/politica-loja', 'Home::politicaLoja');
+$routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');

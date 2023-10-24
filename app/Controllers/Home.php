@@ -28,4 +28,9 @@ class Home extends BaseController
     public function politicaLoja() {
         return view('politicas/politica-loja');
   }
+
+  public function politicaPrivacidade() {
+    return view('politicas/politica-privacidade');
+}
+
 }
