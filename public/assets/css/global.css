@@ -16,6 +16,8 @@
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
 @import url("assets/css/cadastro-adm.css");
+@import url("assets/css/lista-produto-adm.css");
+
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -109,12 +111,11 @@ ol li {
 input[type="text"],
 input[type="number"],
 input[type="password"],
-input[type="email"], 
+input[type="email"],
 input[type="search"],
 input[type="checkbox"],
 select,
-textarea
-{
+textarea {
     border: 1px solid var(--cor-preto);
 }
 
@@ -236,6 +237,7 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
+
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -257,6 +259,7 @@ nav {
     .menu-nav {
         display: block !important;
     }
+
     .instagram-media {
         width: 100% !important;
     }

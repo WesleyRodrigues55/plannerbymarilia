@@ -21,6 +21,7 @@ $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 
 // Administrador
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
+$routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -35,9 +36,10 @@ $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
 $routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
 
+$routes->get('teste', 'User::cookie');
+
 // Carrinho
 $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
-
 
