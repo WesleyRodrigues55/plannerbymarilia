@@ -13,6 +13,12 @@
 
         <!-- row -->
         <div class="row">
+            <?php $message_failed = session()->getFlashdata('query-failed'); ?>
+            <?php if ($message_failed): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?= $message_failed; ?>
+                </div>
+            <?php endif; ?>
             <?php foreach($mais_vendidos as $mv):  ?>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                     <div class="card h-100">

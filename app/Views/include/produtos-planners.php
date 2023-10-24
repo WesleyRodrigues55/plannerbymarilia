@@ -6,6 +6,12 @@
 
     <!-- row -->
     <div class="row">
+        <?php $message_failed = session()->getFlashdata('query-planners-failed'); ?>
+        <?php if ($message_failed): ?>
+            <div class="alert alert-danger text-center" role="alert">
+                <?= $message_failed; ?>
+            </div>
+        <?php endif; ?>
         <?php foreach($planners as $p):  ?>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                 <div class="card h-100">
