@@ -16,10 +16,10 @@ $data['link_css'] = "assets/css/esqueci-senha.css";
         <br>
 
         <div class="esqueci-senha">
-            <form method="post" action="" class="formulario">
+            <form method="post" action="<?= base_url('login/forgot') ?>" class="formulario">
                 <div class="mb-3 d-flex align-items-center">
                     <div style="position: relative; width: 100%;">
-                        <input class="mb-10 w-379px form-control" id="esqueci-senha" type="email" placeholder="Digite seu email" required maxlength="64" name="EMAIL" />
+                        <input class="mb-10 w-379px form-control" id="esqueci-senha" type="email" placeholder="Digite seu email" required maxlength="64" name="EMAIL" value='lucassuzuki13@gmail.com'/>
                         <img src="<?= base_url('assets/icons/user-pink.png') ?>" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone User" />
                     </div>
                 </div>
