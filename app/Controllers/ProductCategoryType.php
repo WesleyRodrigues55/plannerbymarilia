@@ -14,7 +14,7 @@ class ProductCategoryType extends BaseController
             $db->close();
 
             if (!$query) {
-                session()->setFlashdata('query-failed', 'Tivemos um erro ao tentar trazer essas informações.');
+                session()->setFlashdata('query-failed', 'Error ao filtrar dados.');
             }
 
             return $query;

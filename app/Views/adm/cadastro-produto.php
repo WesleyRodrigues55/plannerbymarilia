@@ -35,10 +35,17 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                     <!-- trazer do banco -->
                     <label class="preencher">TIPO CATEGORIA</label>
                     <select class="select form-control" name="" id="" class="form-select" required>
-                        <option selected>Selecione</option>
-                        <?php foreach ($tipo_categoria_produto as $lcp): ?>
-                            <option value="<?= $lcp['ID'] ?>"><?= $lcp['TIPO_CATEGORIA'] ?></option>
-                        <?php endforeach; ?>
+                        <?php $message_failed = session()->getFlashdata('query-failed'); ?>
+                        <?php if ($message_failed) : ?>
+                            <option selected><?= $message_failed; ?></option>
+                        <?php endif; ?>
+
+                        <?php if (!$message_failed) : ?>
+                            <option selected>Selecione
+                            <?php foreach ($tipo_categoria_produto as $lcp): ?>
+                                <option value="<?= $lcp['ID'] ?>"><?= $lcp['TIPO_CATEGORIA'] ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </select>
                 </div>
 
@@ -108,7 +115,7 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
 
             <div class="text-center mt-5">
                 <input type="submit" class="btn input-rosa px-3 botao-cadastro" value="CADASTRAR PRODUTO"></a>
-                <a class="btn input-rosa px-3 botao-cadastro" href="#">LISTA DE PRODUTOS</a>
+                <a class="btn input-rosa px-3 botao-cadastro" href="<?= base_url('administrador/lista-produto'); ?>">LISTA DE PRODUTOS</a>
             </div>
     </form>
 </div>

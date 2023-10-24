@@ -13,10 +13,12 @@ class Testimony extends BaseController
         try {
             $db = \Config\Database::connect();
             $builder = $db->table('depoimentos');
-    
             $query = $builder->get()->getResultArray();
             $db->close();
-    
+
+            if (!$query) {
+                session()->setFlashdata('query-depoimentos-failed', 'Error ao filtrar dados.');
+            }
             return $query;
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();

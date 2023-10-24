@@ -39,6 +39,12 @@
                     <h2 class="h2-titles"><b>DEPOIMENTOS</b></h2>
                     <span>DE CLIENTES</span>
                 </div>
+                <?php $message_failed = session()->getFlashdata('query-depoimentos-failed'); ?>
+                <?php if ($message_failed): ?>
+                    <div class="alert alert-danger mt-5 text-center" role="alert">
+                        <?= $message_failed; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="single-item text-center">
                     <?php foreach($depoimentos as $d): ?>
                         <div class="p-4 text-center borda-depoimentos">
