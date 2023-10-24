@@ -22,6 +22,7 @@ $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 // Administrador
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
+$routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');

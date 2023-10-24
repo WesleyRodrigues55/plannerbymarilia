@@ -15,4 +15,9 @@ class Administrator extends BaseController
         return
             view('/adm/lista-produto');
     }
+    public function listaUsuario()
+    {
+        return
+            view('/adm/lista-usuario');
+    }
 }
