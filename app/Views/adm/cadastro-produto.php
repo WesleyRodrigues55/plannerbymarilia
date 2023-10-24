@@ -13,21 +13,16 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
             <h2 class="h2-titles mt-5"><b>CADASTRO DE PRODUTO</b></h2>
         </div>
 
-        <form class="needs-validation" novalidate>
+        <form class="teste" method="post">
             <div class="row">
                 <div class="col-md-6 mt-2 mb-3">
                     <label for="text" class="preencher">NOME DO PRODUTO</label>
-                    <input type="text" class="form-control" id="" placeholder="Nome do produto">
+                    <input type="text" class="form-control" id="" placeholder="Nome do produto" required>
                 </div>
 
-                <!-- <div class="col-md-4 mt-2 mb-5">
-                    <label for="text" class="preencher">CATEGORIA DO PRODUTO</label>
-                    <input type="text" class="form-control" id="" placeholder="CATEGORIA DO PRODUTO">
-                </div> -->
-
-                <div class="col-md-2 mb-3 mt-2">
+                <div class="col-md-3 mb-3 mt-2">
                     <label class="preencher">CATEGORIA</label>
-                    <select class="select form-control" name="" id="" class="form-select">
+                    <select class="select form-control" name="" id="" class="form-select" required>
                         <option selected>Selecione</option>
                         <option>Caderno</option>
                         <option>Planner</option>
@@ -37,78 +32,84 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                 </div>
 
                 <div class="col-md-3 mb-3 mt-2">
+                    <!-- trazer do banco -->
+                    <label class="preencher">TIPO CATEGORIA</label>
+                    <select class="select form-control" name="" id="" class="form-select" required>
+                        <option selected>Selecione</option>
+                        <?php foreach ($tipo_categoria_produto as $lcp): ?>
+                            <option value="<?= $lcp['ID'] ?>"><?= $lcp['TIPO_CATEGORIA'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3 mt-2">
                     <label for="text" class="preencher">SLUG</label>
-                    <input type="text" class="form-control" id="" placeholder="SLUG">
+                    <input type="text" class="form-control" id="" placeholder="SLUG" required>
                 </div>
 
-                <div class="col-sm-8 col-md-1 mt-2 mb-3">
+                <div class="col-sm-8 col-md-4 mt-2 mb-3">
                     <label for="bairro" class="preencher">PREÇO</label>
-                    <input type="text" class="form-control" placeholder="R$:">
+                    <input type="text" class="form-control" placeholder="R$:" required>
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mt-2 mb-3">
                     <label for="text" class="preencher">ENCARDENAÇÃO</label>
-                    <input type="text" class="form-control" id="" placeholder="ENCARDENAÇÃO">
+                    <input type="text" class="form-control" id="" placeholder="ENCARDENAÇÃO" required>
                 </div>
 
                 <div class="col-sm-12 col-md-6 mb-3">
                     <label class="preencher">TIPO DA CAPA</label>
-                    <select class="select form-control" name="" id="" class="form-select">
+                    <select class="select form-control" name="" id="" class="form-select" required>
                         <option selected>Selecione</option>
                         <option>Dura</option>
                         <option>Mole</option>
                     </select>
                 </div>
+
+                <div class="col-sm-12 col-md-4 mb-3"></div>
+
                 <div class="col-md-6 mb-3">
                     <label for="" class="form-label">DESCRIÇÃO TÉCNICA</label>
-                    <textarea class="form-control texto" id="" rows="3"></textarea>
+                    <textarea class="form-control texto" id="" rows="3" required></textarea>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="" class="form-label">DESCRIÇÃO ELÁSTICO</label>
-                    <textarea class="form-control texto" id="" rows="3"></textarea>
+                    <textarea class="form-control texto" id="" rows="3" required></textarea>
                 </div>
-
-                <!-- <div class="col-md-8 mb-5">
-                    <label for="text" class="preencher">DESCRIÇÃO ELASTICO</label>
-                    <input type="text" class="form-control" id="" placeholder="DESCREVA O ELASTICO">
-                </div> -->
-                <!-- <div class="col-md-6 mb-2">
-                    <label for="" class="form-label">DESCRIÇÃO TÉCNICA</label>
-                    <textarea class="form-control texto" id="" rows="1"></textarea>
-                </div> -->
 
                 <div class="col-md-3 mb-3">
                     <label for="text" class="preencher">TAMANHO CAPA S/DIVISORIA</label>
-                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50">
+                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50" required>
                 </div>
+
                 <div class="col-md-3 mb-3">
                     <label for="text" class="preencher">TAMANHO CAPA C/DIVISORIA</label>
-                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50">
+                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50" required>
                 </div>
+
                 <div class="col-md-3 mb-3">
                     <label for="text" class="preencher">TAMANHO INTERNO</label>
-                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50">
+                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50" required>
                 </div>
+
                 <div class="col-md-3 mb-3">
                     <label for="text" class="preencher">QUANTIDADE DE FOLHAS</label>
-                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50">
+                    <input type="text" class="form-control" id="" placeholder="exemplo: 100x50" required>
                 </div>
 
-
-                <p class="texto-secundario"><b>INSIRA A FOTO</b></p>
+                <p class="texto-secundario"><b>INSIRA A FOTO DO PRODUTO</b></p>
                 <div class=" justify-content-center ">
                     <div class="input-group d-flex text-end mb-2" style="width: 45%;">
-                        <input type="file" class="form-control " id="inputGroupFile02">
+                        <input type="file" class="form-control " id="inputGroupFile02" required>
                     </div>
                 </div>
             </div>
             <!-- ../row -->
 
             <div class="text-center mt-5">
-                <a class="btn input-rosa px-3 botao-cadastro" href="#">CADASTRAR PRODUTO</a>
+                <input type="submit" class="btn input-rosa px-3 botao-cadastro" value="CADASTRAR PRODUTO"></a>
                 <a class="btn input-rosa px-3 botao-cadastro" href="#">LISTA DE PRODUTOS</a>
             </div>
-    </div>
     </form>
 </div>
 <?= view("include/footer") ?>

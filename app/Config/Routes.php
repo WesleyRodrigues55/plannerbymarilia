@@ -37,14 +37,15 @@ $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
 $routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
 
-$routes->get('teste', 'User::cookie');
+// Tipo Categoria Produtos
+$routes->get('/tipo-categorias', 'ProductCategoryType::tipoCategoriasProdutos');
 
 // Carrinho
 $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 
-$routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
+// Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
 
