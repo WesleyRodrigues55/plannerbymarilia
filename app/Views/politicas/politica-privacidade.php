@@ -12,39 +12,44 @@ $data['link_css'] = "assets/css/politicas.css";
         <div class="politica my-5">
 
             <div class="text-center">
-                <h2 class="h2-titles mt-5"><b>POLÍTICAS DE PRIVACIDADE</b></h2>
+                <h1 class="mt-5"><b>POLÍTICAS DE PRIVACIDADE</b></h1>
             </div>
 
             <div class="mt-5">
                 <p>A Planner by Marília, pessoa jurídica, com sede na Rua Edson Francisco Scapol, 67 - Granja Olga /
                     Sorocaba - SP, inscrita no CNPJ sob o nº 36.315.809/0001-50 leva a sua privacidade a sério e zela
                     pela segurança e proteção de dados de todos os seus clientes, parceiros, fornecedores e usuários
-                    (“Usuários” ou “você”) do site “www.plannerbymarilia.com.br” e qualquer outro site, Loja, aplicativo
-                    operado pelo Lojista (aqui designados, simplesmente, “Loja”).</p>
+                    (“Usuários” ou “você”) do site “<a href="planner.bymarilia@hotmail.com"><b>planner.bymarilia@hotmail.com</b></a>” e qualquer outro site, Loja, aplicativo
+                    operado pelo Lojista (aqui designados, simplesmente, “Loja”).</p><br>
+
                 <p>Esta Política de Privacidade (“Política de Privacidade”) destina-se a informá-lo sobre o modo como
                     nós utilizamos e divulgamos informações coletadas em suas visitas à nossa Loja e em mensagens que
                     trocamos com você (“Comunicações”). Esta Política de Privacidade aplica-se somente a informações
-                    coletadas por meio da Loja.</p>
-                <p>AO ACESSAR A LOJA, ENVIAR COMUNICAÇÕES OU FORNECER QUALQUER TIPO DE DADO PESSOAL, VOCÊ DECLARA ESTAR
+                    coletadas por meio da Loja.</p><br>
+
+                <p class="bg-light p-4"><i>AO ACESSAR A LOJA, ENVIAR COMUNICAÇÕES OU FORNECER QUALQUER TIPO DE DADO PESSOAL, VOCÊ DECLARA ESTAR
                     CIENTE COM RELAÇÃO AOS TERMOS AQUI PREVISTOS E DE ACORDO COM A POLÍTICA DE PRIVACIDADE, A QUAL
                     DESCREVE AS FINALIDADES E FORMAS DE TRATAMENTO DE SEUS DADOS PESSOAIS QUE VOCÊ DISPONIBILIZAR NA
-                    LOJA.</p>
+                    LOJA.</i></p><br>
+
                 <p>Esta Política de Privacidade fornece uma visão geral de nossas práticas de privacidade e das
                     escolhas que você pode fazer, bem como direitos que você pode exercer em relação aos Dados Pessoais
                     tratados por nós. Se você tiver alguma dúvida sobre o uso de Dados Pessoais, entre em contato com a
-                    loja pelo e-mail planner.bymarilia@hotmail.com</p>
+                    loja pelo e-mail <a href="mailto:planner.bymarilia@hotmail.com"><b>planner.bymarilia@hotmail.com</b></a></p><br>
+
                 <p>Além disso, a Política de Privacidade não se aplica a quaisquer aplicativos, produtos, serviços,
                     site ou recursos de mídia social de terceiros que possam ser oferecidos ou acessados por meio da
                     Loja. O acesso a esses links fará com que você deixe a Loja e possa resultar na coleta ou
                     compartilhamento de informações sobre você por terceiros. Nós não controlamos, endossamos ou fazemos
                     quaisquer representações sobre esses sites de terceiros ou suas práticas de privacidade, que podem
                     ser diferentes das nossas. Recomendamos que você revise a política de privacidade de qualquer site
-                    com o qual você interaja antes de permitir a coleta e o uso de seus Dados Pessoais.</p>
+                    com o qual você interaja antes de permitir a coleta e o uso de seus Dados Pessoais.</p><br>
+
                 <p>Caso você nos envie Dados Pessoais referentes a outras pessoas físicas, você declara ter a
                     competência para fazê-lo e declara ter obtido o consentimento necessário para autorizar o uso de
-                    tais informações nos termos desta Política de Privacidade.</p><br>
+                    tais informações nos termos desta Política de Privacidade.</p>
 
-                <p>1. Definições</p>
+                    <br><h2><b>1. Definições</b></h2>
                 <ul>
                     <li>a. “Dados Pessoais” significa qualquer informação que, direta ou indiretamente, identifique ou
                         possa identificar uma pessoa natural, como por exemplo, nome, CPF, data de nascimento, endereço IP,
@@ -61,9 +66,9 @@ $data['link_css'] = "assets/css/politicas.css";
                     <li>d. “Leis de Proteção de Dados” significa todas as disposições legais que regulem o Tratamento de
                         Dados Pessoais, incluindo, porém sem se limitar, a Lei nº 13.709/18, Lei Geral de Proteção de
                         Dados Pessoais (“LGPD”);</li>
-                </ul><br>
+                </ul>
 
-                <p>2. Uso de Dados Pessoais</p>
+                <br><h2><b>2. Uso de Dados Pessoais</b></h2>
                 <p>Coletamos e usamos Dados Pessoais para gerenciar seu relacionamento conosco e melhor atendê-lo
                     quando você estiver adquirindo produtos e/ou serviços na loja, personalizando e melhorando sua
                     experiência. Exemplos de como usamos os dados incluem:</p>
@@ -85,9 +90,9 @@ $data['link_css'] = "assets/css/politicas.css";
                     competentes, incluindo autoridades fora do país de residência; (d) para proteger nossas operações;
                     (e) para proteger direitos, privacidade, segurança nossos, seus ou de terceiros; (f) para detectar e
                     prevenir fraude; (g) permitir-nos usar as ações disponíveis ou limitar danos que venhamos a sofrer;
-                    (h) de outros modos permitidos por lei; e (i) para aplicar nossos Termos e Condições de Uso.</p><br>
+                    (h) de outros modos permitidos por lei; e (i) para aplicar nossos Termos e Condições de Uso.</p>
 
-                <p>3. Dados coletados</p>
+                    <br><h2><b>3. Dados coletados</b></h2>
                 <p>O público em geral poderá navegar na Loja sem necessidade de qualquer cadastro e envio de Dados
                     Pessoais. No entanto, algumas das funcionalidades da Loja poderão depender de cadastro e envio de
                     Dados Pessoais como concluir a compra/contratação do serviço e/ou a viabilizar a entrega do
@@ -100,9 +105,9 @@ $data['link_css'] = "assets/css/politicas.css";
                         etc.).</li>
                     <li>c. Dados de localização. Dados de geolocalização quando você acessa a Loja.</li>
                 </ul>
-                <p>- Nós não coletamos Dados Pessoais Sensíveis. </p><br>
+                <p>- Nós não coletamos Dados Pessoais Sensíveis. </p>
 
-                <p>4. Compartilhamento de Dados Pessoais com terceiros</p>
+                <br><h2><b>4. Compartilhamento de Dados Pessoais com terceiros</b></h2>
                 <p>Nós poderemos compartilhar seus Dados Pessoais:</p>
                 <ul>
                     <li>a. Com a(s) empresa(s) parceira(s) que você selecionar ou optar em enviar os seus dados,
@@ -121,16 +126,16 @@ $data['link_css'] = "assets/css/politicas.css";
                         necessário.</li>
                     <li>e. Através de fotos em nossas postagens nas redes sociais, onde o nome/sobrenome disponibilizado
                         para impressão de capa estará visível em fotos;</li>
-                </ul><br>
+                </ul>
 
-                <p>5. Segurança dos Dados Pessoais</p>
+                <br><h2><b>5. Segurança dos Dados Pessoais</b></h2>
                 <p>Buscamos adotar as medidas técnicas e organizacionais previstas pelas Leis de Proteção de Dados
                     adequadas para proteção dos Dados Pessoais na nossa organização. Infelizmente, nenhuma transmissão
                     ou sistema de armazenamento de dados tem a garantia de serem 100% seguros. Caso tenha motivos para
                     acreditar que sua interação conosco tenha deixado de ser segura (por exemplo, caso acredite que a
-                    segurança de qualquer uma de suas contas foi comprometida), favor nos notificar imediatamente.</p><br>
+                    segurança de qualquer uma de suas contas foi comprometida), favor nos notificar imediatamente.</p>
 
-                <p>6. Direitos do Usuário</p>
+                <br><h2><b>6. Direitos do Usuário</b></h2>
                 <p>Você pode, a qualquer momento, requerer: (i) confirmação de como seus Dados Pessoais estão sendo
                     tratados; (ii) acesso aos seus Dados Pessoais; (iii) correções a dados incompletos, inexatos ou
                     desatualizados; (iv) anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou
