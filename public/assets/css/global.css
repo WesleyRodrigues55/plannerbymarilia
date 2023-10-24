@@ -18,7 +18,6 @@
 @import url("assets/css/cadastro-adm.css");
 @import url("assets/css/lista-produto-adm.css");
 @import url("assets/css/lista-usuario.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -98,6 +97,7 @@ a,
 ul li,
 ol li {
     font-size: 16px;
+    line-height: 1.7;
 }
 
 .p-small {
@@ -238,7 +238,6 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -260,7 +259,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }
