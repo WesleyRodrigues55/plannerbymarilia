@@ -53,7 +53,7 @@
                 <p class="text-center">OU</p>
 
                 <div class="text-center">
-                    <a class="btn input-simples-outline px-5" href="/depoimentos">DEIXE UM DEPOIMENTO</a></button>
+                    <a class="btn input-simples-outline px-5" href="/depoimentos-clientes">DEIXE UM DEPOIMENTO</a></button>
                 </div>
 
             </div>
