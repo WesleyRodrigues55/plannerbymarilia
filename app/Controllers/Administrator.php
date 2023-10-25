@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Controllers\ProductCategoryType;
 
 class Administrator extends BaseController
 {
+
+    public function dashboard()
+    {
+        return
+            view('/adm/index');
+    }
     public function cadastroProduto()
     {
         $tipo_categoria_produto = new ProductCategoryType();
@@ -23,5 +30,25 @@ class Administrator extends BaseController
     {
         return
             view('/adm/lista-usuario');
+    }
+    public function cadastroCategoria()
+    {
+        return
+            view('/adm/cadastro-categoria');
+    }
+    public function listaCategoria()
+    {
+        return
+            view('/adm/lista-categoria');
+    }
+    public function editarCategoria()
+    {
+        return
+            view('/adm/editar-categoria');
+    }
+    public function editarProduto()
+    {
+        return
+            view('/adm/editar-produto');
     }
 }

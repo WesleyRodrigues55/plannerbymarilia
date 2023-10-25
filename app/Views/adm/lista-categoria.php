@@ -1,6 +1,6 @@
 <?php
 $data['title'] = "Página Inicial";
-$data['link_css'] = "assets/css/lista-produto-adm.css";
+$data['link_css'] = "assets/css/lista-produto.css";
 ?>
 
 <?= view("include/head", $data) ?>
@@ -9,15 +9,16 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
 
 <div class="container">
     <div>
-        <h2 class="h2-titles mt-4 mt-5 mb-10 px-3 titulo-adm"><b>LISTA DE PRODUTOS</b></h2>
+        <h2 class="h2-titles mt-4 mt-5 mb-10 px-3"><b>LISTA DE CATEGORIA </b></h2>
     </div>
 
     <nav class="navbar mt-10 bg-white">
         <div class="container-fluid">
             <form class="d-flex gap-2" role="search">
-                <input class="form-control" type="search" placeholder="Pesquise o produto" aria-label="Search">
+                <input class="form-control" type="search" placeholder="Pesquise a categoria" aria-label="Search">
                 <button class="btn btn input-rosa" type="submit">Pesquisar</button>
                 <a href="<?= base_url('administrador/dashboard') ?>" class="input-rosa">Voltar</a>
+
             </form>
         </div>
     </nav>
@@ -27,8 +28,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead class=" table-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Descrição </th>
-                <th scope="col">Descrição imagem</th>
+                <th scope="col">Nome categoria </th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -36,9 +36,8 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Descrição </th>
-                <th scope="col">Descrição imagem</th>
-                <th scope="col"><a href="<?= base_url('administrador/editar-produto') ?>" class="input-simples">Editar</a>
+                <th scope="col">Nome categoria </th>
+                <th scope="col"><a href="<?= base_url('administrador/editar-categoria') ?>" class="input-simples">Editar</a>
                     <button class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</button>
                 </th>
             </tr>
@@ -50,11 +49,11 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Deseja realmente apagar esse produto?
+                        Deseja realmente apagar essa categoria?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <a href="<?= base_url('administrador/lista-produto') ?>" class="btn btn input-rosa">VOLTAR</a>
+                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal" action="">CONFIRMAR</button>
+                        <a href="<?= base_url('administrador/lista-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
                     </div>
                 </div>
             </div>
