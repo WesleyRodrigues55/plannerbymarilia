@@ -21,6 +21,8 @@ $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 
 // Administrador
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
+$routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
+$routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -40,4 +42,7 @@ $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 
+// Políticas
+$routes->get('/politicas/politica-loja', 'Home::politicaLoja');
+$routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
 

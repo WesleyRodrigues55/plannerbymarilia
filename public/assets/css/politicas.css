@@ -1,0 +1,18 @@
+.politica {
+       padding: 32px 64px;
+       text-align: justify;
+}
+
+p{
+    margin-bottom: 0rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    text-indent: 2em; 
+    padding-left: 0em; 
+}

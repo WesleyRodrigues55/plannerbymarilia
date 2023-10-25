@@ -16,6 +16,8 @@
 @import url("assets/css/cadastro-user.css");
 @import url("assets/css/nav.css");
 @import url("assets/css/cadastro-adm.css");
+@import url("assets/css/lista-produto-adm.css");
+@import url("assets/css/lista-usuario.css");
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -95,6 +97,7 @@ a,
 ul li,
 ol li {
     font-size: 16px;
+    line-height: 1.7;
 }
 
 .p-small {
@@ -109,12 +112,11 @@ ol li {
 input[type="text"],
 input[type="number"],
 input[type="password"],
-input[type="email"], 
+input[type="email"],
 input[type="search"],
 input[type="checkbox"],
 select,
-textarea
-{
+textarea {
     border: 1px solid var(--cor-preto);
 }
 
