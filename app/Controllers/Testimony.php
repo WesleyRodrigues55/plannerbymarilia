@@ -6,6 +6,10 @@ use App\Controllers\User;
 class Testimony extends BaseController
 {
     public function depoimentosClientes() {
+        $user = new User();
+        if (!$user->validaLogin())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        
         return view('depoimentos/depoimentos');
     }
 

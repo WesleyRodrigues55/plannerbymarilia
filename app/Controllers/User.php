@@ -16,6 +16,10 @@ class User extends BaseController
         return redirect()->to('login');
     }
 
+    public function cadastroUser(){
+        return view('login/cadastrar');
+    }
+
     public function verificarLogin()
     {
         $usuario = $this->request->getPost()['EMAIL'];
@@ -110,7 +114,12 @@ class User extends BaseController
     }
 
     public function meusDepoimentos() {
-        view('perfil-usuario/meus-depoimentos');
+        return view('perfil-usuario/meus-depoimentos');
+    }
+
+    public function validaLogin(){
+        return session()->has('usuario');
+        
     }
 
 }
