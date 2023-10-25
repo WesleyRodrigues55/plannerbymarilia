@@ -20,6 +20,22 @@ class User extends BaseController
         return view('login/cadastrar');
     }
 
+    public function cadastroUsuario(){
+        $user = new User();
+
+        //USER
+        $email = $this->request->getPost('');
+        $senha = $this->request->getPost('');
+        
+        //PERSON
+        $nome = $this->request->getPost('');
+        $sobrenome = $this->request->getPost('');
+        $telefone = $this->request->getPost('');
+        $cpf = $this->request->getPost('');
+        $cnpj = $this->request->getPost('');
+        $telefone = $this->request->getPost('');
+    }
+
     public function verificarLogin()
     {
         $usuario = $this->request->getPost()['EMAIL'];
@@ -122,4 +138,7 @@ class User extends BaseController
         
     }
 
+    public function validaLoginAdm(){
+        return session()->has('usuario') && session('usuario')->nivel == 2;
+    }
 }
