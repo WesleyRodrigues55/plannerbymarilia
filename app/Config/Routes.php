@@ -41,6 +41,7 @@ $routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
 $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
+$routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

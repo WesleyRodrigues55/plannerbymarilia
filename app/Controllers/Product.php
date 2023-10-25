@@ -307,9 +307,16 @@ class Product extends BaseController
             $query = $builder->get()->getResultArray();
             $db->close();
 
+            if ($query == null) {
+                //produto não existe - fazer página de erro
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            }
+
             return $query;
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         } 
     }
+
+
 }
