@@ -18,6 +18,7 @@ $routes->post('/login/forgot', 'User::confirmacaoSenha');
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
+$routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');
