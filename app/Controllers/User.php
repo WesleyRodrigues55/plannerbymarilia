@@ -105,6 +105,7 @@ class User extends BaseController
             $builder->insert($dataUsuario);
             
             $db->close();
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
