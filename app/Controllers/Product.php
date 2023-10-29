@@ -265,7 +265,7 @@ class Product extends BaseController
         }
     }
 
-    public function pagePlanners($categoria = false, $slug = false, $id = false)
+    public function pageProdutos($categoria = false, $slug = false, $id = false)
     {
         if ($categoria == "" || $slug == "" || $id == "") {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
