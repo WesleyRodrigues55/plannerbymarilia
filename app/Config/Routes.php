@@ -18,11 +18,17 @@ $routes->post('/login/forgot', 'User::confirmacaoSenha');
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
+$routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
 // Administrador
+$routes->get('/administrador/dashboard', 'Administrator::dashboard');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
+$routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
+$routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
+$routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
+$routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -48,4 +54,3 @@ $routes->get('/teste', "BuyCart::loadItensCarrinhoContent");
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
-

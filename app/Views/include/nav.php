@@ -12,33 +12,33 @@
 
         <div class="w-50 text-center box-logo-header">
             <a href="<?= base_url('') ?>">
-                <img class="" src="<?= base_url('assets/img/logo-projeto.png') ?>" alt="logo-projeto">
+                <img class="" src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto">
             </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
-            <?php if (!session()->has('usuario')): ?>
+            <?php if (!session()->has('usuario')) : ?>
                 <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
-                    <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     iniciar sessão
                 </a>
 
                 <!-- COM LOGIN -->
-                <?php else: ?>
-                    <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        carrinho
-                    </a>
-                    <a href="" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                        profile
-                    </a>
-                    <a href="user/logout" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                        Logout
-                    </a>
-                <?php endif; ?>
+            <?php else : ?>
+                <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    carrinho
+                </a>
+                <a href="" class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    profile
+                </a>
+                <a href=<?=base_url('user/logout')?> class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Logout
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -48,26 +48,26 @@
                 <div class="header-item-left  content-icons-nav content-icons-nav-mobile">
                     <!-- por ícone projeto no mobile (apenas) -->
                     <!-- <a href="#" class="brand"><img src="assets/img/logo-projeto.png" alt="" style="width: 120px;"></a> -->
-                    
-                    <!-- SEM LOGIN -->
-                    <?php if (!session()->has('usuario')): ?>
-                    <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
-                        iniciar sessão
-                    </a>
 
-                    <!-- COM LOGIN -->
-                    <?php else: ?>
+                    <!-- SEM LOGIN -->
+                    <?php if (!session()->has('usuario')) : ?>
+                        <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                            iniciar sessão
+                        </a>
+
+                        <!-- COM LOGIN -->
+                    <?php else : ?>
                         <a href="" class="d-flex flex-column align-items-center">
                             <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
                             carrinho
                         </a>
                         <a href="" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/user.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                             profile
                         </a>
                         <a href="user/logout" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/logout.png') ?>" alt=""  class="icon-nav" style="width: 32px">
+                            <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
                             Logout
                         </a>
                     <?php endif; ?>
@@ -81,10 +81,10 @@
                                 <img src="<?= base_url('assets/icons/back.png') ?>" alt="" style="width: 32px;">
                             </button>
                             <div class="menu-mobile-title"></div>
-                                <button type="button" class="menu-mobile-close">
-                                    <!-- <i class="ion ion-ios-close"></i> -->
-                                    <img src="<?= base_url('assets/icons/close.png') ?>" alt="" style="width: 32px;">
-                                </button>
+                            <button type="button" class="menu-mobile-close">
+                                <!-- <i class="ion ion-ios-close"></i> -->
+                                <img src="<?= base_url('assets/icons/close.png') ?>" alt="" style="width: 32px;">
+                            </button>
                         </div>
                         <ul class="menu-section menu-nav">
                             <!-- <li><a href="#">Home</a></li> -->
@@ -157,11 +157,11 @@
                     <a href="#" class="menu-icon"><i class="ion ion-md-heart"></i></a>
                     <a href="#" class="menu-icon"><i class="ion ion-md-cart"></i></a>
                     <button type="button" class="menu-mobile-trigger">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </div>
         </div>

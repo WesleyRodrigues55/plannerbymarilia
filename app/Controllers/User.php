@@ -16,24 +16,132 @@ class User extends BaseController
         return redirect()->to('login');
     }
 
+    public function cadastroUser(){
+        return view('login/cadastrar');
+    }
+    //REALIZAR TRATATIVA DAS SENHAS IGUAIS NO JS -------------------------------------------------------------------------------
+    public function cadastroUsuario(){
+        //USER
+        $email = $this->request->getPost('email');
+        $senha = $this->request->getPost('senha');
+        $senha = password_hash($senha, PASSWORD_BCRYPT);
+        $confirmarSenha = $this->request->getPost('confirmarSenha');
+        
+        //PERSON
+        $nome = $this->request->getPost('nome');
+        $sobrenome = $this->request->getPost('sobrenome');
+        $telefone_01 = $this->request->getPost('telefone_01');
+        $telefone_02 = $this->request->getPost('telefone_02');
+        $celular = $this->request->getPost('celular');
+        $cep = $this->request->getPost('CEP');
+        $rua = $this->request->getPost('rua');
+        $numeroResidencia = $this->request->getPost('numeroResidencia');
+        $complemento = $this->request->getPost('complemento');
+        $bairro = $this->request->getPost('bairro');
+        $cidade = $this->request->getPost('cidade');
+        $estado = $this->request->getPost('estado');
+        $termoPrivacidade = $this->request->getPost('termoPrivacidade');
+        $tipoPessoa = $this->request->getPost('tipoPessoa');
+        $termoPrivacidade = $termoPrivacidade == 'on' ? 1 : 0;
+
+        if ($tipoPessoa == 'FISICA'){
+            $cpf = $this->request->getPost('CPF');
+            $data_nascimento = $this->request->getPost('dataNascimento');
+            $cnpj = "";
+            $inscricaoEstadual = "";
+        }else{
+            $cnpj = $this->request->getPost('CNPJ');
+            $inscricaoEstadual = $this->request->getPost('inscricaoEstadual');
+            $cpf = "";
+            $data_nascimento = "";
+        }
+
+
+        $dataPessoa = [
+            'NOME' => $nome,
+            'SOBRENOME' => $sobrenome,
+            'EMAIL' => $email,
+            'DATA_NASCIMENTO' => $data_nascimento,
+            'TELEFONE_01' => $telefone_01,
+            'TELEFONE_02' => $telefone_02,
+            'CELULAR' => $celular,
+            'TIPO_PESSOA' => $tipoPessoa,
+            'CPF' => $cpf,
+            'CNPJ' => $cnpj,
+            'INSCRICAO_ESTADUAL' => $inscricaoEstadual,
+            'CEP' => $cep,
+            'RUA' => $rua,
+            'NUMERO' => $numeroResidencia,
+            'COMPLEMENTO' => $complemento,
+            'BAIRRO' => $bairro,
+            'CIDADE' => $cidade,
+            'ESTADO' => $estado,
+            'POLITICA_PRIVACIDADE' => $termoPrivacidade,
+        ];
+
+        
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('pessoa');
+            $builder->insert($dataPessoa);
+            $ultimo_id_inserido = $db->insertID();
+            $db->close();
+
+            $dataUsuario =[
+                'PESSOA_ID' => $ultimo_id_inserido,
+                'USUARIO' => $email,
+                'SENHA' => $senha,
+                'RECUPERA_SENHA' => '',
+                'FOTO_PERFIL' => 'profile.png',
+                'EMAIL_RECUPERACAO' => $email,
+                'HASH_SENHA' => '',
+                'ATIVO' => 1,
+                'LEMBRAR_DE_MIM' => 1,
+                'NIVEL' => 1,
+            ];
+
+            $builder = $db->table('usuario');
+            $builder->insert($dataUsuario);
+            
+            $db->close();
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
+
+
+
+    }
+
     public function verificarLogin()
     {
         $usuario = $this->request->getPost()['EMAIL'];
         $senha = $this->request->getPost()['SENHA'];
 
+
         //consulta sql personalizada
         $db      = \Config\Database::connect();
         $builder = $db->table('usuario');
-        $builder->select('ID, PESSOA_ID, USUARIO, ATIVO, NIVEL');
+        $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
         $builder->where('USUARIO', $usuario);
-        $builder->where('SENHA', $senha);
-        $builder->where('ATIVO', 1);
-        $query = $builder->get()->getResultArray();
+        $getSenha = $builder->get()->getRow()->SENHA;
+        if (password_verify($senha, $getSenha)){
+            $builder->where('ATIVO', 1);
+            $query = $builder->get()->getResultArray();
+        }else{
+            session()->setFlashdata('login-failed', 'Credencias incorretas!');
+            return redirect()->back();
+        }
+        
+        
+        
 
         if (!$query) {
             session()->setFlashdata('login-failed', 'Credencias incorretas!');
             return redirect()->back();
         }
+        
         session()->set([
             'id' => $query[0]['ID'],
             'usuario' => $query[0]['USUARIO'],
@@ -46,7 +154,7 @@ class User extends BaseController
         if (session()->get('nivel') == 1) {
             return redirect()->to('../');
         } elseif (session()->get('nivel') == 2) {
-            return redirect()->to('pagina-de-administrador');
+            return redirect()->to('administrador/dashboard');
         }
     }
 
@@ -110,7 +218,16 @@ class User extends BaseController
     }
 
     public function meusDepoimentos() {
-        view('perfil-usuario/meus-depoimentos');
+        return view('perfil-usuario/meus-depoimentos');
     }
 
+    public function validaLogin(){
+        return session()->has('usuario'); 
+    }
+
+    public function validaLoginAdm(){
+        return session()->has('usuario') && session()->get('nivel') == 2? true : false;
+
+
+    }
 }
