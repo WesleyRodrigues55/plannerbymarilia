@@ -33,4 +33,8 @@ class Home extends BaseController
     return view('politicas/politica-privacidade');
 }
 
+public function quemSomos() {
+    return view('politicas/quem-somos');
+}
+
 }

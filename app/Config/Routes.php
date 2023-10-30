@@ -47,4 +47,4 @@ $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
-
+$routes->get('/politicas/quem-somos', 'Home::quemSomos');
