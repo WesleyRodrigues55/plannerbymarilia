@@ -8,7 +8,7 @@
     </div>
     
 <?php else: ?>
-    <h1 class="h2-titles mb-5 text-center"><b>CARRINHO DE COMPRAS! <?= session()->get('id')  ?></b></h1>
+    <h1 class="h2-titles mb-5 text-center"><b>CARRINHO DE COMPRAS!</b></h1>
     <div class="row">
         <div class="col-md-8">
             <?php foreach($carrinho_compras as $cc): ?>
