@@ -1,6 +1,6 @@
 <?php
 $data['title'] = "Página Inicial";
-$data['link_css'] = "assets/css/lista-usuario.css";
+$data['link_css'] = "assets/css/cadastro-adm.css";
 ?>
 
 <?= view("include/head", $data) ?>
@@ -9,7 +9,7 @@ $data['link_css'] = "assets/css/lista-usuario.css";
 
 <div class="container">
     <div>
-        <h2 class="h2-titles mt-4 mt-5 mb-10 px-3"><b>LISTA DE USUÁRIOS</b></h2>
+        <h2 class="h2-titles mt-4 mt-5 mb-10 px-3"><b>EDITAR USUÁRIOS</b></h2>
     </div>
 
     <nav class="navbar mt-10 bg-white">
@@ -57,13 +57,19 @@ $data['link_css'] = "assets/css/lista-usuario.css";
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <a href="<?= base_url('administrador/lista-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
+                        <a href="<?= base_url('administrador/editar-usuario') ?>" class="btn btn input-rosa">VOLTAR</a>
                     </div>
                 </div>
             </div>
         </div>
     </table>
 </div>
+
+
+
+
+
+
 <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>

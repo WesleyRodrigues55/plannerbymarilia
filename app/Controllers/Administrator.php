@@ -51,4 +51,9 @@ class Administrator extends BaseController
         return
             view('/adm/editar-produto');
     }
+    public function editarUsuario()
+    {
+        return
+            view('/adm/editar-usuario');
+    }
 }
