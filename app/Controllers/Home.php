@@ -34,4 +34,10 @@ class Home extends BaseController
     }
 
 
+    public function quemSomos() {
+        return view('politicas/quem-somos');
+    }
+
+
+
 }
