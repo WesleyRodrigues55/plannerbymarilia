@@ -13,11 +13,11 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <h2 class="h2-titles mt-5"><b>INFORMAÇÕES DE ACESSO</b></h2>
             </div>
 
-            <form class="needs-validation" novalidate>
+            <form action="<?= base_url('user/cadastroUsuario') ?>" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="email" class="preencher">E-MAIL*</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="email@dominio.com.br">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email@dominio.com.br">
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -25,7 +25,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Digite sua senha" required>
+                        <input type="password" class="form-control" id="password" name="senha" placeholder="Digite sua senha" required>
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
                         <div class="invalid-feedback">
                             Uma senha é requirida.
@@ -34,7 +34,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
-                        <input type="password" class="form-control"  name="passwordConfirm" id="password" placeholder="Confirme sua senha" required>
+                        <input type="password" class="form-control" id="password" name="confirmarSenha" placeholder="Confirme sua senha" required>
                         <div class="invalid-feedback">
                             Uma senha é requirida.
                         </div>
@@ -50,7 +50,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="name" class="preencher">NOME*</label>
-                        <input type="text" class="form-control"  name="nome" id="name" placeholder="Digite o seu nome" required>
+                        <input type="text" class="form-control" id="name" name="nome" placeholder="Digite o seu nome" required>
                         <div class="invalid-feedback">
                             Por favor preencha o seu nome.
                         </div>
@@ -58,15 +58,39 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">SOBRENOME*</label>
-                        <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Digite o seu sobrenome">
+                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Digite o seu sobrenome">
+                        <div class="invalid-feedback">
+                            Por favor preencha o seu sobrenome.
+                        </div>
+                    </div>
+<!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
+                    <div class="col-md-12">
+                        <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
+                        <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="xx/xx/xxxx">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
                         </div>
                     </div>
 
                     <div class="col-md-12">
-                        <label for="telefone" class="preencher">NÚMERO DE TELEFONE*</label>
-                        <input type="text" class="form-control"  name="telefone" id="telefone" placeholder="(XX)XXXXX-XXXX">
+                        <label for="telefone" class="preencher">NÚMERO DE TELEFONE 01*</label>
+                        <input type="text" class="form-control" id="telefone" name="telefone_01" placeholder="(XX)XXXXX-XXXX">
+                        <div class="invalid-feedback">
+                            Por favor preencha o seu telefone de contato.
+                        </div>
+                    </div>
+<!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                    <div class="col-md-12">
+                        <label for="telefone" class="preencher">NÚMERO DE TELEFONE 02*</label>
+                        <input type="text" class="form-control" id="telefone" name="telefone_02" placeholder="(XX)XXXXX-XXXX">
+                        <div class="invalid-feedback">
+                            Por favor preencha o seu telefone de contato.
+                        </div>
+                    </div>
+<!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                    <div class="col-md-12">
+                        <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
+                        <input type="text" class="form-control" id="celular" name="celular" placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
                         </div>
@@ -74,16 +98,20 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="cpf" class="preencher">CPF*</label>
-                        <input type="text" class="form-control"  name="cpf" id="cpf" placeholder="XXX.XXX.XXX-XX">
+                        <input type="text" class="form-control" id="cpf" name="CPF" placeholder="XXX.XXX.XXX-XX">
+<!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                        <input type="text" class="form-control" id="cpf" name="CNPJ" placeholder="xx.xxx.xxx/xxxx-xx">
+<!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                        <input type="text" class="form-control" id="cpf" name="inscricaoEstadual" placeholder="inscricao estadual">
 
                         <div class="content-tipo-pessoa">
                             <div class="d-flex align-items-center gap-2">
-                                <input id="pessoaFisica" name="tipoPessoa" type="radio" class="form-check-input" required>
-                                <label class="form-check-label" for="pessoaFisica">Pessoa física</label>
+                                <input id="pessoaFisica" name="tipoPessoa" type="radio" class="form-check-input" value="FISICA" required>
+                                <label class="form-check-label" for="FISICA">Pessoa física</label>
                             </div>
                             <div class="d-flex align-items-center gap-2">
-                                <input id="pessoaJuridica" name="tipoPessoa" type="radio" class="form-check-input" required>
-                                <label class="form-check-label" for="pessoaJuridica">Pessoa jurídica</label>
+                                <input id="pessoaJuridica" name="tipoPessoa" type="radio" class="form-check-input" value="JURIDICA" required>
+                                <label class="form-check-label" for="JURIDICA">Pessoa jurídica</label>
                             </div>
 
                         </div>
@@ -101,7 +129,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cep" class="preencher">CEP*</label>
-                        <input type="text" class="form-control"  name="cep" id="cep" placeholder="XXXXX-XXX">
+                        <input type="text" class="form-control" id="cep" name="CEP" placeholder="XXXXX-XXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu CEP.
                         </div>
@@ -109,7 +137,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-10">
                         <label for="rua" class="preencher">RUA*</label>
-                        <input type="text" class="form-control"  name="rua" id="rua" placeholder="Digite o nome da sua rua">
+                        <input type="text" class="form-control" id="rua" name="rua" placeholder="Digite o nome da sua rua">
                         <div class="invalid-feedback">
                             Por favor preencha o seu endereço.
                         </div>
@@ -117,7 +145,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-2">
                         <label for="numero" class="preencher">Nº*</label>
-                        <input type="text" class="form-control"  name="numero" id="numero" placeholder="XX">
+                        <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX">
                         <div class="invalid-feedback">
                             Por favor preencha o número do seu endereço.
                         </div>
@@ -125,22 +153,22 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-6">
                         <label for="complemento" class="preencher">COMPLEMENTO</label>
-                        <input type="text" class="form-control" name="complemento" id="complemento" placeholder="apto, bloco, vila">
+                        <input type="text" class="form-control" id="complemento" name="complemento" placeholder="apto, bloco, vila">
                     </div>
 
                     <div class="col-sm-12 col-md-6">
                         <label for="bairro" class="preencher">BAIRRO</label>
-                        <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Digite o nome do seu bairro">
+                        <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o nome do seu bairro">
                     </div>
 
                     <div class="col-sm-12 col-md-10">
                         <label for="inputCity" class="preencher">CIDADE</label>
-                        <input type="text" name="cidade" id="cidade" class="form-control mb-3" id="inputCity" placeholder="Digite o nome da sua cidade">
+                        <input type="text" name="cidade" id="cidade" class="form-control mb-3" id="inputCity" name="cidade" placeholder="Digite o nome da sua cidade">
                     </div>
 
                     <div class="col-sm-12 col-md-2">
                         <label for="inputState" class="preencher">Estado:</label>
-                        <select class="select form-control" name="estado" id="estado" class="form-select">
+                        <select class="select form-control" name="estado" id="estado" name="estado" class="form-select">
                             <option selected>Selecione</option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
@@ -173,7 +201,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12 mt-1">
-                        <input type="checkbox" class="form-check-input"  name="termos" id="termos">
+                        <input type="checkbox" class="form-check-input" name="termoPrivacidade"id="termos">
                         <label class="form-check-label" for="termos" style="display: inline"><i>
                                 Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de seus dados por esse site.
                             </i></label>
@@ -182,7 +210,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <a class="btn input-rosa px-5" href="#">CRIAR CONTA</a></button>
+                    <input type="submit" class="btn input-rosa px-5" value="CRIAR CONTA">
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de privacidade"</i></p>
@@ -190,6 +218,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="text-center my-5">
                     <a href="<?= base_url("login") ?>" class=""><b>Voltar</b></a>
                 </div>
+                
 
             </form>
         </div>

@@ -18,11 +18,17 @@ $routes->post('/login/forgot', 'User::confirmacaoSenha');
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
+$routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
 // Administrador
+$routes->get('/administrador/dashboard', 'Administrator::dashboard');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
+$routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
+$routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
+$routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
+$routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -35,14 +41,17 @@ $routes->get('/agendas', 'Product::agendas');
 $routes->get('/blocos', 'Product::blocos');
 $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
-$routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
+$routes->get('/produto/(:any)', 'Product::pageProdutos/$1');
 
 // Carrinho
 $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
+$routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
+$routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
+$routes->get('/teste', "BuyCart::loadItensCarrinhoContent");
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
-
+$routes->get('/politicas/quem-somos', 'Home::quemSomos');
