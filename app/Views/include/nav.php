@@ -34,7 +34,7 @@
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     profile
                 </a>
-                <a href="user/logout" class="d-flex flex-column align-items-center">
+                <a href=<?=base_url('user/logout')?> class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Logout
                 </a>
