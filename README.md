@@ -16,8 +16,8 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 
 ## Requisitos para o projeto
 
-- Primeiro requisito essêncial é que tenha instalado em sua máquina um servidor web local, omo o xampp por exemplo, link de download [Xampp](https://www.apachefriends.org/pt_br/index.html), instalando o xampp, já virá com o PHP junto e o banco de dados MySql que usaremos como base de dados do projeto.
-*Verifique a porta em que seu projeto foi instlaado, estmaso usando a padrão 3306 do MySql, caso seja outra porta em uso, sigas os passos abaixo:
+- Primeiro requisito essêncial é que tenha instalado em sua máquina um servidor web local, como o xampp por exemplo, link de download [Xampp](https://www.apachefriends.org/pt_br/index.html), instalando o xampp, já virá com o PHP junto e o banco de dados MySql que usaremos como base de dados do projeto.
+*Verifique a porta em que seu projeto foi instalado, o projeto usa a padrão 3306 do MySql, caso seja outra porta em uso, sigas os passos abaixo:
 - Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele ver 
 
 - Baixe o script SQL (será disponibilizado em breve) e importe no mysql.

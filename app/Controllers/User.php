@@ -124,10 +124,12 @@ class User extends BaseController
         $db      = \Config\Database::connect();
         $builder = $db->table('usuario');
         $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
+        $builder->where('USUARIO', $usuario);
+        $builder->where('ATIVO', 1);
         $getSenha = $builder->get()->getRow()->SENHA;
         if (password_verify($senha, $getSenha)){
-            $builder->where('ATIVO', 1);
             $builder->where('USUARIO', $usuario);
+            $builder->where('ATIVO', 1);
             $query = $builder->get()->getResultArray();
         }else{
             session()->setFlashdata('login-failed', 'Credencias incorretas!');
