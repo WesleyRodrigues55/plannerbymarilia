@@ -24,6 +24,10 @@
 
     <!-- Nav JS -->
     <script src="<?= base_url('assets/js/nav.js') ?>"></script>
+    <script src="<?= base_url('assets/js/main.js') ?>"></script>
+
+    <!-- Carrinho JS -->
+    <script src="<?= base_url('assets/js/carrinho.js') ?>"></script>
 
     <!-- Instagram JS -->
     <script async src="https://www.instagram.com/embed.js"></script>

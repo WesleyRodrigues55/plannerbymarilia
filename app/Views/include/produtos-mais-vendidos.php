@@ -7,6 +7,12 @@
 
     <!-- row -->
     <div class="row">
+        <?php $message_failed = session()->getFlashdata('query-mais-vendidos-failed'); ?>
+        <?php if ($message_failed): ?>
+            <div class="alert alert-danger text-center" role="alert">
+                <?= $message_failed; ?>
+            </div>
+        <?php endif; ?>
         <?php foreach($mais_vendidos as $mv):  ?>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                 <div class="card h-100">
@@ -19,7 +25,20 @@
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
-                            <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
+                            <?php if (session()->has('usuario')): ?>
+                                <form action="carrinho/adiciona-produto-carrinho" method="post">
+                                    <input type="text" name="id-produto" value="<?= $mv['ID'] ?>" id="" hidden readonly>
+                                    <input type="text" name="slug" value="<?= $mv['SLUG'] ?>" id="" hidden readonly>
+                                    <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">
+                                        <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
+                                    </button>
+                                </form>
+                            <?php else: ?>
+                                <button type="submit" id="submit" name="submit" class="faca-login" id="faca-login-<?= $mv['SLUG'] ?>" style="border: none; background: #fff;">
+                                    <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
+                                </button>
+                            <?php endif; ?>
+                            
                         </div>
                     </div>
                 </div>
