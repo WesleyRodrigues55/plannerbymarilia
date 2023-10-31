@@ -28,6 +28,11 @@ function loadCarrinho() {
     });
 }
 
+// $(document).on('DOMContentLoaded', (e) => {
+//     var sub = $('#sub')
+//     console.log(sub)
+// })
+
 $(document).on('submit', '#subtraiQuantidadeCarrinho', function(event) {
     event.preventDefault();
     var formData = $(this).serialize();

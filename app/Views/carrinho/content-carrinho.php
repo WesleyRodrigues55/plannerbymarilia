@@ -30,7 +30,7 @@
                                 <!-- <form action="carrinho/subtrai-quantidade" method="post"> -->
                                     <input type="number" id="quantidade" name="quantidade" value="<?php echo $cc['QUANTIDADE']; ?>" hidden>
                                     <input type="number" id="id" name="id" value="<?php echo $cc['ID_ITENS_CARRINHO']; ?>" hidden>
-                                    <input type="submit" value="-" name="sub">
+                                    <input type="submit" value="-" name="sub" id="sub">
                                 </form>
                                 <span style="width: 100px"><?php echo $cc['QUANTIDADE']; ?></span>
                                 <form method="post" id="somaQuantidadeCarrinho">
