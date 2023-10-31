@@ -24,7 +24,7 @@ class User extends BaseController
         //USER
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
-        $senha = password_hash($senha, PASSWORD_BCRYPT);
+        $senha = password_hash("$senha", PASSWORD_BCRYPT);
         $confirmarSenha = $this->request->getPost('confirmarSenha');
         
         //PERSON
@@ -124,18 +124,15 @@ class User extends BaseController
         $db      = \Config\Database::connect();
         $builder = $db->table('usuario');
         $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
-        $builder->where('USUARIO', $usuario);
         $getSenha = $builder->get()->getRow()->SENHA;
         if (password_verify($senha, $getSenha)){
             $builder->where('ATIVO', 1);
+            $builder->where('USUARIO', $usuario);
             $query = $builder->get()->getResultArray();
         }else{
             session()->setFlashdata('login-failed', 'Credencias incorretas!');
             return redirect()->back();
         }
-        
-        
-        
 
         if (!$query) {
             session()->setFlashdata('login-failed', 'Credencias incorretas!');
