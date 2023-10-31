@@ -17,7 +17,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="email" class="preencher">E-MAIL*</label>
+
                         <input type="email" class="form-control" id="email" name="email" placeholder="email@dominio.com.br">
+
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -25,7 +27,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
+
                         <input type="password" class="form-control" id="password" name="senha" placeholder="Digite sua senha" required>
+
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
                         <div class="invalid-feedback">
                             Uma senha é requirida.
@@ -34,7 +38,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
+
                         <input type="password" class="form-control" id="password" name="confirmarSenha" placeholder="Confirme sua senha" required>
+
                         <div class="invalid-feedback">
                             Uma senha é requirida.
                         </div>
@@ -50,7 +56,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="name" class="preencher">NOME*</label>
+
                         <input type="text" class="form-control" id="name" name="nome" placeholder="Digite o seu nome" required>
+
                         <div class="invalid-feedback">
                             Por favor preencha o seu nome.
                         </div>
@@ -58,6 +66,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">SOBRENOME*</label>
+
                         <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Digite o seu sobrenome">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
@@ -67,12 +76,14 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
                         <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="xx/xx/xxxx">
+
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
                         </div>
                     </div>
 
                     <div class="col-md-12">
+
                         <label for="telefone" class="preencher">NÚMERO DE TELEFONE 01*</label>
                         <input type="text" class="form-control" id="telefone" name="telefone_01" placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
@@ -91,6 +102,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
                         <input type="text" class="form-control" id="celular" name="celular" placeholder="(XX)XXXXX-XXXX">
+
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
                         </div>
@@ -98,11 +110,13 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="cpf" class="preencher">CPF*</label>
+
                         <input type="text" class="form-control" id="cpf" name="CPF" placeholder="XXX.XXX.XXX-XX">
 <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                         <input type="text" class="form-control" id="cpf" name="CNPJ" placeholder="xx.xxx.xxx/xxxx-xx">
 <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                         <input type="text" class="form-control" id="cpf" name="inscricaoEstadual" placeholder="inscricao estadual">
+
 
                         <div class="content-tipo-pessoa">
                             <div class="d-flex align-items-center gap-2">
@@ -129,7 +143,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cep" class="preencher">CEP*</label>
+
                         <input type="text" class="form-control" id="cep" name="CEP" placeholder="XXXXX-XXX">
+
                         <div class="invalid-feedback">
                             Por favor preencha o seu CEP.
                         </div>
@@ -137,7 +153,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-10">
                         <label for="rua" class="preencher">RUA*</label>
+
                         <input type="text" class="form-control" id="rua" name="rua" placeholder="Digite o nome da sua rua">
+
                         <div class="invalid-feedback">
                             Por favor preencha o seu endereço.
                         </div>
@@ -145,7 +163,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-2">
                         <label for="numero" class="preencher">Nº*</label>
+
                         <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX">
+
                         <div class="invalid-feedback">
                             Por favor preencha o número do seu endereço.
                         </div>
@@ -153,12 +173,16 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-6">
                         <label for="complemento" class="preencher">COMPLEMENTO</label>
+
                         <input type="text" class="form-control" id="complemento" name="complemento" placeholder="apto, bloco, vila">
+
                     </div>
 
                     <div class="col-sm-12 col-md-6">
                         <label for="bairro" class="preencher">BAIRRO</label>
+
                         <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o nome do seu bairro">
+
                     </div>
 
                     <div class="col-sm-12 col-md-10">
@@ -201,7 +225,9 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12 mt-1">
+
                         <input type="checkbox" class="form-check-input" name="termoPrivacidade"id="termos">
+
                         <label class="form-check-label" for="termos" style="display: inline"><i>
                                 Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de seus dados por esse site.
                             </i></label>

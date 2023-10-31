@@ -41,7 +41,7 @@ $routes->get('/agendas', 'Product::agendas');
 $routes->get('/blocos', 'Product::blocos');
 $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
-$routes->get('/produto/(:any)', 'Product::pageProdutos/$1');
+$routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
 
 // Carrinho
 $routes->get('/carrinho', 'BuyCart::carrinho');

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Controllers\ProductCategoryType;
 
 use App\Controllers\ProductCategoryType;
 
@@ -21,7 +22,6 @@ class Administrator extends BaseController
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        
         $tipo_categoria_produto = new ProductCategoryType();
 
         $data = ['tipo_categoria_produto' => $tipo_categoria_produto->tipoCategoriasProdutos()];
