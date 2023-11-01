@@ -31,7 +31,20 @@
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$pc['CATEGORIA'].'/'.$pc['SLUG'].'/'. $pc['ID']) ?>">SAIBA MAIS</a>
-                                <a href=""><img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px"></a>
+                                <?php if (session()->has('usuario')): ?>
+                                    <form id="adicionaProdutoCarrinho" method="post">
+                                    <!-- <form action="carrinho/adiciona-produto-carrinho" method="post"> -->
+                                        <input type="text" name="id-produto" value="<?= $pc['ID'] ?>" id="" hidden readonly>
+                                        <input type="text" name="slug" value="<?= $pc['SLUG'] ?>" id="" hidden readonly>
+                                        <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">
+                                            <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <button type="submit" id="submit" name="submit" class="faca-login" id="faca-login-<?= $pc['SLUG'] ?>" style="border: none; background: #fff;">
+                                        <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
