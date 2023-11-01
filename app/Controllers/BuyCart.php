@@ -7,7 +7,7 @@ use CodeIgniter\I18n\Time;
 class BuyCart extends BaseController
 {
     public function carrinho() {
-        return view('carrinho/carrinho');
+        return view('comprando/carrinho/carrinho');
     }
 
     public function loadContentCarrinho() {
@@ -16,7 +16,7 @@ class BuyCart extends BaseController
             "carrinho_compras" => $this->loadItensCarrinhoContent()
         ];
 
-        return view('carrinho/content-carrinho', $data);
+        return view('comprando/carrinho/content-carrinho', $data);
     }
 
     public function loadItensCarrinhoContent() {
@@ -48,23 +48,96 @@ class BuyCart extends BaseController
                 produto.NOME as NOME_PRODUTO,
                 produto.IMAGEM,
                 produto.SLUG,
-                produto.PRECO
+                produto.PRECO,
+                estoque.QUANTIDADE as QUANTIDADE_ESTOQUE
             ');
             $builder->where('CARRINHO_DE_COMPRA_ID', $carrinho_de_compra_id);
             $builder->join('produto', 'produto.ID = itens_carrinho.PRODUTO_ID');
+            $builder->join('estoque', 'estoque.PRODUTO_ID = produto.ID');
             $query = $builder->get()->getResultArray();
             $db->close();
 
+            // echo "<pre>";
+            // var_dump($query);
             return $query;
             // return view("carrinho/itens-carrinho", $data);
         } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            
         }
+    }
+
+    public function getQuantidadeItemCarrinhoPorId($id_item_carrinho) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->where('ID', $id_item_carrinho);
+        $quantidade = $builder->get()->getRow()->QUANTIDADE;
+        $db->close();
+        return $quantidade;
+    }
+
+    public function getIdProdutoItemCarrinho($id_item_carrinho) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->where('ID', $id_item_carrinho);
+        $id_produto = $builder->get()->getRow()->PRODUTO_ID;
+        $db->close();
+        return $id_produto;
+    }
+
+    public function updatedQuantidadeEstoque() {
+
+    }
+
+    public function removeItemCarrinho() {
+        $id = $this->request->getPost('id');
+        $quantidade_item_carrinho = $this->getQuantidadeItemCarrinhoPorId($id);
+        $id_produto = $this->getIdProdutoItemCarrinho($id);
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('estoque');
+        $builder->where('PRODUTO_ID', $id_produto);
+        $quantidade_carrinho = $builder->get()->getRow()->QUANTIDADE;
+        $builder->set('QUANTIDADE', $quantidade_carrinho + $quantidade_item_carrinho);
+        $builder->where('PRODUTO_ID', $id_produto);
+        $builder->update();
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->where('ID', $id);
+        $builder->delete();
+        $db->close();
+
+        $response = array(
+            'success' => true,
+            'message' => 'Remoção bem-sucedida.'
+        );
+    
+        echo json_encode($response);
+    }
+
+    public function verificaEstoque($id_itens_carrinho) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->select('
+            estoque.QUANTIDADE as QUANTIDADE_ESTOQUE
+        ');
+        $builder->where('itens_carrinho.ID', $id_itens_carrinho);
+        $builder->join('estoque', 'estoque.PRODUTO_ID = itens_carrinho.PRODUTO_ID');
+        return $builder->get()->getRow()->QUANTIDADE_ESTOQUE;
     }
 
     public function somaQuantidade() {
         $id = $this->request->getPost('id');
         $quantidade = $this->request->getPost('quantidade');
+
+        $quantidade_estoque = $this->verificaEstoque($id);
+        if ($quantidade_estoque == 0) {
+            $response = array(
+                'success' => true,
+                'message' => 'success'
+            );
+            return json_encode($response);
+        }
 
         try {
             $db = \Config\Database::connect();
@@ -74,6 +147,7 @@ class BuyCart extends BaseController
             $preco_unitario = $builder->get()->getRow()->PRECO_UNITARIO;
             $builder->where('ID', $id);
             $subtotal = $builder->get()->getRow()->SUBTOTAL;
+            $id_produto = $builder->get()->getRow()->PRODUTO_ID;
             $builder->set('QUANTIDADE', $quantidade+1);
             $builder->set('SUBTOTAL', $subtotal + $preco_unitario);
             $builder->where('ID', $id);
@@ -85,9 +159,11 @@ class BuyCart extends BaseController
                 //produto não existe - fazer página de erro
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
+
+            $this->removeQuantidadeCarrinho($id_produto);
             $response = array(
                 'success' => true,
-                'message' => 'Inserção bem-sucedida.'
+                'message' => 'success'
             );
         
             echo json_encode($response);
@@ -105,7 +181,7 @@ class BuyCart extends BaseController
         if ($quantidade == 1) {
             $response = array(
                 'success' => true,
-                'message' => 'Quantidade não pode ser menor que 1.'
+                'message' => 'success'
             );
             return json_encode($response);
         }
@@ -118,19 +194,22 @@ class BuyCart extends BaseController
             $preco_unitario = $builder->get()->getRow()->PRECO_UNITARIO;
             $builder->where('ID', $id);
             $subtotal = $builder->get()->getRow()->SUBTOTAL;
+            $id_produto = $builder->get()->getRow()->PRODUTO_ID;
             $builder->set('QUANTIDADE', $quantidade - 1);
             $builder->set('SUBTOTAL', $subtotal - $preco_unitario);
             $builder->where('ID', $id);
             $builder->update();
             $db->close();
-            
+
             if (!$builder) {
                 //produto não existe - fazer página de erro
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
+
+            $this->retornaQuantidadeCarrinho($id_produto);
             $response = array(
                 'success' => true,
-                'message' => 'Inserção bem-sucedida.'
+                'message' => 'success'
             );
         
             echo json_encode($response);
@@ -209,9 +288,37 @@ class BuyCart extends BaseController
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
         $builder->update();
         $db->close();
+
+        $response = array(
+            'success' => true,
+            'message' => 'Adição bem-sucedida.'
+        );
+    
+        echo json_encode($response);
+    }
+
+    public function removeQuantidadeCarrinho($id_produto) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('estoque');
+        $builder->where('PRODUTO_ID', $id_produto);
+        $quantidade = $builder->get()->getRow('QUANTIDADE');
+        $builder->set('QUANTIDADE',$quantidade -1);
+        $builder->where('PRODUTO_ID', $id_produto);
+        $builder->update();
+    }
+
+    public function retornaQuantidadeCarrinho($id_produto) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('estoque');
+        $builder->where('PRODUTO_ID', $id_produto);
+        $quantidade = $builder->get()->getRow('QUANTIDADE');
+        $builder->set('QUANTIDADE',$quantidade + 1);
+        $builder->where('PRODUTO_ID', $id_produto);
+        $builder->update();
     }
 
     public function inserePrimeiroItemNoCarrinho($ultimo_id_novo_carrinho_inserido, $id_produto, $preco_produto) {
+        $this->removeQuantidadeCarrinho($id_produto);
         $data = [
             'CARRINHO_DE_COMPRA_ID' => (int) $ultimo_id_novo_carrinho_inserido,
             'PRODUTO_ID' => (int) $id_produto,
@@ -224,9 +331,17 @@ class BuyCart extends BaseController
         $builder = $db->table('itens_carrinho');
         $builder->insert($data);
         $db->close();
+
+        $response = array(
+            'success' => true,
+            'message' => 'Adição bem-sucedida.'
+        );
+    
+        echo json_encode($response);
     }
 
     public function insereItemNoCarrinho($id_carrinho_compra, $id_produto, $preco_produto) {
+        $this->removeQuantidadeCarrinho($id_produto);
         $data = [
             'CARRINHO_DE_COMPRA_ID' => (int) $id_carrinho_compra,
             'PRODUTO_ID' => (int) $id_produto,
@@ -239,6 +354,13 @@ class BuyCart extends BaseController
         $builder = $db->table('itens_carrinho');
         $builder->insert($data);
         $db->close();
+
+        $response = array(
+            'success' => true,
+            'message' => 'Adição bem-sucedida.'
+        );
+    
+        echo json_encode($response);
     }
 
     public function adicionaProdutoCarrinho() {
@@ -283,7 +405,13 @@ class BuyCart extends BaseController
                     $this->insereItemNoCarrinho($id_carrinho_compra, $id_produto, $preco_produto);
                 }
             }
-            session()->setFlashdata('query-success', 'Quantidade alterada.');
+            // session()->setFlashdata('query-success', 'Quantidade alterada.');
+            $response = array(
+                'success' => true,
+                'message' => 'Remoção bem-sucedida.'
+            );
+        
+            echo json_encode($response);
             return redirect()->back();
             
         } catch (\Exception $e) {
@@ -342,6 +470,20 @@ class BuyCart extends BaseController
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         }
+    }
+    
+    public function enderecoDeEntrega($id_carrinho, $id_usuario) {
+        $user = new User();
+        
+        if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        else if ($user->idUser() != $id_usuario) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        
+        return view('comprando/endereco-de-entrega/endereco');
     }
 
 
