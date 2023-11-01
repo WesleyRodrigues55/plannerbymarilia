@@ -18,10 +18,10 @@
 @import url("assets/css/cadastro-adm.css");
 @import url("assets/css/lista-produto-adm.css");
 @import url("assets/css/lista-usuario.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
+    --cor-ciza: #ddd;
     --cor-rosa-principal: #FFAFCC;
     --cor-rosa-secundario: #FFC8DD;
     --cor-rosa-hover: rgba(255, 200, 221, 0.50);
@@ -239,7 +239,6 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -261,7 +260,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }
