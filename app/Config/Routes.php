@@ -49,7 +49,10 @@ $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 $routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
 $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
-$routes->get('/teste', "BuyCart::loadItensCarrinhoContent");
+$routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
+
+// Comprando
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntrega/$1');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

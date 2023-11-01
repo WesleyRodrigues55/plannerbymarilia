@@ -18,7 +18,7 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 
 - Primeiro requisito essêncial é que tenha instalado em sua máquina um servidor web local, como o xampp por exemplo, link de download [Xampp](https://www.apachefriends.org/pt_br/index.html), instalando o xampp, já virá com o PHP junto e o banco de dados MySql que usaremos como base de dados do projeto.
 *Verifique a porta em que seu projeto foi instalado, o projeto usa a padrão 3306 do MySql, caso seja outra porta em uso, sigas os passos abaixo:
-- Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele ver 
+- Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele altere a porta para a que esteja usando.
 
 - Baixe o script SQL (será disponibilizado em breve) e importe no mysql.
 
@@ -33,7 +33,7 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 
 - Após isso, acesse o projeto clonado `cd plannerbymarilia` ou em alguma IDE de sua preferência.
 
-- Com o temrinal na raíz do projeto clonado, rode o comando `composer install` para baixar as dependências necessárias do projeto.
+- Com o terminal na raíz do projeto clonado, rode o comando `composer install` para baixar as dependências necessárias do projeto.
 
 - Com tudo acima sendo feito, agora basta rodar o comando `php spark serve` que emulará sua aplicação na web.
 

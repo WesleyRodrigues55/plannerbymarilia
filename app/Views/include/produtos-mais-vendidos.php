@@ -26,7 +26,8 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
                             <?php if (session()->has('usuario')): ?>
-                                <form action="carrinho/adiciona-produto-carrinho" method="post">
+                                <form id="adicionaProdutoCarrinho" method="post">
+                                <!-- <form action="carrinho/adiciona-produto-carrinho" method="post"> -->
                                     <input type="text" name="id-produto" value="<?= $mv['ID'] ?>" id="" hidden readonly>
                                     <input type="text" name="slug" value="<?= $mv['SLUG'] ?>" id="" hidden readonly>
                                     <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">
@@ -51,4 +52,23 @@
         <a class="btn input-simples px-5" href="mais-vendidos-semana">VER MAIS</a></button>
     </div>
     
+</div>
+
+<!-- <button type="button" class="btn btn-primary" id="produto-adicionado-toast">Show live toast</button> -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+        Produto adicionado no carrinho.
+        <br><a href="<?= base_url('/carrinho') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> e acesse o seu carrinho!
+    </p>
+    </div>
+  </div>
 </div>

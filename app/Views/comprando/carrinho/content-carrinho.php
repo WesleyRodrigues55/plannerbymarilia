@@ -14,38 +14,41 @@
             <?php foreach($carrinho_compras as $cc): ?>
                 <div class="d-flex align-items-center box-carrinho my-1 p-4">
                     <div class="box-img-carrinho">
-                        <img src="<?php echo base_url('assets/img/teste/'.$cc['IMAGEM']) ?>" alt="img-produto">
+                        <img src="<?= base_url('assets/img/teste/'.$cc['IMAGEM']) ?>" alt="img-produto">
                     </div>
                 
                     <div class="w-100 d-flex align-items-center justify-content-between">
                         <div>
-                            <p><b><?php echo $cc['NOME_PRODUTO'] ?></b></p>
+                            <b><?= $cc['NOME_PRODUTO'] ?></b>
                             <div class="d-flex">
-                                <span><a href="">Excluir</a></span>
+                                <form method="post" id="removeItemCarrinho">
+                                    <input type="number" id="id" name="id" value="<?= $cc['ID_ITENS_CARRINHO']; ?>" hidden>
+                                    <button type="submit" name="remover" id="remover" class="botao-remove-item-carrinho p-small">Remover</button>
+                                </form>
                             </div>
                         </div>
                         <div class="text-center">
                             <div class="d-flex">
                                 <form method="post" id="subtraiQuantidadeCarrinho">
                                 <!-- <form action="carrinho/subtrai-quantidade" method="post"> -->
-                                    <input type="number" id="quantidade" name="quantidade" value="<?php echo $cc['QUANTIDADE']; ?>" hidden>
-                                    <input type="number" id="id" name="id" value="<?php echo $cc['ID_ITENS_CARRINHO']; ?>" hidden>
+                                    <input type="number" id="quantidade" name="quantidade" value="<?= $cc['QUANTIDADE']; ?>" hidden>
+                                    <input type="number" id="id" name="id" value="<?= $cc['ID_ITENS_CARRINHO']; ?>" hidden>
                                     <input type="submit" value="-" name="sub" id="sub">
                                 </form>
-                                <span style="width: 100px"><?php echo $cc['QUANTIDADE']; ?></span>
+                                <span style="width: 100px" id="quantidade-produto"><?= $cc['QUANTIDADE']; ?></span>
                                 <form method="post" id="somaQuantidadeCarrinho">
                                 <!-- <form action="carrinho/soma-quantidade" method="post"> -->
-                                    <input type="number" id="quantidade" name="quantidade" value="<?php echo $cc['QUANTIDADE']; ?>" hidden>
-                                    <input type="number" id="id" name="id" value="<?php echo $cc['ID_ITENS_CARRINHO']; ?>" hidden>
+                                    <input type="number" id="quantidade" name="quantidade" value="<?= $cc['QUANTIDADE']; ?>" hidden>
+                                    <input type="number" id="id" name="id" value="<?= $cc['ID_ITENS_CARRINHO']; ?>" hidden>
                                     <input type="submit" value="+" name="sum">
                                 </form>
                             </div>
                             
-                            <span class="d-block">2 disponíveis</span>
+                            <span class="d-block"><?= $cc['QUANTIDADE_ESTOQUE']; ?> disponíveis</span>
                         </div>
                         <div class="box-preco-carrinho">
                             <span>R$ </span>
-                            <span id="valor-total"><?php echo $cc['SUBTOTAL']; ?></span>
+                            <span id="valor-total"><?= $cc['SUBTOTAL']; ?></span>
                         </div>
                     </div>
                 </div>
@@ -57,7 +60,10 @@
             <p>Produtos (<?= $visao_geral['count_itens_carrinho'] ?>): R$<?= $visao_geral['total_geral'] ?></p>
             <p>Frete (Grátis)</p>
             <p>Total R$<?= $visao_geral['total_geral'] ?></p>
-            <button id="<?= $visao_geral['id_carrinho'] ?>">Continuar a compra</button>
+            <a href="<?= base_url('/comprando/endereco-de-entrega/'. $visao_geral['id_carrinho'] . '/' . session()->get('id')) ?>" class="input-rosa">Continuar a compra</a>
         </div>
     </div>
 <?php endif ?>
+
+<?php //echo "<pre>"; var_dump($visao_geral); ?>
+

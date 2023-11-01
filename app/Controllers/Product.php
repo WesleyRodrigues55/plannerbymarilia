@@ -9,15 +9,18 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('CATEGORIA', 'planner');
-            $builder->where('ATIVO', 1);
+            $builder->where('produto.CATEGORIA', 'planner');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
+
     
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -38,15 +41,17 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('CATEGORIA', 'caderno');
-            $builder->where('ATIVO', 1);
+            $builder->where('produto.CATEGORIA', 'caderno');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
     
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -68,15 +73,17 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('CATEGORIA', 'agenda');
-            $builder->where('ATIVO', 1);
+            $builder->where('produto.CATEGORIA', 'agenda');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -97,15 +104,17 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('CATEGORIA', 'bloco');
-            $builder->where('ATIVO', 1);
+            $builder->where('produto.CATEGORIA', 'bloco');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -126,16 +135,18 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS  
-            $builder->where('ATIVO', 1);
-            $builder->orderBy('ID', 'RANDOM');
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+            $builder->where('produto.ID', 'RANDOM');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -156,15 +167,18 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
-            ');  
-            $builder->where('ATIVO', 1);
-            $builder->orderBy('ID', 'RANDOM');
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
+            ');
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+            $builder->where('produto.ID', 'RANDOM');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -185,15 +199,17 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('CATEGORIA', 'planner');
-            $builder->where('ATIVO', 1);
+            $builder->where('produto.CATEGORIA', 'planner');
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
             $builder->limit(4);
 
             $query = $builder->get()->getResultArray();
@@ -211,19 +227,22 @@ class Product extends BaseController
     public function presentesCriativosHome() {
         try {
             $db = \Config\Database::connect();
-            $builder = $db->table('produto');
+            $builder = $db->table('produto');           
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('ATIVO', 1);
-            $builder->orderBy('ID', 'RANDOM');
-            $builder->limit(4);
-
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
+            $builder->orderBy('RAND()');
+            $builder->limit(4); 
+            
             $query = $builder->get()->getResultArray();
             $db->close();
 
@@ -241,17 +260,19 @@ class Product extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->select('
-                ID,
-                NOME,
-                IMAGEM,
-                PRECO,
-                SLUG,
-                CATEGORIA
+                produto.ID,
+                produto.NOME,
+                produto.IMAGEM,
+                produto.PRECO,
+                produto.SLUG,
+                produto.CATEGORIA
             ');
-            $builder->where('ATIVO', 1);
-            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS
-            $builder->orderBy('ID', 'RANDOM');
-            $builder->limit(4);
+            //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+            $builder->where('produto.ATIVO', 1);
+            $builder->where('estoque.QUANTIDADE >',  0);
+            $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
+            $builder->orderBy('RAND()');
+            $builder->limit(4); 
 
             $query = $builder->get()->getResultArray();
             $db->close();
