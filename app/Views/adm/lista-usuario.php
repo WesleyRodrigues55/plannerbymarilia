@@ -44,7 +44,6 @@ $data['link_css'] = "assets/css/lista-usuario.css";
                 <th scope="col">Ativo</th>
                 <th>
                     <button class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</button>
-                    <a class="input-simples" href="<?= base_url('administrador/editar-usuario') ?>">Editar</a>
                 </th>
             </tr>
         </thead>
