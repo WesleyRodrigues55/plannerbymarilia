@@ -143,10 +143,11 @@ class Product extends BaseController
                 produto.CATEGORIA
             ');
             //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-            $builder->where('produto.ID', 'RANDOM');
             $builder->where('produto.ATIVO', 1);
             $builder->where('estoque.QUANTIDADE >',  0);
             $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
+            $builder->orderBy('RAND()');
+            $builder->limit(4); 
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -175,10 +176,11 @@ class Product extends BaseController
                 produto.CATEGORIA
             ');
             //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-            $builder->where('produto.ID', 'RANDOM');
             $builder->where('produto.ATIVO', 1);
             $builder->where('estoque.QUANTIDADE >',  0);
             $builder->join('estoque', 'produto.ID = estoque.PRODUTO_ID');
+            $builder->orderBy('RAND()');
+            $builder->limit(4); 
 
             $query = $builder->get()->getResultArray();
             $db->close();
