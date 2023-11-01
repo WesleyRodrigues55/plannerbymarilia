@@ -53,22 +53,3 @@
     </div>
     
 </div>
-
-<!-- <button type="button" class="btn btn-primary" id="produto-adicionado-toast">Show live toast</button> -->
-
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="open-toast" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
-      <strong class="me-auto">Planner By marília</strong>
-      <small>Agora</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      <p class="p-small">
-        Produto adicionado no carrinho.
-        <br><a href="<?= base_url('/carrinho') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> e acesse o seu carrinho!
-    </p>
-    </div>
-  </div>
-</div>

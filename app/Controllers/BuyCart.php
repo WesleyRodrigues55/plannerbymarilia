@@ -267,6 +267,8 @@ class BuyCart extends BaseController
     }
 
     public function updateItemCarrinho($id_produto, $id_carrinho_compra) {
+        $this->removeQuantidadeCarrinho($id_produto);
+        
         $db = \Config\Database::connect();
         $builder = $db->table('itens_carrinho');
 
