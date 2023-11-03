@@ -37,14 +37,14 @@ $data['link_css'] = "assets/css/lista-usuario.css";
 
         <thead>
             <tr>
-                <th scope="col">Wesley </th>
-                <th scope="col">123</th>
-                <th scope="col">33367723-73</th>
-                <th scope="col">Administrador</th>
-                <th scope="col">Ativo</th>
-                <th>
-                    <button class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</button>
-                </th>
+                <td scope="col">Wesley </td>
+                <td scope="col">123</td>
+                <td scope="col">33367723-73</td>
+                <td scope="col">Administrador</td>
+                <td scope="col">Ativo</td>
+                <td>
+                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                </td>
             </tr>
         </thead>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

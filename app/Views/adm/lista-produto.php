@@ -35,12 +35,12 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
 
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Descrição </th>
-                <th scope="col">Descrição imagem</th>
-                <th scope="col"><a href="<?= base_url('administrador/editar-produto') ?>" class="input-simples">Editar</a>
-                    <button class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</button>
-                </th>
+                <td scope="col">ID</td>
+                <td scope="col">Descrição </td>
+                <td scope="col">Descrição imagem</td>
+                <td scope="col"><a href="<?= base_url('administrador/editar-produto') ?>" class="input-simples">Editar</a>
+                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                </td>
             </tr>
         </thead>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
