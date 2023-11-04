@@ -12,33 +12,13 @@ $.ajax({
     }
 });
 
-// recarrega carrinho com os dados sem o "load" no navegador
-function loadCarrinho() {
-    $.ajax({
-        url: '/carrinho/load-content-carrinho',
-        type: 'GET',
-        success: function(data) {
-            $('#content-carrinho').html(data);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            // Esta função é chamada em caso de erro
-            console.log("Ocorreu um erro na requisição AJAX: " + textStatus);
-            console.log("Erro: " + errorThrown);
-        }
-    });
-}
 
+// abre pop-up
 function openToast() {
     const toastLiveExample = document.getElementById('open-toast')
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
     toastBootstrap.show();
 }
-
-$(document).on('DOMContentLoaded', function(event) {
-    setInterval(() => {
-        loadCarrinho();
-    }, 10000);
-})
 
 // remove item do carrinho
 $(document).on('submit', '#removeItemCarrinho', function(event) {
@@ -87,18 +67,24 @@ $(document).on('submit', '#somaQuantidadeCarrinho', function(event) {
     });
 });
 
-
-
-$(document).on('submit', '#adicionaProdutoCarrinho', function(event) {
-    event.preventDefault();
-    var formData = $(this).serialize();
+// recarrega carrinho com os dados sem o "load" no navegador
+function loadCarrinho() {
     $.ajax({
-        type: 'POST',
-        url: '/carrinho/adiciona-produto-carrinho',
-        data: formData,
-        success: function(response) {
-            // response = JSON.parse(response);
-            openToast();
+        url: '/carrinho/load-content-carrinho',
+        type: 'GET',
+        success: function(data) {
+            $('#content-carrinho').html(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Esta função é chamada em caso de erro
+            console.log("Ocorreu um erro na requisição AJAX: " + textStatus);
+            console.log("Erro: " + errorThrown);
         }
-    })
+    });
+}
+
+$(document).on('DOMContentLoaded', function(event) {
+    setInterval(() => {
+        loadCarrinho();
+    }, 10000);
 })

@@ -473,8 +473,44 @@ class BuyCart extends BaseController
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         }
     }
-    
-    public function enderecoDeEntrega($id_carrinho, $id_usuario) {
+
+    public function getEnderecoUsuario($id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->select('
+            endereco_de_entrega.ID,
+            endereco_de_entrega.USUARIO_ID,
+            endereco_de_entrega.CEP,
+            endereco_de_entrega.RUA,
+            endereco_de_entrega.CIDADE,
+            endereco_de_entrega.ESTADO,
+            endereco_de_entrega.LOCAL_ENTREGA,
+            endereco_de_entrega.INFORMACOES_ADICIONAIS,
+            endereco_de_entrega.BAIRRO,
+            endereco_de_entrega.NUMERO,
+            endereco_de_entrega.COMPLEMENTO,
+            endereco_de_entrega.RUA,
+            endereco_de_entrega.CHECKED,
+            endereco_de_entrega.NOME_COMPLETO,
+            endereco_de_entrega.CELULAR
+        ');
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->join('usuario', 'usuario.ID = endereco_de_entrega.USUARIO_ID');
+        $builder->orderBy('CHECKED', 'DESC');
+        $query = $builder->get()->getResultArray();
+        return $query;
+    }
+
+    public function getEnderecoUsuarioChecked($id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->where('CHECKED', 1);
+        $query = $builder->get()->getResultArray();
+        return $query;
+    }
+
+    public function escolherEnderecoEntrega($id_carrinho, $id_usuario) {
         $user = new User();
         
         if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
@@ -485,8 +521,148 @@ class BuyCart extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         
-        return view('comprando/endereco-de-entrega/endereco');
+        $data = [
+            'dados_usuario' =>$this->getEnderecoUsuario($id_usuario),
+            'id_carrinho' => $id_carrinho
+        ];
+        session()->set([
+            'id_carrinho' => $id_carrinho
+        ]);    
+        return view('comprando/endereco-de-entrega/escolhendo-endereco-de-entrega', $data);
     }
 
+    public function verificaEnderecoDeEntrega($id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->where('CHECKED', 1);
+        $query = $builder->get()->getResultArray();
+        return $query;
+    }
+    
+    public function enderecoDeEntrega($id_carrinho, $id_usuario) {
+        $user = new User();
+        
+        if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        else if ($user->idUser() != $id_usuario) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        
+        $data = [
+            'dados_usuario' => $this->getEnderecoUsuarioChecked($id_usuario),
+            'id_carrinho' => $id_carrinho
+        ];
+
+        // var_dump($this->getEnderecoUsuarioChecked($id_usuario));
+        return view('comprando/endereco-de-entrega/endereco', $data);
+    }
+
+    public function cadastrandoEnderecoEntrega($id_usuario) {
+        $user = new User();
+        
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        else if ($user->idUser() != $id_usuario) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = ['id_usuario' => $id_usuario];
+
+        return view('comprando/endereco-de-entrega/cadastro', $data);
+    }
+
+
+    public function salvandoEnderecoEntrega() {
+        $id_usuario = $this->request->getPost('id-usuario');
+        $nome = $this->request->getPost('nome');
+        $celular = $this->request->getPost('celular');
+        $cep = $this->request->getPost('cep');
+        $rua = $this->request->getPost('rua');
+        $cidade = $this->request->getPost('cidade');
+        $bairro = $this->request->getPost('bairro');
+        $estado = $this->request->getPost('estado');
+        $numero = $this->request->getPost('numero');
+        $complemento = $this->request->getPost('complemento');
+        $local = $this->request->getPost('local');
+        $informacoes = $this->request->getPost('informacoes');
+
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->set('CHECKED', 0);
+        $builder->where('CHECKED', 1);
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->update();
+        $db->close();
+        
+
+        $data = [
+            'USUARIO_ID' => $id_usuario,
+            'NOME_COMPLETO' => $nome,
+            'CELULAR' => $celular,
+            'CEP' => $cep,
+            'RUA' => $rua,
+            'CIDADE' => $cidade,
+            'ESTADO' => $estado,
+            'LOCAL_ENTREGA' => $local,
+            'INFORMACOES_ADICIONAIS' => $informacoes,
+            'BAIRRO' => $bairro,
+            'NUMERO' => $numero,
+            'COMPLEMENTO' => $complemento,
+            'CHECKED' => 1,
+            'ATIVO' => 1
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('endereco_de_entrega');
+            $builder->insert($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('endereco-failed', 'Tivemos um erro em salvar seu endereço, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('endereco-success', 'Endereço salvo com sucesso!');
+            }
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
+
+
+    public function adicionaEnderecoDeEntregaEmDetalhesPedido() {
+        $myTime = Time::now('America/Sao_Paulo');
+
+        $id_carrinho = $this->request->getPost('id-carrinho');
+        $id_endereco_escolhido = $this->request->getPost('id-endereco-escolhido');
+        $id_usuario = $this->request->getPost('id-usuario');
+
+        $data = [
+            'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
+            'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
+            'USUARIO_ID' => $id_usuario,
+            'DATA_PEDIDO' => $myTime->toDateTimeString(),
+            'STATUS_PEDIDO' => "EM ABERTO",
+            'TOTAL_PEDIDO' => ''
+        ];
+
+        // SE JÁ EXISTIR, DÁ UPDAT NA LINHA, COM OS MESMO DADOS, OU CASO O ENDEREÇO SEJA ALTERADO.
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->insert($data);
+        $db->close();
+
+        return $this->formaDePagamento();
+    }
+
+    public function formaDePagamento() {
+        return view('comprando/forma-de-pagamento/escolhendo-forma-de-pagamento');
+    }
 
 }

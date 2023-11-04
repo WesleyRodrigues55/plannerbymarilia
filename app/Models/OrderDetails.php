@@ -15,10 +15,12 @@ class OrderDetails extends Model
     protected $useSoftDeletes = true;
 
     protected $allowedFields = [
-        'PEDIDO_ID',
         'CARRINHO_DE_COMPRAS_ID',
-        'PRECO_UNITARIO',
-        'TOTAL_PEDIDO',
+        'ENDERECO_DE_ENTREGA_ID',
+        'USUARIO_ID',
+        'DATA_PEDIDO',
+        'STATUS_PEDIDO',
+        'TOTAL_PEDIDO'
     ];
 
     // Dates

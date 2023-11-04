@@ -55,3 +55,5 @@
 
 <?= view("include/scripts") ?>
 
+<?= view("comprando/scripts/script-carrinho") ?>
+

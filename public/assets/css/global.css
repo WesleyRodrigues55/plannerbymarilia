@@ -129,7 +129,8 @@ select {
     border: 1px solid var(--cor-preto) !important;
 }
 
-input[type="text"]:focus,
+
+/* input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -138,7 +139,7 @@ input[type="checkbox"]:focus {
     border: 1px solid var(--cor-preto);
     outline: none;
     box-shadow: none;
-}
+} */
 
 select:focus {
     border: 1px solid var(--cor-preto) !important;
