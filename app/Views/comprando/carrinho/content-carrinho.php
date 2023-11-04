@@ -10,9 +10,9 @@
 <?php else: ?>
     <h1 class="h2-titles mb-5 text-center"><b>CARRINHO DE COMPRAS!</b></h1>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <?php foreach($carrinho_compras as $cc): ?>
-                <div class="d-flex align-items-center box-carrinho my-1 p-4">
+                <div class="d-flex align-items-center box-carrinho mb-1 p-4 border rounded-3">
                     <div class="box-img-carrinho">
                         <img src="<?= base_url('assets/img/teste/'.$cc['IMAGEM']) ?>" alt="img-produto">
                     </div>
@@ -55,7 +55,7 @@
             <?php endforeach; ?>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3 border rounded-3 p-4">
             <h2>Resumo da compra</h2>
             <p>Produtos (<?= $visao_geral['count_itens_carrinho'] ?>): R$<?= $visao_geral['total_geral'] ?></p>
             <p>Frete (Grátis)</p>

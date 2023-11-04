@@ -14,6 +14,9 @@ class DeliverAdress extends Model
     protected $allowedFields = [
         'ID',
         'USUARIO_ID',
+        'NOME_COMPLETO',
+        'CELULAR',
+        'CEP',
         'RUA',
         'CIDADE',
         'ESTADO',
@@ -22,6 +25,7 @@ class DeliverAdress extends Model
         'BAIRRO',
         'NUMERO',
         'COMPLEMENTO',
+        'CHECKED',
         'ATIVO'
     ];
 
