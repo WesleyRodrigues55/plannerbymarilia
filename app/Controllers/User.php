@@ -16,6 +16,8 @@ class User extends BaseController
         return redirect()->to('login');
     }
 
+ 
+
     public function cadastroUser(){
         return view('login/cadastrar');
     }
@@ -101,10 +103,42 @@ class User extends BaseController
                 'NIVEL' => 1,
             ];
 
+
+            if ($cpf) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('pessoa');
+                if ($builder->where('CPF', $cpf)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('cpf-exists', 'CPF já cadastrado, por favor, use outro.');
+                    return redirect()->back();
+                }
+            }
+        
+            // Verificar se o e-mail já existe
+            if ($email) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('pessoa');
+                if ($builder->where('EMAIL', $email)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('email-exists', 'E-mail já cadastrado, por favor, use outro.');
+                    return redirect()->back();
+                }
+            }
+
             $builder = $db->table('usuario');
             $builder->insert($dataUsuario);
-            
             $db->close();
+            
+
+            
+
+            if (!$builder){
+                session()->setFlashdata('Failed-register', 'Erro ao cadastrar, verifique os campos e tente novamente');
+            }else{
+                session()->setFlashdata('success-register', 'Cadastro realizado com sucesso!');
+            }
+            return redirect()->back();
+            
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -133,8 +167,6 @@ class User extends BaseController
             session()->setFlashdata('login-failed', 'Credencias incorretas!');
             return redirect()->back();
         }
-        
-        
         
 
         if (!$query) {
