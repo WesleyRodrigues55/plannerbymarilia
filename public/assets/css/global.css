@@ -18,10 +18,10 @@
 @import url("assets/css/cadastro-adm.css");
 @import url("assets/css/lista-produto-adm.css");
 @import url("assets/css/lista-usuario.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
+    --cor-ciza: #ddd;
     --cor-rosa-principal: #FFAFCC;
     --cor-rosa-secundario: #FFC8DD;
     --cor-rosa-hover: rgba(255, 200, 221, 0.50);
@@ -129,7 +129,8 @@ select {
     border: 1px solid var(--cor-preto) !important;
 }
 
-input[type="text"]:focus,
+
+/* input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
@@ -138,7 +139,7 @@ input[type="checkbox"]:focus {
     border: 1px solid var(--cor-preto);
     outline: none;
     box-shadow: none;
-}
+} */
 
 select:focus {
     border: 1px solid var(--cor-preto) !important;
@@ -156,7 +157,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .input-simples,
@@ -239,7 +240,6 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
@@ -261,7 +261,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }

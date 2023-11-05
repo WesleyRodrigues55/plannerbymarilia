@@ -1,11 +1,5 @@
-.box-carrinho {
-    border: 1px solid var(--cor-cinza);
-}
-
-.box-img-carrinho {}
-
 .box-img-carrinho img {
-    width: 100px
+    width: 80px
 }
 
 .valor-quantidade:hover {
@@ -14,4 +8,10 @@
 
 .box-preco-carrinho span {
     font-size: 24px !important;
+}
+
+.botao-remove-item-carrinho {
+    border: none;
+    background: transparent;
+    padding: 0;
 }

@@ -17,7 +17,6 @@ class Stock extends Model
     protected $allowedFields = [
         'ID',
         'PRODUTO_ID',
-        'PRECO_UNITARIO',
         'QUANTIDADE'
     ];
 
