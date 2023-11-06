@@ -8,7 +8,7 @@
     <?= view("include/nav") ?>
 
     <main class="container my-5">
-        <h1 class="text-center mb-4">Cadastrando um endereço de entrega</h1>
+        <h1 class="text-center mb-4">Cadastro de endereço de entrega</h1>
 
         <?php $message_success = session()->getFlashdata('endereco-success'); ?>
         <?php $message_failed = session()->getFlashdata('endereco-failed'); ?>

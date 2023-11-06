@@ -519,16 +519,21 @@ class BuyCart extends BaseController
 
         else if ($user->idUser() != $id_usuario) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+
+            if (!$this->getEnderecoUsuario($id_usuario)) {
+                return $this->enderecoDeEntrega($id_carrinho, $id_usuario);
+            }
+            
+            $data = [
+                'dados_usuario' => $this->getEnderecoUsuario($id_usuario),
+                'id_carrinho' => $id_carrinho
+            ];
+            session()->set([
+                'id_carrinho' => $id_carrinho
+            ]);    
+            return view('comprando/endereco-de-entrega/escolhendo-endereco-de-entrega', $data);
         }
-        
-        $data = [
-            'dados_usuario' =>$this->getEnderecoUsuario($id_usuario),
-            'id_carrinho' => $id_carrinho
-        ];
-        session()->set([
-            'id_carrinho' => $id_carrinho
-        ]);    
-        return view('comprando/endereco-de-entrega/escolhendo-endereco-de-entrega', $data);
     }
 
     public function verificaEnderecoDeEntrega($id_usuario) {
@@ -559,15 +564,19 @@ class BuyCart extends BaseController
         return view('comprando/endereco-de-entrega/endereco', $data);
     }
 
-    public function cadastrandoEnderecoEntrega($id_usuario) {
+    public function cadastrandoEnderecoEntrega($id_carrinho, $id_usuario) {
         $user = new User();
         
-        if (!$user->validaLogin()) {
+        if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         else if ($user->idUser() != $id_usuario) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+
+        session()->set([
+            'id_carrinho' => $id_carrinho
+        ]);
 
         $data = ['id_usuario' => $id_usuario];
 
@@ -635,6 +644,15 @@ class BuyCart extends BaseController
     }
 
 
+    public function getDetalhesPedido($id_carrinho, $id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
+        $builder->where('USUARIO_ID', $id_usuario);
+        $query = $builder->get()->getResultArray();
+        return $query;
+    }
+
     public function adicionaEnderecoDeEntregaEmDetalhesPedido() {
         $myTime = Time::now('America/Sao_Paulo');
 
@@ -642,21 +660,39 @@ class BuyCart extends BaseController
         $id_endereco_escolhido = $this->request->getPost('id-endereco-escolhido');
         $id_usuario = $this->request->getPost('id-usuario');
 
-        $data = [
-            'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
-            'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
-            'USUARIO_ID' => $id_usuario,
-            'DATA_PEDIDO' => $myTime->toDateTimeString(),
-            'STATUS_PEDIDO' => "EM ABERTO",
-            'TOTAL_PEDIDO' => ''
-        ];
+        if ($this->getDetalhesPedido($id_carrinho, $id_usuario)) {
+            $data = [
+                'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
+                'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
+                'USUARIO_ID' => $id_usuario,
+                'DATA_PEDIDO' => $myTime->toDateTimeString(),
+                'STATUS_PEDIDO' => 'EM ABERTO',
+                'TOTAL_PEDIDO' => ''
+            ];
 
-        // SE JÁ EXISTIR, DÁ UPDAT NA LINHA, COM OS MESMO DADOS, OU CASO O ENDEREÇO SEJA ALTERADO.
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->set('TOTAL_PEDIDO', '');
+            $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
+            $builder->where('ENDERECO_DE_ENTREGA_ID', $id_endereco_escolhido);
+            $builder->where('USUARIO_ID', $id_usuario);
+            $builder->update();
+            $db->close();
+        } else {
+            $data = [
+                'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
+                'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
+                'USUARIO_ID' => $id_usuario,
+                'DATA_PEDIDO' => $myTime->toDateTimeString(),
+                'STATUS_PEDIDO' => 'EM ABERTO',
+                'TOTAL_PEDIDO' => ''
+            ];
 
-        $db = \Config\Database::connect();
-        $builder = $db->table('detalhes_do_pedido');
-        $builder->insert($data);
-        $db->close();
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->insert($data);
+            $db->close();
+        }
 
         return $this->formaDePagamento();
     }
