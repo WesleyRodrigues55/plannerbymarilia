@@ -108,11 +108,11 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="cpf" class="preencher">CPF*</label>
-                        <input type="text" class="form-control" id="cpf" name="CPF" placeholder="XXX.XXX.XXX-XX">
+                        <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14" placeholder="XXX.XXX.XXX-XX">
                         <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
-                        <input type="text" class="form-control" id="cpf" name="CNPJ" placeholder="xx.xxx.xxx/xxxx-xx">
+                        <input type="text" class="form-control" id="cnpj" name="CNPJ" maxlength="18" placeholder="xx.xxx.xxx/xxxx-xx">
                         <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
-                        <input type="text" class="form-control" id="cpf" name="inscricaoEstadual"
+                        <input type="text" class="form-control" id="" name="inscricaoEstadual"
                             placeholder="inscricao estadual">
 
                         <div class="content-tipo-pessoa">
@@ -142,7 +142,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cep" class="preencher">CEP*</label>
-                        <input type="text" class="form-control" id="cep" name="CEP" placeholder="XXXXX-XXX">
+                        <input maxlength="9" type="text" class="form-control" id="cep" name="CEP" placeholder="XXXXX-XXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu CEP.
                         </div>

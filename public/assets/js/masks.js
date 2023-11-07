@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $('#cep').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = cep(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
 
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
@@ -57,4 +63,42 @@ $(document).ready(function () {
             limpa_formulário_cep();
         }
     });
+
+    $('#cpf').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = cpf(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
+    $('#cnpj').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = cnpj(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
 });
+
+function cep(v){
+  v = v.replace(/\D/g,'')
+  v = v.replace(/(\d{5})(\d)/,'$1-$2')
+  return v
+}
+
+
+function cnpj(v){
+    v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+    v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
+    v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+    return v
+}
+
+function cpf(v){
+    v=v.replace(/\D/g,"")                    //Remove tudo o que não é dígito
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+                                             //de novo (para o segundo bloco de números)
+    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+    return v
+}
