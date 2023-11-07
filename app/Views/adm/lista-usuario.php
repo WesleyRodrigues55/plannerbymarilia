@@ -37,28 +37,26 @@ $data['link_css'] = "assets/css/lista-usuario.css";
 
         <thead>
             <tr>
-                <th scope="col">Wesley </th>
-                <th scope="col">333.333.333.33</th>
-                <th scope="col">Administrador</th>
-                <th scope="col">333.333.333.33</th>
-                <th scope="col">Ativo</th>
-                <th>
-                    <button class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</button>
-                </th>
+                <td scope="col">Wesley </td>
+                <td scope="col">123</td>
+                <td scope="col">33367723-73</td>
+                <td scope="col">Administrador</td>
+                <td scope="col">Ativo</td>
+                <td>
+                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                </td>
             </tr>
         </thead>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                    <div class="modal-header"> </div>
                     <div class="modal-body">
                         Deseja realmente apagar esse usuário?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <button type="button" class="btn btn input-rosa">CANCELAR</button>
+                        <a href="<?= base_url('administrador/lista-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
                     </div>
                 </div>
             </div>

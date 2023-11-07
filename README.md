@@ -1,62 +1,57 @@
-# CodeIgniter 4 Application Starter
+# E-commerce - Planner By Marília
 
-## What is CodeIgniter?
+## O que é o projeto?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+A microempresa cujo nome fantasia é conhecido como Planner By Marília – Design em papel, empresa desse estudo, buscou desde sua abertura oferecer não somente produtos de qualidade, mas sim atuar de uma forma diferenciada principalmente no atendimento, seja para pessoas físicas ou jurídicas, criando produtos exclusivos, através da personalização, o que torna o material de quem compra e/ou recebe, um produto único e exclusivo. 
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/WesleyRodrigues55/planner).
+Atualmente o negócio existente realiza suas vendas através de dois canais eletrônicos, a rede social Instagram e o chat de conversas instantâneas WhatsApp, não existindo nenhum outro meio de comunicação e/ou apresentação dos produtos. 
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Toda a cadeia logística da papelaria é realizada pela própria proprietária, desde o primeiro contato com o cliente, confecção do modelo até sua entrega final. A papelaria segue as vendas da mesma forma, desde o seu início
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+Portanto, com o objetivo de melhorar as vendas, contato com o cliente, acessibilidade as informações e melhor visualização dos produtos da empresa, para esse projeto será realizado a criação de um e-commerce web para a empresa em questão, visto que a mesma tem apresentado um crescimento ano após ano em suas vendas, e vem se tornando também um negócio consolidado no ramo. 
 
-## Installation & updates
+Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das tarefas é um desafio contínuo em nossa sociedade moderna, onde as demandas pessoais e profissionais frequentemente se sobrepõem.  
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
 
-## Setup
+## Requisitos para o projeto
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+- Primeiro requisito essêncial é que tenha instalado em sua máquina um servidor web local, como o xampp por exemplo, link de download [Xampp](https://www.apachefriends.org/pt_br/index.html), instalando o xampp, já virá com o PHP junto e o banco de dados MySql que usaremos como base de dados do projeto.
+*Verifique a porta em que seu projeto foi instalado, o projeto usa a padrão 3306 do MySql, caso seja outra porta em uso, sigas os passos abaixo:
+- Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele altere a porta para a que esteja usando.
 
-## Important Change with index.php
+- Baixe o script SQL (será disponibilizado em breve) e importe no mysql.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- É necessário ter o composer instalado em sua máquina, pode baixar o composer pelo link [Composer](https://getcomposer.org/download/)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+- Também, para a realização do clone do repositório, precisará ter em sua máquina o Git, link para downlaod [Git](https://git-scm.com/downloads)
 
-**Please** read the user guide for a better explanation of how CI4 works!
 
-## Repository Management
+## Atualizações de instalação
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- Agora será necessário realizar a clonagem do repositório `git clone https://github.com/WesleyRodrigues55/plannerbymarilia.git` via linha de comando ou alguma ferramenta.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+- Após isso, acesse o projeto clonado `cd plannerbymarilia` ou em alguma IDE de sua preferência.
 
-## Server Requirements
+- Com o terminal na raíz do projeto clonado, rode o comando `composer install` para baixar as dependências necessárias do projeto.
 
-PHP version 7.4 or higher is required, with the following extensions installed:
+- Com tudo acima sendo feito, agora basta rodar o comando `php spark serve` que emulará sua aplicação na web.
+
+
+## Configuração
+
+Há um arquivo `env-example` na raíz do projeto, renomeie para `.env`
+
+
+## Requisitos do servidor
+
+PHP versão 7.4 ou superior é necessária, com as seguintes extensões instaladas:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Além disso, certifique-se de que as seguintes extensões estão habilitadas em seu PHP:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- JSON (ativado por padrão - não desative)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) se você planeja usar o MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) se você planeja usar a biblioteca HTTP\CURLRequest

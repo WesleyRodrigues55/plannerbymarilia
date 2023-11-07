@@ -29,6 +29,7 @@ $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCatego
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
 $routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
 $routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
+$routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -41,13 +42,26 @@ $routes->get('/agendas', 'Product::agendas');
 $routes->get('/blocos', 'Product::blocos');
 $routes->get('/mais-vendidos-semana', 'Product::maisVendidosSemana');
 $routes->get('/presentes-criativos', 'Product::presentesCriativos');
-$routes->get('/produto/(:any)', 'Product::pagePlanners/$1');
+$routes->get('/produto/(:any)', 'Product::pageProdutos/$1');
 
 // Carrinho
 $routes->get('/carrinho', 'BuyCart::carrinho');
 $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
+$routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
+$routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
+$routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
+
+// Comprando
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntrega/$1');
+$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'BuyCart::escolherEnderecoEntrega/$1');
+$routes->get('/comprando/cadastrando-endereco-de-entrega/(:any)', 'BuyCart::cadastrandoEnderecoEntrega/$1');
+$routes->post('/comprando/salvar-endereco-de-entrega', 'BuyCart::salvandoEnderecoEntrega');
+$routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
+
+$routes->get('/comprando/forma-de-pagamento', 'BuyCart::formaDePagamento');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
+$routes->get('/politicas/quem-somos', 'Home::quemSomos');
