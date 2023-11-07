@@ -35,12 +35,12 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="alert alert-danger mt-5 text-center" role="alert">
                     <?= $message_failed_cpf; ?>
                 </div>
-            <?php elseif ($message_failed_email): ?>
+            <?php endif; ?>
+            <?php if ($message_failed_email): ?>
                 <div class="alert alert-danger mt-5 text-center" role="alert">
                     <?= $message_failed_email; ?>
                 </div>
             <?php endif; ?>
-
             <form action="<?= base_url('user/cadastroUsuario') ?>" method="post">
                 <div class="row">
                     <div class="col-md-12">

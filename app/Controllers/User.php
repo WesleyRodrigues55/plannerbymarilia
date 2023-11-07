@@ -84,26 +84,6 @@ class User extends BaseController
         
 
         try {
-            $db = \Config\Database::connect();
-            $builder = $db->table('pessoa');
-            $builder->insert($dataPessoa);
-            $ultimo_id_inserido = $db->insertID();
-            $db->close();
-
-            $dataUsuario =[
-                'PESSOA_ID' => $ultimo_id_inserido,
-                'USUARIO' => $email,
-                'SENHA' => $senha,
-                'RECUPERA_SENHA' => '',
-                'FOTO_PERFIL' => 'profile.png',
-                'EMAIL_RECUPERACAO' => $email,
-                'HASH_SENHA' => '',
-                'ATIVO' => 1,
-                'LEMBRAR_DE_MIM' => 1,
-                'NIVEL' => 1,
-            ];
-
-
             if ($cpf) {
                 $db = \Config\Database::connect();
                 $builder = $db->table('pessoa');
@@ -125,13 +105,30 @@ class User extends BaseController
                 }
             }
 
+            $db = \Config\Database::connect();
+            $builder = $db->table('pessoa');
+            $builder->insert($dataPessoa);
+            $ultimo_id_inserido = $db->insertID();
+            $db->close();
+
+            $dataUsuario =[
+                'PESSOA_ID' => $ultimo_id_inserido,
+                'USUARIO' => $email,
+                'SENHA' => $senha,
+                'RECUPERA_SENHA' => '',
+                'FOTO_PERFIL' => 'profile.png',
+                'EMAIL_RECUPERACAO' => $email,
+                'HASH_SENHA' => '',
+                'ATIVO' => 1,
+                'LEMBRAR_DE_MIM' => 1,
+                'NIVEL' => 1,
+            ];
+
+            $db = \Config\Database::connect();
             $builder = $db->table('usuario');
             $builder->insert($dataUsuario);
             $db->close();
             
-
-            
-
             if (!$builder){
                 session()->setFlashdata('Failed-register', 'Erro ao cadastrar, verifique os campos e tente novamente');
             }else{
@@ -140,7 +137,9 @@ class User extends BaseController
             return redirect()->back();
             
 
-        } catch (\Exception $e) {
+        } catch (\Exception $e) 
+        {
+
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         }
 

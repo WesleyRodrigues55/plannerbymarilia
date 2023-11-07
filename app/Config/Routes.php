@@ -30,6 +30,7 @@ $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
 $routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
 $routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
+$routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
