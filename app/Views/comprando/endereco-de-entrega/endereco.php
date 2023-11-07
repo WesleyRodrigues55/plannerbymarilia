@@ -8,13 +8,16 @@
     <?= view("include/nav") ?>
 
     <main class="container my-5">
-        <h1 class="text-center mb-4">Escolha um endereço de entrega</h1>
+
 
         <?php if (!$dados_usuario): ?>
-            <p>Parece que não há endereços de entrega cadastrados, clique no botão abaixo e cadastre.</p>
-            <a href="<?= base_url('/comprando/cadastrando-endereco-de-entrega/'. session()->get('id')) ?>" class="input-simples">Adicionar Endereço</a>
+            <div class="text-center">
+                <h1>Ops!</h1>
+                <p>Parece que não há endereços de entrega cadastrados, clique no botão abaixo e cadastre.</p>
+                <a href="<?= base_url('/comprando/cadastrando-endereco-de-entrega/'. $id_carrinho . '/'. session()->get('id')) ?>" class="input-simples">Adicionar Endereço</a>
+            </div>
         <?php else: ?>
-        
+            <h1 class="text-center mb-4">Escolha um endereço de entrega</h1>
             <form method="post" action="<?= base_url('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido') ?>">
                 <div class="d-flex align-items-start gap-2 border rounded-3 p-4">
                     <input type="number" value="<?= $id_carrinho ?>" name="id-carrinho" class="mt-2" readonly hidden>
