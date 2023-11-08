@@ -33,11 +33,11 @@
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CELULAR</label>
-                    <input type="text" id="celular" name="celular" class="form-control" tabindex="2">
+                    <input maxlength="11" type="text" id="telefone" name="celular" class="form-control" tabindex="2">
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CEP</label>
-                    <input type="text" id="cep" name="cep" class="form-control" tabindex="3">
+                    <input maxlength="9" type="text" id="cep" name="cep" class="form-control" tabindex="3">
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">RUA</label>
@@ -83,6 +83,6 @@
 
     <?= view("include/footer") ?>
 
-<?= view("include/scripts") ?>
+    <?= view("include/scripts") ?>
 <?= view("comprando/scripts/script-cadastro-cep") ?>
 
