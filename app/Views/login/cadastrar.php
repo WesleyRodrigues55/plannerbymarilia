@@ -72,7 +72,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
-                        <input type="text" class="form-control" id="dataNascimento" name="dataNascimento"
+                        <input maxlength="8" type="text" class="form-control" id="dataNascimento" name="dataNascimento"
                             placeholder="xx/xx/xxxx">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
@@ -81,7 +81,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE TELEFONE 01*</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone_01"
+                        <input maxlength="11" type="text" class="form-control" id="telefone" name="telefone_01"
                             placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
@@ -90,7 +90,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE TELEFONE 02*</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone_02"
+                        <input maxlength="11" type="text" class="form-control" id="telefone" name="telefone_02"
                             placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
@@ -99,7 +99,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
-                        <input type="text" class="form-control" id="celular" name="celular"
+                        <input maxlength="11" type="text" class="form-control" id="telefone" name="celular"
                             placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.

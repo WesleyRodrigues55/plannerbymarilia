@@ -76,6 +76,18 @@ $(document).ready(function () {
         $(this).val(valorFormatado);
       });
 
+    $('#telefone').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = telefone(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
+    $('#dataNascimento').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = data(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
 });
 
 function cep(v){
@@ -102,3 +114,22 @@ function cpf(v){
     v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
     return v
 }
+
+function telefone(v) {
+    v = v.replace(/\D/g, '');
+  
+    if (v.length !== 11) {
+      console.error('Número de telefone inválido. Deve conter 11 dígitos.');
+      return v;
+    }  
+    v = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7, 11)}`;
+  
+    return v;
+  }
+
+  function data(v) {
+    v = v.replace(/\D/g, '');
+  
+    v = v.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
+  
+    return v;}
