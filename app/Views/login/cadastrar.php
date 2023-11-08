@@ -90,7 +90,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE TELEFONE 02*</label>
-                        <input maxlength="11" type="text" class="form-control" id="telefone" name="telefone_02"
+                        <input maxlength="11" type="text" class="form-control" id="telefone1" name="telefone_02"
                             placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
@@ -99,7 +99,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
-                        <input maxlength="11" type="text" class="form-control" id="telefone" name="celular"
+                        <input maxlength="11" type="text" class="form-control" id="telefone2" name="celular"
                             placeholder="(XX)XXXXX-XXXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.

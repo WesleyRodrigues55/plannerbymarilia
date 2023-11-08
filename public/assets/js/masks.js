@@ -76,7 +76,7 @@ $(document).ready(function () {
         $(this).val(valorFormatado);
       });
 
-    $('#telefone').on('input', function() {
+    $('#telefone, #telefone1, #telefone2').on('input', function() {
         var valorDigitado = $(this).val();
         var valorFormatado = telefone(valorDigitado);
         $(this).val(valorFormatado);
