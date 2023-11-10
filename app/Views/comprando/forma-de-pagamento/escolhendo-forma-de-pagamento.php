@@ -1,6 +1,7 @@
 <?php
     $data['title'] = 'Forma de pagamento';
     $data['link_css'] = "";
+    $data['script_payment'] = "assets/js/payment.js";
 ?>
 
 
@@ -47,4 +48,4 @@
 
   <?= view("include/footer") ?>
 
-<?= view("include/scripts") ?>
+<?= view("include/scripts", $data) ?>
