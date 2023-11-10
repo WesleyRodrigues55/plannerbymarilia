@@ -575,11 +575,7 @@ class BuyCart extends BaseController
         else if ($user->idUser() != $id_usuario) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-
-        // session()->set([
-        //     'id_carrinho' => $id_carrinho
-        // ]);
-
+        
         $data = [
             'id_usuario' => $id_usuario,
             'id_carrinho' => $id_carrinho
@@ -623,17 +619,8 @@ class BuyCart extends BaseController
         $local = $this->request->getPost('local');
         $informacoes = $this->request->getPost('informacoes');
 
-
-        // $db = \Config\Database::connect();
-        // $builder = $db->table('endereco_de_entrega');
-        // $builder->set('CHECKED', 0);
-        // $builder->where('CHECKED', 1);
-        // $builder->where('USUARIO_ID', $id_usuario);
-        // $builder->update();
-        // $db->close();
         $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
         
-
         $data = [
             'USUARIO_ID' => $id_usuario,
             'NOME_COMPLETO' => $nome,

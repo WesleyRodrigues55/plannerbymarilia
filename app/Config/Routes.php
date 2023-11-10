@@ -57,12 +57,11 @@ $routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntreg
 $routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'BuyCart::escolherEnderecoEntrega/$1');
 $routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'BuyCart::cadastroEnderecoEntrega/$1');
 $routes->post('/comprando/cadastrar-endereco-de-entrega', 'BuyCart::cadastrarEnderecoEntrega');
-
-
-// $routes->get('/comprando/salvar-endereco-de-entrega', 'BuyCart::salvandoEnderecoEntrega');
 $routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
 
-$routes->get('/comprando/forma-de-pagamento', 'BuyCart::formaDePagamento');
+// Pagamento
+$routes->get('/payment/payment', 'PaymentMethod::payment');
+$routes->get('/payment/get-payment', 'PaymentMethod::getStatusPayment');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
