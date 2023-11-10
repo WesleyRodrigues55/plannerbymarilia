@@ -127,10 +127,10 @@ class BuyCart extends BaseController
     }
 
     public function somaQuantidade() {
-        $id = $this->request->getPost('id');
+        $id_itens_carrinho = $this->request->getPost('id');
         $quantidade = $this->request->getPost('quantidade');
 
-        $quantidade_estoque = $this->verificaEstoque($id);
+        $quantidade_estoque = $this->verificaEstoque($id_itens_carrinho);
         if ($quantidade_estoque == 0) {
             $response = array(
                 'success' => true,
@@ -143,14 +143,15 @@ class BuyCart extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('itens_carrinho');
             // $builder->select('ID');
-            $builder->where('ID', $id);
+            $builder->where('ID', $id_itens_carrinho);
             $preco_unitario = $builder->get()->getRow()->PRECO_UNITARIO;
-            $builder->where('ID', $id);
+            $builder->where('ID', $id_itens_carrinho);
             $subtotal = $builder->get()->getRow()->SUBTOTAL;
+            $builder->where('ID', $id_itens_carrinho);
             $id_produto = $builder->get()->getRow()->PRODUTO_ID;
             $builder->set('QUANTIDADE', $quantidade+1);
             $builder->set('SUBTOTAL', $subtotal + $preco_unitario);
-            $builder->where('ID', $id);
+            $builder->where('ID', $id_itens_carrinho);
             $builder->update();
             // $query = $builder->getCompiledUpdate(); 
             $db->close();
@@ -160,7 +161,7 @@ class BuyCart extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 
-            $this->removeQuantidadeCarrinho($id_produto);
+            $this->removeQuantidadeEstoque($id_produto);
             $response = array(
                 'success' => true,
                 'message' => 'success'
@@ -194,6 +195,7 @@ class BuyCart extends BaseController
             $preco_unitario = $builder->get()->getRow()->PRECO_UNITARIO;
             $builder->where('ID', $id);
             $subtotal = $builder->get()->getRow()->SUBTOTAL;
+            $builder->where('ID', $id);
             $id_produto = $builder->get()->getRow()->PRODUTO_ID;
             $builder->set('QUANTIDADE', $quantidade - 1);
             $builder->set('SUBTOTAL', $subtotal - $preco_unitario);
@@ -206,7 +208,7 @@ class BuyCart extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 
-            $this->retornaQuantidadeCarrinho($id_produto);
+            $this->retornaQuantidadeEstoque($id_produto);
             $response = array(
                 'success' => true,
                 'message' => 'success'
@@ -267,7 +269,7 @@ class BuyCart extends BaseController
     }
 
     public function updateItemCarrinho($id_produto, $id_carrinho_compra) {
-        $this->removeQuantidadeCarrinho($id_produto);
+        $this->removeQuantidadeEstoque($id_produto);
         
         $db = \Config\Database::connect();
         $builder = $db->table('itens_carrinho');
@@ -299,7 +301,7 @@ class BuyCart extends BaseController
         echo json_encode($response);
     }
 
-    public function removeQuantidadeCarrinho($id_produto) {
+    public function removeQuantidadeEstoque($id_produto) {
         $db = \Config\Database::connect();
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
@@ -309,7 +311,7 @@ class BuyCart extends BaseController
         $builder->update();
     }
 
-    public function retornaQuantidadeCarrinho($id_produto) {
+    public function retornaQuantidadeEstoque($id_produto) {
         $db = \Config\Database::connect();
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
@@ -320,7 +322,7 @@ class BuyCart extends BaseController
     }
 
     public function inserePrimeiroItemNoCarrinho($ultimo_id_novo_carrinho_inserido, $id_produto, $preco_produto) {
-        $this->removeQuantidadeCarrinho($id_produto);
+        $this->removeQuantidadeEstoque($id_produto);
         $data = [
             'CARRINHO_DE_COMPRA_ID' => (int) $ultimo_id_novo_carrinho_inserido,
             'PRODUTO_ID' => (int) $id_produto,
@@ -343,7 +345,7 @@ class BuyCart extends BaseController
     }
 
     public function insereItemNoCarrinho($id_carrinho_compra, $id_produto, $preco_produto) {
-        $this->removeQuantidadeCarrinho($id_produto);
+        $this->removeQuantidadeEstoque($id_produto);
         $data = [
             'CARRINHO_DE_COMPRA_ID' => (int) $id_carrinho_compra,
             'PRODUTO_ID' => (int) $id_produto,
@@ -564,7 +566,7 @@ class BuyCart extends BaseController
         return view('comprando/endereco-de-entrega/endereco', $data);
     }
 
-    public function cadastrandoEnderecoEntrega($id_carrinho, $id_usuario) {
+    public function cadastroEnderecoEntrega($id_carrinho, $id_usuario) {
         $user = new User();
         
         if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
@@ -574,18 +576,41 @@ class BuyCart extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        session()->set([
-            'id_carrinho' => $id_carrinho
-        ]);
+        // session()->set([
+        //     'id_carrinho' => $id_carrinho
+        // ]);
 
-        $data = ['id_usuario' => $id_usuario];
+        $data = [
+            'id_usuario' => $id_usuario,
+            'id_carrinho' => $id_carrinho
+        ];
 
         return view('comprando/endereco-de-entrega/cadastro', $data);
     }
 
+    public function updatedRemoveCheckedEnderecoEntrega($id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->set('CHECKED', 0);
+        $builder->where('CHECKED', 1);
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->update();
+        $db->close();
+    }
 
-    public function salvandoEnderecoEntrega() {
+    public function addCheckedEnderecoEntrega($id_endereco_escolhido, $id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->set('CHECKED', 1);
+        $builder->where('ID', $id_endereco_escolhido);
+        $builder->where('USUARIO_ID', $id_usuario);
+        $builder->update();
+        $db->close();
+    }
+
+    public function cadastrarEnderecoEntrega() {
         $id_usuario = $this->request->getPost('id-usuario');
+        $id_carinho_compras = $this->request->getPost('id-carrinho-compras');
         $nome = $this->request->getPost('nome');
         $celular = $this->request->getPost('celular');
         $cep = $this->request->getPost('cep');
@@ -599,13 +624,14 @@ class BuyCart extends BaseController
         $informacoes = $this->request->getPost('informacoes');
 
 
-        $db = \Config\Database::connect();
-        $builder = $db->table('endereco_de_entrega');
-        $builder->set('CHECKED', 0);
-        $builder->where('CHECKED', 1);
-        $builder->where('USUARIO_ID', $id_usuario);
-        $builder->update();
-        $db->close();
+        // $db = \Config\Database::connect();
+        // $builder = $db->table('endereco_de_entrega');
+        // $builder->set('CHECKED', 0);
+        // $builder->where('CHECKED', 1);
+        // $builder->where('USUARIO_ID', $id_usuario);
+        // $builder->update();
+        // $db->close();
+        $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
         
 
         $data = [
@@ -636,6 +662,12 @@ class BuyCart extends BaseController
             } else {
                 session()->setFlashdata('endereco-success', 'Endereço salvo com sucesso!');
             }
+
+            $data = [
+                'dados_usuario' => $this->getEnderecoUsuario($id_usuario),
+                'id_carrinho' => $id_carinho_compras
+            ];
+
             return redirect()->back();
 
         } catch (\Exception $e) {
@@ -660,19 +692,35 @@ class BuyCart extends BaseController
         $id_endereco_escolhido = $this->request->getPost('id-endereco-escolhido');
         $id_usuario = $this->request->getPost('id-usuario');
 
+        //subtotal - query que consulta itens carrinho, soma total de compras e quantidade e retorna o total
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->select('SUBTOTAL');
+        $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho);
+        $query = $builder->get()->getResultArray();
+
+        $subtotal = 0;
+        foreach ($query as $key) {
+            $subtotal += (double) $key['SUBTOTAL'];
+        }
+        
+        $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
+        $this->addCheckedEnderecoEntrega($id_endereco_escolhido, $id_usuario);
+
         if ($this->getDetalhesPedido($id_carrinho, $id_usuario)) {
-            $data = [
-                'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
-                'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
-                'USUARIO_ID' => $id_usuario,
-                'DATA_PEDIDO' => $myTime->toDateTimeString(),
-                'STATUS_PEDIDO' => 'EM ABERTO',
-                'TOTAL_PEDIDO' => ''
-            ];
+            // $data = [
+            //     'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
+            //     'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
+            //     'USUARIO_ID' => $id_usuario,
+            //     'DATA_PEDIDO' => $myTime->toDateTimeString(),
+            //     'STATUS_PEDIDO' => 'EM ABERTO',
+            //     'TOTAL_PEDIDO' => $subtotal
+            // ];
 
             $db = \Config\Database::connect();
             $builder = $db->table('detalhes_do_pedido');
-            $builder->set('TOTAL_PEDIDO', '');
+            $builder->set('DATA_PEDIDO', $myTime->toDateTimeString());
+            $builder->set('TOTAL_PEDIDO', $subtotal);
             $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
             $builder->where('ENDERECO_DE_ENTREGA_ID', $id_endereco_escolhido);
             $builder->where('USUARIO_ID', $id_usuario);
@@ -685,7 +733,7 @@ class BuyCart extends BaseController
                 'USUARIO_ID' => $id_usuario,
                 'DATA_PEDIDO' => $myTime->toDateTimeString(),
                 'STATUS_PEDIDO' => 'EM ABERTO',
-                'TOTAL_PEDIDO' => ''
+                'TOTAL_PEDIDO' => $subtotal
             ];
 
             $db = \Config\Database::connect();
@@ -694,10 +742,6 @@ class BuyCart extends BaseController
             $db->close();
         }
 
-        return $this->formaDePagamento();
-    }
-
-    public function formaDePagamento() {
         return view('comprando/forma-de-pagamento/escolhendo-forma-de-pagamento');
     }
 
