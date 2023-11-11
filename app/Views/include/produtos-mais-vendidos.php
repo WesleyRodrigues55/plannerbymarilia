@@ -27,7 +27,6 @@
                             <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
                             <?php if (session()->has('usuario')): ?>
                                 <form id="adicionaProdutoCarrinho" method="post">
-                                <!-- <form action="carrinho/adiciona-produto-carrinho" method="post"> -->
                                     <input type="text" name="id-produto" value="<?= $mv['ID'] ?>" id="" hidden readonly>
                                     <input type="text" name="slug" value="<?= $mv['SLUG'] ?>" id="" hidden readonly>
                                     <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">

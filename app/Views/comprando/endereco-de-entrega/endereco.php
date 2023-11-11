@@ -14,7 +14,7 @@
             <div class="text-center">
                 <h1>Ops!</h1>
                 <p>Parece que não há endereços de entrega cadastrados, clique no botão abaixo e cadastre.</p>
-                <a href="<?= base_url('/comprando/cadastrando-endereco-de-entrega/'. $id_carrinho . '/'. session()->get('id')) ?>" class="input-simples">Adicionar Endereço</a>
+                <a href="<?= base_url('/comprando/cadastro-endereco-de-entrega/'. $id_carrinho . '/'. session()->get('id')) ?>" class="input-simples">Adicionar Endereço</a>
             </div>
         <?php else: ?>
             <h1 class="text-center mb-4">Escolha um endereço de entrega</h1>
