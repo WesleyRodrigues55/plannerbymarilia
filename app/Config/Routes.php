@@ -31,6 +31,7 @@ $routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria'
 $routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 $routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
+$routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');

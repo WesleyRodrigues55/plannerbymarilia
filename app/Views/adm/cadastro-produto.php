@@ -14,6 +14,15 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
         </div>
         <?php $message_success = session()->getFlashdata('register-product-success'); ?>
         <?php $message_failed = session()->getFlashdata('register-produtc-failed'); ?>
+        <?php $message_failed_product = session()->getFlashdata('product-exists'); ?>
+
+        <?php if ($message_failed_product): ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_failed_product; ?>
+                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-produto'); ?>">Lista</a>.
+            </div>
+        <?php endif; ?>
+
         <?php if ($message_failed): ?>
                 <div class="alert alert-danger mt-5 text-center" role="alert">
                     <?php $message_failed; ?>

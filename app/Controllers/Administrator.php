@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use CodeIgniter\I18n\Time;
 use App\Controllers\ProductCategoryType;
+use App\Models\Product;
 
 class Administrator extends BaseController
 {
@@ -72,6 +73,20 @@ class Administrator extends BaseController
         ];
 
         try {
+
+            if ($nome && $categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('produto');
+                $builder->where('NOME', $nome);
+                $builder->where('CATEGORIA', $categoria);
+
+                if ($builder->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('product-exists', 'Produto já cadastrado!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->insert($data);
@@ -95,17 +110,68 @@ class Administrator extends BaseController
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 
-        return
-            view('/adm/lista-produto');
+            try {
+                $db = \Config\Database::connect();
+                $builder = $db->table('produto');
+                $builder->select('
+                    produto.ID,
+                    produto.NOME,
+                    produto.PRECO,
+                    produto.CATEGORIA
+                ');
+                //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+                $builder->orderBy('ID', 'ASC');
+                $builder->limit(10); 
+    
+                $query = $builder->get()->getResultArray();
+                $db->close();
+    
+                if (empty($query)) {
+                    session()->setFlashdata('list-empty', 'A lista está vazia.');
+                    return view('/adm/lista-produto');
+                }
+                $data = ['produtos' => $query];
+    
+                return view('/adm/lista-produto', $data);
+            } catch (\Exception $e) {
+                echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            }
+
     }
+
+    
     public function listaUsuario()
     {
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 
-        return
-            view('/adm/lista-usuario');
+            try {
+                $db = \Config\Database::connect();
+                $builder = $db->table('usuario');
+                $builder->select('
+                    usuario.ID,
+                    usuario.PESSOA_ID,
+                    usuario.USUARIO,
+                    usuario.ATIVO
+                ');
+                //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+                $builder->orderBy('ID', 'ASC');
+                $builder->limit(10); 
+    
+                $query = $builder->get()->getResultArray();
+                $db->close();
+    
+                if (empty($query)) {
+                    session()->setFlashdata('list-empty', 'A lista está vazia.');
+                    return view('/adm/lista-usuario');
+                }
+                $data = ['usuario' => $query];
+    
+                return view('/adm/lista-usuario', $data);
+            } catch (\Exception $e) {
+                echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            }
     }
     public function cadastroCategoria()
     {
@@ -116,15 +182,91 @@ class Administrator extends BaseController
         return
             view('/adm/cadastro-categoria');
     }
+
+    public function inserirCategoria()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        $user = new User();
+
+        $id = $user->idUser();
+        $tipo_categoria = $this->request->getPost('categoria');
+        
+        $data = [
+            'TIPO_CATEGORIA' => $tipo_categoria,
+            'DELETED_AT' => '',
+            'UPDATED_AT' => '',
+            'CREATED_AT' => $myTime->toDateTimeString(),
+            'ATIVO' => 1
+        ];
+
+        try {
+
+            if ($tipo_categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('tipo_categoria_produto');
+                if ($builder->where('TIPO_CATEGORIA', $tipo_categoria)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('category-exists', 'Categoria já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('tipo_categoria_produto');
+            $builder->insert($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em salvar sua categoria, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'categoria salvo com sucesso!');
+            }
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
+
     public function listaCategoria()
     {
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    
 
-        return
-            view('/adm/lista-categoria');
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('tipo_categoria_produto');
+            $builder->select('
+                tipo_categoria_produto.ID,
+                tipo_categoria_produto.TIPO_CATEGORIA,
+
+            ');
+            $builder->orderBy('ID', 'ASC');
+            $builder->limit(10); 
+
+            $query = $builder->get()->getResultArray();
+            $db->close();
+
+            if (empty($query)) {
+                session()->setFlashdata('list-empty', 'A lista está vazia.');
+                return view('/adm/lista-categoria');
+            }
+            $data = ['categorias' => $query];
+
+            return view('/adm/lista-categoria', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
     }
+
+    // public function apresentarCategoria()
+    // {
+        
+
+    // }
+
     public function editarCategoria()
     {
         $user = new User();
