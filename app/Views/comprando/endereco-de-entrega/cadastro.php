@@ -21,7 +21,7 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. session()->get('id_carrinho')) .'/'. $id_usuario ?>" >Clique aqui</a> para continuar o processo de compra
+                <br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario) ?>" >Clique aqui</a> para continuar o processo de compra
 
             </div>
         <?php endif; ?>
