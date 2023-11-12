@@ -29,6 +29,7 @@ $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCatego
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
 $routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
 $routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
+$routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -49,7 +50,21 @@ $routes->post('/carrinho/soma-quantidade', 'BuyCart::somaQuantidade');
 $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 $routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
 $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
-$routes->get('/teste', "BuyCart::loadItensCarrinhoContent");
+$routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
+
+// Comprando
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
+$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'DeliveryAdress::escolherEnderecoEntrega/$1');
+$routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'DeliveryAdress::cadastroEnderecoEntrega/$1');
+$routes->post('/comprando/cadastrar-endereco-de-entrega', 'DeliveryAdress::cadastrarEnderecoEntrega');
+$routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
+$routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagamento/$1');
+$routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
+$routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
+
+// Pagamento
+$routes->get('/payment/payment', 'PaymentMethod::payment');
+$routes->get('/payment/get-payment', 'PaymentMethod::getStatusPayment');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

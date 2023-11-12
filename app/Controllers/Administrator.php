@@ -21,7 +21,7 @@ class Administrator extends BaseController
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        
+
         $tipo_categoria_produto = new ProductCategoryType();
 
         $data = ['tipo_categoria_produto' => $tipo_categoria_produto->tipoCategoriasProdutos()];
@@ -79,7 +79,7 @@ class Administrator extends BaseController
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        
+
         return
             view('/adm/editar-produto');
     }

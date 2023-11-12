@@ -31,6 +31,5 @@ $data['link_css'] = "assets/css/esqueci-senha.css";
                 <a href="../login" class="text-center voltar mt-2">Voltar</a>
             </div>
         </div>
-
     </div>
 </div>
