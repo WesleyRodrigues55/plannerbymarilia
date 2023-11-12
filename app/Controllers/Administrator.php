@@ -238,6 +238,7 @@ class Administrator extends BaseController
         try {
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
+            $builder->where('ATIVO', 1);
             $builder->select('
                 tipo_categoria_produto.ID,
                 tipo_categoria_produto.TIPO_CATEGORIA,
@@ -267,15 +268,70 @@ class Administrator extends BaseController
 
     // }
 
-    public function editarCategoria()
+    public function editarCategoria($id = null)
     {
+        if ($id == null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        $nomeCategoria = $this->getNomeCampoCategoria($id);
+        $data = [
+            "id_categoria" => $id,
+            "nomeCategoria" => $nomeCategoria
+        ];
 
-        return
-            view('/adm/editar-categoria');
+        return view('/adm/editar-categoria', $data);
+        }
     }
+
+    public function alterarCategoria()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        
+        $tipo_categoria = $this->request->getPost('categoria');
+        $id_categoria = $this->request->getPost('idcategoria');
+        
+        $data = [
+            'TIPO_CATEGORIA' => $tipo_categoria,
+            'UPDATED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('tipo_categoria_produto');
+            $builder->where('ID', $id_categoria);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em salvar sua categoria, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'categoria salvo com sucesso!');
+            }
+            return redirect()->to('/administrador/lista-categoria');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+        
+    }
+
+    public function getNomeCampoCategoria($id_categoria) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tipo_categoria_produto');
+        $builder->select('TIPO_CATEGORIA');
+        $builder->where('ID', $id_categoria);
+        $result = $builder->get()->getRow();
+    
+        if ($result) {
+            return $result->TIPO_CATEGORIA;
+        }
+    
+        return null; // Retorna nulo se não encontrar a categoria
+    }
+
     public function editarProduto()
     {
         $user = new User();
