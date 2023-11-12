@@ -59,12 +59,10 @@ class BuyCart extends BaseController
             $query = $builder->get()->getResultArray();
             $db->close();
 
-            // echo "<pre>";
-            // var_dump($query);
             return $query;
             // return view("carrinho/itens-carrinho", $data);
         } else {
-            
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -490,48 +488,100 @@ class BuyCart extends BaseController
         $id_endereco_escolhido = $this->request->getPost('id-endereco-escolhido');
         $id_usuario = $this->request->getPost('id-usuario');
 
-        //subtotal - query que consulta itens carrinho, soma total de compras e quantidade e retorna o total
-        $db = \Config\Database::connect();
-        $builder = $db->table('itens_carrinho');
-        $builder->select('SUBTOTAL');
-        $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho);
-        $query = $builder->get()->getResultArray();
+        if (session()->has('usuario') && $id_usuario == session()->get('id')) {
+            //subtotal - query que consulta itens carrinho, soma total de compras e quantidade e retorna o total
+            $db = \Config\Database::connect();
+            $builder = $db->table('itens_carrinho');
+            $builder->select('SUBTOTAL');
+            $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho);
+            $query = $builder->get()->getResultArray();
 
-        $subtotal = 0;
-        foreach ($query as $key) {
-            $subtotal += (double) $key['SUBTOTAL'];
+            $subtotal = 0;
+            foreach ($query as $key) {
+                $subtotal += (double) $key['SUBTOTAL'];
+            }
+
+            $endereco_de_entrega->updatedRemoveCheckedEnderecoEntrega($id_usuario);
+            $endereco_de_entrega->addCheckedEnderecoEntrega($id_endereco_escolhido, $id_usuario);
+
+            if ($this->getDetalhesPedido($id_carrinho, $id_usuario)) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('detalhes_do_pedido');
+                $builder->set('DATA_PEDIDO', $myTime->toDateTimeString());
+                $builder->set('TOTAL_PEDIDO', $subtotal);
+                $builder->set('ENDERECO_DE_ENTREGA_ID', $id_endereco_escolhido);
+                $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
+                $builder->where('USUARIO_ID', $id_usuario);
+                $builder->update();
+                $db->close();
+            } else {
+                $data = [
+                    'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
+                    'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
+                    'USUARIO_ID' => $id_usuario,
+                    'FORMA_DE_PAGAMENTO' => '',
+                    'DATA_PEDIDO' => $myTime->toDateTimeString(),
+                    'STATUS_PEDIDO' => 'EM ABERTO',
+                    'TOTAL_PEDIDO' => $subtotal
+                ];
+
+                $db = \Config\Database::connect();
+                $builder = $db->table('detalhes_do_pedido');
+                $builder->insert($data);
+                $db->close();
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         
-        $endereco_de_entrega->updatedRemoveCheckedEnderecoEntrega($id_usuario);
-        $endereco_de_entrega->addCheckedEnderecoEntrega($id_endereco_escolhido, $id_usuario);
+        return redirect()->to('comprando/formas-de-pagamento/'. $id_carrinho . '/' . $id_usuario);
+        // return view('comprando/forma-de-pagamento/escolhendo-forma-de-pagamento');
+    }
 
-        if ($this->getDetalhesPedido($id_carrinho, $id_usuario)) {
-            $db = \Config\Database::connect();
-            $builder = $db->table('detalhes_do_pedido');
-            $builder->set('DATA_PEDIDO', $myTime->toDateTimeString());
-            $builder->set('TOTAL_PEDIDO', $subtotal);
-            $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
-            $builder->where('ENDERECO_DE_ENTREGA_ID', $id_endereco_escolhido);
-            $builder->where('USUARIO_ID', $id_usuario);
-            $builder->update();
-            $db->close();
-        } else {
+    public function formasDePagamento($id_carrinho, $id_usuario) {
+        if (session()->has('usuario') && $id_usuario == session()->get('id')) {
             $data = [
-                'CARRINHO_DE_COMPRAS_ID' => $id_carrinho,
-                'ENDERECO_DE_ENTREGA_ID' => $id_endereco_escolhido,
-                'USUARIO_ID' => $id_usuario,
-                'DATA_PEDIDO' => $myTime->toDateTimeString(),
-                'STATUS_PEDIDO' => 'EM ABERTO',
-                'TOTAL_PEDIDO' => $subtotal
+                'id_carrinho' => $id_carrinho,
+                'id_usuario' => $id_usuario
             ];
+            return view('comprando/forma-de-pagamento/formas-de-pagamento', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        
+    }
 
-            $db = \Config\Database::connect();
-            $builder = $db->table('detalhes_do_pedido');
-            $builder->insert($data);
-            $db->close();
+    public function formaDePagamentoEscolhida() {
+        $myTime = Time::now('America/Sao_Paulo');
+        $id_carrinho = $this->request->getPost('id-carrinho');
+        $id_usuario = $this->request->getPost('id-usuario');
+        $forma_de_pagamento = $this->request->getPost('forma-de-pagamento');
+
+        if (session()->has('usuario') && $id_usuario == session()->get('id')) {
+
+            if ($this->getDetalhesPedido($id_carrinho, $id_usuario)) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('detalhes_do_pedido');
+                $builder->set('DATA_PEDIDO', $myTime->toDateTimeString());
+                $builder->set('FORMA_DE_PAGAMENTO', $forma_de_pagamento);
+                $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
+                $builder->where('USUARIO_ID', $id_usuario);
+                $builder->update();
+                $db->close();
+            } else {
+                session()->setFlashdata('query-failed', 'Error ao salvar forma de pagamento.<br> Tente novamente!');
+                return redirect()->back();
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return view('comprando/forma-de-pagamento/escolhendo-forma-de-pagamento');
+        return redirect()->to('comprando/revisao/' . $id_carrinho);
+    }
+
+    public function revisaoCompra($id_carrinho) {
+        $data = [ 'id_carrinho' => $id_carrinho ];
+        return view('comprando/revisao-geral', $data);
     }
 
 }

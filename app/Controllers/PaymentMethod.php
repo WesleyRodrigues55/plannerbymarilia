@@ -64,7 +64,7 @@ class PaymentMethod extends BaseController
     public function getStatusPayment() {
         $accessToken = env('TOKEN_API_MERCADO_PAGO_PRODUCTION'); 
         
-        $url = "https://api.mercadopago.com/v1/payments/66665690953";
+        $url = "https://api.mercadopago.com/v1/payments/66717024491";
         
         $opts = [
             'http' => [
@@ -80,7 +80,7 @@ class PaymentMethod extends BaseController
             echo 'Erro na solicitação.';
         } else {
             $responseData = json_decode($response, true);
-            echo "Satus: " . $responseData['status'];
+            echo "STATUS: " . $responseData['status'];
             echo "<br><br>";
             echo $response;
         }
