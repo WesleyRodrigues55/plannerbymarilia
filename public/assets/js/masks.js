@@ -76,9 +76,15 @@ $(document).ready(function () {
         $(this).val(valorFormatado);
       });
 
-    $('#telefone, #telefone1, #telefone2').on('input', function() {
+    $('#celular, #celular1').on('input', function() {
         var valorDigitado = $(this).val();
-        var valorFormatado = telefone(valorDigitado);
+        var valorFormatado = telefoneCelular(valorDigitado);
+        $(this).val(valorFormatado);
+      });
+
+    $('#telefone, #telefone1').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = telefoneFixo(valorDigitado);
         $(this).val(valorFormatado);
       });
 
@@ -115,7 +121,7 @@ function cpf(v){
     return v
 }
 
-function telefone(v) {
+function telefoneCelular(v) {
     v = v.replace(/\D/g, '');
   
     if (v.length !== 11) {
@@ -123,6 +129,18 @@ function telefone(v) {
       return v;
     }  
     v = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7, 11)}`;
+  
+    return v;
+  }
+
+function telefoneFixo(v) {
+    v = v.replace(/\D/g, '');
+  
+    if (v.length !== 10) {
+      console.error('Número de telefone inválido. Deve conter 11 dígitos.');
+      return v;
+    }  
+    v = `(${v.substring(0, 2)}) ${v.substring(2, 6)}-${v.substring(6, 10)}`;
   
     return v;
   }
