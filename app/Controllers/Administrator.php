@@ -3,7 +3,8 @@
 namespace App\Controllers;
 use CodeIgniter\I18n\Time;
 use App\Controllers\ProductCategoryType;
-use App\Models\Product;
+use App\Controllers\Product;
+use App\Controllers\User;
 
 class Administrator extends BaseController
 {
@@ -276,10 +277,10 @@ class Administrator extends BaseController
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        $nomeCategoria = $this->getNomeCampoCategoria($id);
+        $produto = new Product();
+        $categoria_selecionada = $produto->getCategoriaById($id);
         $data = [
-            "id_categoria" => $id,
-            "nomeCategoria" => $nomeCategoria
+            "categoria" => $categoria_selecionada
         ];
 
         return view('/adm/editar-categoria', $data);
@@ -306,9 +307,9 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em salvar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria salvo com sucesso!');
+                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
             }
             return redirect()->to('/administrador/lista-categoria');
 
@@ -316,29 +317,87 @@ class Administrator extends BaseController
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         } 
         
+        
     }
 
-    public function getNomeCampoCategoria($id_categoria) {
-        $db = \Config\Database::connect();
-        $builder = $db->table('tipo_categoria_produto');
-        $builder->select('TIPO_CATEGORIA');
-        $builder->where('ID', $id_categoria);
-        $result = $builder->get()->getRow();
-    
-        if ($result) {
-            return $result->TIPO_CATEGORIA;
-        }
-    
-        return null; // Retorna nulo se não encontrar a categoria
-    }
-
-    public function editarProduto()
+    public function excluirCategoria()
     {
-        $user = new User();
-        if (!$user->validaLoginAdm())
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 
-        return
-            view('/adm/editar-produto');
     }
+
+    public function editarProduto($id_produto)
+    {
+        if ($id_produto == null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $user = new User();
+            if (!$user->validaLoginAdm())
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            $produto = new Product();
+            $produto_selecionado = $produto->getProdutoById($id_produto);
+            $data = [
+                "produto" => $produto_selecionado['produto_selecionado'][0],
+                "categorias" => $produto_selecionado['categorias']
+            ];
+            return
+                view('/adm/editar-produto', $data);
+        }   
+    }
+
+    public function alterarProduto()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        $user = new User();
+        $id = $user->idUser();
+        $id_produto = $this->request->getPost('id-produto');
+        $tipo_categoria_produto = $this->request->getPost('tipo-categoria');
+        $nome = $this->request->getPost('nome-produto');
+        $preco = $this->request->getPost('preco');
+        $slug = $this->request->getPost('slug');
+        $tipo_capa = $this->request->getPost('tipo-da-capa');
+        $categoria = $this->request->getPost('categoria');
+        $descricao_elastico = $this->request->getPost('descricao-elastico');
+        $encadernacao = $this->request->getPost('encardenacao');
+        $tamanho_capa_sem_divisoria = $this->request->getPost('capa-sem-divisoria');
+        $tamanho_capa_com_divisoria = $this->request->getPost('capa-com-divisoria');
+        $tamanho_interno = $this->request->getPost('tamanho-interno');
+        $quantidade_folha = $this->request->getPost('quantidade-folhas');
+        $descricao_tecnica = $this->request->getPost('descricao-tecnica');
+        
+        $data = [
+            'TIPO_CATEGORIA_PRODUTO_ID' => $tipo_categoria_produto,
+            'NOME' => $nome,
+            'PRECO' => $preco,
+            'SLUG' => $slug,
+            'TIPO_CAPA' => $tipo_capa,
+            'CATEGORIA' => $categoria,
+            'DESCRICAO_ELASTICO' => $descricao_elastico,
+            'ENCADERNACAO' => $encadernacao,
+            'TAMANHO_CAPA_SEM_DIVISORIA' => $tamanho_capa_sem_divisoria,
+            'TAMANHO_CAPA_COM_DIVISORIA' => $tamanho_capa_com_divisoria,
+            'TAMANHO_INTERNO' => $tamanho_interno,
+            'QUANTIDADE_FOLHA' => $quantidade_folha,
+            'DESCRICAO_TECNICA' => $descricao_tecnica,
+            'UPDATED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->where('ID', $id_produto);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-product-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-product-success', 'produto salvo com sucesso!');
+            }
+            return redirect()->to('/administrador/lista-produto');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
+
 }

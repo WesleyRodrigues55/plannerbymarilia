@@ -29,7 +29,8 @@ $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCatego
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
 $routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCategoria/$1');
 $routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
-$routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
+$routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProduto/$1');
+$routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 $routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');

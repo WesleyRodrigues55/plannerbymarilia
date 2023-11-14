@@ -16,9 +16,10 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
         <form class="teste" method="post" action="<?= base_url("/administrador/alterar-categoria") ?>" >
             <div class="row">
                 <div class="col-md-12 mt-2 mb-3">
+                    
                     <label for="text" class="preencher">NOME DA CATEGORIA</label>
-                    <input type="text" class="form-control" id="" value="" name="categoria" placeholder="<?= $nomeCategoria ?>" required>
-                    <input type="text" class="form-control" id="" value="<?=$id_categoria?>" name="idcategoria" placeholder="Categorias" hidden redonly>
+                    <input type="text" class="form-control" id=""  name="categoria" value="<?= $categoria[0]["TIPO_CATEGORIA"] ?>" required>
+                    <input type="text" class="form-control" id="" value="<?= $categoria[0]["ID"]?>" name="idcategoria" placeholder="Categorias" hidden redonly>
                 </div>
                 <!-- ../row -->
             </div>
@@ -35,11 +36,12 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn input-rosa" data-bs-dismiss="modal">ATUALIZAR</button>
-                                <a href="<?= base_url('/administrador/alterar-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
+                                
+                                <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
                 <a class="btn input-rosa px-3" href="<?= base_url('administrador/lista-categoria') ?>">VOLTAR</a>
             </div>
         </form>
