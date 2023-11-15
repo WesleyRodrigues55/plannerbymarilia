@@ -94,6 +94,9 @@ $(document).ready(function () {
         $(this).val(valorFormatado);
       });
 
+      
+ 
+    
 });
 
 function cep(v){
@@ -151,3 +154,24 @@ function telefoneFixo(v) {
     v = v.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
   
     return v;}
+
+  // ALTERNANDO TIPO PESSOA
+
+  function esconderCPF() {
+      document.getElementById('divCPF').style.display = 'none';
+  }
+
+  function esconderCNPJ() {
+      document.getElementById('divCNPJ').style.display = 'none';
+  }
+
+  function mostrarCPF() {
+      document.getElementById('divCPF').style.display = 'block';
+  }
+
+  function mostrarCNPJ() {
+      document.getElementById('divCNPJ').style.display = 'block';
+  }
+
+    
+  

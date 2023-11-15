@@ -107,23 +107,30 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12">
-                        <label for="cpf" class="preencher">CPF*</label>
-                        <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14" placeholder="XXX.XXX.XXX-XX">
+                        <div id="divCPF">
+                            <label for="cpf" class="preencher">CPF*</label>
+                            <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14"
+                            placeholder="XXX.XXX.XXX-XX">
+                        </div>
                         <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
-                        <input type="text" class="form-control" id="cnpj" name="CNPJ" maxlength="18" placeholder="xx.xxx.xxx/xxxx-xx">
+                        <div id="divCNPJ">
+                            <label for="cpf" class="preencher">CNPJ*</label>
+                            <input type="text" class="form-control" id="cnpj" name="CNPJ" maxlength="18"
+                            placeholder="xx.xxx.xxx/xxxx-xx">
+                        </div>
                         <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
-                        <input type="text" class="form-control" id="" name="inscricaoEstadual"
-                            placeholder="inscricao estadual">
+                        
+
 
                         <div class="content-tipo-pessoa">
                             <div class="d-flex align-items-center gap-2">
                                 <input id="pessoaFisica" name="tipoPessoa" type="radio" class="form-check-input"
-                                    value="FISICA" required>
+                                    value="FISICA" required onclick="esconderCNPJ(), mostrarCPF()" checked>
                                 <label class="form-check-label" for="FISICA">Pessoa física</label>
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <input id="pessoaJuridica" name="tipoPessoa" type="radio" class="form-check-input"
-                                    value="JURIDICA" required>
+                                    value="JURIDICA" required onclick="esconderCPF(), mostrarCNPJ()">
                                 <label class="form-check-label" for="JURIDICA">Pessoa jurídica</label>
                             </div>
 
@@ -142,7 +149,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="row">
                     <div class="col-md-12">
                         <label for="cep" class="preencher">CEP*</label>
-                        <input maxlength="9" type="text" class="form-control" id="cep" name="CEP" placeholder="XXXXX-XXX">
+                        <input maxlength="9" type="text" class="form-control" id="cep" name="CEP"
+                            placeholder="XXXXX-XXX">
                         <div class="invalid-feedback">
                             Por favor preencha o seu CEP.
                         </div>
@@ -248,4 +256,3 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
-
