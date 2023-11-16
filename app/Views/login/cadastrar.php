@@ -13,6 +13,34 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <h2 class="h2-titles mt-5"><b>INFORMAÇÕES DE ACESSO</b></h2>
             </div>
 
+            <?php $message_success = session()->getFlashdata('success-register'); ?>
+            <?php $message_failed_cpf = session()->getFlashdata('cpf-exists'); ?>
+            <?php $message_failed_email = session()->getFlashdata('email-exists'); ?>
+            <?php $message_failed = session()->getFlashdata('failed-register'); ?>
+            <?php if ($message_failed): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?php $message_failed; ?>
+                    
+                </div>
+            <?php endif; ?>
+
+            <?php if ($message_success): ?>
+                <div class="alert alert-success mt-5 text-center" role="alert">
+                    <?= $message_success; ?>
+                    <br>Para acessar sua conta, clique em:  <a href="<?= base_url('/login'); ?>">Login</a>.
+                </div>
+            <?php endif; ?>
+
+            <?php if ($message_failed_cpf): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?= $message_failed_cpf; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($message_failed_email): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?= $message_failed_email; ?>
+                </div>
+            <?php endif; ?>
             <form action="<?= base_url('user/cadastroUsuario') ?>" method="post">
                 <div class="row">
                     <div class="col-md-12">
@@ -210,7 +238,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <a href="<?= base_url("login") ?>" class="btn input-rosa">Criar conta</a>
+                    <input type="submit" class="input-rosa" value="Criar Conta">
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de privacidade"</i></p>

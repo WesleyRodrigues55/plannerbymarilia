@@ -341,5 +341,48 @@ class Product extends BaseController
         } 
     }
 
+    public function getCategorias() {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tipo_categoria_produto');
+        $builder->where('ATIVO', 1);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    
+    public function getCategoriaById($id) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tipo_categoria_produto');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function getProdutoById($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('produto');
+        $builder->where('ID', $id);
+        $builder->where('ATIVO', 1);
+
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        $categorias = $this->getCategorias();
+
+        if ($query == null || $categorias == null) {
+            //produto não existe - fazer página de erro
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'produto_selecionado' => $query,
+            'categorias' => $categorias
+        ];
+        return $data;
+    }
+
 
 }

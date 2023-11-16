@@ -29,9 +29,13 @@ $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
 $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
-$routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
-$routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
+$routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCategoria/$1');
+$routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
+$routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProduto/$1');
+$routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
+$routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
+$routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');

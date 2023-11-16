@@ -12,8 +12,32 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
         <div class="text-center">
             <h2 class="h2-titles mt-5"><b>CADASTRO DE PRODUTO</b></h2>
         </div>
+        <?php $message_success = session()->getFlashdata('register-product-success'); ?>
+        <?php $message_failed = session()->getFlashdata('register-produtc-failed'); ?>
+        <?php $message_failed_product = session()->getFlashdata('product-exists'); ?>
 
-        <form class="teste" method="post">
+        <?php if ($message_failed_product): ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_failed_product; ?>
+                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-produto'); ?>">Lista</a>.
+            </div>
+        <?php endif; ?>
+
+        <?php if ($message_failed): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?php $message_failed; ?>
+                    
+                </div>
+        <?php endif; ?>
+        
+        <?php if ($message_success): ?>
+            <div class="alert alert-success mt-5 text-center" role="alert">
+                <?= $message_success; ?>
+                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-produto'); ?>">Lista</a>.
+            </div>
+        <?php endif; ?>
+
+        <form class="teste" method="post" action="<?= base_url('/administrador/insere-produto') ?>">
             <div class="row">
                 <div class="col-md-6 mt-2 mb-3">
                     <label for="text" class="preencher">NOME DO PRODUTO</label>
@@ -24,10 +48,10 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                     <label class="preencher">CATEGORIA</label>
                     <select class="select form-control" name="categoria" id="" class="form-select" required>
                         <option selected>Selecione</option>
-                        <option>Caderno</option>
-                        <option>Planner</option>
-                        <option>Bloco</option>
-                        <option>Agenda</option>
+                        <option value="caderno">Caderno</option>
+                        <option value="planner">Planner</option>
+                        <option value="bloco">Bloco</option>
+                        <option value="agenda">Agenda</option>
                     </select>
                 </div>
 
@@ -42,10 +66,10 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
 
                         <?php if (!$message_failed) : ?>
                             <option selected>Selecione
-                                <?php foreach ($tipo_categoria_produto as $lcp) : ?>
-                            <option value="<?= $lcp['ID'] ?>"><?= $lcp['TIPO_CATEGORIA'] ?></option>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                                <?php foreach ($tipo_categoria_produto as $tcp) : ?>
+                                    <option value="<?= $tcp['ID'] ?>"><?= $tcp['TIPO_CATEGORIA'] ?></option>
+                                <?php endforeach; ?>
+                        <?php endif; ?>
                     </select>
                 </div>
 

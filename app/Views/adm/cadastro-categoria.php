@@ -13,7 +13,32 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
             <h2 class="h2-titles mt-5"><b>CADASTRO TIPO CATEGORIA</b></h2>
         </div>
 
-        <form class="teste" method="post">
+        <?php $message_success = session()->getFlashdata('register-category-success'); ?>
+        <?php $message_failed = session()->getFlashdata('register-category-failed'); ?>
+        <?php $message_failed_category = session()->getFlashdata('category-exists'); ?>
+
+        <?php if ($message_failed_category): ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_failed_category; ?>
+                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-categoria'); ?>">Lista</a>.
+            </div>
+        <?php endif; ?>
+
+        <?php if ($message_failed): ?>
+                <div class="alert alert-danger mt-5 text-center" role="alert">
+                    <?php $message_failed; ?>
+                    
+                </div>
+        <?php endif; ?>
+        
+        <?php if ($message_success): ?>
+            <div class="alert alert-success mt-5 text-center" role="alert">
+                <?= $message_success; ?>
+                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-categoria'); ?>">Lista</a>.
+            </div>
+        <?php endif; ?>
+
+        <form class="teste" method="post" action="<?= base_url('/administrador/insere-categoria') ?>">
             <div class="row">
                 <div class="col-md-12 mt-2 mb-3">
                     <label for="text" class="preencher">NOME DA CATEGORIA</label>
