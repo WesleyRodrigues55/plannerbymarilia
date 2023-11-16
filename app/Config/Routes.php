@@ -15,7 +15,7 @@ $routes->get('/login', 'User::login');
 $routes->get('/login/esqueceu-senha', 'User::esqueceuSenha');
 $routes->get('/login/nova-senha', 'User::novaSenha');
 $routes->get('/login/cadastro-usuario', 'User::cadastroUser');
-$routes->get('/login/forgot', 'User::confirmacaoSenha');
+$routes->get('/login/forgot', 'User::confirmacaoSenha'); // CORRIGIR
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
