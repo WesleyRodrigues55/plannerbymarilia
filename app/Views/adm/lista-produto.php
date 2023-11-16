@@ -27,21 +27,36 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead class=" table-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Descrição </th>
-                <th scope="col">Descrição imagem</th>
+                <th scope="col">Nome </th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Preço</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
 
         <thead>
-            <tr>
-                <td scope="col">ID</td>
-                <td scope="col">Descrição </td>
-                <td scope="col">Descrição imagem</td>
-                <td scope="col"><a href="<?= base_url('administrador/editar-produto') ?>" class="input-simples">Editar</a>
-                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
-                </td>
-            </tr>
+            <td colspan="6">
+                <?php $message_empty = session()->getFlashdata('list-empty'); ?>
+                <?php if ($message_empty): ?>
+                    <div class="alert alert-danger mt-5 text-center" role="alert">
+                        <?= $message_empty; ?>
+                        <br>Para cadastrar um produto, clique em: <a href="<?= base_url('/administrador/cadastro-produto'); ?>">Insere Produto</a>.
+                    </div>
+                <?php else: ?>
+                    <?php foreach($produtos as $produto): ?>
+                        <tr>
+                            <td scope="col"><?= $produto['ID'] ?></td>
+                            <td scope="col"><?= $produto['NOME'] ?></td>
+                            <td scope="col"><?= $produto['CATEGORIA'] ?></td>
+                            <td scope="col"><?= "R$ " . number_format($produto['PRECO'], 2, '.', '') ?></td>
+                            <td scope="col">
+                                <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
+                                <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </td>
         </thead>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">

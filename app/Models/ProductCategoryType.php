@@ -23,6 +23,11 @@ class ProductCategoryType extends Model
         'ATIVO'
     ];
 
+    public function getCategories()
+    {
+        return $this->findAll();
+    }
+
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
