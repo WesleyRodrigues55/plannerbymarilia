@@ -173,5 +173,10 @@ function telefoneFixo(v) {
       document.getElementById('divCNPJ').style.display = 'block';
   }
 
+  $(document).ready(function () {
+    esconderCNPJ();
+    mostrarCPF();
+  })
+
     
   

@@ -86,16 +86,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
                         </div>
-                    </div>
-                    <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
-                    <div class="col-md-12">
-                        <label for="telefone" class="preencher">NÚMERO DE TELEFONE 02*</label>
-                        <input maxlength="10" type="text" class="form-control" id="telefone1" name="telefone_02"
-                            placeholder="(XX)XXXX-XXXX">
-                        <div class="invalid-feedback">
-                            Por favor preencha o seu telefone de contato.
-                        </div>
-                    </div>
+                    </div>                    
                     <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
