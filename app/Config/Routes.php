@@ -55,13 +55,18 @@ $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
 
 // Comprando
-$routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntrega/$1');
-$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'BuyCart::escolherEnderecoEntrega/$1');
-$routes->get('/comprando/cadastrando-endereco-de-entrega/(:any)', 'BuyCart::cadastrandoEnderecoEntrega/$1');
-$routes->post('/comprando/salvar-endereco-de-entrega', 'BuyCart::salvandoEnderecoEntrega');
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
+$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'DeliveryAdress::escolherEnderecoEntrega/$1');
+$routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'DeliveryAdress::cadastroEnderecoEntrega/$1');
+$routes->post('/comprando/cadastrar-endereco-de-entrega', 'DeliveryAdress::cadastrarEnderecoEntrega');
 $routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
+$routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagamento/$1');
+$routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
+$routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
 
-$routes->get('/comprando/forma-de-pagamento', 'BuyCart::formaDePagamento');
+// Pagamento
+$routes->get('/payment/payment', 'PaymentMethod::payment');
+$routes->get('/payment/get-payment', 'PaymentMethod::getStatusPayment');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

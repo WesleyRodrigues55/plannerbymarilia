@@ -40,7 +40,7 @@
 
             <div class="d-flex justify-content mt-4 gap-2">
                 <input type="submit" class="input-simples" value="Continuar">
-                <a href="<?= base_url('/comprando/cadastrando-endereco-de-entrega/'.$du['USUARIO_ID']) ?>" class="input-simples">Adicionar Endereço</a>
+                <a href="<?= base_url('/comprando/cadastro-endereco-de-entrega/'. $id_carrinho . '/' . $du['USUARIO_ID']) ?>" class="input-simples">Adicionar Endereço</a>
             </div>
         </form>
     </main>

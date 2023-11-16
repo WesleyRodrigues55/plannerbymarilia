@@ -5,14 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     elementosFacaLogin.forEach(function (elemento) {
         elemento.addEventListener('click', function (event) {
             event.preventDefault();
-            window.alert('precisa fazer login para adicionar um item no carrinho!')
+            openToast('open-toast-login');
+            // window.alert('precisa fazer login para adicionar um item no carrinho!')
         });
     });
 });
 
 // abre pop-up
-function openToast() {
-    const toastLiveExample = document.getElementById('open-toast')
+function openToast(el) {
+    const toastLiveExample = document.getElementById(el)
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
     toastBootstrap.show();
 }
@@ -27,7 +28,7 @@ $(document).on('submit', '#adicionaProdutoCarrinho', function (event) {
         data: formData,
         success: function (response) {
             // response = JSON.parse(response);
-            openToast();
+            openToast('open-toast-cart');
         }
     })
 })
