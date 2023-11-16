@@ -13,11 +13,13 @@ $routes->get('/home', 'Home::index');
 // Usuário
 $routes->get('/login', 'User::login');
 $routes->get('/login/esqueceu-senha', 'User::esqueceuSenha');
+$routes->get('/login/nova-senha', 'User::novaSenha');
 $routes->get('/login/cadastro-usuario', 'User::cadastroUser');
-$routes->post('/login/forgot', 'User::confirmacaoSenha');
+$routes->get('/login/forgot', 'User::confirmacaoSenha'); // CORRIGIR
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
+$routes->get('/perfil/perfil-usuario', 'User::perfilUsuario');
 $routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
 // Administrador
@@ -57,16 +59,18 @@ $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
 
 // Comprando
-$routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntrega/$1');
-$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'BuyCart::escolherEnderecoEntrega/$1');
-$routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'BuyCart::cadastroEnderecoEntrega/$1');
-$routes->post('/comprando/cadastrar-endereco-de-entrega', 'BuyCart::cadastrarEnderecoEntrega');
-
-
-// $routes->get('/comprando/salvar-endereco-de-entrega', 'BuyCart::salvandoEnderecoEntrega');
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
+$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'DeliveryAdress::escolherEnderecoEntrega/$1');
+$routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'DeliveryAdress::cadastroEnderecoEntrega/$1');
+$routes->post('/comprando/cadastrar-endereco-de-entrega', 'DeliveryAdress::cadastrarEnderecoEntrega');
 $routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
+$routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagamento/$1');
+$routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
+$routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
 
-$routes->get('/comprando/forma-de-pagamento', 'BuyCart::formaDePagamento');
+// Pagamento
+$routes->get('/payment/payment', 'PaymentMethod::payment');
+$routes->get('/payment/get-payment', 'PaymentMethod::getStatusPayment');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

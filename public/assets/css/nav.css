@@ -263,9 +263,9 @@ video {
     background: #fafafa;
     -webkit-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    -webkit-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .header .menu>ul>li .menu-subs>ul>li {
@@ -502,9 +502,9 @@ video {
         -webkit-transform: translate(-100%);
         -ms-transform: translate(-100%);
         transform: translate(-100%);
-        -webkit-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
     }
     .header .menu.active {
         -webkit-transform: translate(0%);
@@ -671,9 +671,9 @@ video {
         opacity: 0;
         visibility: hidden;
         background: rgba(0, 0, 0, 0.55);
-        -webkit-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
     }
     .overlay.active {
         opacity: 1;
@@ -685,7 +685,6 @@ video {
     display: block;
     width: 100%;
     min-height: 100vh;
-    background-image: url("https://source.unsplash.com/pkhBlvTLyog/1920x1280");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
