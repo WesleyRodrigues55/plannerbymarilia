@@ -90,11 +90,9 @@ $(document).ready(function () {
 
     $('#dataNascimento').on('input', function() {
         var valorDigitado = $(this).val();
-        var valorFormatado = data(valorDigitado);
+        var valorFormatado = formatarEValidarData(valorDigitado);
         $(this).val(valorFormatado);
-      });
-
-      
+      });    
  
     
 });
@@ -148,13 +146,36 @@ function telefoneFixo(v) {
     return v;
   }
 
-  function data(v) {
-    v = v.replace(/\D/g, '');
-  
-    v = v.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
-  
-    return v;}
+  //VALIDAR DATA
 
+  function formatarEValidarData(v) {
+    const dataLimpa = v.replace(/\D/g, '');  
+    const dataFormatada = dataLimpa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');  
+    // if (validarData(dataFormatada)) {
+    //   return dataFormatada;
+    // } else {
+      //   console.error('Data inválida:', v);
+      //   return null;
+      // }
+        return dataFormatada;
+  }
+
+  function validarData(dataString) {
+    var partes = dataString.split("-");
+    if (partes.length !== 3 || partes[0].length !== 4 || partes[1].length !== 2 || partes[2].length !== 2) {
+      return false;
+    }
+  
+    var data = new Date(dataString);
+    return (
+      data instanceof Date &&
+      !isNaN(data) &&
+      data.getFullYear() === parseInt(partes[0], 10) &&
+      data.getMonth() + 1 === parseInt(partes[1], 10) &&
+      data.getDate() === parseInt(partes[2], 10)
+    );
+  } 
+  
   // ALTERNANDO TIPO PESSOA
 
   function esconderCPF() {

@@ -72,8 +72,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                                         <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
-                        <input maxlength="8" type="text" class="form-control" id="dataNascimento" name="dataNascimento"
-                            placeholder="xx/xx/xxxx">
+                        <input maxlength="10" type="text" class="form-control" id="dataNascimento" name="dataNascimento"
+                            placeholder="xxxx/xx/xx">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
                         </div>
