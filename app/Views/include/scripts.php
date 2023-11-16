@@ -4,7 +4,7 @@
     <!-- SLick JS -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.single-item').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -30,4 +30,10 @@
     <!-- Instagram JS -->
     <script async src="https://www.instagram.com/embed.js"></script>
     <script type="text/javascript" src="https://instaembedcode.com/in.js"></script>
-</body>
+
+    <!-- Perfil do Usuário -->
+    <script src="<?= base_url('assets/js/perfil-usuario.js') ?>"></script>
+
+
+
+    </body>

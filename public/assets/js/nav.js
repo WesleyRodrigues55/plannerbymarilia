@@ -35,21 +35,21 @@ function toggleMenu() {
 function showSubMenu(hasChildren) {
     subMenu = hasChildren.querySelector('.menu-subs');
     subMenu.classList.add('active');
-    subMenu.style.animation = 'slideLeft 0.5s ease forwards';
+    subMenu.style.animation = 'slideLeft 0.05s ease forwards';
     const menuTitle = hasChildren.querySelector('i').parentNode.childNodes[0].textContent;
     menu.querySelector('.menu-mobile-title').innerHTML = menuTitle;
     menu.querySelector('.menu-mobile-header').classList.add('active');
 }
 
 function hideSubMenu() {
-    subMenu.style.animation = 'slideRight 0.5s ease forwards';
+    subMenu.style.animation = 'slideRight 0.05s ease forwards';
     setTimeout(() => {
         subMenu.classList.remove('active');
-    }, 300);
+    }, 50);
     menu.querySelector('.menu-mobile-title').innerHTML = '';
     menu.querySelector('.menu-mobile-header').classList.remove('active');
 }
-window.onresize = function() {
+window.onresize = function () {
     if (this.innerWidth > 991) {
         if (menu.classList.contains('active')) {
             toggleMenu();
