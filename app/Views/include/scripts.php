@@ -1,5 +1,5 @@
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
 
     <!-- SLick JS -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -46,12 +46,10 @@
     <script src="<?= base_url('assets/js/carousel-slick.js') ?>" type="text/javascript"></script>
 
     <!-- Instagram JS -->
-    <script async src="https://www.instagram.com/embed.js"></script>
-    <script type="text/javascript" src="https://instaembedcode.com/in.js"></script>
+    <script async src="https://www.instagram.com/embed.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://instaembedcode.com/in.js" type="text/javascript"></script>
 
     <!-- Perfil do Usuário -->
     <script src="<?= base_url('assets/js/perfil-usuario.js') ?>"></script>
 
-
-
-    </body>
+</body>
