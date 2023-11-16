@@ -33,7 +33,23 @@
         var_dump($opcoes_adicionais);
     ?>
 
-    
+    <div class="slider-container">
+        <div class="slider-for">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <!-- Adicione mais slides conforme necessário -->
+        </div>
+
+        <div class="slider-nav">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <!-- Adicione mais miniaturas conforme necessário -->
+        </div>
+    </div>
+
+
    
     </main>
 
