@@ -69,7 +69,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                             Por favor preencha o seu sobrenome.
                         </div>
                     </div>
-                    <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
+                                        <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
                         <input maxlength="8" type="text" class="form-control" id="dataNascimento" name="dataNascimento"
@@ -87,7 +87,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                             Por favor preencha o seu telefone de contato.
                         </div>
                     </div>                    
-                    <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                                        <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
                         <input maxlength="11" type="text" class="form-control" id="celular" name="celular"
@@ -103,13 +103,13 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                             <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14"
                             placeholder="XXX.XXX.XXX-XX">
                         </div>
-                        <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                                                <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                         <div id="divCNPJ">
                             <label for="cpf" class="preencher">CNPJ*</label>
                             <input type="text" class="form-control" id="cnpj" name="CNPJ" maxlength="18"
                             placeholder="xx.xxx.xxx/xxxx-xx">
                         </div>
-                        <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                                                <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                         
 
 
@@ -217,7 +217,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12 mt-1">
-                        <input type="checkbox" class="form-check-input" name="termoPrivacidade" id="termos">
+                        <input type="checkbox" class="form-check-input" name="termoPrivacidade"  id="termos">
                         <label class="form-check-label" for="termos" style="display: inline"><i>
                                 Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de
                                 seus dados por esse site.
@@ -227,7 +227,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <input type="submit" class="btn input-rosa px-5" value="CRIAR CONTA">
+                    <a href="<?= base_url("login") ?>" class="btn input-rosa">Criar conta</a>
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de
@@ -236,6 +236,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <div class="text-center my-5">
                     <a href="<?= base_url("login") ?>" class=""><b>Voltar</b></a>
                 </div>
+
 
 
             </form>

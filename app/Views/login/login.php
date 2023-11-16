@@ -53,16 +53,4 @@ $data['link_css'] = "assets/css/login.css";
     </div>
 </div>
 
-<script>
-    document.getElementById("showPassword").addEventListener("click", function() {
-        var passwordInput = document.getElementById("password");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
-    });
-</script>
-
-
 <?= view("include/scripts") ?>

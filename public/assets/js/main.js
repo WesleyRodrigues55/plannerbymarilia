@@ -1,16 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
     // abre alerta para realizar login para compra
     const elementosFacaLogin = document.querySelectorAll('.faca-login');
-    elementosFacaLogin.forEach(function(elemento) {
-        elemento.addEventListener('click', function(event) {
+    elementosFacaLogin.forEach(function (elemento) {
+        elemento.addEventListener('click', function (event) {
             event.preventDefault();
             openToast('open-toast-login');
             // window.alert('precisa fazer login para adicionar um item no carrinho!')
         });
     });
 });
-
 
 // abre pop-up
 function openToast(el) {
@@ -20,16 +19,26 @@ function openToast(el) {
 }
 
 // adiciona produto no carrinho
-$(document).on('submit', '#adicionaProdutoCarrinho', function(event) {
+$(document).on('submit', '#adicionaProdutoCarrinho', function (event) {
     event.preventDefault();
     var formData = $(this).serialize();
     $.ajax({
         type: 'POST',
         url: '/carrinho/adiciona-produto-carrinho',
         data: formData,
-        success: function(response) {
+        success: function (response) {
             // response = JSON.parse(response);
             openToast('open-toast-cart');
         }
     })
 })
+
+// Icone do password, ocultando e aparecendo senha
+document.getElementById("showPassword").addEventListener("click", () => {
+    var passwordInput = document.getElementById("password");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+});
