@@ -189,7 +189,8 @@ class User extends BaseController
         // var_dump($query);
 
         if ($query == false) {
-            return redirect()->to('login/esqueceu-senha?error'); // Redirecione com uma mensagem de erro
+            //CORRIGIRRRRRRRRR
+            // return redirect()->to('login/esqueceu-senha');
         } else {
 
             // echo '<pre>';
