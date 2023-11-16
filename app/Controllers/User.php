@@ -31,7 +31,7 @@ class User extends BaseController
 
     //REALIZAR TRATATIVA DAS SENHAS IGUAIS NO JS -------------------------------------------------------------------------------
     public function cadastroUsuario()
-    {
+    {  
         //USER
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
@@ -90,7 +90,7 @@ class User extends BaseController
             'POLITICA_PRIVACIDADE' => $termoPrivacidade,
         ];
 
-
+        
 
         try {
             if ($cpf) {
@@ -139,6 +139,8 @@ class User extends BaseController
 
 
             $db->close();
+
+            return redirect()->to('login');
         } catch (\Exception $e) {
 
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();

@@ -238,7 +238,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <a href="<?= base_url("login") ?>" class="btn input-rosa">Criar conta</a>
+                    <input type="submit" class="input-rosa" value="Criar Conta">
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de privacidade"</i></p>
