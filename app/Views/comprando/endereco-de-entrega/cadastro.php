@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CELULAR *</label>
-                    <input maxlength="11" type="text" id="telefone" name="celular1" class="form-control" tabindex="2" required>
+                    <input maxlength="12" type="text" id="celular" name="celular" class="form-control" tabindex="2" required>
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CEP *</label>
