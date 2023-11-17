@@ -2,12 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BuyCart;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
 class PaymentMethod extends BaseController
 {
+
+    public function aguardandoPagamento($id_detalhes_pedido, $id_carrinho) {
+        $buy_cart = new BuyCart();
+        
+
+        $data = [
+            'valor_total' => $buy_cart->getValorTotalCompra($id_carrinho)
+        ];
+
+        return view('comprando/aguardando-pagamento', $data);
+    }
 
     public function payment() {
         // Step 2: Set production or sandbox access token

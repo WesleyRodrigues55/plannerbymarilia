@@ -1,5 +1,5 @@
 <?php
-    $data['title'] = 'Carrinho de Compras';
+    $data['title'] = 'Cadastrando um Endereço de Entrega';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
 
@@ -82,7 +82,7 @@
             
             <div class="d-flex gap-2 justify-content-center mt-4">
                 <input type="submit" class="input-simples" value="Cadastrar endereço">
-                <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. session()->get('id_carrinho')) .'/'. $id_usuario ?>" class="input-simples">Voltar</a>
+                <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario); ?>" class="input-simples">Voltar</a>
             </div>
         </form>
     </main>

@@ -73,7 +73,7 @@
       <p class="p-small">
        Você precisa fazer login para adicionar um item no carrinho.
         <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
-    </p>
+      </p>
     </div>
   </div>
 </div>
