@@ -32,3 +32,51 @@ $(document).on('submit', '#adicionaProdutoCarrinho', function(event) {
         }
     })
 })
+
+// exclui catergoria
+$(document).on('submit', '#excluirCategoria', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-categoria',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-exclusao-categoria');
+            window.location.href = "/administrador/lista-categoria"
+        }
+    })
+})
+
+// exclui produto
+$(document).on('submit', '#excluirProduto', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-produto',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-exclusao-produto');
+            window.location.href = "/administrador/lista-produto"
+        }
+    })
+})
+
+// exclui usuario
+$(document).on('submit', '#excluirUsuario', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-usuario',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-exclusao-usuario');
+            window.location.href = "/administrador/lista-usuario"
+        }
+    })
+})

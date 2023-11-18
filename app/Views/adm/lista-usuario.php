@@ -51,28 +51,32 @@ $data['link_css'] = "assets/css/lista-usuario.css";
                             <td scope="col"><?= $user['ATIVO'] ?></td>
                             
                             <td scope="col">
-                                <a href="<?= base_url('administrador/editar-usuario/' . $user['ID']) ?>" class="input-simples">Editar</a>
-                                <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                            <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $user['ID']?>">Excluir</a>
                             </td>
                         </tr>
+                        <div class="modal fade" id="staticBackdrop<?= $user['ID']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Deseja realmente apagar esse usuario?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" id="excluirUsuario">
+                                        <input type="text" value="<?= $user['ID'] ?>" name="id-user" id="id-user" readonly hidden>
+                                        <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
+                                        </form>
+                                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </td>
         </thead>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"> </div>
-                    <div class="modal-body">
-                        Deseja realmente apagar esse usuário?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <a href="<?= base_url('administrador/lista-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </table>
 </div>
 <?= view("include/footer") ?>

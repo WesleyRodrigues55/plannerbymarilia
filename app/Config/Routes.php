@@ -36,6 +36,12 @@ $routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto')
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 $routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
+$routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
+
+$routes->post('/administrador/desativar-categoria', 'Administrator::desativarCategoria');
+$routes->post('/administrador/desativar-produto', 'Administrator::desativarProduto');
+$routes->post('/administrador/desativar-usuario', 'Administrator::desativarUsuario');
+
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');

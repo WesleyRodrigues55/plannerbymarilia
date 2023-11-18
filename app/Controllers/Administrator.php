@@ -114,6 +114,7 @@ class Administrator extends BaseController
             try {
                 $db = \Config\Database::connect();
                 $builder = $db->table('produto');
+                $builder->where('ATIVO', 1);
                 $builder->select('
                     produto.ID,
                     produto.NOME,
@@ -143,6 +144,7 @@ class Administrator extends BaseController
     
     public function listaUsuario()
     {
+        
         $user = new User();
         if (!$user->validaLoginAdm())
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -150,6 +152,7 @@ class Administrator extends BaseController
             try {
                 $db = \Config\Database::connect();
                 $builder = $db->table('usuario');
+                $builder->where('ATIVO', 1);
                 $builder->select('
                     usuario.ID,
                     usuario.PESSOA_ID,
@@ -320,10 +323,52 @@ class Administrator extends BaseController
         
     }
 
-    public function excluirCategoria()
+    public function desativarCategoria()
     {
+            
+        $user = new User();
+        if (!$user->validaLoginAdm()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
+        $produto = new Product();
+        $id = $this->request->getPost('id-categoria');
+    
+        $myTime = Time::now('America/Sao_Paulo');
+        $data = [
+            'ATIVO' => 0,
+            'DELETED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('tipo_categoria_produto');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.'
+                );
+
+            }
+            echo json_encode($response);
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
+            // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
+        }
+        
     }
+
 
     public function editarProduto($id_produto)
     {
@@ -343,6 +388,50 @@ class Administrator extends BaseController
                 view('/adm/editar-produto', $data);
         }   
     }
+
+    public function desativarProduto()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $produto = new Product();
+        $id = $this->request->getPost('id-produto');
+        $myTime = Time::now('America/Sao_Paulo');
+        $data = [
+            'ATIVO' => 0,
+            'DELETED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('produto');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.'
+                );
+
+            }
+            echo json_encode($response);
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
+            // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
+        }
+    }
+
 
     public function alterarProduto()
     {
@@ -399,5 +488,46 @@ class Administrator extends BaseController
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         } 
     }
+
+    public function desativarUsuario()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        
+        $id = $this->request->getPost('id-user');
+        $data = [
+            'ATIVO' => 0,
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('usuario');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.'
+                );
+
+            }
+            echo json_encode($response);
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
+            // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
+        }
+    }
+
 
 }

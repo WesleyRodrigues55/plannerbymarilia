@@ -139,8 +139,9 @@ class User extends BaseController
 
 
             $db->close();
-
+            session()->setFlashdata('success-register', 'Conta criada com sucesso!');
             return redirect()->to('login');
+            
         } catch (\Exception $e) {
 
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -189,6 +190,7 @@ class User extends BaseController
             return redirect()->to('administrador/dashboard');
         }
     }
+
 
     public function idUser()
     {
