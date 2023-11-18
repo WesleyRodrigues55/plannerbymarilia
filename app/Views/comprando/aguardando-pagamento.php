@@ -1,57 +1,46 @@
-<!-- <p>
-    tem que ter:
-    <br>Endereço de entrega escolhido
-    <br>Os produtos que serão comprados (uma lista simples e pequena)
-    <br>A forma de pagamento (Pix)
-    <br>Dados para nota fiscal (o que conter?) -- deixar em standy by?
-    <br>Valor total da compra
-    <br><br>E o botão de CONFIRMAR COMPRA
-</p>
-
-<p>Após clicar em confirmar compra: levar para pagamento PIX, mas levar os dados pessoasi do usuário/pessoa para pagamento (nome, sobrenome, cpf, cep, etc...)</p> -->
-
 <?php
-    $data['title'] = 'Editando um Endereço de Entrega';
+    $data['title'] = 'Status Compra';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
-
-
-
 
 <?= view("include/head", $data) ?>
     <?= view("include/nav") ?>
 
-    <main class="container my-5">
-        <h1 class="mb-4 text-center">Pague R$ <?= $valor_total ?>  via Pix para garantir sua compra</h1>
+    <main class="container my-5" style="max-width: 600px;">
+        <h2 class="mb-4 text-center"><b>Pague R$ <?= $valor_total ?>  via Pix para garantir sua compra</b></h2>
         <br>
-
-        
 
 
         <p><b>Escaneie este código para pagar</b></p>
         <p class="p-small">
-            Acesse seu Internet Banking ou app de pagamentos.
-            <br>Escolha pagar via Pix.
-            <br>Escaneie o seguinte código:
+            1. Acesse seu Internet Banking ou app de pagamentos.
+            <br>2. Escolha pagar via Pix.
+            <br>3. Escaneie o seguinte código:
         </p>
 
-        <p>QRCODE</p>
+        <div class="text-center">
+            <img src="data:image/jpeg;base64, <?= $qrcode ?> " style='width: 200px'/>
+        </div>
 
-        <p>Pague e será creditado na hora</p>
+        <p class="p-small">Pague e será creditado na hora</p>
         <hr>
         <p><b>Ou copie este código QR para fazer o pagamento</b></p>
         <p class="p-small">Escolha pagar via Pix pelo seu Internet Banking ou app de pagamentos. Depois, cole o seguinte código:</p>
 
-        <input type="text" class="form-control" value="AKXANWDNAWN3289DN93F292">
-        <br>
-        <button class="input-simples">Copiar</button>
+        <div class="input-group mb-3">
+            <input type="text" value="<?= $id_transaction ?>" id="id-transaction" hidden readonly>
+            <input type="text" class="form-control" id="link-transaction" value="<?= $qrcode ?>" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-copy-1"><img src="<?= base_url('assets/icons/copy.png') ?>" alt="copy" style="width: 24px"></button>
+        </div>
+        <button class="input-simples" id="button-copy-2">Copiar código</button>
         
     </main>
 
     <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
-<?= view("comprando/scripts/script-cadastro-cep") ?>
+<?= view("comprando/scripts/script-review") ?>
+
 
 
 

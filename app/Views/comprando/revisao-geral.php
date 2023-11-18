@@ -11,7 +11,7 @@
 <p>Após clicar em confirmar compra: levar para pagamento PIX, mas levar os dados pessoasi do usuário/pessoa para pagamento (nome, sobrenome, cpf, cep, etc...)</p> -->
 
 <?php
-    $data['title'] = 'Editando um Endereço de Entrega';
+    $data['title'] = 'Revisão Compra';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
 

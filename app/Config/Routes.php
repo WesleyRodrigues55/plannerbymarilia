@@ -63,11 +63,14 @@ $routes->post('/comprando/editar-endereco-de-entrega', 'DeliveryAdress::editando
 $routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagamento/$1');
 $routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
 $routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
+
+$routes->get('/comprando/checkout/payment/(:any)', 'PaymentMethod::viewPayment/$1');
 $routes->get('/comprando/checkout/pagamento/(:any)', 'PaymentMethod::aguardandoPagamento/$1');
+$routes->get('/comprando/checkout/success', 'PaymentMethod::compraAprovada');
 
 // Pagamento
 $routes->get('/payment/payment', 'PaymentMethod::payment');
-$routes->get('/payment/get-payment', 'PaymentMethod::getStatusPayment');
+$routes->get('/payment/get-payment/(:any)', 'PaymentMethod::getStatusPayment/$1');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

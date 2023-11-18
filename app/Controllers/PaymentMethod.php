@@ -10,18 +10,53 @@ use MercadoPago\MercadoPagoConfig;
 class PaymentMethod extends BaseController
 {
 
+    public function viewPayment($id_detalhes_pedido, $id_carrinho) {
+        $data = [
+            'id_detalhes_pedido' => $id_detalhes_pedido,
+            'id_carrinho' => $id_carrinho
+        ];
+        return view('comprando/payment', $data);
+    }
+
     public function aguardandoPagamento($id_detalhes_pedido, $id_carrinho) {
         $buy_cart = new BuyCart();
-        
 
-        $data = [
-            'valor_total' => $buy_cart->getValorTotalCompra($id_carrinho)
-        ];
+        $valor_total = $buy_cart->getValorTotalCompra($id_carrinho);
+        // $nome_usuario = session()->get('email');
+        // $email_usuario = session()->get('email');
+
+        if (!session()->has('id_transaction')) {
+            $payment = $this->payment((double) $valor_total);
+
+            session()->set([
+                'id_transaction' => $payment['id_transaction'],
+                'status' => $payment['status'],
+                'qrcode' => $payment['qrcode'],
+            ]); 
+
+            $data = [
+                'id_transaction' => session()->get('id_transaction'),
+                'status' => session()->get('status'),
+                'qrcode' => session()->get('qrcode'),
+                'valor_total' => $valor_total,
+            ];
+        } else {
+            $data = [
+                'id_transaction' => session()->get('id_transaction'),
+                'status' => session()->get('status'),
+                'qrcode' => session()->get('qrcode'),
+                'valor_total' => $valor_total,
+            ];
+        }
 
         return view('comprando/aguardando-pagamento', $data);
     }
 
-    public function payment() {
+    public function  loadSuccessPayment() {
+        return view('success-pagamento');
+    }
+
+    public function payment($valor_total) {
         // Step 2: Set production or sandbox access token
         MercadoPagoConfig::setAccessToken(env('TOKEN_API_MERCADO_PAGO_PRODUCTION'));
 
@@ -31,9 +66,9 @@ class PaymentMethod extends BaseController
         try {
             // Step 4: Create the request array
             $request = [
-                "transaction_amount" => 0.02,
-                // "token" => env('TOKEN_API_MERCADO_PAGO_DEVELOPMENT'),
-                "description" => "description",
+                "transaction_amount" => 0.01,
+                "token" => env('TOKEN_API_MERCADO_PAGO_DEVELOPMENT'),
+                "description" => "Compra na plataforma Planner By Marília!",
                 "installments" => 1,
                 "payment_method_id" => "pix",
                 "payer" => [
@@ -41,28 +76,20 @@ class PaymentMethod extends BaseController
                         "type" => "CPF",
                         "number" => "49106275885"
                     ],
-                    "last_name" => "Rodrigues",
                     "first_name" => "Wesley",
-                    "email" => "user@test.com",
+                    "email" => "wesley@gmail.com",
                 ]
             ];
 
-            // Step 5: Make the request
             $payment = $client->create($request);
-            echo "Transaction Amount: " . $payment->transaction_amount . "<br>";
-            echo "QR Code: <br><img src='data:image/jpeg;base64,". $payment->point_of_interaction->transaction_data->qr_code_base64 ."' style='width: 200px'/><br>";
-            echo "Link Transation: <a href='" . $payment->point_of_interaction->transaction_data->ticket_url . "' target='blank'>Pagar com Pix</a><br>";
-            echo "Method: " . $payment->payment_method_id . "<br>";
-            echo "ID: " . $payment->id . "<br>";
-            echo "Status: " . $payment->status . "<br>";
-            echo "Email: " . $payment->payer->email . "<br>";
-            echo "First Name: " . $payment->payer->first_name . "<br>";
-            echo "Last Name: " . $payment->payer->last_name . "<br>";
-            echo "Identification Type: " . $payment->payer->identification->type . "<br>";
-            echo "Number Identification: " . $payment->payer->identification->number . "<br>";
-            echo "<pre>";
-            var_dump($payment);
-            // echo $payment->id;
+    
+            $data = [
+                'id_transaction' => $payment->id,
+                'status' => $payment->status,
+                'qrcode' => $payment->point_of_interaction->transaction_data->qr_code_base64,
+            ];
+
+            return $data;
 
         // Step 6: Handle exceptions
         } catch (MPApiException $e) {
@@ -73,10 +100,10 @@ class PaymentMethod extends BaseController
         }
     }
 
-    public function getStatusPayment() {
+    public function getStatusPayment($id_payment) {
         $accessToken = env('TOKEN_API_MERCADO_PAGO_PRODUCTION'); 
         
-        $url = "https://api.mercadopago.com/v1/payments/66717024491";
+        $url = "https://api.mercadopago.com/v1/payments/$id_payment";
         
         $opts = [
             'http' => [
@@ -92,9 +119,19 @@ class PaymentMethod extends BaseController
             echo 'Erro na solicitação.';
         } else {
             $responseData = json_decode($response, true);
-            echo "STATUS: " . $responseData['status'];
-            echo "<br><br>";
-            echo $response;
+            // echo "STATUS: " . $responseData['status'];
+            // echo "<br><br>";
+            // echo $response;
+            echo $responseData['status'];
+
+            if ($responseData['status'] == "approved") {
+                $data = [
+                    'id_transaction',
+                    'status',
+                    'qrcode'
+                ];
+                session()->remove($data);
+            }
         }
         
       
