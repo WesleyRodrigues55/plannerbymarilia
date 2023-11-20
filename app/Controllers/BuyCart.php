@@ -686,4 +686,33 @@ class BuyCart extends BaseController
         $db->close();
     }
 
+    public function getIdTransactionByIdDetahesPedido($id_detalhes_pedido) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $id_transaction = $builder->get()->getRow('ID_TRANSACTION');
+        $db->close();
+        return $id_transaction;
+    }
+
+    public function updatedDetalhesPedidoDadosPagamento($id_detalhes_pedido, $payment) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->set('ID_TRANSACTION', $payment['id_transaction']);
+        $builder->set('QRCODE', $payment['qrcode']);
+        $builder->set('QRCODE64', $payment['qrcode64']);
+        $builder->where('ID', $id_detalhes_pedido);
+        $builder->update();
+        $db->close();
+    }
+
+    public function getDetalhesPedidoById($id_detalhes_pedido) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
 }

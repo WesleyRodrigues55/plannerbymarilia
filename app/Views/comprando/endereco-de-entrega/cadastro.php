@@ -11,6 +11,7 @@
         <h1 class="text-center mb-4">Cadastro de endereço de entrega</h1>
 
         <?php $message_success = session()->getFlashdata('endereco-success'); ?>
+        <?php $message_exists = session()->getFlashdata('endereco-exists'); ?>
         <?php $message_failed = session()->getFlashdata('endereco-failed'); ?>
         <?php if ($message_failed): ?>
             <div class="alert alert-danger mt-5 text-center" role="alert">
@@ -21,10 +22,16 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario) ?>" >Clique aqui</a> para continuar o processo de compra
-
+                <br><br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario) ?>" class="input-rosa m-2">Clique aqui</a> para continuar o processo de compra
             </div>
         <?php endif; ?>
+
+        <?php if ($message_exists): ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_exists; ?>
+            </div>
+        <?php endif; ?>
+
         
         <form method="post" action="/comprando/cadastrar-endereco-de-entrega">
             

@@ -18,36 +18,14 @@ class PaymentMethod extends BaseController
         $user = new User();
 
         $valor_total = $buy_cart->getValorTotalCompra($id_carrinho);
-
-        // echo "<pre>";
-        // $get_data_pessoa = $user->getPessoa($user->idUser());
-        // return var_dump($this->payment((double) $valor_total, $get_data_pessoa[0]));
-
-        $db = \Config\Database::connect();
-        $builder = $db->table('detalhes_do_pedido');
-        $builder->where('ID', $id_detalhes_pedido);
-        $id_transaction = $builder->get()->getRow('ID_TRANSACTION');
-        $db->close();
+        $id_transaction = $buy_cart->getIdTransactionByIdDetahesPedido($id_detalhes_pedido);
 
         if (!$id_transaction) {
             $get_data_pessoa = $user->getPessoa($user->idUser());
 
             $payment = $this->payment((double) $valor_total, $get_data_pessoa[0]);
-
-            $db = \Config\Database::connect();
-            $builder = $db->table('detalhes_do_pedido');
-            $builder->set('ID_TRANSACTION', $payment['id_transaction']);
-            $builder->set('QRCODE', $payment['qrcode']);
-            $builder->set('QRCODE64', $payment['qrcode64']);
-            $builder->where('ID', $id_detalhes_pedido);
-            $builder->update();
-            $db->close();
-
-            $db = \Config\Database::connect();
-            $builder = $db->table('detalhes_do_pedido');
-            $builder->where('ID', $id_detalhes_pedido);
-            $query = $builder->get()->getResultArray();
-            $db->close();
+            $buy_cart->updatedDetalhesPedidoDadosPagamento($id_detalhes_pedido, $payment);
+            $query = $buy_cart->getDetalhesPedidoById($id_detalhes_pedido);
 
             $data = [
                 'id_transaction' => $query[0]['ID_TRANSACTION'],
@@ -58,11 +36,7 @@ class PaymentMethod extends BaseController
                 'id_detalhes_pedido' => $id_detalhes_pedido
             ];
         } else {
-            $db = \Config\Database::connect();
-            $builder = $db->table('detalhes_do_pedido');
-            $builder->where('ID', $id_detalhes_pedido);
-            $query = $builder->get()->getResultArray();
-            $db->close();
+            $query = $buy_cart->getDetalhesPedidoById($id_detalhes_pedido);
 
             $data = [
                 'id_transaction' => $query[0]['ID_TRANSACTION'],
@@ -125,7 +99,7 @@ class PaymentMethod extends BaseController
                 'qrcode64' => $payment->point_of_interaction->transaction_data->qr_code_base64,
             ];
 
-            return $request;
+            return $data;
 
         } catch (MPApiException $e) {
             echo "Status code: " . $e->getApiResponse()->getStatusCode() . "<br>";
@@ -161,7 +135,6 @@ class PaymentMethod extends BaseController
                 $buy_cart->alteraStatusDetalhePedido($id_detalhes_pedido);
                 $buy_cart->alteraStatusCarrinho($id_detalhes_pedido);
             }
-
             // echo "<br><br>";
             // echo $response;
         }

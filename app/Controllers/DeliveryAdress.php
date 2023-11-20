@@ -85,12 +85,9 @@ class DeliveryAdress extends BaseController
         
         if (!$user->validaLogin() || !$user->validaLogin() && $id_carrinho == null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-
-        else if ($user->idUser() != $id_usuario) {
+        } else if ($user->idUser() != $id_usuario) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
-
             if (!$this->getEnderecoUsuario($id_usuario)) {
                 return $this->enderecoDeEntrega($id_carrinho, $id_usuario);
             }
@@ -99,9 +96,7 @@ class DeliveryAdress extends BaseController
                 'dados_usuario' => $this->getEnderecoUsuario($id_usuario),
                 'id_carrinho' => $id_carrinho
             ];
-            // session()->set([
-            //     'id_carrinho' => $id_carrinho
-            // ]);    
+
             return view('comprando/endereco-de-entrega/escolhendo-endereco-de-entrega', $data);
         }
     }
@@ -237,6 +232,16 @@ class DeliveryAdress extends BaseController
         $db->close();
     }
 
+    public function validaEnderecoExistente($cep, $rua, $cidade) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('endereco_de_entrega');
+        $builder->where('CEP', $cep);
+        $builder->where('CIDADE', $cidade);
+        $builder->where('RUA', $rua);
+        $builder->get()->getResultArray();
+        $db->close();
+    }
+
     public function cadastrarEnderecoEntrega() {
         $id_usuario = $this->request->getPost('id-usuario');
         $id_carinho_compras = $this->request->getPost('id-carrinho-compras');
@@ -252,26 +257,31 @@ class DeliveryAdress extends BaseController
         $local = $this->request->getPost('local');
         $informacoes = $this->request->getPost('informacoes');
 
-        $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
+        if (!$this->validaEnderecoExistente($cep, $rua, $cidade)) {
+            session()->setFlashdata('endereco-exists', 'Esse endereço já existe cadastrado, edite-o ou adicione um diferente!');
+            return redirect()->back();
+        }
         
-        $data = [
-            'USUARIO_ID' => $id_usuario,
-            'NOME_COMPLETO' => $nome,
-            'CELULAR' => $celular,
-            'CEP' => $cep,
-            'RUA' => $rua,
-            'CIDADE' => $cidade,
-            'ESTADO' => $estado,
-            'LOCAL_ENTREGA' => $local,
-            'INFORMACOES_ADICIONAIS' => $informacoes,
-            'BAIRRO' => $bairro,
-            'NUMERO' => $numero,
-            'COMPLEMENTO' => $complemento,
-            'CHECKED' => 1,
-            'ATIVO' => 1
-        ];
-
+        $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
+    
         try {
+            $data = [
+                'USUARIO_ID' => $id_usuario,
+                'NOME_COMPLETO' => $nome,
+                'CELULAR' => $celular,
+                'CEP' => $cep,
+                'RUA' => $rua,
+                'CIDADE' => $cidade,
+                'ESTADO' => $estado,
+                'LOCAL_ENTREGA' => $local,
+                'INFORMACOES_ADICIONAIS' => $informacoes,
+                'BAIRRO' => $bairro,
+                'NUMERO' => $numero,
+                'COMPLEMENTO' => $complemento,
+                'CHECKED' => 1,
+                'ATIVO' => 1
+            ];
+
             $db = \Config\Database::connect();
             $builder = $db->table('endereco_de_entrega');
             $builder->insert($data);
@@ -282,11 +292,6 @@ class DeliveryAdress extends BaseController
             } else {
                 session()->setFlashdata('endereco-success', 'Endereço salvo com sucesso!');
             }
-
-            $data = [
-                'dados_usuario' => $this->getEnderecoUsuario($id_usuario),
-                'id_carrinho' => $id_carinho_compras
-            ];
 
             return redirect()->back();
 
