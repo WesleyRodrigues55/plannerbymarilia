@@ -3,81 +3,116 @@
 namespace App\Controllers;
 
 use App\Controllers\BuyCart;
+use App\Controllers\User;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 
 class PaymentMethod extends BaseController
 {
-
-    public function viewPayment($id_detalhes_pedido, $id_carrinho) {
-        $data = [
-            'id_detalhes_pedido' => $id_detalhes_pedido,
-            'id_carrinho' => $id_carrinho
-        ];
-        return view('comprando/payment', $data);
-    }
-
     public function aguardandoPagamento($id_detalhes_pedido, $id_carrinho) {
+        if (!session()->has('usuario')) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
         $buy_cart = new BuyCart();
+        $user = new User();
 
         $valor_total = $buy_cart->getValorTotalCompra($id_carrinho);
-        // $nome_usuario = session()->get('email');
-        // $email_usuario = session()->get('email');
 
-        if (!session()->has('id_transaction')) {
-            $payment = $this->payment((double) $valor_total);
+        // echo "<pre>";
+        // $get_data_pessoa = $user->getPessoa($user->idUser());
+        // return var_dump($this->payment((double) $valor_total, $get_data_pessoa[0]));
 
-            session()->set([
-                'id_transaction' => $payment['id_transaction'],
-                'status' => $payment['status'],
-                'qrcode' => $payment['qrcode'],
-            ]); 
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $id_transaction = $builder->get()->getRow('ID_TRANSACTION');
+        $db->close();
+
+        if (!$id_transaction) {
+            $get_data_pessoa = $user->getPessoa($user->idUser());
+
+            $payment = $this->payment((double) $valor_total, $get_data_pessoa[0]);
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->set('ID_TRANSACTION', $payment['id_transaction']);
+            $builder->set('QRCODE', $payment['qrcode']);
+            $builder->set('QRCODE64', $payment['qrcode64']);
+            $builder->where('ID', $id_detalhes_pedido);
+            $builder->update();
+            $db->close();
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->where('ID', $id_detalhes_pedido);
+            $query = $builder->get()->getResultArray();
+            $db->close();
 
             $data = [
-                'id_transaction' => session()->get('id_transaction'),
-                'status' => session()->get('status'),
-                'qrcode' => session()->get('qrcode'),
+                'id_transaction' => $query[0]['ID_TRANSACTION'],
+                'status' => $query[0]['STATUS_PEDIDO'],
+                'qrcode' => $query[0]['QRCODE'],
+                'qrcode64' => $query[0]['QRCODE64'],
                 'valor_total' => $valor_total,
+                'id_detalhes_pedido' => $id_detalhes_pedido
             ];
         } else {
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->where('ID', $id_detalhes_pedido);
+            $query = $builder->get()->getResultArray();
+            $db->close();
+
             $data = [
-                'id_transaction' => session()->get('id_transaction'),
-                'status' => session()->get('status'),
-                'qrcode' => session()->get('qrcode'),
+                'id_transaction' => $query[0]['ID_TRANSACTION'],
+                'status' => $query[0]['STATUS_PEDIDO'],
+                'qrcode' => $query[0]['QRCODE'],
+                'qrcode64' => $query[0]['QRCODE64'],
                 'valor_total' => $valor_total,
+                'id_detalhes_pedido' => $id_detalhes_pedido
             ];
         }
 
         return view('comprando/aguardando-pagamento', $data);
+        
     }
 
-    public function  loadSuccessPayment() {
-        return view('success-pagamento');
+    public function compraAprovada() {
+        if (session()->has('usuario')) {
+            return view('comprando/success-pagamento');
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
     }
 
-    public function payment($valor_total) {
-        // Step 2: Set production or sandbox access token
+    public function payment($valor_total, $get_data_pessoa) {
         MercadoPagoConfig::setAccessToken(env('TOKEN_API_MERCADO_PAGO_PRODUCTION'));
 
-        // Step 3: Initialize the API client
         $client = new PaymentClient();
 
         try {
-            // Step 4: Create the request array
+            if ($get_data_pessoa['TIPO_PESSOA'] == "FISICA") {
+                $type_identificator = "CPF";
+                $number_identificator = $get_data_pessoa['CPF'];
+            } else {
+                $type_identificator = "CNPJ";
+                $number_identificator = $get_data_pessoa['CNPJ'];
+            }
+
             $request = [
-                "transaction_amount" => 0.01,
+                "transaction_amount" => $valor_total,
                 "token" => env('TOKEN_API_MERCADO_PAGO_DEVELOPMENT'),
                 "description" => "Compra na plataforma Planner By Marília!",
                 "installments" => 1,
                 "payment_method_id" => "pix",
                 "payer" => [
                     "identification" => [
-                        "type" => "CPF",
-                        "number" => "49106275885"
+                        "type" => $type_identificator,
+                        "number" => $number_identificator
                     ],
-                    "first_name" => "Wesley",
-                    "email" => "wesley@gmail.com",
+                    "first_name" => $get_data_pessoa['NOME'],
+                    "email" => $get_data_pessoa['EMAIL'],
                 ]
             ];
 
@@ -86,12 +121,12 @@ class PaymentMethod extends BaseController
             $data = [
                 'id_transaction' => $payment->id,
                 'status' => $payment->status,
-                'qrcode' => $payment->point_of_interaction->transaction_data->qr_code_base64,
+                'qrcode' => $payment->point_of_interaction->transaction_data->qr_code,
+                'qrcode64' => $payment->point_of_interaction->transaction_data->qr_code_base64,
             ];
 
-            return $data;
+            return $request;
 
-        // Step 6: Handle exceptions
         } catch (MPApiException $e) {
             echo "Status code: " . $e->getApiResponse()->getStatusCode() . "<br>";
             echo "Content: " . $e->getApiResponse()->getContent() . "<br>";
@@ -100,7 +135,9 @@ class PaymentMethod extends BaseController
         }
     }
 
-    public function getStatusPayment($id_payment) {
+    public function getStatusPayment($id_payment, $id_detalhes_pedido) {
+        $buy_cart = new BuyCart();
+
         $accessToken = env('TOKEN_API_MERCADO_PAGO_PRODUCTION'); 
         
         $url = "https://api.mercadopago.com/v1/payments/$id_payment";
@@ -119,22 +156,15 @@ class PaymentMethod extends BaseController
             echo 'Erro na solicitação.';
         } else {
             $responseData = json_decode($response, true);
-            // echo "STATUS: " . $responseData['status'];
+            echo $responseData['status'];
+            if ($responseData['status'] == "approved") {
+                $buy_cart->alteraStatusDetalhePedido($id_detalhes_pedido);
+                $buy_cart->alteraStatusCarrinho($id_detalhes_pedido);
+            }
+
             // echo "<br><br>";
             // echo $response;
-            echo $responseData['status'];
-
-            if ($responseData['status'] == "approved") {
-                $data = [
-                    'id_transaction',
-                    'status',
-                    'qrcode'
-                ];
-                session()->remove($data);
-            }
         }
-        
-      
     }
 
 }

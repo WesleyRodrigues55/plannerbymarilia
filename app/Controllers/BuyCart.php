@@ -521,7 +521,7 @@ class BuyCart extends BaseController
                     'USUARIO_ID' => $id_usuario,
                     'FORMA_DE_PAGAMENTO' => '',
                     'DATA_PEDIDO' => $myTime->toDateTimeString(),
-                    'STATUS_PEDIDO' => 'EM ABERTO',
+                    'STATUS_PEDIDO' => 'pending',
                     'TOTAL_PEDIDO' => $subtotal
                 ];
 
@@ -655,6 +655,35 @@ class BuyCart extends BaseController
         $db->close();
 
         return $total;
+    }
+
+    public function alteraStatusDetalhePedido($id_detalhes_pedido) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->set('STATUS_PEDIDO', 'approved');
+        $builder->where('ID', $id_detalhes_pedido);
+        $builder->update();
+        $db->close();
+    }
+
+    public function getIdCarrinhoPorDetalhePedido($id_detalhes_pedido) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $id_carrinho = $builder->get()->getRow('CARRINHO_DE_COMPRAS_ID');
+        $builder->where('ID', $id_detalhes_pedido);
+        $db->close();
+        return $id_carrinho;
+    }
+
+    public function alteraStatusCarrinho($id_detalhes_pedido) {
+        $id_carrinho = $this->getIdCarrinhoPorDetalhePedido($id_detalhes_pedido);
+        $db = \Config\Database::connect();
+        $builder = $db->table('carrinho_de_compras');
+        $builder->set('STATUS_COMPRA', 'FECHADO');
+        $builder->where('ID', $id_carrinho);
+        $builder->update();
+        $db->close();
     }
 
 }
