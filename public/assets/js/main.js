@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
 // abre pop-up
 function openToast(el) {
     const toastLiveExample = document.getElementById(el)

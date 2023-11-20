@@ -53,8 +53,11 @@ $data['link_css'] = "assets/css/login.css";
     </div>
 </div>
 
+<?= view("include/scripts") ?>
+
 <script>
-    document.getElementById("showPassword").addEventListener("click", function() {
+    // Icone do password, ocultando e aparecendo senha
+    document.getElementById("showPassword").addEventListener("click", () => {
         var passwordInput = document.getElementById("password");
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
@@ -64,5 +67,3 @@ $data['link_css'] = "assets/css/login.css";
     });
 </script>
 
-
-<?= view("include/scripts") ?>
