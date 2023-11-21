@@ -1,5 +1,5 @@
 <?php
-    $data['title'] = 'Carrinho de Compras';
+    $data['title'] = 'Cadastrando um Endereço de Entrega';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
 
@@ -11,6 +11,7 @@
         <h1 class="text-center mb-4">Cadastro de endereço de entrega</h1>
 
         <?php $message_success = session()->getFlashdata('endereco-success'); ?>
+        <?php $message_exists = session()->getFlashdata('endereco-exists'); ?>
         <?php $message_failed = session()->getFlashdata('endereco-failed'); ?>
         <?php if ($message_failed): ?>
             <div class="alert alert-danger mt-5 text-center" role="alert">
@@ -21,10 +22,16 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario) ?>" >Clique aqui</a> para continuar o processo de compra
-
+                <br><br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario) ?>" class="input-rosa m-2">Clique aqui</a> para continuar o processo de compra
             </div>
         <?php endif; ?>
+
+        <?php if ($message_exists): ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_exists; ?>
+            </div>
+        <?php endif; ?>
+
         
         <form method="post" action="/comprando/cadastrar-endereco-de-entrega">
             
@@ -39,11 +46,11 @@
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CELULAR *</label>
-                    <input type="text" id="celular" name="celular" class="form-control" tabindex="2" required>
+                    <input maxlength="12" type="text" id="celular" name="celular" class="form-control" tabindex="2" required>
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">CEP *</label>
-                    <input type="text" id="cep" name="cep" class="form-control" tabindex="3" required>
+                    <input maxlength="9" type="text" id="cep" name="cep" class="form-control" tabindex="3" required>
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">RUA *</label>
@@ -82,13 +89,13 @@
             
             <div class="d-flex gap-2 justify-content-center mt-4">
                 <input type="submit" class="input-simples" value="Cadastrar endereço">
-                <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. session()->get('id_carrinho')) .'/'. $id_usuario ?>" class="input-simples">Voltar</a>
+                <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario); ?>" class="input-simples">Voltar</a>
             </div>
         </form>
     </main>
 
     <?= view("include/footer") ?>
 
-<?= view("include/scripts") ?>
+    <?= view("include/scripts") ?>
 <?= view("comprando/scripts/script-cadastro-cep") ?>
 

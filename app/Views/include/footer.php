@@ -73,7 +73,24 @@
       <p class="p-small">
        Você precisa fazer login para adicionar um item no carrinho.
         <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
-    </p>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem que código foi copiado -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-copy-coadigo" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+       Código copiado
+      </p>
     </div>
   </div>
 </div>
