@@ -1,6 +1,11 @@
+<?php
+$data['link_css'] = "assets/css/nav.css";
+
+?>
+
 <header>
     <div class="text-center py-3 header-top">
-        <span><b>SONHE, PLANEJE E REALIZE!</b></span>
+        <span id="mensagem" class="mensagem"><b>SONHE, PLANEJE E REALIZE!</b></span>
     </div>
     <div class="border-header"></div>
 
@@ -19,9 +24,14 @@
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
-                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center link-nav">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    iniciar sessão
+                    Iniciar sessão
+                </a>
+
+                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
+                    <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Cadastrar
                 </a>
 
                 <!-- COM LOGIN -->
@@ -93,7 +103,7 @@
                                 <a href="#">PLANNERS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
+                                        <li class="nav-categorias"><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
@@ -167,3 +177,26 @@
         </div>
     </header>
 </header>
+
+<script>
+    // Array com as mensagens
+    const mensagens = [
+        "SONHE, PLANEJE E REALIZE!",
+        "ACREDITE NOS SEUS SONHOS E FAÇA ACONTECER!"
+        // Adicione mais mensagens aqui se desejar
+    ];
+
+    // Função para alternar as mensagens a cada 10 segundos
+    function alternarMensagem() {
+        const mensagemElement = document.getElementById('mensagem');
+        let index = 0;
+
+        setInterval(() => {
+            mensagemElement.innerHTML = `<b>${mensagens[index]}</b>`;
+            index = (index + 1) % mensagens.length;
+        }, 3000); // 10 segundos em milissegundos
+    }
+
+    // Chamar a função para começar a alternância das mensagens
+    alternarMensagem();
+</script>

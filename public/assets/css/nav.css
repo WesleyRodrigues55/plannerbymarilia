@@ -135,6 +135,10 @@ video {
     }
 } */
 
+.mensagem:hover {
+    color: var(--cor-rosa-principal);
+}
+
 .brand {
     /* font-family: inherit;
     font-size: 1.75rem;
@@ -309,6 +313,20 @@ video {
     display: block;
     line-height: 1;
 }
+
+.link-nav:hover {
+    color: var(--cor-rosa-principal);
+}
+
+.link-footer:hover {
+    color: var(--cor-rosa-principal);
+}
+
+
+.menu-subs ul li:hover a {
+    color: var(--cor-rosa-principal) !important;
+}
+
 
 .header .menu>ul>li .menu-subs.menu-mega>.list-item>ul>li>a {
     display: inline-block;

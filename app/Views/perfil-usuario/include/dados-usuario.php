@@ -31,15 +31,15 @@ $data['link_css'] = "assets/css/perfil.css";
                         </div>
                     </div>
                 </div>
-                <div class="container my-2">
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="button" class="btn input-rosa button-dados">Atualizar</button>
-                        </div>
+            </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn input-rosa button-dados float-start">Atualizar</button>
                     </div>
                 </div>
+            </div>
 
-            </form>
         </div>
     </div>
 </div>
