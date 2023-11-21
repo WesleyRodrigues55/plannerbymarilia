@@ -31,7 +31,7 @@ class User extends BaseController
 
     //REALIZAR TRATATIVA DAS SENHAS IGUAIS NO JS -------------------------------------------------------------------------------
     public function cadastroUsuario()
-    {  
+    {
         //USER
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
@@ -100,7 +100,7 @@ class User extends BaseController
                     return redirect()->back();
                 }
             }
-        
+
             // Verificar se o e-mail já existe
             if ($email) {
                 $db = \Config\Database::connect();
@@ -262,12 +262,13 @@ class User extends BaseController
     {
         return session()->has('usuario');
     }
-  
-    public function validaLoginAdm(){
-        return session()->has('usuario') && session()->get('nivel') == 2? true : false;
+    public function validaLoginAdm()
+    {
+        return session()->has('usuario') && session()->get('nivel') == 2 ? true : false;
     }
 
-    public function getPessoaByIdUsuario($id_usuario) {
+    public function getPessoaByIdUsuario($id_usuario)
+    {
         $db      = \Config\Database::connect();
         $builder = $db->table('usuario');
         $builder->where('ID', $id_usuario);
@@ -277,7 +278,8 @@ class User extends BaseController
         return $id_pessoa;
     }
 
-    public function getPessoa($id_usuario) {
+    public function getPessoa($id_usuario)
+    {
         $id_pessoa = $this->getPessoaByIdUsuario($id_usuario);
         $db      = \Config\Database::connect();
         $builder = $db->table('pessoa');
@@ -287,4 +289,5 @@ class User extends BaseController
         $db->close();
 
         return $query;
+    }
 }
