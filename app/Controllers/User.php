@@ -262,7 +262,6 @@ class User extends BaseController
     {
         return session()->has('usuario');
     }
-  
     public function validaLoginAdm(){
         return session()->has('usuario') && session()->get('nivel') == 2? true : false;
     }
@@ -287,4 +286,5 @@ class User extends BaseController
         $db->close();
 
         return $query;
+    }
 }
