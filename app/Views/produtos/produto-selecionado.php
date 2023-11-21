@@ -150,13 +150,13 @@
                     
                     <div class="row my-4">
                         <p><b>PREÇO FINAL:</b></p>
+                        <p>À vista no PIX com 10% OFF</p>
+                            <div class="col-md-12 mt-3 d-flex justify-content-end">
+                                <input type="submit" class="btn input-rosa px-5" value="COMPRAR">
+                            </div>
                     </div>
-                    <p>À vista no PIX com 10% OFF</p>
                     
-
-                    <div class="col-md-12 mt-3 d-flex justify-content-end">
-                        <input type="submit" class="btn input-rosa px-5" value="COMPRAR">
-                    </div>
+                    
 
                 </div>
             </form>
