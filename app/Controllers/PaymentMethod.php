@@ -22,7 +22,6 @@ class PaymentMethod extends BaseController
 
         if (!$id_transaction) {
             $get_data_pessoa = $user->getPessoa($user->idUser());
-
             $payment = $this->payment((double) $valor_total, $get_data_pessoa[0]);
             $buy_cart->updatedDetalhesPedidoDadosPagamento($id_detalhes_pedido, $payment);
             $query = $buy_cart->getDetalhesPedidoById($id_detalhes_pedido);

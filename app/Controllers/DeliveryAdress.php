@@ -257,10 +257,10 @@ class DeliveryAdress extends BaseController
         $local = $this->request->getPost('local');
         $informacoes = $this->request->getPost('informacoes');
 
-        if (!$this->validaEnderecoExistente($cep, $rua, $cidade)) {
-            session()->setFlashdata('endereco-exists', 'Esse endereço já existe cadastrado, edite-o ou adicione um diferente!');
-            return redirect()->back();
-        }
+        // if (!$this->validaEnderecoExistente($cep, $rua, $cidade)) {
+        //     session()->setFlashdata('endereco-exists', 'Esse endereço já existe cadastrado, edite-o ou adicione um diferente!');
+        //     return redirect()->back();
+        // }
         
         $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
     
