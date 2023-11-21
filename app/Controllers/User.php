@@ -31,7 +31,7 @@ class User extends BaseController
 
     //REALIZAR TRATATIVA DAS SENHAS IGUAIS NO JS -------------------------------------------------------------------------------
     public function cadastroUsuario()
-    {
+    {  
         //USER
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
@@ -90,9 +90,28 @@ class User extends BaseController
             'POLITICA_PRIVACIDADE' => $termoPrivacidade,
         ];
 
-
-
         try {
+            if ($cpf) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('pessoa');
+                if ($builder->where('CPF', $cpf)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('cpf-exists', 'CPF já cadastrado, por favor, use outro.');
+                    return redirect()->back();
+                }
+            }
+        
+            // Verificar se o e-mail já existe
+            if ($email) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('pessoa');
+                if ($builder->where('EMAIL', $email)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('email-exists', 'E-mail já cadastrado, por favor, use outro.');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('pessoa');
             $builder->insert($dataPessoa);
@@ -112,11 +131,16 @@ class User extends BaseController
                 'NIVEL' => 1,
             ];
 
+            $db = \Config\Database::connect();
             $builder = $db->table('usuario');
             $builder->insert($dataUsuario);
 
+
             $db->close();
+
+            return redirect()->to('login');
         } catch (\Exception $e) {
+
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         }
     }
@@ -188,7 +212,8 @@ class User extends BaseController
         // var_dump($query);
 
         if ($query == false) {
-            return redirect()->to('login/esqueceu-senha?error'); // Redirecione com uma mensagem de erro
+            //CORRIGIRRRRRRRRR
+            // return redirect()->to('login/esqueceu-senha');
         } else {
 
             // echo '<pre>';
@@ -237,9 +262,29 @@ class User extends BaseController
     {
         return session()->has('usuario');
     }
+    public function validaLoginAdm(){
+        return session()->has('usuario') && session()->get('nivel') == 2? true : false;
+    }
 
-    public function validaLoginAdm()
-    {
-        return session()->has('usuario') && session()->get('nivel') == 2 ? true : false;
+    public function getPessoaByIdUsuario($id_usuario) {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->where('ID', $id_usuario);
+        $id_pessoa = $builder->get()->getRow('PESSOA_ID');
+        $db->close();
+
+        return $id_pessoa;
+    }
+
+    public function getPessoa($id_usuario) {
+        $id_pessoa = $this->getPessoaByIdUsuario($id_usuario);
+        $db      = \Config\Database::connect();
+        $builder = $db->table('pessoa');
+        $builder->select('NOME, EMAIL, CPF, TIPO_PESSOA, CNPJ');
+        $builder->where('ID', $id_pessoa);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+
+        return $query;
     }
 }
