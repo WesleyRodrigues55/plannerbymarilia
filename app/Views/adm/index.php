@@ -25,6 +25,11 @@ $data['link_css'] = "assets/css/lista-produto.css";
             <p><a href="<?= base_url('administrador/lista-categoria') ?>" class="input-simples-outline">Listar Categoria</a></p>
         </div>
         <div class="col-md-4 mb-4">
+            <h2>Opções Adicionais</h2>
+            <p><a href="<?= base_url('administrador/cadastro-opcoes-adicionais') ?>" class="input-simples-outline">Cadastrar Adicional</a></p>
+            <p><a href="<?= base_url('administrador/lista-opcoes-adicionais') ?>" class="input-simples-outline">Listar Adicional</a></p>
+        </div>
+        <div class="col-md-4 mb-4">
             <h2>Usuários</h2>
             <p><a href="<?= base_url('administrador/lista-usuario') ?>" class="input-simples-outline">Listar Usuario</a></p>
         </div>

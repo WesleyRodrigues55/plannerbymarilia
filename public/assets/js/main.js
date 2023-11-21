@@ -49,6 +49,22 @@ $(document).on('submit', '#excluirCategoria', function(event) {
     })
 })
 
+// exclui adicional
+$(document).on('submit', '#excluirOpcoesAdicionais', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-opcoes-adicionais',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-exclusao-opcoes-adicionais');
+            window.location.href = "/administrador/lista-opcoes-adicionais"
+        }
+    })
+})
+
 // exclui produto
 $(document).on('submit', '#excluirProduto', function(event) {
     event.preventDefault();

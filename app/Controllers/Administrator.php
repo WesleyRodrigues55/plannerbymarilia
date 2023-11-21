@@ -187,6 +187,7 @@ class Administrator extends BaseController
             view('/adm/cadastro-categoria');
     }
 
+
     public function inserirCategoria()
     {
         $myTime = Time::now('America/Sao_Paulo');
@@ -527,6 +528,199 @@ class Administrator extends BaseController
             log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
             // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
         }
+    }
+
+    public function cadastroOpcaoAdicional()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        return
+            view('/adm/cadastro-opcoes-adicionais');
+    }
+
+    public function insereOpcaoAdicional()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        $user = new User();
+
+        $id = $user->idUser();
+        $nome_opcao_adicional = $this->request->getPost('nome-opcao-adicional');
+        $preco = $this->request->getPost('preco');
+
+        $data = [
+            'NOME' => $nome_opcao_adicional,
+            'PRECO' => $preco,
+            'DELETED_AT' => '',
+            'UPDATED_AT' => '',
+            'CREATED_AT' => $myTime->toDateTimeString(),
+            'ATIVO' => 1
+        ];
+
+        try {
+
+            if ($nome_opcao_adicional) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('opcoes_adicionais');
+                if ($builder->where('NOME', $nome_opcao_adicional)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('option-exists', 'Adicional já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('opcoes_adicionais');
+            $builder->insert($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-adicional-failed', 'Tivemos um erro em salvar sua Opção Adicional, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-adicional-success', 'Opção Adicional salvo com sucesso!');
+            }
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
+
+    public function listaOpcoesAdicionais()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+            try {
+                $db = \Config\Database::connect();
+                $builder = $db->table('opcoes_adicionais');
+                $builder->where('ATIVO', 1);
+                $builder->select('
+                    opcoes_adicionais.ID,
+                    opcoes_adicionais.NOME,
+                    opcoes_adicionais.PRECO,
+                ');
+                //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
+                $builder->orderBy('ID', 'ASC');
+                $builder->limit(10); 
+    
+                $query = $builder->get()->getResultArray();
+                $db->close();
+    
+                if (empty($query)) {
+                    session()->setFlashdata('list-empty', 'A lista está vazia.');
+                    return view('/adm/lista-opcoes-adicionais');
+                }
+                $data = ['opcoes_adicionais' => $query];
+    
+                return view('/adm/lista-opcoes-adicionais', $data);
+            } catch (\Exception $e) {
+                echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            }
+    }
+
+    public function desativarOpcoesAdicionais()
+    {
+            
+        $user = new User();
+        if (!$user->validaLoginAdm()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $produto = new Product();
+        $id = $this->request->getPost('id-opcoes-adicionais');
+    
+        $myTime = Time::now('America/Sao_Paulo');
+        $data = [
+            'ATIVO' => 0,
+            'DELETED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('opcoes_adicionais');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.'
+                );
+
+            }
+            echo json_encode($response);
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
+            // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
+        }
+        
+    }
+
+    public function editarOpcoesAdicionais($id = null)
+    {
+        if ($id == null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $user = new User();
+            if (!$user->validaLoginAdm()) {
+                return redirect()->to('/login')->with('error', 'Login required.');
+            }
+        
+            $opcoes_adicionais = new Product();
+            $opcao_selecionada = $opcoes_adicionais->getOpcoesById($id);
+        
+            $data = [
+                'opcao_selecionada' => $opcao_selecionada,
+            ];
+        
+            return view('adm/editar-opcoes-adicionais', $data);
+        }
+    }
+
+    public function alterarOpcoesAdicionais()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        
+        $nome = $this->request->getPost('nome-opcao-adicional');
+        $preco = $this->request->getPost('preco');
+        $id_opcoes_adicionais = $this->request->getPost('id-opcao-adicional');
+        
+        $data = [
+            'NOME' => $nome,
+            'PRECO' => $preco,
+            'UPDATED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('opcoes_adicionais');
+            $builder->where('ID', $id_opcoes_adicionais);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+            }
+            return redirect()->to('/administrador/lista-opcoes-adicionais');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+        
+        
     }
 
 
