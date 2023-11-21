@@ -42,33 +42,28 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <?= $message_failed_email; ?>
                 </div>
             <?php endif; ?>
-            <form action="<?= base_url('user/cadastroUsuario') ?>" method="post">
+            <form onsubmit="senhaOk();" action="<?= base_url('user/cadastroUsuario') ?>" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="email" class="preencher">E-MAIL*</label>
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="email@dominio.com.br">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                            placeholder="email@dominio.com.br">                        
                     </div>
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
                         <input type="password" class="form-control" id="password" name="senha"
-                            placeholder="Digite sua senha" required>
+                            placeholder="Digite sua senha" required >
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
-                        <div class="invalid-feedback">
-                            Uma senha é requirida.
-                        </div>
+                        
                     </div>
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
-                        <input type="password" class="form-control" id="password" name="confirmarSenha"
-                            placeholder="Confirme sua senha" required>
-                        <div class="invalid-feedback">
-                            Uma senha é requirida.
+                        <input type="password" class="form-control" id="confirma" name="confirmarSenha"
+                            placeholder="Confirme sua senha" required onchange="confereSenha();">
+                        <div class="invalid-feedback" id="message">
+                            <span>Senhas não conferem</span>.
                         </div>
                     </div>
                 </div>

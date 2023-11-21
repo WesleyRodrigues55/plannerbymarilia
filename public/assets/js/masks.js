@@ -93,7 +93,14 @@ $(document).ready(function () {
         var valorFormatado = formatarEValidarData(valorDigitado);
         $(this).val(valorFormatado);
       });    
- 
+
+    $('#senha').on('input', function() {
+        var valorDigitado = $(this).val();
+        var valorFormatado = confereSenha(valorDigitado);
+        $(this).val(valorFormatado);
+      });     
+
+      
     
 });
 
@@ -198,6 +205,20 @@ function telefoneFixo(v) {
     esconderCNPJ();
     mostrarCPF();
   })
+
+//PW VALIDATION
+
+function confereSenha() {
+  const senha = document.querySelector('input[name=senha]');
+  const confirma = document.querySelector('input[name=confirmarSenha]');
+  const invalid = document.querySelector('.invalid-feedback')
+
+  if(confirma.value === senha.value){
+    invalid.style.display = 'none'
+  } else{
+    invalid.style.display = 'block'
+  }   
+}
 
     
   
