@@ -151,10 +151,13 @@
                     <div class="row my-4">
                         <p><b>PREÇO FINAL:</b></p>
                     </div>
-
-                        
                     <p>À vista no PIX com 10% OFF</p>
-                    <p>Cartão em até 12x com juros da plataforma</p>
+                    
+
+                    <div class="col-md-12 mt-3 d-flex justify-content-end">
+                        <input type="submit" class="btn input-rosa px-5" value="COMPRAR">
+                    </div>
+
                 </div>
             </form>
         </div>
