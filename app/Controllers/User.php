@@ -147,38 +147,28 @@ class User extends BaseController
     }
 
     public function verificarLogin()
-    {
-        $usuario = $this->request->getPost()['EMAIL'];
-        $senha = $this->request->getPost()['SENHA'];
+{
+    $usuario = $this->request->getPost()['EMAIL'];
+    $senha = $this->request->getPost()['SENHA'];
 
+    // Consulta SQL personalizada
+    $db = \Config\Database::connect();
+    $builder = $db->table('usuario');
+    $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
+    $builder->where('USUARIO', $usuario);
+    $builder->where('ATIVO', 1);
+    
+    // Obtém os resultados da consulta
+    $result = $builder->get()->getRow();
 
-        //consulta sql personalizada
-        $db      = \Config\Database::connect();
-        $builder = $db->table('usuario');
-        $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
-        $builder->where('USUARIO', $usuario);
-        $builder->where('ATIVO', 1);
-        $getSenha = $builder->get()->getRow()->SENHA;
-        if (password_verify($senha, $getSenha)) {
-            $builder->where('USUARIO', $usuario);
-            $builder->where('ATIVO', 1);
-            $query = $builder->get()->getResultArray();
-        } else {
-            session()->setFlashdata('login-failed', 'Credencias incorretas!');
-            return redirect()->back();
-        }
-
-        if (!$query) {
-            session()->setFlashdata('login-failed', 'Credencias incorretas!');
-            return redirect()->back();
-        }
-
+    // Verifica se a senha existe antes de prosseguir
+    if ($result && password_verify($senha, $result->SENHA)) {
         session()->set([
-            'id' => $query[0]['ID'],
-            'usuario' => $query[0]['USUARIO'],
-            'pessoa_id' => $query[0]['PESSOA_ID'],
-            'nivel' => $query[0]['NIVEL'],
-            'ativo' => $query[0]['ATIVO'],
+            'id' => $result->ID,
+            'usuario' => $result->USUARIO,
+            'pessoa_id' => $result->PESSOA_ID,
+            'nivel' => $result->NIVEL,
+            'ativo' => $result->ATIVO,
         ]);
 
         // Redireciona com base no nível
@@ -187,7 +177,11 @@ class User extends BaseController
         } elseif (session()->get('nivel') == 2) {
             return redirect()->to('administrador/dashboard');
         }
+    } else {
+        session()->setFlashdata('login-failed', 'Credenciais incorretas!');
+        return redirect()->back();
     }
+}
 
 
     public function idUser()
