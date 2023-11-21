@@ -90,8 +90,6 @@ class User extends BaseController
             'POLITICA_PRIVACIDADE' => $termoPrivacidade,
         ];
 
-        
-
         try {
             if ($cpf) {
                 $db = \Config\Database::connect();
@@ -264,9 +262,29 @@ class User extends BaseController
     {
         return session()->has('usuario');
     }
+    public function validaLoginAdm(){
+        return session()->has('usuario') && session()->get('nivel') == 2? true : false;
+    }
 
-    public function validaLoginAdm()
-    {
-        return session()->has('usuario') && session()->get('nivel') == 2 ? true : false;
+    public function getPessoaByIdUsuario($id_usuario) {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->where('ID', $id_usuario);
+        $id_pessoa = $builder->get()->getRow('PESSOA_ID');
+        $db->close();
+
+        return $id_pessoa;
+    }
+
+    public function getPessoa($id_usuario) {
+        $id_pessoa = $this->getPessoaByIdUsuario($id_usuario);
+        $db      = \Config\Database::connect();
+        $builder = $db->table('pessoa');
+        $builder->select('NOME, EMAIL, CPF, TIPO_PESSOA, CNPJ');
+        $builder->where('ID', $id_pessoa);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+
+        return $query;
     }
 }

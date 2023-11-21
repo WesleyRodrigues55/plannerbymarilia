@@ -3,6 +3,7 @@ $.ajax({
     url: '/carrinho/load-content-carrinho',
     type: 'GET',
     success: function(data) {
+        // console.log(data)
         $('#content-carrinho').html(data);
     },
     error: function(data, jqXHR, textStatus, errorThrown) {
