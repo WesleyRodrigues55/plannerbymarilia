@@ -11,6 +11,7 @@
     <h1 class="h2-titles mb-5 text-center"><b>CARRINHO DE COMPRAS!</b></h1>
     <div class="row">
         <div class="col-md-7">
+
             <?php foreach($carrinho_compras as $cc): ?>
                 <div class="d-flex align-items-center box-carrinho mb-1 p-4 border rounded-3">
                     <div class="box-img-carrinho">
@@ -53,6 +54,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+
         </div>
 
         <div class="col-md-3 border rounded-3 p-4">

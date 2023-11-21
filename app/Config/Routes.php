@@ -15,7 +15,7 @@ $routes->get('/login', 'User::login');
 $routes->get('/login/esqueceu-senha', 'User::esqueceuSenha');
 $routes->get('/login/nova-senha', 'User::novaSenha');
 $routes->get('/login/cadastro-usuario', 'User::cadastroUser');
-$routes->get('/login/forgot', 'User::confirmacaoSenha');
+$routes->get('/login/forgot', 'User::confirmacaoSenha'); // CORRIGIR
 $routes->post('/user/verificarlogin', 'User::verificarLogin');
 $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
@@ -29,9 +29,13 @@ $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
 $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
-$routes->get('/administrador/editar-categoria', 'Administrator::editarCategoria');
-$routes->get('/administrador/editar-produto', 'Administrator::editarProduto');
+$routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCategoria/$1');
+$routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
+$routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProduto/$1');
+$routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
+$routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
+$routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
@@ -55,13 +59,24 @@ $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
 
 // Comprando
-$routes->get('/comprando/endereco-de-entrega/(:any)', 'BuyCart::enderecoDeEntrega/$1');
-$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'BuyCart::escolherEnderecoEntrega/$1');
-$routes->get('/comprando/cadastrando-endereco-de-entrega/(:any)', 'BuyCart::cadastrandoEnderecoEntrega/$1');
-$routes->post('/comprando/salvar-endereco-de-entrega', 'BuyCart::salvandoEnderecoEntrega');
+$routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
+$routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'DeliveryAdress::escolherEnderecoEntrega/$1');
+$routes->get('/comprando/editando-endereco-de-entrega/(:any)', 'DeliveryAdress::editarEnderecoEntrega/$1');
+$routes->get('/comprando/cadastro-endereco-de-entrega/(:any)', 'DeliveryAdress::cadastroEnderecoEntrega/$1');
+$routes->post('/comprando/cadastrar-endereco-de-entrega', 'DeliveryAdress::cadastrarEnderecoEntrega');
 $routes->post('/comprando/adiciona-endereco-de-entrega-em-detalhes-pedido', 'BuyCart::adicionaEnderecoDeEntregaEmDetalhesPedido');
+$routes->post('/comprando/editar-endereco-de-entrega', 'DeliveryAdress::editandoEnderecoDeEntrega');
+$routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagamento/$1');
+$routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
 
-$routes->get('/comprando/forma-de-pagamento', 'BuyCart::formaDePagamento');
+$routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
+// $routes->get('/comprando/checkout/payment/(:any)', 'PaymentMethod::viewPayment/$1');
+$routes->get('/comprando/checkout/pagamento/(:any)', 'PaymentMethod::aguardandoPagamento/$1');
+$routes->get('/comprando/checkout/success', 'PaymentMethod::compraAprovada');
+
+// Pagamento
+// $routes->get('/payment/payment', 'PaymentMethod::payment');
+$routes->get('/payment/get-payment/(:any)', 'PaymentMethod::getStatusPayment/$1');
 
 // Políticas
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');

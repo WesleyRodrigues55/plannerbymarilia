@@ -1,5 +1,5 @@
 <?php
-    $data['title'] = 'Carrinho de Compras';
+    $data['title'] = 'Escolhendo Endereço de Entrega';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
 
@@ -32,7 +32,7 @@
                         </div>
                         <hr>
                         <div class="d-block">
-                            <a href="">Editar</a>
+                            <a href="<?= base_url('comprando/editando-endereco-de-entrega/'. $du['ID'] . '/' . $du['USUARIO_ID'] . '/' . $id_carrinho) ?>">Editar</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
 
             <div class="d-flex justify-content mt-4 gap-2">
                 <input type="submit" class="input-simples" value="Continuar">
-                <a href="<?= base_url('/comprando/cadastrando-endereco-de-entrega/'.$du['USUARIO_ID']) ?>" class="input-simples">Adicionar Endereço</a>
+                <a href="<?= base_url('/comprando/cadastro-endereco-de-entrega/'. $id_carrinho . '/' . $du['USUARIO_ID']) ?>" class="input-simples">Adicionar Endereço</a>
             </div>
         </form>
     </main>
