@@ -1,4 +1,4 @@
-<?php if ($visao_geral['count_itens_carrinho'] == null || $visao_geral['total_geral'] == null  || $visao_geral['id_carrinho'] == null || $carrinho_compras == null):?>
+<?php if ($carrinho_compras == null):?>
     <div class="d-flex justify-content-center align-items-center text-center" id="carrinho-vazio">
         <div style="max-width: 400px">
             <h2>Monte um carrinho de compras!</h2>
