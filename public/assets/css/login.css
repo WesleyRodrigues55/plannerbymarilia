@@ -14,3 +14,7 @@ h1 {
     margin-bottom: 1em;
     color: var(--cor-preto);
 }
+
+.link-teste {
+    visibility: hidden;
+}

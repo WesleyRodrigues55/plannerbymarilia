@@ -34,13 +34,31 @@ $data['link_css'] = "assets/css/lista-produto.css";
         </thead>
 
         <thead>
+        
             <tr>
-                <td scope="col">ID</td>
-                <td scope="col">Nome categoria </td>
-                <td scope="col"><a href="<?= base_url('administrador/editar-categoria') ?>" class="input-simples">Editar</a>
-                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                <td colspan="4">
+                    <?php $message_empty = session()->getFlashdata('list-empty'); ?>
+                    <?php if ($message_empty): ?>
+                        <div class="alert alert-danger mt-5 text-center" role="alert">
+                            <?= $message_empty; ?>
+                            <br>Para cadastrar uma categoria, clique em: <a href="<?= base_url('/administrador/cadastro-categoria'); ?>">Insere Categoria</a>.
+                        </div>
+                    <?php else: ?>
+                        <?php foreach($categorias as $ctg): ?>
+                            <tr>
+                                <td scope="col"><?= $ctg['ID'] ?></td>
+                                <td scope="col"><?= $ctg['TIPO_CATEGORIA'] ?></td>
+                                <td scope="col">
+                                    <a href="<?= base_url('administrador/editar-categoria/' . $ctg['ID']) ?>" class="input-simples">Editar</a>
+                                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </td>
             </tr>
+
+
         </thead>
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">

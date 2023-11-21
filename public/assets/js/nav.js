@@ -45,7 +45,7 @@ function hideSubMenu() {
     subMenu.style.animation = 'slideRight 0.5s ease forwards';
     setTimeout(() => {
         subMenu.classList.remove('active');
-    }, 300);
+    }, 50);
     menu.querySelector('.menu-mobile-title').innerHTML = '';
     menu.querySelector('.menu-mobile-header').classList.remove('active');
 }
