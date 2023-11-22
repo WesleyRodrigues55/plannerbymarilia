@@ -11,11 +11,13 @@ use MercadoPago\MercadoPagoConfig;
 class PaymentMethod extends BaseController
 {
     public function aguardandoPagamento($id_detalhes_pedido, $id_carrinho) {
-        if (!session()->has('usuario')) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
         $buy_cart = new BuyCart();
         $user = new User();
+
+        if (!session()->has('usuario') || !$buy_cart->verificaIdUsuarioEmDetalhesPedido($id_detalhes_pedido)) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
 
         $valor_total = $buy_cart->getValorTotalCompra($id_carrinho);
         $id_transaction = $buy_cart->getIdTransactionByIdDetahesPedido($id_detalhes_pedido);
@@ -51,12 +53,13 @@ class PaymentMethod extends BaseController
         
     }
 
-    public function compraAprovada() {
-        if (session()->has('usuario')) {
-            return view('comprando/success-pagamento');
-        } else {
+    public function compraAprovada($id_detalhes_pedido) {
+        $buy_cart = new BuyCart();
+        if (!session()->has('usuario') || !$buy_cart->verificaIdUsuarioEmDetalhesPedido($id_detalhes_pedido)) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+        
+        return view('comprando/success-pagamento');
     }
 
     public function payment($valor_total, $get_data_pessoa) {

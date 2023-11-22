@@ -715,4 +715,17 @@ class BuyCart extends BaseController
         return $query;
     }
 
+    public function verificaIdUsuarioEmDetalhesPedido($id_detalhes_pedido) {
+        $user = new User();
+        $id_usuario = $user->idUser();
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $builder->where('USUARIO_ID', $id_usuario);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
 }

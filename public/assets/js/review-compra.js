@@ -36,7 +36,7 @@ const status_compra = setInterval(() => {
             } else {
                 console.log(`Status compra: ${data}`)
                 clearInterval(status_compra)
-                window.location.href = '/comprando/checkout/success'
+                window.location.href = '/comprando/checkout/success/' + id_detalhes_pedido.value
             }
         },
         error: function(data, jqXHR, textStatus, errorThrown) {

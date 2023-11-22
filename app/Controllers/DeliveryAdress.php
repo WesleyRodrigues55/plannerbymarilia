@@ -103,7 +103,7 @@ class DeliveryAdress extends BaseController
 
     public function editarEnderecoEntrega($id_endereco, $id_usuario, $id_carrinho) {
         $user = new User();
-        
+
         if (!$user->validaLogin()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
