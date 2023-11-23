@@ -302,7 +302,7 @@ class BuyCart extends BaseController
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
         $quantidade = $builder->get()->getRow('QUANTIDADE');
-        $builder->set('QUANTIDADE',$quantidade -1);
+        $builder->set('QUANTIDADE', $quantidade -1);
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->update();
     }
@@ -312,7 +312,7 @@ class BuyCart extends BaseController
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
         $quantidade = $builder->get()->getRow('QUANTIDADE');
-        $builder->set('QUANTIDADE',$quantidade + 1);
+        $builder->set('QUANTIDADE', $quantidade + 1);
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->update();
     }
@@ -371,7 +371,7 @@ class BuyCart extends BaseController
         try {
             $id_carrinho_compra = $this->getIdCarrinhoCompra($id_usuario);
             
-            if ($id_carrinho_compra == null) {
+            if (!$id_carrinho_compra) {
                 try {
                     // pega o último id inserido no novo carrinho "EM ABERTO"
                     $ultimo_id_novo_carrinho_inserido = $this->ultimoIdInseridoCarrinhoCompras($id_usuario);
@@ -710,6 +710,19 @@ class BuyCart extends BaseController
         $db = \Config\Database::connect();
         $builder = $db->table('detalhes_do_pedido');
         $builder->where('ID', $id_detalhes_pedido);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function verificaIdUsuarioEmDetalhesPedido($id_detalhes_pedido) {
+        $user = new User();
+        $id_usuario = $user->idUser();
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $builder->where('USUARIO_ID', $id_usuario);
         $query = $builder->get()->getResultArray();
         $db->close();
         return $query;

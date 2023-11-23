@@ -88,7 +88,7 @@
             </div>
             
             <div class="d-flex gap-2 justify-content-center mt-4">
-                <input type="submit" class="input-simples" value="Cadastrar endereço">
+                <input type="submit" class="input-rosa" value="Cadastrar endereço">
                 <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $id_usuario); ?>" class="input-simples">Voltar</a>
             </div>
         </form>
