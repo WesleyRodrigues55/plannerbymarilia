@@ -267,11 +267,6 @@ class Administrator extends BaseController
         }
     }
 
-    // public function apresentarCategoria()
-    // {
-        
-
-    // }
 
     public function editarCategoria($id = null)
     {
@@ -688,6 +683,8 @@ class Administrator extends BaseController
         }
     }
 
+    
+
     public function alterarOpcoesAdicionais()
     {
         $myTime = Time::now('America/Sao_Paulo');
@@ -723,5 +720,79 @@ class Administrator extends BaseController
         
     }
 
+
+    public function getUsuarioById($id_usuario) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id_usuario);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function getPessoaById($id_pessoa) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id_pessoa);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    // public function editarUsuario($id_usuario = null)
+    // {
+    //     if ($id_usuario == null) {
+    //         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    //     } else {
+    //         $user = new User();
+    //         if (!$user->validaLoginAdm()) {
+    //             return redirect()->to('/login')->with('error', 'Login required.');
+    //         }
+        
+
+    //         $usuario_selecionado = $id_usuario->getUserById($id_usuario);
+        
+    //         $data = [
+    //             'usuario' => $usuario_selecionado,
+    //         ];
+        
+    //         return view('adm/editar-opcoes-adicionais', $data);
+    //     }
+    // }
+
+    public function alterarUsuario()
+    {
+        $myTime = Time::now('America/Sao_Paulo');
+        
+        $senha = $this->request->getPost('senha');
+        $id_opcoes_adicionais = $this->request->getPost('id-user');
+        
+        $data = [
+            'SENHA' => $senha,
+            'UPDATED_AT' => $myTime->toDateTimeString(),
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('usuario');
+            $builder->where('ID', $id_opcoes_adicionais);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+            }
+            return redirect()->to('/administrador/lista-opcoes-adicionais');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+        
+        
+    }
 
 }

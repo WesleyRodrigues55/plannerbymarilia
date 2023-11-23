@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use CodeIgniter\I18n\Time;
 use Config\Services;
 
 class User extends BaseController
@@ -147,41 +147,39 @@ class User extends BaseController
     }
 
     public function verificarLogin()
-{
-    $usuario = $this->request->getPost()['EMAIL'];
-    $senha = $this->request->getPost()['SENHA'];
+    {
+        $usuario = $this->request->getPost()['EMAIL'];
+        $senha = $this->request->getPost()['SENHA'];
 
-    // Consulta SQL personalizada
-    $db = \Config\Database::connect();
-    $builder = $db->table('usuario');
-    $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
-    $builder->where('USUARIO', $usuario);
-    $builder->where('ATIVO', 1);
-    
-    // Obtém os resultados da consulta
-    $result = $builder->get()->getRow();
+        // Consulta SQL personalizada
+        $db = \Config\Database::connect();
+        $builder = $db->table('usuario');
+        $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
+        $builder->where('USUARIO', $usuario);
+        $builder->where('ATIVO', 1);
+        
+        $result = $builder->get()->getRow();
 
-    // Verifica se a senha existe antes de prosseguir
-    if ($result && password_verify($senha, $result->SENHA)) {
-        session()->set([
-            'id' => $result->ID,
-            'usuario' => $result->USUARIO,
-            'pessoa_id' => $result->PESSOA_ID,
-            'nivel' => $result->NIVEL,
-            'ativo' => $result->ATIVO,
-        ]);
+        if ($result && password_verify($senha, $result->SENHA)) {
+            session()->set([
+                'id' => $result->ID,
+                'usuario' => $result->USUARIO,
+                'pessoa_id' => $result->PESSOA_ID,
+                'nivel' => $result->NIVEL,
+                'ativo' => $result->ATIVO,
+            ]);
 
-        // Redireciona com base no nível
-        if (session()->get('nivel') == 1) {
-            return redirect()->to('../');
-        } elseif (session()->get('nivel') == 2) {
-            return redirect()->to('administrador/dashboard');
+            // Redireciona com base no nível
+            if (session()->get('nivel') == 1) {
+                return redirect()->to('../');
+            } elseif (session()->get('nivel') == 2) {
+                return redirect()->to('administrador/dashboard');
+            }
+        } else {
+            session()->setFlashdata('login-failed', 'Credenciais incorretas!');
+            return redirect()->back();
         }
-    } else {
-        session()->setFlashdata('login-failed', 'Credenciais incorretas!');
-        return redirect()->back();
     }
-}
 
 
     public function idUser()
@@ -247,10 +245,18 @@ class User extends BaseController
 
     public function meusDepoimentos()
     {
+        $user = new User();
+        if (!$user->validaLogin())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         return view('perfil-usuario/meus-depoimentos');
     }
-    public function perfilUsuario()
+
+    public function perfilUsuario($id_usuario = null)
     {
+        $user = new User();
+        if (!$user->validaLogin())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
         return view('perfil-usuario/perfil');
     }
 
@@ -283,4 +289,46 @@ class User extends BaseController
 
         return $query;
     }
+
+    public function alterarPessoa()
+    {
+
+        
+        $nome = $this->request->getPost('nome');
+        $endereco = $this->request->getPost('endereco');
+        $telefone_01 = $this->request->getPost('telefone_01');
+        $telefone_02 = $this->request->getPost('telefone_02');
+        $celular = $this->request->getPost('celular');
+        $id_pessoa = $this->request->getPost('id-pessoa');
+        
+        $data = [
+            'NOME' => $nome,
+            'CEP' => $endereco,
+            'TELEFONE_01' => $telefone_01,
+            'TELEFONE_02' => $telefone_02,
+            'CELULAR' => $celular,
+
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('pessoa');
+            $builder->where('ID', $id_pessoa);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+            }
+            return redirect()->to('/perfil/perfil-usuario');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+        
+        
+    }
+
 }

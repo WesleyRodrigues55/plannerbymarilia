@@ -42,7 +42,7 @@ $data['link_css'] = "assets/css/lista-produto.css";
                     <?php if ($message_empty): ?>
                         <div class="alert alert-danger mt-5 text-center" role="alert">
                             <?= $message_empty; ?>
-                            <br>Para cadastrar uma categoria, clique em: <a href="<?= base_url('/administrador/cadastro-categoria'); ?>">Insere Categoria</a>.
+                            <br>Para cadastrar uma opção adicional, clique em: <a href="<?= base_url('/administrador/cadastro-opcoes-adicionais'); ?>">Insere Adicional</a>.
                         </div>
                     <?php else: ?>
                         

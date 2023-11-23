@@ -27,6 +27,7 @@ $data['link_css'] = "assets/css/perfil.css";
                         <label for="userPassword" class="form-label "><b>Senha do Usuário</b></label>
                         <div style="position: relative; width: 100%;">
                             <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Senha" required maxlength="64" name="SENHA" />
+                            <input type="text" class="form-control" id="id-user" value="" name="id-user" placeholder="produto" hidden redonly>
                             <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showPassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
                         </div>
                     </div>
