@@ -25,13 +25,14 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/instagram.css') ?>">
     <link rel="stylesheet" href="<?= base_url($link_css) ?>">
 
-    <!-- slick -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <?php if (base_url()) ?>
+    <!-- slick -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <!-- Masks -->
     <script src="<?= base_url("assets/js/masks.js")?>"></script>    
 </head>
 
