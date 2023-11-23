@@ -10,7 +10,7 @@
     <!-- conteúdo home vai aqui -->
     <main>
         <header>
-            <img src="<?= base_url('assets/img/banner-home.jpg') ?>" class="w-100" alt="">
+            <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100" alt="">
         </header>
         <?= view("include/produtos-mais-vendidos", $mais_vendidos) ?>
 

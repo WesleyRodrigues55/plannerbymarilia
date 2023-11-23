@@ -39,7 +39,7 @@
     <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
-<?= view("comprando/scripts/script-review") ?>
+<?= view("comprando/scripts/script-aguardando-pagamento") ?>
 
 
 
