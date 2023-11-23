@@ -24,21 +24,7 @@
                             <br><span><b><?php echo number_format($mv['PRECO'], 2, '.', ''); ?></b></span>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>
-                            <?php if (session()->has('usuario')): ?>
-                                <form id="adicionaProdutoCarrinho" method="post">
-                                    <input type="text" name="id-produto" value="<?= $mv['ID'] ?>" id="" hidden readonly>
-                                    <input type="text" name="slug" value="<?= $mv['SLUG'] ?>" id="" hidden readonly>
-                                    <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">
-                                        <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
-                                    </button>
-                                </form>
-                            <?php else: ?>
-                                <button type="submit" id="submit" name="submit" class="faca-login" id="faca-login-<?= $mv['SLUG'] ?>" style="border: none; background: #fff;">
-                                    <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
-                                </button>
-                            <?php endif; ?>
-                            
+                            <a class="btn input-simples w-100" style="margin-right: 8px" href="<?= base_url('produto/'.$mv['CATEGORIA'].'/'.$mv['SLUG'].'/'. $mv['ID']) ?>">SAIBA MAIS</a>                            
                         </div>
                     </div>
                 </div>
