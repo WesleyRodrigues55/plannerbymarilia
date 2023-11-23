@@ -1,0 +1,1 @@
+<script src="<?= base_url('assets/js/aguardando-pagamento.js') ?>"></script>

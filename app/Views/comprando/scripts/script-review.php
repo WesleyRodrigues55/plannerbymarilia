@@ -1,1 +1,0 @@
-<script src="<?= base_url('assets/js/review-compra.js') ?>"></script>

@@ -197,7 +197,7 @@ function esconderCNPJ() {
 }
 
 function mostrarCPF() {
-    var elemento = document.getElementById('divCNPJ');
+    var elemento = document.getElementById('divCPF');
     if (elemento) {
         elemento.style.display = 'block';
     } else {
