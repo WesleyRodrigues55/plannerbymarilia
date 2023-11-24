@@ -1,8 +1,6 @@
 <?php
     $data['title'] = 'Editando um Endereço de Entrega';
     $data['link_css'] = "assets/css/carrinho.css";
-
-    $id_carrinho = session()->get('id_carrinho');
     // echo "<pre>";
     // var_dump($dados_usuario);
 ?>
@@ -27,7 +25,7 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $dados_usuario[0]['USUARIO_ID']) ?>" >Clique aqui</a> para continuar o processo de compra
+                <br><br><a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho .'/'. $dados_usuario[0]['USUARIO_ID']) ?>" class="input-rosa">Clique aqui</a> para continuar o processo de compra
             </div>
         <?php endif; ?>
 
@@ -35,9 +33,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <input type="number" class="form-control" name="id-endereco" value="<?= $dados_usuario[0]['ID'] ?>" readonly hidden required>
-                    <input type="number" class="form-control" name="id-carrinho" value="<?= $id_carrinho ?>" readonly hidden required>
-                    <input type="number" class="form-control" name="id-usuario" value="<?= $dados_usuario[0]['USUARIO_ID'] ?>" readonly hidden required>
+                    <input type="text" class="form-control" name="id-endereco" value="<?= $dados_usuario[0]['ID'] ?>" readonly hidden required>
+                    <input type="text" class="form-control" name="id-carrinho" value="<?= $id_carrinho ?>" readonly hidden required>
+                    <input type="text" class="form-control" name="id-usuario" value="<?= $dados_usuario[0]['USUARIO_ID'] ?>" readonly hidden required>
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="">NOME COMPLETO *</label>
@@ -96,8 +94,8 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content mt-4 gap-2">
-                <input type="submit" class="input-simples" value="Editar">
+            <div class="d-flex justify-content-center mt-4 gap-2">
+                <input type="submit" class="input-rosa" value="Editar">
                 <a href="<?= base_url('/comprando/escolhendo-endereco-de-entrega/'. $id_carrinho . '/' . $dados_usuario[0]['USUARIO_ID']) ?>" class="input-simples">Voltar</a>
             </div>
         </form>

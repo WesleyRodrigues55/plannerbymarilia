@@ -19,7 +19,7 @@
 @import url("assets/css/lista-produto-adm.css");
 @import url("assets/css/lista-usuario.css");
 @import url("assets/css/perfil.css");
-
+@import url("assets/css/produto-selecionado.css");
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -238,14 +238,24 @@ a:hover {
     width: 32px;
 }
 
+.visao-mobile-icons {
+    display: none !important;
+}
+
+.header-item-right {
+    margin: 16px 0;
+}
+
 @media screen and (max-width: 992px) {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
+    }
+    .visao-mobile-icons {
+        display: block !important;
     }
 }
 
@@ -264,7 +274,6 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }

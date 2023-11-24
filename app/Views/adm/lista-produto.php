@@ -50,30 +50,34 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                             <td scope="col"><?= $produto['CATEGORIA'] ?></td>
                             <td scope="col"><?= "R$ " . number_format($produto['PRECO'], 2, '.', '') ?></td>
                             <td scope="col">
-                                <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
-                                <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
-                            </td>
+                                    <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
+                                    <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $produto['ID']?>">Excluir</a>
+                                </td>
                         </tr>
+                        <div class="modal fade" id="staticBackdrop<?= $produto['ID']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Deseja realmente apagar esse produto?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" id="excluirProduto">
+                                        <input type="text" value="<?= $produto['ID'] ?>" name="id-produto" id="id-produto" readonly hidden>
+                                        <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
+                                        </form>
+                                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </td>
         </thead>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Deseja realmente apagar esse produto?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <a href="<?= base_url('administrador/lista-produto') ?>" class="btn btn input-rosa">VOLTAR</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </table>
 </div>
 <?= view("include/footer") ?>

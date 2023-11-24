@@ -26,23 +26,18 @@ $data['link_css'] = "assets/css/nav.css";
             <?php if (!session()->has('usuario')) : ?>
                 <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center link-nav">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    Iniciar sessão
-                </a>
-
-                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
-                    <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    Cadastrar
+                    Iniciar Sessão
                 </a>
 
                 <!-- COM LOGIN -->
             <?php else : ?>
                 <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    carrinho
+                    Carrinho
                 </a>
                 <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    profile
+                    Perfil
                 </a>
                 <a href=<?= base_url('user/logout') ?> class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
@@ -56,31 +51,31 @@ $data['link_css'] = "assets/css/nav.css";
         <div class="container">
             <div class="wrapper">
                 <div class="header-item-left  content-icons-nav content-icons-nav-mobile">
-                    <!-- por ícone projeto no mobile (apenas) -->
-                    <!-- <a href="#" class="brand"><img src="assets/img/logo-projeto.png" alt="" style="width: 120px;"></a> -->
-
                     <!-- SEM LOGIN -->
                     <?php if (!session()->has('usuario')) : ?>
-                        <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            iniciar sessão
-                        </a>
+                        <li class="visao-mobile-icons">
+                            <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                                <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                <span class="p-small">Iniciar Sessão</span>
+                            </a>
+                        </li>
 
                         <!-- COM LOGIN -->
                     <?php else : ?>
-                        <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            carrinho
-                        </a>
-                        <a href="" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            profile
-                        </a>
-                        <a href="user/logout" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            Logout
-                        </a>
+                        <li class="visao-mobile-icons">
+                            <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
+                                <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                <span class="p-small">Carrinho</span>
+                            </a>
+                        </li>
+                        <li class="visao-mobile-icons">
+                            <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
+                                <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                <span class="p-small">Perfil</span>
+                            </a>
+                        </li>
                     <?php endif; ?>
+
                 </div>
                 <div class="header-item-center">
                     <div class="overlay"></div>
@@ -97,7 +92,37 @@ $data['link_css'] = "assets/css/nav.css";
                             </button>
                         </div>
                         <ul class="menu-section menu-nav">
-                            <!-- <li><a href="#">Home</a></li> -->
+
+                            <!-- SEM LOGIN -->
+                            <?php if (!session()->has('usuario')) : ?>
+                                <li class="visao-mobile-icons">
+                                    <a href="<?= base_url('login') ?>" class="d-flex align-items-center gap-2">
+                                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                        iniciar sessão
+                                    </a>
+                                </li>
+
+                                <!-- COM LOGIN -->
+                            <?php else : ?>
+                                <li class="visao-mobile-icons">
+                                    <a href="<?= base_url('carrinho') ?>" class="d-flex align-items-center gap-2">
+                                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                        Carrinho de compras
+                                    </a>
+                                </li>
+                                <li class="visao-mobile-icons">
+                                    <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex align-items-center gap-2">
+                                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                        Perfil
+                                    </a>
+                                </li>
+                                <li class="visao-mobile-icons">
+                                    <a href="user/logout" class="d-flex align-items-center gap-2">
+                                        <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                        Sair
+                                    </a>
+                                </li>
+                            <?php endif; ?>
 
                             <li class="menu-item-has-children">
                                 <a href="#">PLANNERS<img src="#" alt=""></a>

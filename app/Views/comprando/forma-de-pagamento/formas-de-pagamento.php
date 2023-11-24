@@ -10,7 +10,7 @@
     <main class="container py-5">
         <div class="mb-5">
             <h1 class="h2-titles"><b>Como você prefere pagar?</b></h1>
-            <span>Com Mercado Pago - INSERIR ÍCONE</span>
+            <span>Com Mercado Pago - <img src="<?= base_url("assets/icons/icon-mp.png") ?>" style="width: 64px" alt="mercado pago"></span>
         </div>
 
         <?php $message_failed = session()->getFlashdata('query-failed'); ?>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-4">
-                <input type="submit" class="input-simples" value="Continuar">
+                <input type="submit" class="input-rosa" value="Continuar">
             </div>
         </form>
     </main>

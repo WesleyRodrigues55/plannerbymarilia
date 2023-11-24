@@ -361,6 +361,16 @@ class Product extends BaseController
         return $query;
     }
 
+    public function getOpcoesById($id) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('opcoes_adicionais');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
     public function getProdutoById($id)
     {
         $db = \Config\Database::connect();
