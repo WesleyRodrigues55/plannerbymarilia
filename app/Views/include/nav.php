@@ -177,26 +177,3 @@ $data['link_css'] = "assets/css/nav.css";
         </div>
     </header>
 </header>
-
-<script>
-    // Array com as mensagens
-    const mensagens = [
-        "SONHE, PLANEJE E REALIZE!",
-        "ACREDITE NOS SEUS SONHOS E FAÇA ACONTECER!"
-        // Adicione mais mensagens aqui se desejar
-    ];
-
-    // Função para alternar as mensagens a cada 10 segundos
-    function alternarMensagem() {
-        const mensagemElement = document.getElementById('mensagem');
-        let index = 0;
-
-        setInterval(() => {
-            mensagemElement.innerHTML = `<b>${mensagens[index]}</b>`;
-            index = (index + 1) % mensagens.length;
-        }, 3000); // 10 segundos em milissegundos
-    }
-
-    // Chamar a função para começar a alternância das mensagens
-    alternarMensagem();
-</script>

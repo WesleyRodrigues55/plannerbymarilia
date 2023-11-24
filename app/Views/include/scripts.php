@@ -26,14 +26,15 @@
 
     <!-- Mercado Pago - Pix -->
     <script src="https://sdk.mercadopago.com/js/v2" type="text/javascript"></script>
-    <!-- <script src="<?php //base_url('assets/js/payment.js') ?>" type="text/javascript"></script> -->
+    <!-- <script src="<?php //base_url('assets/js/payment.js') 
+                        ?>" type="text/javascript"></script> -->
 
-    <?php if (!isset($script_payment)): ?>
+    <?php if (!isset($script_payment)) : ?>
 
-    <?php else: ?>
+    <?php else : ?>
         <script src="<?= base_url($script_payment) ?>"></script>
     <?php endif ?>
-   
+
 
     <!-- Nav JS -->
     <script src="<?= base_url('assets/js/nav.js') ?>" type="text/javascript"></script>
@@ -45,5 +46,4 @@
 
     <!-- Perfil do Usuário -->
     <script src="<?= base_url('assets/js/perfil-usuario.js') ?>"></script>
-
-</body>
+    </body>
