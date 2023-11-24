@@ -11,7 +11,7 @@ $data['link_css'] = "assets/css/perfil.css";
 
         <div class="mb-2 p-2 my-2">
             <label for="userPassword" class="form-label " value="Nome completo do usuário"><b>Nome</b></label>
-            <input type="text" class="form-control" id="" value="" name="pessoa" placeholder="produto" hidden redonly>
+            <input type="text" class="form-control" id="" value="<?= $usuario_selecionado["NOME"] ?>" name="pessoa" placeholder="produto" hidden redonly>
             <input type="text" name="nome" class="form-control">
         </div>
         <div class="mb-2 p-2 my-2">

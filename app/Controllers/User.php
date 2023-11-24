@@ -251,19 +251,34 @@ class User extends BaseController
         return view('perfil-usuario/meus-depoimentos');
     }
 
-    public function perfilUsuario($id_usuario = null)
-    {
+    public function perfilUsuario()
+{
         $user = new User();
-        if (!$user->validaLogin())
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 
-        return view('perfil-usuario/perfil');
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $id_usuario = session()->get('id');
+
+        $usuario_selecionado = $user->getPessoa($id_usuario);
+
+        if ($usuario_selecionado !== null && isset($usuario_selecionado[0])) {
+            $data = [
+                "usuario_selecionado" => $usuario_selecionado[0],
+            ];
+            return view('perfil-usuario/perfil', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
     }
 
     public function validaLogin()
     {
         return session()->has('usuario');
     }
+
     public function validaLoginAdm(){
         return session()->has('usuario') && session()->get('nivel') == 2? true : false;
     }
@@ -290,24 +305,37 @@ class User extends BaseController
         return $query;
     }
 
+    
+
     public function alterarPessoa()
     {
 
         
+        $user = new User();
+
+    // Verifica se o usuário está logado
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        // Obtém o ID do usuário logado a partir das informações de sessão
+        $id_usuario = session()->get('id_usuario');
+
         $nome = $this->request->getPost('nome');
         $endereco = $this->request->getPost('endereco');
         $telefone_01 = $this->request->getPost('telefone_01');
         $telefone_02 = $this->request->getPost('telefone_02');
         $celular = $this->request->getPost('celular');
-        $id_pessoa = $this->request->getPost('id-pessoa');
-        
+
+        // Obtém o ID da pessoa usando o ID do usuário
+        $id_pessoa = $user->getPessoaByIdUsuario($id_usuario);
+
         $data = [
             'NOME' => $nome,
             'CEP' => $endereco,
             'TELEFONE_01' => $telefone_01,
             'TELEFONE_02' => $telefone_02,
             'CELULAR' => $celular,
-
         ];
 
         try {
@@ -318,17 +346,15 @@ class User extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor, tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+                session()->setFlashdata('register-category-success', 'Categoria atualizada com sucesso!');
             }
             return redirect()->to('/perfil/perfil-usuario');
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
-        } 
-        
-        
+        }
     }
 
 }
