@@ -111,7 +111,6 @@
     <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
-<?= view("comprando/scripts/script-cadastro-cep") ?>
 
 
 

@@ -82,6 +82,7 @@ $routes->get('/comprando/formas-de-pagamento/(:any)', 'BuyCart::formasDePagament
 $routes->post('/comprando/forma-de-pagamento-escolhida', 'BuyCart::formaDePagamentoEscolhida');
 
 $routes->get('/comprando/revisao/(:any)', 'BuyCart::revisaoCompra/$1');
+$routes->get('/comprando/load-revisao/(:any)', 'BuyCart::loadRevisaoCompra/$1');
 // $routes->get('/comprando/checkout/payment/(:any)', 'PaymentMethod::viewPayment/$1');
 $routes->get('/comprando/checkout/pagamento/(:any)', 'PaymentMethod::aguardandoPagamento/$1');
 $routes->get('/comprando/checkout/success/(:any)', 'PaymentMethod::compraAprovada/$1');

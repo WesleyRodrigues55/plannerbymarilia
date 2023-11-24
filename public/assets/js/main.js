@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     // abre alerta para realizar login para compra
     const elementosFacaLogin = document.querySelectorAll('.faca-login');
     elementosFacaLogin.forEach(function(elemento) {
