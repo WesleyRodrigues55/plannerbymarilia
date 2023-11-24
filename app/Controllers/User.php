@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use CodeIgniter\I18n\Time;
 use Config\Services;
 
 class User extends BaseController
@@ -137,8 +137,9 @@ class User extends BaseController
 
 
             $db->close();
-
+            session()->setFlashdata('success-register', 'Conta criada com sucesso!');
             return redirect()->to('login');
+            
         } catch (\Exception $e) {
 
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -150,43 +151,36 @@ class User extends BaseController
         $usuario = $this->request->getPost()['EMAIL'];
         $senha = $this->request->getPost()['SENHA'];
 
-
-        //consulta sql personalizada
-        $db      = \Config\Database::connect();
+        // Consulta SQL personalizada
+        $db = \Config\Database::connect();
         $builder = $db->table('usuario');
         $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
         $builder->where('USUARIO', $usuario);
         $builder->where('ATIVO', 1);
-        $getSenha = $builder->get()->getRow()->SENHA;
-        if (password_verify($senha, $getSenha)) {
-            $builder->where('USUARIO', $usuario);
-            $builder->where('ATIVO', 1);
-            $query = $builder->get()->getResultArray();
+        
+        $result = $builder->get()->getRow();
+
+        if ($result && password_verify($senha, $result->SENHA)) {
+            session()->set([
+                'id' => $result->ID,
+                'usuario' => $result->USUARIO,
+                'pessoa_id' => $result->PESSOA_ID,
+                'nivel' => $result->NIVEL,
+                'ativo' => $result->ATIVO,
+            ]);
+
+            // Redireciona com base no nível
+            if (session()->get('nivel') == 1) {
+                return redirect()->to('../');
+            } elseif (session()->get('nivel') == 2) {
+                return redirect()->to('administrador/dashboard');
+            }
         } else {
-            session()->setFlashdata('login-failed', 'Credencias incorretas!');
+            session()->setFlashdata('login-failed', 'Credenciais incorretas!');
             return redirect()->back();
-        }
-
-        if (!$query) {
-            session()->setFlashdata('login-failed', 'Credencias incorretas!');
-            return redirect()->back();
-        }
-
-        session()->set([
-            'id' => $query[0]['ID'],
-            'usuario' => $query[0]['USUARIO'],
-            'pessoa_id' => $query[0]['PESSOA_ID'],
-            'nivel' => $query[0]['NIVEL'],
-            'ativo' => $query[0]['ATIVO'],
-        ]);
-
-        // Redireciona com base no nível
-        if (session()->get('nivel') == 1) {
-            return redirect()->to('../');
-        } elseif (session()->get('nivel') == 2) {
-            return redirect()->to('administrador/dashboard');
         }
     }
+
 
     public function idUser()
     {
@@ -251,17 +245,40 @@ class User extends BaseController
 
     public function meusDepoimentos()
     {
+        $user = new User();
+        if (!$user->validaLogin())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         return view('perfil-usuario/meus-depoimentos');
     }
+
     public function perfilUsuario()
-    {
-        return view('perfil-usuario/perfil');
+{
+        $user = new User();
+
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $id_usuario = session()->get('id');
+
+        $usuario_selecionado = $user->getPessoa($id_usuario);
+
+        if ($usuario_selecionado !== null && isset($usuario_selecionado[0])) {
+            $data = [
+                "usuario_selecionado" => $usuario_selecionado[0],
+            ];
+            return view('perfil-usuario/perfil', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
     }
 
     public function validaLogin()
     {
         return session()->has('usuario');
     }
+
     public function validaLoginAdm(){
         return session()->has('usuario') && session()->get('nivel') == 2? true : false;
     }
@@ -287,4 +304,57 @@ class User extends BaseController
 
         return $query;
     }
+
+    
+
+    public function alterarPessoa()
+    {
+
+        
+        $user = new User();
+
+    // Verifica se o usuário está logado
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        // Obtém o ID do usuário logado a partir das informações de sessão
+        $id_usuario = session()->get('id_usuario');
+
+        $nome = $this->request->getPost('nome');
+        $endereco = $this->request->getPost('endereco');
+        $telefone_01 = $this->request->getPost('telefone_01');
+        $telefone_02 = $this->request->getPost('telefone_02');
+        $celular = $this->request->getPost('celular');
+
+        // Obtém o ID da pessoa usando o ID do usuário
+        $id_pessoa = $user->getPessoaByIdUsuario($id_usuario);
+
+        $data = [
+            'NOME' => $nome,
+            'CEP' => $endereco,
+            'TELEFONE_01' => $telefone_01,
+            'TELEFONE_02' => $telefone_02,
+            'CELULAR' => $celular,
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('pessoa');
+            $builder->where('ID', $id_pessoa);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor, tente novamente!');
+            } else {
+                session()->setFlashdata('register-category-success', 'Categoria atualizada com sucesso!');
+            }
+            return redirect()->to('/perfil/perfil-usuario');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
+    }
+
 }

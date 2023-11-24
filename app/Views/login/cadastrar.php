@@ -25,10 +25,10 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 </div>
             <?php endif; ?>
 
+            
             <?php if ($message_success): ?>
                 <div class="alert alert-success mt-5 text-center" role="alert">
                     <?= $message_success; ?>
-                    <br>Para acessar sua conta, clique em:  <a href="<?= base_url('/login'); ?>">Login</a>.
                 </div>
             <?php endif; ?>
 

@@ -22,9 +22,12 @@ $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 $routes->get('/perfil/perfil-usuario', 'User::perfilUsuario');
 $routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
+$routes->get('/administrador/alterar-pessoa', 'User::alterarPessoa');
+
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
+$routes->get('/administrador/cadastro-opcoes-adicionais', 'Administrator::cadastroOpcaoAdicional');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
 $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
@@ -36,6 +39,15 @@ $routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto')
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 $routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
+$routes->post('/administrador/insere-opcoes-adicionais', 'Administrator::insereOpcaoAdicional');
+$routes->get('/administrador/lista-opcoes-adicionais', 'Administrator::listaOpcoesAdicionais');
+$routes->get('/administrador/editar-opcoes-adicionais/(:any)', 'Administrator::editarOpcoesAdicionais/$1');
+$routes->post('/administrador/alterar-opcoes-adicionais', 'Administrator::alterarOpcoesAdicionais');
+$routes->post('/administrador/desativar-categoria', 'Administrator::desativarCategoria');
+$routes->post('/administrador/desativar-produto', 'Administrator::desativarProduto');
+$routes->post('/administrador/desativar-usuario', 'Administrator::desativarUsuario');
+$routes->post('/administrador/desativar-opcoes-adicionais', 'Administrator::desativarOpcoesAdicionais');
+
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
