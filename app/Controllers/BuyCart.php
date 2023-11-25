@@ -302,7 +302,7 @@ class BuyCart extends BaseController
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
         $quantidade = $builder->get()->getRow('QUANTIDADE');
-        $builder->set('QUANTIDADE',$quantidade -1);
+        $builder->set('QUANTIDADE', $quantidade -1);
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->update();
     }
@@ -312,7 +312,7 @@ class BuyCart extends BaseController
         $builder = $db->table('estoque');
         $builder->where('PRODUTO_ID', $id_produto);
         $quantidade = $builder->get()->getRow('QUANTIDADE');
-        $builder->set('QUANTIDADE',$quantidade + 1);
+        $builder->set('QUANTIDADE', $quantidade + 1);
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->update();
     }
@@ -371,7 +371,7 @@ class BuyCart extends BaseController
         try {
             $id_carrinho_compra = $this->getIdCarrinhoCompra($id_usuario);
             
-            if ($id_carrinho_compra == null) {
+            if (!$id_carrinho_compra) {
                 try {
                     // pega o último id inserido no novo carrinho "EM ABERTO"
                     $ultimo_id_novo_carrinho_inserido = $this->ultimoIdInseridoCarrinhoCompras($id_usuario);
@@ -633,8 +633,16 @@ class BuyCart extends BaseController
 
     public function revisaoCompra($id_carrinho, $id_usuario) {
         if (session()->has('usuario') && $id_usuario == session()->get('id')) {
-            // echo "<pre>";
-            // return var_dump($this->getItensCarrinho($id_carrinho));
+
+            $total_pedido = $this->getValorTotalCarrinho($id_carrinho);
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('detalhes_do_pedido');
+            $builder->set('TOTAL_PEDIDO', $total_pedido);
+            $builder->where('CARRINHO_DE_COMPRAS_ID', $id_carrinho);
+            $builder->where('USUARIO_ID', $id_usuario);
+            $builder->update();
+            $db->close();
 
             $data = [ 
                 'detalhes_do_pedido' => $this->getDadosDetalhesCompra($id_carrinho, $id_usuario),
@@ -645,6 +653,20 @@ class BuyCart extends BaseController
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+    }
+
+    public function getValorTotalCarrinho($id_carrinho) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('itens_carrinho');
+        $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho);
+        $query = $builder->get()->getResultArray();
+
+        $total_geral = 0;
+        foreach ($query as $q) {
+            $total_geral += $q['SUBTOTAL'];
+        }
+
+        return $total_geral;
     }
 
     public function getValorTotalCompra($id_carrinho) {
@@ -710,6 +732,19 @@ class BuyCart extends BaseController
         $db = \Config\Database::connect();
         $builder = $db->table('detalhes_do_pedido');
         $builder->where('ID', $id_detalhes_pedido);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function verificaIdUsuarioEmDetalhesPedido($id_detalhes_pedido) {
+        $user = new User();
+        $id_usuario = $user->idUser();
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('ID', $id_detalhes_pedido);
+        $builder->where('USUARIO_ID', $id_usuario);
         $query = $builder->get()->getResultArray();
         $db->close();
         return $query;

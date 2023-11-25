@@ -10,8 +10,10 @@ $data['link_css'] = "assets/css/login.css";
     <a href="<?= base_url('home') ?>">
         <img src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto" class="logo">
     </a>
-    <h1 class="titulo">Acesse sua Conta</h1>
 
+    
+    <h1 class="titulo">Acesse sua Conta</h1>
+    
     <div class="usuario-senha">
         <?php $message_failed = session()->getFlashdata('login-failed'); ?>
         <?php if ($message_failed) : ?>

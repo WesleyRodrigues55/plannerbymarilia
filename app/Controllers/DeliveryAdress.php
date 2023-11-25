@@ -103,7 +103,7 @@ class DeliveryAdress extends BaseController
 
     public function editarEnderecoEntrega($id_endereco, $id_usuario, $id_carrinho) {
         $user = new User();
-        
+
         if (!$user->validaLogin()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -232,12 +232,12 @@ class DeliveryAdress extends BaseController
         $db->close();
     }
 
-    public function validaEnderecoExistente($cep, $rua, $cidade) {
+    public function validaEnderecoExistente($rua, $cidade, $numero) {
         $db = \Config\Database::connect();
         $builder = $db->table('endereco_de_entrega');
-        $builder->where('CEP', $cep);
         $builder->where('CIDADE', $cidade);
         $builder->where('RUA', $rua);
+        $builder->where('NUMERO', $numero);
         $builder->get()->getResultArray();
         $db->close();
     }
@@ -257,10 +257,11 @@ class DeliveryAdress extends BaseController
         $local = $this->request->getPost('local');
         $informacoes = $this->request->getPost('informacoes');
 
-        // if (!$this->validaEnderecoExistente($cep, $rua, $cidade)) {
-        //     session()->setFlashdata('endereco-exists', 'Esse endereço já existe cadastrado, edite-o ou adicione um diferente!');
-        //     return redirect()->back();
-        // }
+
+        if ($this->validaEnderecoExistente($rua, $cidade, $numero) == null) {
+            session()->setFlashdata('endereco-exists', 'Esse endereço já existe cadastrado, edite-o ou adicione um diferente!');
+            return redirect()->back();
+        }
         
         $this->updatedRemoveCheckedEnderecoEntrega($id_usuario);
     

@@ -94,3 +94,71 @@
     </div>
   </div>
 </div>
+
+<!-- mensagem pop-up exclusao categoria-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-exclusao-categoria" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Categoria removida com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up exclusao produto-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-exclusao-produto" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Produto removido com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up exclusao usuario-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-exclusao-usuario" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Usuario removido com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up exclusao usuario-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-exclusao-opcoes-adicionais" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Adicional removido com sucesso!
+    </p>
+    </div>
+  </div>
+</div>

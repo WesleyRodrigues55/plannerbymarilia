@@ -1,3 +1,42 @@
+.box-item-carrinho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-quantidade {
+    text-align: center;
+}
+
+.box-quantidade .quantidade-item-estoque {
+    width: 40px;
+}
+
+@media screen and (max-width: 767px) {
+    .box-item-carrinho {
+        flex-direction: column;
+        align-items: start;
+    }
+    .box-quantidade {
+        border-top: 1px solid #ddd;
+        padding: 16px 8px;
+        margin-top: 16px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .box-quantidade div {
+        width: 100%;
+    }
+    .box-preco-carrinho {
+        border-top: 1px solid #ddd;
+        padding: 16px 8px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
 .box-img-carrinho img {
     width: 80px
 }

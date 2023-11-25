@@ -26,7 +26,7 @@
         <br>
         <div class="row">
 
-            <div class="col-md-8 mt-4">
+            <div class="col-md-12 col-lg-8 mt-4">
                 <p><b>Detalhe do envio</b></p>
                 <div class="d-flex gap-4 align-items-center mb-2 p-4 border rounded-3">
                     <div>
@@ -43,7 +43,7 @@
                         <img src="<?= base_url('assets/icons/delivery-truck.png') ?>" style="width: 32px" alt="delivery-truck">
                     </div>
                     <div class="w-100">
-                        <span>Produtos</span><br>
+                        <span><b>Produtos</b></span><br>
                         <br>
                         <p class="p-small">Envio</p>
                         <hr>
@@ -51,7 +51,7 @@
                             <div class="d-flex gap-2 align-items-center my-2">
                                 <img src="<?= base_url('assets/img/teste/'. $ic['IMAGEM']) ?>" alt="" style="width: 60px; border-radius: 100%">
                                 <div>
-                                    <span class="p-small"><?= $ic['NOME_PRODUTO'] ?></span><br>
+                                    <span class="p-small"><b><?= $ic['NOME_PRODUTO'] ?></b></span><br>
                                     <span class="p-small">Quantidade: <?= $ic['QUANTIDADE'] ?></span>
                                 </div>
                             </div>
@@ -66,8 +66,8 @@
                         <img src="<?= base_url('assets/icons/icon-pix.png') ?>" style="width: 32px" alt="location">
                     </div>
                     <div>
-                        <span><?= $detalhes_do_pedido[0]['FORMA_DE_PAGAMENTO'] ?> </span><br>
-                        <span class="p-small">Você pagará R$<?= $detalhes_do_pedido[0]['VALOR_TOTAL'] ?></span>
+                        <span style="text-transform: uppercase;"><?= $detalhes_do_pedido[0]['FORMA_DE_PAGAMENTO'] ?> </span><br>
+                        <span class="p-small">Você pagará <b>R$<?= $detalhes_do_pedido[0]['VALOR_TOTAL'] ?></b></span>
                     </div>
                 </div>
                 <div class="d-flex gap-4 align-items-center mb-2 p-4 border rounded-3">
@@ -79,12 +79,9 @@
                         <span><?= $detalhes_do_pedido[0]['NOME_COMPLETO'] ?> - <?= $detalhes_do_pedido[0]['CPF'] ?> </span>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <a href="<?= base_url('/comprando/formas-de-pagamento/'. $detalhes_do_pedido[0]['ID_CARRINHO'] . '/' . $detalhes_do_pedido[0]['ID_USUARIO']) ?>" class="input-simples">Voltar</a>
-                </div>
             </div>
             
-            <div class="col-md-4 px-4 mt-4">
+            <div class="col-md-12 col-lg-4 px-4 mt-4">
                 <p><b>Resumo da compra</b></p>
                 <hr>
                 <div class="d-flex justify-content-between">
@@ -104,6 +101,9 @@
                 <div class="d-flex justify-content-center">
                     <a href="<?= base_url('/comprando/checkout/pagamento/'. $detalhes_do_pedido[0]['ID_DETALHES_DO_PEDIDO'] . '/' . $detalhes_do_pedido[0]['ID_CARRINHO']) ?>" class="input-rosa w-100 text-center">Confirmar a compra</a>
                 </div>
+                <div class="d-flex justify-content-center mt-2">
+                    <a href="<?= base_url('/comprando/formas-de-pagamento/'. $detalhes_do_pedido[0]['ID_CARRINHO'] . '/' . $detalhes_do_pedido[0]['ID_USUARIO']) ?>" class="input-simples w-100 text-center">Voltar</a>
+                </div>
             </div>        
         </div>
     </main>
@@ -111,7 +111,6 @@
     <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
-<?= view("comprando/scripts/script-cadastro-cep") ?>
 
 
 

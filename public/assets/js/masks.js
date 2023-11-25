@@ -112,18 +112,18 @@ function cep(v) {
 
 
 function cnpj(v) {
-  v = v.replace(/\D/g, "")                           //Remove tudo o que não é dígito
-  v = v.replace(/^(\d{2})(\d)/, "$1.$2")             //Coloca ponto entre o segundo e o terceiro dígitos
+  v = v.replace(/\D/g, "") //Remove tudo o que não é dígito
+  v = v.replace(/^(\d{2})(\d)/, "$1.$2") //Coloca ponto entre o segundo e o terceiro dígitos
   v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3") //Coloca ponto entre o quinto e o sexto dígitos
-  v = v.replace(/\.(\d{3})(\d)/, ".$1/$2")           //Coloca uma barra entre o oitavo e o nono dígitos
-  v = v.replace(/(\d{4})(\d)/, "$1-$2")              //Coloca um hífen depois do bloco de quatro dígitos
+  v = v.replace(/\.(\d{3})(\d)/, ".$1/$2") //Coloca uma barra entre o oitavo e o nono dígitos
+  v = v.replace(/(\d{4})(\d)/, "$1-$2") //Coloca um hífen depois do bloco de quatro dígitos
   return v
 }
 
 function cpf(v) {
-  v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
-  v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-  v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+  v = v.replace(/\D/g, "") //Remove tudo o que não é dígito
+  v = v.replace(/(\d{3})(\d)/, "$1.$2") //Coloca um ponto entre o terceiro e o quarto dígitos
+  v = v.replace(/(\d{3})(\d)/, "$1.$2") //Coloca um ponto entre o terceiro e o quarto dígitos
   //de novo (para o segundo bloco de números)
   v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
   return v
@@ -153,17 +153,9 @@ function telefoneFixo(v) {
   return v;
 }
 
-//VALIDAR DATA
-
 function formatarEValidarData(v) {
   const dataLimpa = v.replace(/\D/g, '');
-  const dataFormatada = dataLimpa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-  // if (validarData(dataFormatada)) {
-  //   return dataFormatada;
-  // } else {
-  //   console.error('Data inválida:', v);
-  //   return null;
-  // }
+  const dataFormatada = dataLimpa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'); 
   return dataFormatada;
 }
 
@@ -186,72 +178,78 @@ function validarData(dataString) {
 // ALTERNANDO TIPO PESSOA
 
 function esconderCPF() {
-  document.getElementById('divCPF').style.display = 'none';
-  document.getElementById('nomePessoa').style.display = 'none';
-  document.getElementById('sobrenomePessoa').style.display = 'none';
-  document.getElementById('dataNasc').style.display = 'none';
-  document.getElementById('name').removeAttribute("required");
-  document.getElementById('sobrenome').removeAttribute("required");
-  document.getElementById('dataNascimento').removeAttribute("required");
-  document.getElementById('name').value = '';
-  document.getElementById('sobrenome').value = '';
-  document.getElementById('dataNascimento').value = '';
-  document.getElementById('cpf').value = '';
-
+  var elemento = document.getElementById('divCPF');
+  if (elemento) {
+    elemento.style.display = 'none';
+    document.getElementById('nomePessoa').style.display = 'none';
+    document.getElementById('sobrenomePessoa').style.display = 'none';
+    document.getElementById('dataNasc').style.display = 'none';
+    document.getElementById('name').removeAttribute("required");
+    document.getElementById('sobrenome').removeAttribute("required");
+    document.getElementById('dataNascimento').removeAttribute("required");
+    document.getElementById('name').value = '';
+    document.getElementById('sobrenome').value = '';
+    document.getElementById('dataNascimento').value = '';
+    document.getElementById('cpf').value = '';
+  } else {
+    console.error('Elemento divCPF não encontrado.');
+  }
 }
 
-function mostrarCNPJ() {
-  document.getElementById('divCNPJ').style.display = 'block';
-  document.getElementById('nomeEmpresa').style.display = 'block';
-  document.getElementById('fantasia').style.display = 'block';
-  document.getElementById('dataAbertura').style.display = 'block';
-  document.getElementById('razaoSocial').setAttribute("required", "true");
-  document.getElementById('nomeFantasia').setAttribute("required", "true");
-  document.getElementById('data-Abertura').setAttribute("required", "true");
-}
 
 function esconderCNPJ() {
-  document.getElementById('divCNPJ').style.display = 'none';
-  document.getElementById('nomeEmpresa').style.display = 'none';
-  document.getElementById('fantasia').style.display = 'none';
-  document.getElementById('dataAbertura').style.display = 'none';
-  document.getElementById('razaoSocial').removeAttribute("required");
-  document.getElementById('nomeFantasia').removeAttribute("required");
-  document.getElementById('data-Abertura').removeAttribute("required");
-  document.getElementById('razaoSocial').value = '';
-  document.getElementById('nomeFantasia').value = '';
-  document.getElementById('data-Abertura').value = '';
-  document.getElementById('cnpj').value = '';
+  var elemento = document.getElementById('divCNPJ');
+  if (elemento) {
+    elemento.style.display = 'none';
+    document.getElementById('nomeEmpresa').style.display = 'none';
+    document.getElementById('fantasia').style.display = 'none';
+    document.getElementById('dataAbertura').style.display = 'none';
+    document.getElementById('razaoSocial').removeAttribute("required");
+    document.getElementById('nomeFantasia').removeAttribute("required");
+    document.getElementById('data-Abertura').removeAttribute("required");
+    document.getElementById('razaoSocial').value = '';
+    document.getElementById('nomeFantasia').value = '';
+    document.getElementById('data-Abertura').value = '';
+    document.getElementById('cnpj').value = '';
+
+
+  } else {
+    console.error('Elemento divCNPJ não encontrado.');
+  }
 }
 
 function mostrarCPF() {
-  document.getElementById('divCPF').style.display = 'block';
-  document.getElementById('nomePessoa').style.display = 'block';
-  document.getElementById('sobrenomePessoa').style.display = 'block';
-  document.getElementById('dataNasc').style.display = 'block';
-  document.getElementById('name').setAttribute("required", "true");
-  document.getElementById('sobrenome').setAttribute("required", "true");
-  document.getElementById('dataNascimento').setAttribute("required", "true");
+  var elemento = document.getElementById('divCPF');
+  if (elemento) {
+    elemento.style.display = 'block';
+    document.getElementById('nomePessoa').style.display = 'block';
+    document.getElementById('sobrenomePessoa').style.display = 'block';
+    document.getElementById('dataNasc').style.display = 'block';
+    document.getElementById('name').setAttribute("required", "true");
+    document.getElementById('sobrenome').setAttribute("required", "true");
+    document.getElementById('dataNascimento').setAttribute("required", "true");
+  } else {
+    console.error('Elemento divCPF não encontrado.');
+  }
 }
 
+function mostrarCNPJ() {
+  var elemento = document.getElementById('divCNPJ');
+  if (elemento) {
+    elemento.style.display = 'block';
+    document.getElementById('divCNPJ').style.display = 'block';
+    document.getElementById('nomeEmpresa').style.display = 'block';
+    document.getElementById('fantasia').style.display = 'block';
+    document.getElementById('dataAbertura').style.display = 'block';
+    document.getElementById('razaoSocial').setAttribute("required", "true");
+    document.getElementById('nomeFantasia').setAttribute("required", "true");
+    document.getElementById('data-Abertura').setAttribute("required", "true")
+  } else {
+    console.error('Elemento divCNPJ não encontrado.');
+  }
+}
 
 $(document).ready(function () {
   esconderCNPJ();
   mostrarCPF();
 })
-
-//PW VALIDATION
-
-function confereSenha() {
-  const senha = document.querySelector('input[name=senha]');
-  const confirma = document.querySelector('input[name=confirmarSenha]');
-  const invalid = document.querySelector('.invalid-feedback')
-
-  if (confirma.value === senha.value) {
-    invalid.style.display = 'none'
-  } else {
-    invalid.style.display = 'block'
-  }
-}
-
-
