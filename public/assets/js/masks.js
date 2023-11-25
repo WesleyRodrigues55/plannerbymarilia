@@ -155,7 +155,7 @@ function telefoneFixo(v) {
 
 function formatarEValidarData(v) {
   const dataLimpa = v.replace(/\D/g, '');
-  const dataFormatada = dataLimpa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'); 
+  const dataFormatada = dataLimpa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
   return dataFormatada;
 }
 
@@ -253,3 +253,19 @@ $(document).ready(function () {
   esconderCNPJ();
   mostrarCPF();
 })
+
+//PW VALIDATION
+
+function confereSenha() {
+  const senha = document.querySelector('input[name=senha]');
+  const confirma = document.querySelector('input[name=confirmarSenha]');
+  const invalid = document.querySelector('.invalid-feedback')
+
+  if (confirma.value === senha.value) {
+    invalid.style.display = 'none';
+    document.getElementById("btnSubmit").disabled = false;
+  } else {
+    document.getElementById("btnSubmit").disabled = true;
+    invalid.style.display = 'block'
+  }
+}

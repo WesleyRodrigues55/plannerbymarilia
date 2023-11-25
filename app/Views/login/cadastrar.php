@@ -25,7 +25,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 </div>
             <?php endif; ?>
 
-            
+
             <?php if ($message_success): ?>
                 <div class="alert alert-success mt-5 text-center" role="alert">
                     <?= $message_success; ?>
@@ -48,9 +48,6 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                         <label for="email" class="preencher">E-MAIL*</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="email@dominio.com.br" required>
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
                     </div>
 
                     <div class="col-md-12">
@@ -151,7 +148,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                         <div id="divCPF">
                             <label for="cpf" class="preencher">CPF*</label>
                             <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14"
-                            placeholder="XXX.XXX.XXX-XX" required>
+                                placeholder="XXX.XXX.XXX-XX" required>
                         </div>
 
                         <div id="divCNPJ">
@@ -204,7 +201,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-2">
                         <label for="numero" class="preencher">Nº*</label>
-                        <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX" required>
+                        <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX"
+                            required>
                         <div class="invalid-feedback">
                             Por favor preencha o número do seu endereço.
                         </div>
@@ -263,7 +261,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12 mt-1">
-                        <input type="checkbox" class="form-check-input" name="termoPrivacidade"  id="termos" checked required>
+                        <input type="checkbox" class="form-check-input" name="termoPrivacidade" id="termos" checked
+                            required>
                         <label class="form-check-label" for="termos" style="display: inline"><i>
                                 Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de
                                 seus dados por esse site.
@@ -273,7 +272,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <input type="submit" class="input-rosa" value="Criar Conta">
+                    <input type="submit" class="input-rosa" value="Criar Conta" id="btnSubmit">
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de
