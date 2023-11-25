@@ -1,10 +1,10 @@
 <header>
-    <!-- <div class="text-center py-3 header-top">
-        <span><b>SONHE, PLANEJE E REALIZE!</b></span>
+    <div class="text-center py-1 header-top">
+        <span>SONHE, PLANEJE E REALIZE!</span>
     </div>
-    <div class="border-header"></div> -->
+    <div class="border-header"></div>
 
-    <div class="container d-flex justify-content-between align-items-center my-4">
+    <div class="container d-flex justify-content-between align-items-center">
         <form action="" action="" class="w-25 form-search-nav" style="position: relative">
             <input type="search" class="input-navegacao" name="pesquisa-nav" placeholder="Buscar">
             <img src="<?= base_url('assets/icons/lupa.png') ?>" style="position: absolute; top: 50%; right: 120px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Search" />
@@ -19,7 +19,7 @@
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
-                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                <a href="<?= base_url('login') ?>" class="d-flex gap-2 align-items-center input-rosa border-0">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Iniciar Sessão
                 </a>
