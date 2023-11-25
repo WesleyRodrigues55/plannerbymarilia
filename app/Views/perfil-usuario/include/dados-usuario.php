@@ -17,17 +17,23 @@ $data['link_css'] = "assets/css/perfil.css";
         <div class="h-100 w-75 p-2">
             <h1 class="titulo-perfil">Dados do Usuário</h1>
             <hr>
-            <form id="userProfileForm">
+            <form id="AlterarSenhaUsuarioLogado" method="post">
                 <div>
                     <div class="mb-2 w-50 p-2 my-2">
                         <label for="userEmail"><b>Email do Usuário</b></label>
-                        <input type="email" class="form-control" id="" value="email do usuario" disabled>
+                        <input type="email" class="form-control" id="" value="<?=session()->get('usuario')?>" name="usuario" disabled>
+                        <input type="text" class="form-control" id="" value="<?=session()->get('id')?>" name="id" hidden readonly>
+                        
                     </div>
                     <div class="mb-3 w-50 p-2 my-2">
                         <label for="userPassword" class="form-label "><b>Senha do Usuário</b></label>
                         <div style="position: relative; width: 100%;">
-                            <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Senha" required maxlength="64" name="SENHA" />
-                            <input type="text" class="form-control" id="id-user" value="" name="id-user" placeholder="produto" hidden redonly>
+                            <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Senha" required maxlength="64" name="senha" />
+                            <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showPassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
+                        </div>
+                        <label for="userPassword" class="form-label "><b>Confirme sua Senha</b></label>
+                        <div style="position: relative; width: 100%;">
+                            <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Senha" required maxlength="64" name="confirmar-senha" />
                             <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showPassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
                         </div>
                     </div>
@@ -35,7 +41,7 @@ $data['link_css'] = "assets/css/perfil.css";
                 <div class="container my-2">
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" class="btn input-rosa button-dados">Atualizar</button>
+                            <button type="submit" class="btn input-rosa button-dados">Atualizar</button>
                         </div>
                     </div>
                 </div>
@@ -71,5 +77,15 @@ $data['link_css'] = "assets/css/perfil.css";
         // Aqui você pode implementar a lógica para atualizar a senha do usuário.
         const newPassword = userPasswordInput.value;
         // Faça algo com a nova senha (por exemplo, envie para o servidor).
+    });
+
+    // Icone do password, ocultando e aparecendo senha
+    document.getElementById("showPassword").addEventListener("click", () => {
+        var passwordInput = document.getElementById("password");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
     });
 </script>

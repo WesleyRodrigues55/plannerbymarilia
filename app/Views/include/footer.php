@@ -162,3 +162,37 @@
     </div>
   </div>
 </div>
+
+<!-- mensagem pop-up alteração usuario logado-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-alterar-usuario-logado" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Suas informações foram alteradas com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up alteração usuario logado-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-alterar-senha-usuario-logado" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Sua Senha foi alterada com Sucesso!
+    </p>
+    </div>
+  </div>
+</div>
