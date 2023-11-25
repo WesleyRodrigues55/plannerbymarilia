@@ -33,7 +33,7 @@ class Product extends BaseController
     
             return view('produtos/planners', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } 
     }
     public function cadernos() {
@@ -63,7 +63,7 @@ class Product extends BaseController
     
             return view('produtos/cadernos', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         
     }
@@ -95,7 +95,7 @@ class Product extends BaseController
 
             return view('produtos/agendas', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -126,7 +126,7 @@ class Product extends BaseController
 
             return view('produtos/blocos', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -317,7 +317,7 @@ class Product extends BaseController
             ];
             return view('produtos/produto-selecionado', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }   
     }
 

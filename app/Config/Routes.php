@@ -28,6 +28,7 @@ $routes->post('/user/alterar-usuario', 'User::AlterarUsuarioLogado');
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
+$routes->get('/administrador/cadastro-capas-produto/(:any)', 'Administrator::cadastroCapasProduto/$1');
 $routes->get('/administrador/cadastro-opcoes-adicionais', 'Administrator::cadastroOpcaoAdicional');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
@@ -39,6 +40,7 @@ $routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProdu
 $routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
 $routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
 $routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
+$routes->post('/administrador/insere-capas-produto', 'Administrator::insereCapasProduto');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 $routes->post('/administrador/insere-opcoes-adicionais', 'Administrator::insereOpcaoAdicional');
 $routes->get('/administrador/lista-opcoes-adicionais', 'Administrator::listaOpcoesAdicionais');
