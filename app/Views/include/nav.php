@@ -1,8 +1,8 @@
 <header>
-    <div class="text-center py-3 header-top">
+    <!-- <div class="text-center py-3 header-top">
         <span><b>SONHE, PLANEJE E REALIZE!</b></span>
     </div>
-    <div class="border-header"></div>
+    <div class="border-header"></div> -->
 
     <div class="container d-flex justify-content-between align-items-center my-4">
         <form action="" action="" class="w-25 form-search-nav" style="position: relative">
@@ -12,7 +12,7 @@
 
         <div class="w-50 text-center box-logo-header">
             <a href="<?= base_url('') ?>">
-                <img class="" src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto">
+                <img class="w-100" src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" style="max-width: 400px">
             </a>
         </div>
 
