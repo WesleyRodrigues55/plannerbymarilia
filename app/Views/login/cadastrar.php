@@ -55,7 +55,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" id="password" name="senha"
+                        <input type="password" class="form-control" id="" name="senha"
                             placeholder="Digite sua senha" required>
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
                         <div class="invalid-feedback">
@@ -65,7 +65,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
-                        <input type="password" class="form-control" id="password" name="confirmarSenha"
+                        <input type="password" class="form-control" id="" name="confirmarSenha"
                             placeholder="Confirme sua senha" required>
                         <div class="invalid-feedback">
                             Uma senha é requirida.

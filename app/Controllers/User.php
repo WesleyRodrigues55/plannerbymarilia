@@ -368,4 +368,46 @@ class User extends BaseController
     
     }
 
+    public function AlterarUsuarioLogado()
+    {
+        $user = new User();
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $usuario = $this->request->getPost('usuario');
+        $id_usuario = $this->request->getPost('id');
+        $senha = $this->request->getPost('senha');
+        $senha = password_hash("$senha", PASSWORD_BCRYPT);
+
+        $data = [
+            'SENHA' => $senha,
+        ];
+        
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('usuario');
+            $builder->where('ID', $id_usuario);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração falhou.'
+                );
+                
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração completa.'
+                );
+            }
+            echo json_encode($response);
+
+        } catch (\Exception $e) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    
+    }
 }
