@@ -670,7 +670,7 @@ class Administrator extends BaseController
         } else {
             $user = new User();
             if (!$user->validaLoginAdm()) {
-                return redirect()->to('/login')->with('error', 'Login required.');
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         
             $opcoes_adicionais = new Product();

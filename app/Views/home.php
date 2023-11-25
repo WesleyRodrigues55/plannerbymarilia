@@ -10,14 +10,15 @@
     <!-- conteúdo home vai aqui -->
     <main>
         <header>
-            <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100" alt="">
+            <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100 banner-desktop" alt="">
+            <img src="<?= base_url('assets/img/banner-home-mobile.png') ?>" class="w-100 banner-mobile" alt="">
         </header>
         <?= view("include/produtos-mais-vendidos", $mais_vendidos) ?>
 
         <!-- planner 2024 -->
         <div class="bg-planner-2024 pb-5 mt-5">
             <div class="container">
-                <div class="testee">
+                <div class="titulo-planner-2024">
                     <h2 class="h2-titles"><b>PLANNER<br>2024</b></h2>
                 </div>
                 <ul>
