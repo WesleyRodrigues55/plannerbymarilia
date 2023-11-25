@@ -95,3 +95,18 @@ $(document).on('submit', '#excluirUsuario', function(event) {
         }
     })
 })
+
+// Altera dados usuario logado
+$(document).on('submit', '#AlterarUsuarioLogado', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/user/alterar-pessoa',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-alterar-usuario-logado');
+        }
+    })
+})

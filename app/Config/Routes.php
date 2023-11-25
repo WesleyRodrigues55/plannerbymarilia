@@ -22,7 +22,7 @@ $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 $routes->get('/perfil/perfil-usuario', 'User::perfilUsuario');
 $routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
-$routes->get('/administrador/alterar-pessoa', 'User::alterarPessoa');
+$routes->post('/user/alterar-pessoa', 'User::alterarPessoa');
 
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');
