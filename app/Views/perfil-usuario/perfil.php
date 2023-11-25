@@ -23,7 +23,7 @@ $data['link_css'] = "assets/css/perfil.css";
                     <?= view("perfil-usuario/include/minhas-informacoes", $usuario_selecionado) ?>
                 </div>
                 <div class="box" id="item2" style="display: none; border: 1px solid var(--cor-cinza); width: 100%; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);">
-                    <?= view("perfil-usuario/include/dados-usuario") ?> <!-- para referenciar o conteudo-->
+                    <?= view("perfil-usuario/include/dados-usuario", ) ?> <!-- para referenciar o conteudo-->
                 </div>
 
                 <div class="box" id="item3" style="display: none; border: 1px solid var(--cor-cinza); width: 100%; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);">

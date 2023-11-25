@@ -23,6 +23,7 @@ $routes->get('/perfil/perfil-usuario', 'User::perfilUsuario');
 $routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
 
 $routes->post('/user/alterar-pessoa', 'User::alterarPessoa');
+$routes->post('/user/alterar-usuario', 'User::AlterarUsuarioLogado');
 
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');

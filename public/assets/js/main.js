@@ -110,3 +110,19 @@ $(document).on('submit', '#AlterarUsuarioLogado', function(event) {
         }
     })
 })
+
+// Altera dados usuario logado
+$(document).on('submit', '#AlterarSenhaUsuarioLogado', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/user/alterar-usuario',
+        data: formData,
+        success: function(response) {
+            console.log(response)
+            // response = JSON.parse(response);
+            openToast('open-toast-alterar-senha-usuario-logado');
+        }
+    })
+})
