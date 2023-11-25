@@ -50,6 +50,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                             <td scope="col"><?= $produto['CATEGORIA'] ?></td>
                             <td scope="col"><?= "R$ " . number_format($produto['PRECO'], 2, '.', '') ?></td>
                             <td scope="col">
+                                    <a href="<?= base_url('administrador/cadastro-capas-produto/' . $produto['ID']) ?>" class="input-simples">Cadastrar capas</a>
                                     <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
                                     <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $produto['ID']?>">Excluir</a>
                                 </td>

@@ -5,6 +5,7 @@ use CodeIgniter\I18n\Time;
 use App\Controllers\ProductCategoryType;
 use App\Controllers\Product;
 use App\Controllers\User;
+use CodeIgniter\Files\File;
 
 class Administrator extends BaseController
 {
@@ -18,6 +19,7 @@ class Administrator extends BaseController
         return
             view('/adm/index');
     }
+
     public function cadastroProduto()
     {
         $user = new User();
@@ -29,7 +31,66 @@ class Administrator extends BaseController
         $data = ['tipo_categoria_produto' => $tipo_categoria_produto->tipoCategoriasProdutos()];
         return
             view('/adm/cadastro-produto', $data);
+    }
 
+    public function cadastroCapasProduto($id_produto)
+    {
+        if (!$id_produto)
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $tipo_categoria_produto = new ProductCategoryType();
+
+        $data = ['id_produto' => $id_produto ];
+        return
+            view('/adm/cadastro-capas-produto', $data);
+    }
+
+    public function insereCapasProduto() {
+        echo "<pre>";
+        return var_dump($this->request->getFileMultiple('foto-produto'));
+        // tratar imagens e fazer inserção.
+    }
+
+    public function uploadImagem($img) {
+        $rules = [
+            'foto-produto' => 'uploaded[foto-produto]|mime_in[foto-produto,image/png,image/jpeg]|max_size[foto-produto,1024]' // 1 MB máximo
+        ];
+
+        if ($this->validate($rules))
+        {
+            if ($img->isValid() && !$img->hasMoved())
+            {
+                $img->move(ROOTPATH . 'public/assets/img/produtos');
+                $fileName = $img->getName();
+                return $fileName;
+            }
+            else
+            {
+                return false;
+                return $img->getErrorString();
+            }
+        }
+        else
+        {
+            return false;
+            return implode('<br>', $this->validator->getErrors());
+        }
+
+    }
+
+    public function cadastrarQuantidadeEstoquePeloIdProduto($id_produto, $quantidade_estoque) {
+        $data = [
+            'PRODUTO_ID' => $id_produto,
+            'QUANTIDADE' => $quantidade_estoque,
+        ];
+        $db = \Config\Database::connect();
+        $builder = $db->table('estoque');
+        $builder->insert($data);
+        $db->close();
     }
 
     public function insereProduto()
@@ -51,11 +112,20 @@ class Administrator extends BaseController
         $tamanho_interno = $this->request->getPost('tamanho-interno');
         $quantidade_folha = $this->request->getPost('quantidade-folhas');
         $descricao_tecnica = $this->request->getPost('descricao-tecnica');
-        
+        $quantidade_estoque = $this->request->getPost('quantidade');
+
+        $img = $this->request->getFile('foto-produto');
+
+        $move_img = $this->uploadImagem($img);
+        if (!$move_img) {
+            session()->setFlashdata('imagem-invalida', 'Imagem não é valida!');
+            return redirect()->back();
+        } 
+    
         $data = [
             'TIPO_CATEGORIA_PRODUTO_ID' => $tipo_categoria_produto,
             'NOME' => $nome,
-            'IMAGEM' => 'produto.png',
+            'IMAGEM' => $move_img,
             'PRECO' => $preco,
             'SLUG' => $slug,
             'TIPO_CAPA' => $tipo_capa,
@@ -74,7 +144,6 @@ class Administrator extends BaseController
         ];
 
         try {
-
             if ($nome && $categoria) {
                 $db = \Config\Database::connect();
                 $builder = $db->table('produto');
@@ -91,7 +160,10 @@ class Administrator extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->insert($data);
+            $ultimo_id_produto_inserido = $db->insertID();
             $db->close();
+
+            $this->cadastrarQuantidadeEstoquePeloIdProduto($ultimo_id_produto_inserido, $quantidade_estoque);
 
             if (!$builder) {
                 session()->setFlashdata('register-produtc-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
