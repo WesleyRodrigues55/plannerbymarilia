@@ -4,7 +4,6 @@ $data['link_css'] = "assets/css/perfil.css";
 ?>
 
 <div class="">
-
     <div class="d-flex ">
         <div class="d-flex align-items-center justify-content-center w-25 bg-coluna-dados-usuario coluna-dados-usuario ">
             <div>

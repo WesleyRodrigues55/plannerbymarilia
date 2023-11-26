@@ -4,10 +4,10 @@ $data['link_css'] = "assets/css/nav.css";
 ?>
 
 <header>
-    <div class="text-center py-3 header-top">
+    <!-- <div class="text-center py-3 header-top">
         <span id="mensagem" class="mensagem"><b>SONHE, PLANEJE E REALIZE!</b></span>
     </div>
-    <div class="border-header"></div>
+    <div class="border-header"></div> -->
 
     <div class="container d-flex justify-content-between align-items-center my-4">
         <form action="" action="" class="w-25 form-search-nav" style="position: relative">
@@ -27,6 +27,11 @@ $data['link_css'] = "assets/css/nav.css";
                 <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center link-nav">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Iniciar Sessão
+                </a>
+
+                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
+                    <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Cadastrar-se
                 </a>
 
                 <!-- COM LOGIN -->
@@ -101,6 +106,7 @@ $data['link_css'] = "assets/css/nav.css";
                                         iniciar sessão
                                     </a>
                                 </li>
+
 
                                 <!-- COM LOGIN -->
                             <?php else : ?>

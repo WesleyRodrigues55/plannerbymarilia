@@ -36,6 +36,14 @@
     background-color: var(--cor-rosa-principal);
 }
 
+.whats {
+    position: fixed;
+    bottom: 4em;
+    margin-right: 1em;
+    right: 1em;
+    z-index: 9999;
+}
+
 @media screen and (max-width: 768px) {
     .box-slider-depoimentos .container {
         width: 100%;
