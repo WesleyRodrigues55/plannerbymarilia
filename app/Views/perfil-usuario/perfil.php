@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Perfil Usuário";
 $data['link_css'] = "assets/css/perfil.css";
 ?>
 

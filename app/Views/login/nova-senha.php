@@ -16,14 +16,14 @@ $data['link_css'] = "assets/css/login.css";
         <form method="post" action="<?= base_url('user/verificarlogin') ?>" class="formulario">
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
-                    <input class="mb- w-100 form-control" id="password" type="password" value="" placeholder="Digite sua nova senha" required maxlength="64" name="SENHA" />
-                    <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showPassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
+                    <input class="mb- w-100 form-control" id="password1" type="password" value="" placeholder="Confirme sua nova senha" required maxlength="64" name="NOVA-SENHA" />
+                    <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showsPassword1" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
                 </div>
             </div>
             <div class="mb-3 d-flex align-items-center">
                 <div style="position: relative; width: 100%;">
-                    <input class="mb- w-100 form-control" id="password-2" type="password" value="" placeholder="Confirme sua nova senha" required maxlength="64" name="NOVA-SENHA" />
-                    <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showsPassword" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
+                    <input class="mb- w-100 form-control" id="password2" type="password" value="" placeholder="Confirme sua nova senha" required maxlength="64" name="NOVA-SENHA" />
+                    <img src="<?= base_url('assets/icons/icone-password.png') ?>" id="showsPassword2" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); height: 20px; width: 20px; cursor: pointer;" alt="Ícone Senha" />
                 </div>
             </div>
             <div>
@@ -45,16 +45,25 @@ $data['link_css'] = "assets/css/login.css";
 </div>
 
 <script>
-    document.getElementById("showPassword").addEventListener("click", function() {
-        var passwordInput = document.getElementById("password");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
+    document.getElementById("showsPassword1").addEventListener("click", function() {
+        var passwordInput = document.getElementById("password1");
+        togglePasswordVisibility(passwordInput);
     });
+
+    document.getElementById("showsPassword2").addEventListener("click", function() {
+        var passwordInput = document.getElementById("password2");
+        togglePasswordVisibility(passwordInput);
+    });
+
+    function togglePasswordVisibility(input) {
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
 </script>
-<script>
+<!-- <script>
     document.getElementById("showsPassword").addEventListener("click", function() {
         var passwordInput = document.getElementById("password-2");
         if (passwordInput.type === "password") {
@@ -63,7 +72,7 @@ $data['link_css'] = "assets/css/login.css";
             passwordInput.type = "password";
         }
     });
-</script>
+</script> -->
 
 
 <?= view("include/scripts") ?>

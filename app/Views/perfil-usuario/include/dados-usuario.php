@@ -4,7 +4,6 @@ $data['link_css'] = "assets/css/perfil.css";
 ?>
 
 <div class="">
-
     <div class="d-flex ">
         <div class="d-flex align-items-center justify-content-center w-25 bg-coluna-dados-usuario coluna-dados-usuario ">
             <div>
@@ -21,9 +20,9 @@ $data['link_css'] = "assets/css/perfil.css";
                 <div>
                     <div class="mb-2 w-50 p-2 my-2">
                         <label for="userEmail"><b>Email do Usuário</b></label>
-                        <input type="email" class="form-control" id="" value="<?=session()->get('usuario')?>" name="usuario" disabled>
-                        <input type="text" class="form-control" id="" value="<?=session()->get('id')?>" name="id" hidden readonly>
-                        
+                        <input type="email" class="form-control" id="" value="<?= session()->get('usuario') ?>" name="usuario" disabled>
+                        <input type="text" class="form-control" id="" value="<?= session()->get('id') ?>" name="id" hidden readonly>
+
                     </div>
                     <div class="mb-3 w-50 p-2 my-2">
                         <label for="userPassword" class="form-label "><b>Senha do Usuário</b></label>
@@ -46,7 +45,6 @@ $data['link_css'] = "assets/css/perfil.css";
                     </div>
                 </div>
 
-            </form>
         </div>
     </div>
 </div>
