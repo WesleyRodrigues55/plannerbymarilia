@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Listar Produto";
+$data['title'] = "Página Inicial";
 $data['link_css'] = "assets/css/lista-produto-adm.css";
 ?>
 
@@ -27,9 +27,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead class=" table-dark">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nome </th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Preço</th>
+                <th scope="col">Capa </th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -37,36 +35,34 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead>
             <td colspan="6">
                 <?php $message_empty = session()->getFlashdata('list-empty'); ?>
-                <?php if ($message_empty) : ?>
+                <?php if ($message_empty): ?>
                     <div class="alert alert-danger mt-5 text-center" role="alert">
                         <?= $message_empty; ?>
-                        <br>Para cadastrar um produto, clique em: <a href="<?= base_url('/administrador/cadastro-produto'); ?>">Insere Produto</a>.
+                        <br>Para cadastrar capas de produtos, clique em: <a href="<?= base_url('/administrador/cadastro-capas-produto/'.$id_produto); ?>">Insere Capas Produto</a>.
                     </div>
-                <?php else : ?>
-                    <?php foreach ($produtos as $produto) : ?>
+                <?php else: ?>
+                    <?php foreach($capas as $capa): ?>
                         <tr>
-                            <td scope="col"><?= $produto['ID'] ?></td>
-                            <td scope="col"><?= $produto['NOME'] ?></td>
-                            <td scope="col"><?= $produto['CATEGORIA'] ?></td>
-                            <td scope="col"><?= "R$ " . number_format($produto['PRECO'], 2, '.', '') ?></td>
+                            <td scope="col"><?= $capa['ID'] ?></td>
+                            <td scope="col"><img src="<?= base_url('assets/img/produtos/capas/'. $capa['IMAGEM_CAPA']) ?>" alt="<?= $capa['IMAGEM_CAPA'] ?>" style="width: 40px; height: 40px; border-radius: 100%; object-fit: cover"></td>
                             <td scope="col">
-                                <a href="<?= base_url('administrador/cadastro-capas-produto/' . $produto['ID']) ?>" class="input-simples">Cadastrar capas</a>
-                                <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
-                                <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $produto['ID'] ?>">Excluir</a>
-                            </td>
+                                    <a href="<?= base_url('administrador/editar-capa-produto/' . $capa['ID']) ?>" class="input-simples">Editar Capa</a>
+                                    <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $capa['ID']?>">Desativar</a>
+                                </td>
                         </tr>
-                        <div class="modal fade" id="staticBackdrop<?= $produto['ID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop<?= $capa['ID']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Deseja realmente apagar esse produto?
+                                        Deseja realmente Desativar essa capa do produto?
                                     </div>
                                     <div class="modal-footer">
-                                        <form method="post" id="excluirProduto">
-                                            <input type="text" value="<?= $produto['ID'] ?>" name="id-produto" id="id-produto" readonly hidden>
+                                        <form method="post" id="excluirCapaProduto">
+                                            <input type="text" value="<?= $capa['ID'] ?>" name="id-capa-produto" id="id-capa-produto" readonly hidden>
+                                            <input type="text" value="<?= $capa['PRODUTO_ID'] ?>" name="id-produto" id="id-produto" readonly hidden>
                                             <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
                                         </form>
                                         <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
@@ -78,7 +74,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                 <?php endif; ?>
             </td>
         </thead>
-
+        
     </table>
 </div>
 <?= view("include/footer") ?>

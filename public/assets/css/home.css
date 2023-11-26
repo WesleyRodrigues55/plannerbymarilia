@@ -6,11 +6,11 @@
     background-size: 600px auto, cover;
 }
 
-.bg-planner-2024 .testee {
+.bg-planner-2024 .titulo-planner-2024 {
     position: relative;
 }
 
-.bg-planner-2024 .testee h2 {
+.bg-planner-2024 .titulo-planner-2024 h2 {
     position: absolute;
     top: -18px;
 }
@@ -36,6 +36,14 @@
     background-color: var(--cor-rosa-principal);
 }
 
+.banner-desktop {
+    display: block;
+}
+
+.banner-mobile {
+    display: none;
+}
+
 .whats {
     position: fixed;
     bottom: 4em;
@@ -47,5 +55,13 @@
 @media screen and (max-width: 768px) {
     .box-slider-depoimentos .container {
         width: 100%;
+    }
+
+    .banner-desktop {
+        display: none;
+    }
+
+    .banner-mobile {
+        display: block;
     }
 }

@@ -80,6 +80,24 @@ $(document).on('submit', '#excluirProduto', function (event) {
     })
 })
 
+// exclui capa produto
+$(document).on('submit', '#excluirCapaProduto', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-capa-produto',
+        data: formData,
+        success: function(response) {
+            response = JSON.parse(response);
+            openToast('open-toast-exclusao-capa-produto');
+            setTimeout(() => {
+                window.location.href = "/administrador/lista-capas-produto/" + response.id_produto
+            }, 5000);
+        }
+    })
+})
+
 // exclui usuario
 $(document).on('submit', '#excluirUsuario', function (event) {
     event.preventDefault();
@@ -92,6 +110,37 @@ $(document).on('submit', '#excluirUsuario', function (event) {
             // response = JSON.parse(response);
             openToast('open-toast-exclusao-usuario');
             window.location.href = "/administrador/lista-usuario"
+        }
+    })
+})
+
+// Altera dados usuario logado
+$(document).on('submit', '#AlterarUsuarioLogado', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/user/alterar-pessoa',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-alterar-usuario-logado');
+        }
+    })
+})
+
+// Altera dados usuario logado
+$(document).on('submit', '#AlterarSenhaUsuarioLogado', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/user/alterar-usuario',
+        data: formData,
+        success: function(response) {
+            console.log(response)
+                // response = JSON.parse(response);
+            openToast('open-toast-alterar-senha-usuario-logado');
         }
     })
 })

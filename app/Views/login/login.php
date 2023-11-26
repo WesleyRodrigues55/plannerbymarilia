@@ -8,7 +8,7 @@ $data['link_css'] = "assets/css/login.css";
 
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
     <a href="<?= base_url('home') ?>">
-        <img src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto" class="logo">
+        <img src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" class="w-100" style="max-width: 400px">
     </a>
 
     

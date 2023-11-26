@@ -251,28 +251,6 @@ class User extends BaseController
         return view('perfil-usuario/meus-depoimentos');
     }
 
-    public function perfilUsuario()
-    {
-        $user = new User();
-
-        if (!$user->validaLogin()) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-
-        $id_usuario = session()->get('id');
-
-        $usuario_selecionado = $user->getPessoa($id_usuario);
-
-        if ($usuario_selecionado !== null && isset($usuario_selecionado[0])) {
-            $data = [
-                "usuario_selecionado" => $usuario_selecionado[0],
-            ];
-            return view('perfil-usuario/perfil', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-    }
-
     public function validaLogin()
     {
         return session()->has('usuario');
@@ -299,7 +277,6 @@ class User extends BaseController
         $id_pessoa = $this->getPessoaByIdUsuario($id_usuario);
         $db      = \Config\Database::connect();
         $builder = $db->table('pessoa');
-        $builder->select('NOME, EMAIL, CPF, TIPO_PESSOA, CNPJ');
         $builder->where('ID', $id_pessoa);
         $query = $builder->get()->getResultArray();
         $db->close();
@@ -307,36 +284,62 @@ class User extends BaseController
         return $query;
     }
 
-
-
-    public function alterarPessoa()
+    public function perfilUsuario()
     {
-
-
         $user = new User();
 
-        // Verifica se o usuário está logado
         if (!$user->validaLogin()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        // Obtém o ID do usuário logado a partir das informações de sessão
+        $id_usuario = session()->get('id');
+
+        $usuario_selecionado = $user->getPessoa($id_usuario);
+
+        if ($usuario_selecionado !== null) {
+            $data = [
+                "usuario_selecionado" => $usuario_selecionado[0],
+            ];
+
+            return view('perfil-usuario/perfil', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function alterarPessoa()
+    {
+        $user = new User();
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $id_usuario = session()->get('id_usuario');
 
+        $id_pessoa = $this->request->getPost('id-pessoa');
         $nome = $this->request->getPost('nome');
-        $endereco = $this->request->getPost('endereco');
+        $sobrenome = $this->request->getPost('sobrenome');
+        $cep = $this->request->getPost('cep');
+        $rua = $this->request->getPost('rua');
+        $numero = $this->request->getPost('numero');
+        $complemento = $this->request->getPost('complemento');
+        $bairro = $this->request->getPost('bairro');
+        $cidade = $this->request->getPost('cidade');
+        $estado = $this->request->getPost('estado');
         $telefone_01 = $this->request->getPost('telefone_01');
-        $telefone_02 = $this->request->getPost('telefone_02');
         $celular = $this->request->getPost('celular');
-
-        // Obtém o ID da pessoa usando o ID do usuário
-        $id_pessoa = $user->getPessoaByIdUsuario($id_usuario);
 
         $data = [
             'NOME' => $nome,
-            'CEP' => $endereco,
+            'SOBRENOME' => $sobrenome,
+            'CEP' => $cep,
+            'RUA' => $rua,
+            'NUMERO' => $numero,
+            'COMPLEMENTO' => $complemento,
+            'BAIRRO' => $bairro,
+            'CIDADE' => $cidade,
+            'ESTADO' => $estado,
             'TELEFONE_01' => $telefone_01,
-            'TELEFONE_02' => $telefone_02,
             'CELULAR' => $celular,
         ];
 
@@ -348,13 +351,59 @@ class User extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor, tente novamente!');
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração falhou.'
+                );
             } else {
-                session()->setFlashdata('register-category-success', 'Categoria atualizada com sucesso!');
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração completa.'
+                );
             }
-            return redirect()->to('/perfil/perfil-usuario');
+            echo json_encode($response);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function AlterarUsuarioLogado()
+    {
+        $user = new User();
+        if (!$user->validaLogin()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $usuario = $this->request->getPost('usuario');
+        $id_usuario = $this->request->getPost('id');
+        $senha = $this->request->getPost('senha');
+        $senha = password_hash("$senha", PASSWORD_BCRYPT);
+
+        $data = [
+            'SENHA' => $senha,
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('usuario');
+            $builder->where('ID', $id_usuario);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Alteração completa.'
+                );
+            }
+            echo json_encode($response);
+        } catch (\Exception $e) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 }

@@ -21,11 +21,11 @@ $data['link_css'] = "assets/css/cadastro-user.css";
             <?php if ($message_failed): ?>
                 <div class="alert alert-danger mt-5 text-center" role="alert">
                     <?php $message_failed; ?>
-                    
+
                 </div>
             <?php endif; ?>
 
-            
+
             <?php if ($message_success): ?>
                 <div class="alert alert-success mt-5 text-center" role="alert">
                     <?= $message_success; ?>
@@ -42,33 +42,28 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     <?= $message_failed_email; ?>
                 </div>
             <?php endif; ?>
-            <form action="<?= base_url('user/cadastroUsuario') ?>" method="post">
+            <form onsubmit="senhaOk();" action="<?= base_url('user/cadastroUsuario') ?>" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="email" class="preencher">E-MAIL*</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="email@dominio.com.br" required>
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
                     </div>
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" id="password" name="senha"
+                        <input type="password" class="form-control" id="" name="senha"
                             placeholder="Digite sua senha" required>
                         <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
-                        <div class="invalid-feedback">
-                            Uma senha é requirida.
-                        </div>
+
                     </div>
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
-                        <input type="password" class="form-control" id="password" name="confirmarSenha"
-                            placeholder="Confirme sua senha" required>
-                        <div class="invalid-feedback">
-                            Uma senha é requirida.
+                        <input type="password" class="form-control" id="confirma" name="confirmarSenha"
+                            placeholder="Confirme sua senha" required onchange="confereSenha();">
+                        <div class="invalid-feedback" id="message">
+                            <span>Senhas não conferem</span>.
                         </div>
                     </div>
                 </div>
@@ -80,7 +75,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="nomePessoa">
                         <label for="name" class="preencher">NOME*</label>
                         <input type="text" class="form-control" id="name" name="nome" placeholder="Digite o seu nome"
                             required>
@@ -88,22 +83,46 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                             Por favor preencha o seu nome.
                         </div>
                     </div>
+                    <div class="col-md-12" id="nomeEmpresa">
+                        <label for="razaoSocial" class="preencher">RAZÃO SOCIAL*</label>
+                        <input type="text" class="form-control" id="razaoSocial" name="razaoSocial"
+                            placeholder="Digite a razão social" required>
+                        <div class="invalid-feedback">
+                            Por favor preencha a razão social.
+                        </div>
+                    </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="sobrenomePessoa">
                         <label for="sobrenome" class="preencher">SOBRENOME*</label>
-                        <input type="text" class="form-control" id="sobrenome" name="sobrenome"
-                            placeholder="Digite o seu sobrenome" required>
+                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" required
+                            placeholder="Digite o seu sobrenome">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
                         </div>
                     </div>
-                                        <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="fantasia">
+                        <label for="nomeFantasia" class="preencher">NOME FANTASIA*</label>
+                        <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia"
+                            placeholder="Digite o nome fantasia">
+                        <div class="invalid-feedback">
+                            Por favor preencha o nome fantasia.
+                        </div>
+                    </div>
+                    <!-- ADICIONADO - FORMATAR CONFORME NECESSIDADE -->
+                    <div class="col-md-12" id="dataNasc">
                         <label for="sobrenome" class="preencher">DATA NASCIMENTO*</label>
                         <input maxlength="10" type="text" class="form-control" id="dataNascimento" name="dataNascimento"
-                            placeholder="xxxx/xx/xx" required>
+                            required placeholder="xxxx/xx/xx">
                         <div class="invalid-feedback">
                             Por favor preencha o seu sobrenome.
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="dataAbertura">
+                        <label for="dataAbertura" class="preencher">DATA ABERTURA*</label>
+                        <input maxlength="10" type="text" class="form-control" id="data-Abertura" name="dataAbertura"
+                            placeholder="xxxx/xx/xx">
+                        <div class="invalid-feedback">
+                            Por favor preencha a data de abertura.
                         </div>
                     </div>
 
@@ -114,8 +133,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                         <div class="invalid-feedback">
                             Por favor preencha o seu telefone de contato.
                         </div>
-                    </div>                    
-                                        <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
+                    </div>
+                    <!-- ADICIONADO, FORMATAR CONFORME NECESSIDADE -->
                     <div class="col-md-12">
                         <label for="telefone" class="preencher">NÚMERO DE CELULAR*</label>
                         <input maxlength="11" type="text" class="form-control" id="celular" name="celular"
@@ -129,13 +148,13 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                         <div id="divCPF">
                             <label for="cpf" class="preencher">CPF*</label>
                             <input type="text" class="form-control" id="cpf" name="CPF" maxlength="14"
-                            placeholder="XXX.XXX.XXX-XX" required>
+                                placeholder="XXX.XXX.XXX-XX" required>
                         </div>
 
                         <div id="divCNPJ">
                             <label for="cpf" class="preencher">CNPJ*</label>
                             <input type="text" class="form-control" id="cnpj" name="CNPJ" maxlength="18"
-                            placeholder="xx.xxx.xxx/xxxx-xx">
+                                placeholder="xx.xxx.xxx/xxxx-xx">
                         </div>
                         <div class="content-tipo-pessoa">
                             <div class="d-flex align-items-center gap-2">
@@ -182,7 +201,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-sm-12 col-md-2">
                         <label for="numero" class="preencher">Nº*</label>
-                        <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX" required>
+                        <input type="text" class="form-control" id="numero" name="numeroResidencia" placeholder="XX"
+                            required>
                         <div class="invalid-feedback">
                             Por favor preencha o número do seu endereço.
                         </div>
@@ -241,7 +261,8 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                     </div>
 
                     <div class="col-md-12 mt-1">
-                        <input type="checkbox" class="form-check-input" name="termoPrivacidade"  id="termos" checked required>
+                        <input type="checkbox" class="form-check-input" name="termoPrivacidade" id="termos" checked
+                            required>
                         <label class="form-check-label" for="termos" style="display: inline"><i>
                                 Ao usar este formulário de cadastro, você concorda com o armazenamento e manuseio de
                                 seus dados por esse site.
@@ -251,7 +272,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center mt-5">
-                    <input type="submit" class="input-rosa" value="Criar Conta">
+                    <input type="submit" class="input-rosa" value="Criar Conta" id="btnSubmit">
                 </div>
 
                 <p class="text-center mt-5"><i>"Ao criar uma conta você está de acordo com a nossa política de

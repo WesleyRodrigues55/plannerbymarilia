@@ -5,6 +5,7 @@ use CodeIgniter\I18n\Time;
 use App\Controllers\ProductCategoryType;
 use App\Controllers\Product;
 use App\Controllers\User;
+use CodeIgniter\Files\File;
 
 class Administrator extends BaseController
 {
@@ -18,6 +19,7 @@ class Administrator extends BaseController
         return
             view('/adm/index');
     }
+
     public function cadastroProduto()
     {
         $user = new User();
@@ -29,7 +31,283 @@ class Administrator extends BaseController
         $data = ['tipo_categoria_produto' => $tipo_categoria_produto->tipoCategoriasProdutos()];
         return
             view('/adm/cadastro-produto', $data);
+    }
 
+    public function cadastroCapasProduto($id_produto)
+    {
+        if (!$id_produto)
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $tipo_categoria_produto = new ProductCategoryType();
+
+        $data = ['id_produto' => $id_produto ];
+        return
+            view('/adm/cadastro-capas-produto', $data);
+    }
+
+    public function uploadImagemCapasProduto($imagens)
+    {
+        $nomesDosArquivos = [];
+
+        $rules = [
+            'foto-produto' => 'uploaded[foto-produto]|mime_in[foto-produto,image/png,image/jpeg]|max_size[foto-produto,1024]' // 1 MB máximo
+        ];
+        if ($this->validate($rules))
+        {
+            foreach ($imagens as $img) {
+                if ($img->isValid() && !$img->hasMoved())
+                {
+                    $novoNome = uniqid() . '_' . $img->getName();
+                    $img->move(ROOTPATH . 'public/assets/img/produtos/capas', $novoNome);
+                    $nomesDosArquivos[] = $novoNome;
+                }
+                else
+                {
+                    $nomesDosArquivos[] = $img->getErrorString();
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            $nomesDosArquivos[] = implode('<br>', $this->validator->getErrors());
+            return false;
+        }
+        return $nomesDosArquivos;
+    }
+
+
+    public function insereCapasProduto() {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $id_produto = $this->request->getPost('id-produto');
+        $imagens = $this->request->getFileMultiple('foto-produto');
+        $nomesDosArquivos = $this->uploadImagemCapasProduto($imagens);
+        if (!$nomesDosArquivos) {
+            session()->setFlashdata('imagem-invalida', 'Imagens e capas não são validas, tenten novamente!');
+            return redirect()->back();
+        } 
+        foreach ($nomesDosArquivos as $nomeDoArquivo) {
+            $data = [
+                'PRODUTO_ID' => $id_produto,
+                'IMAGEM_CAPA' => $nomeDoArquivo,
+                'ATIVO' => 1
+            ];
+
+            $db = \Config\Database::connect();
+            $builder = $db->table('capas_produtos');
+            $builder->insert($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('erro-insert-capas', 'Ocorreu um erro no cadastro das capas, tente novamente!');
+            } else {
+                session()->setFlashdata('succes-insert-capas', 'Capas cadastradas com sucesso!');
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function listaCapasProduto($id_produto)
+    {
+        if (!$id_produto)
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('capas_produtos');
+            $builder->where('ATIVO', 1);
+            $builder->orderBy('ID', 'ASC');
+            $builder->limit(10); 
+
+            $query = $builder->get()->getResultArray();
+            $db->close();
+
+            if (empty($query)) {
+                $data = ['id_produto' => $id_produto];
+                session()->setFlashdata('list-empty', 'A lista está vazia.');
+                return view('/adm/lista-capas-produto', $data);
+            }
+            $data = ['capas' => $query];
+
+            return view('/adm/lista-capas-produto', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
+    }
+
+    public function editarCapaProduto($id)
+    {
+        if ($id == null)
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('capas_produtos');
+        $builder->where("ID", $id);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        
+        $data = [
+            "capa_produto" => $query, 
+        ];
+        return view('/adm/editar-capa-produto', $data);
+    }
+
+    public function uploadImagemCapaProduto($img) {
+        $rules = [
+            'foto-capa-produto' => 'uploaded[foto-capa-produto]|mime_in[foto-capa-produto,image/png,image/jpeg]|max_size[foto-capa-produto,1024]' // 1 MB máximo
+        ];
+
+        if ($this->validate($rules))
+        {
+            if ($img->isValid() && !$img->hasMoved())
+            {
+                $novoNome = uniqid() . '_' . $img->getName();
+                $img->move(ROOTPATH . 'public/assets/img/produtos/capas/', $novoNome);
+                return $novoNome;
+            }
+            else
+            {
+                return false;
+                return $img->getErrorString();
+            }
+        }
+        else {
+            return false;
+            return implode('<br>', $this->validator->getErrors());
+        }
+    }
+
+    public function alterarCapaProduto()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        
+        $id = $this->request->getPost('id');
+        $id_produto = $this->request->getPost('id-produto');
+        $nova_imagem = $this->request->getFile('foto-capa-produto');
+
+        $move_img = $this->uploadImagemCapaProduto($nova_imagem);
+        if (!$move_img) {
+            session()->setFlashdata('imagem-invalida', 'Imagem não é valida!');
+            return redirect()->back();
+        } 
+        
+        $data = [
+            'IMAGEM_CAPA' => $move_img
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('capas_produtos');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                session()->setFlashdata('register-capa-failed', 'Tivemos um erro em editar a capa do produto, por favor tente novamente!');
+            } else {
+                session()->setFlashdata('register-capa-success', 'Capa do produto editado com sucesso!');
+            }
+            return redirect()->back();
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+    }
+
+    public function desativarCapaProduto()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
+        $id = $this->request->getPost('id-capa-produto');
+        $id_produto = $this->request->getPost('id-produto');
+        $data = [
+            'ATIVO' => 0,
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('capas_produtos');
+            $builder->where('ID', $id);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.',
+                    'id_produto' => $id_produto
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.',
+                    'id_produto' => $id_produto
+                );
+
+            }
+            echo json_encode($response);
+
+            // return redirect()->back();
+
+        } catch (\Exception $e) {
+            log_message('error', 'Erro na conexão com o banco de dados: ' . $e->getMessage());
+            // Lidar com o erro de forma adequada, exibir uma mensagem de erro amigável ao usuário, etc.
+        }
+    }
+
+    public function uploadImagemProduto($img) {
+        $rules = [
+            'foto-produto' => 'uploaded[foto-produto]|mime_in[foto-produto,image/png,image/jpeg]|max_size[foto-produto,1024]' // 1 MB máximo
+        ];
+
+        if ($this->validate($rules))
+        {
+            if ($img->isValid() && !$img->hasMoved())
+            {
+                $novoNome = uniqid() . '_' . $img->getName();
+                $img->move(ROOTPATH . 'public/assets/img/produtos', $novoNome);
+                return $novoNome;
+            }
+            else
+            {
+                return false;
+                return $img->getErrorString();
+            }
+        }
+        else {
+            return false;
+            return implode('<br>', $this->validator->getErrors());
+        }
+    }
+
+    public function cadastrarQuantidadeEstoquePeloIdProduto($id_produto, $quantidade_estoque) {
+        $data = [
+            'PRODUTO_ID' => $id_produto,
+            'QUANTIDADE' => $quantidade_estoque,
+        ];
+        $db = \Config\Database::connect();
+        $builder = $db->table('estoque');
+        $builder->insert($data);
+        $db->close();
     }
 
     public function insereProduto()
@@ -51,11 +329,20 @@ class Administrator extends BaseController
         $tamanho_interno = $this->request->getPost('tamanho-interno');
         $quantidade_folha = $this->request->getPost('quantidade-folhas');
         $descricao_tecnica = $this->request->getPost('descricao-tecnica');
-        
+        $quantidade_estoque = $this->request->getPost('quantidade');
+
+        $img = $this->request->getFile('foto-produto');
+
+        $move_img = $this->uploadImagemProduto($img);
+        if (!$move_img) {
+            session()->setFlashdata('imagem-invalida', 'Imagem não é valida!');
+            return redirect()->back();
+        } 
+    
         $data = [
             'TIPO_CATEGORIA_PRODUTO_ID' => $tipo_categoria_produto,
             'NOME' => $nome,
-            'IMAGEM' => 'produto.png',
+            'IMAGEM' => $move_img,
             'PRECO' => $preco,
             'SLUG' => $slug,
             'TIPO_CAPA' => $tipo_capa,
@@ -74,7 +361,6 @@ class Administrator extends BaseController
         ];
 
         try {
-
             if ($nome && $categoria) {
                 $db = \Config\Database::connect();
                 $builder = $db->table('produto');
@@ -91,7 +377,10 @@ class Administrator extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->insert($data);
+            $ultimo_id_produto_inserido = $db->insertID();
             $db->close();
+
+            $this->cadastrarQuantidadeEstoquePeloIdProduto($ultimo_id_produto_inserido, $quantidade_estoque);
 
             if (!$builder) {
                 session()->setFlashdata('register-produtc-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
@@ -138,7 +427,6 @@ class Administrator extends BaseController
             } catch (\Exception $e) {
                 echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
             }
-
     }
 
     
@@ -651,6 +939,7 @@ class Administrator extends BaseController
                 );
 
             }
+            
             echo json_encode($response);
 
             return redirect()->back();
@@ -669,7 +958,7 @@ class Administrator extends BaseController
         } else {
             $user = new User();
             if (!$user->validaLoginAdm()) {
-                return redirect()->to('/login')->with('error', 'Login required.');
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         
             $opcoes_adicionais = new Product();
@@ -739,60 +1028,6 @@ class Administrator extends BaseController
         $query = $builder->get()->getResultArray();
         $db->close();
         return $query;
-    }
-
-    // public function editarUsuario($id_usuario = null)
-    // {
-    //     if ($id_usuario == null) {
-    //         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-    //     } else {
-    //         $user = new User();
-    //         if (!$user->validaLoginAdm()) {
-    //             return redirect()->to('/login')->with('error', 'Login required.');
-    //         }
-        
-
-    //         $usuario_selecionado = $id_usuario->getUserById($id_usuario);
-        
-    //         $data = [
-    //             'usuario' => $usuario_selecionado,
-    //         ];
-        
-    //         return view('adm/editar-opcoes-adicionais', $data);
-    //     }
-    // }
-
-    public function alterarUsuario()
-    {
-        $myTime = Time::now('America/Sao_Paulo');
-        
-        $senha = $this->request->getPost('senha');
-        $id_opcoes_adicionais = $this->request->getPost('id-user');
-        
-        $data = [
-            'SENHA' => $senha,
-            'UPDATED_AT' => $myTime->toDateTimeString(),
-        ];
-
-        try {
-            $db = \Config\Database::connect();
-            $builder = $db->table('usuario');
-            $builder->where('ID', $id_opcoes_adicionais);
-            $builder->update($data);
-            $db->close();
-
-            if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
-            } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
-            }
-            return redirect()->to('/administrador/lista-opcoes-adicionais');
-
-        } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
-        } 
-        
-        
     }
 
 }
