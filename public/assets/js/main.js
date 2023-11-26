@@ -80,6 +80,24 @@ $(document).on('submit', '#excluirProduto', function(event) {
     })
 })
 
+// exclui capa produto
+$(document).on('submit', '#excluirCapaProduto', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/desativar-capa-produto',
+        data: formData,
+        success: function(response) {
+            response = JSON.parse(response);
+            openToast('open-toast-exclusao-capa-produto');
+            setTimeout(() => {
+                window.location.href = "/administrador/lista-capas-produto/" + response.id_produto
+            }, 5000);
+        }
+    })
+})
+
 // exclui usuario
 $(document).on('submit', '#excluirUsuario', function(event) {
     event.preventDefault();
@@ -121,7 +139,7 @@ $(document).on('submit', '#AlterarSenhaUsuarioLogado', function(event) {
         data: formData,
         success: function(response) {
             console.log(response)
-            // response = JSON.parse(response);
+                // response = JSON.parse(response);
             openToast('open-toast-alterar-senha-usuario-logado');
         }
     })

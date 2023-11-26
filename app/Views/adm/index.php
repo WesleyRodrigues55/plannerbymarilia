@@ -17,7 +17,6 @@ $data['link_css'] = "assets/css/lista-produto.css";
         <div class="col-md-4 mb-4">
             <h2>Produtos</h2>
             <p><a href="<?= base_url('administrador/cadastro-produto') ?>" class="input-simples-outline">Cadastrar Produtos</a></p>
-            <p><a href="<?= base_url('administrador/cadastro-capas-produto') ?>" class="input-simples-outline">Cadastrar Capas Produtos</a></p>
             <p><a href="<?= base_url('administrador/lista-produto') ?>" class="input-simples-outline">Listar Produtos</a></p>
         </div>
         <div class="col-md-4 mb-4">

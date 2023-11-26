@@ -27,30 +27,37 @@ $routes->post('/user/alterar-usuario', 'User::AlterarUsuarioLogado');
 
 // Administrador
 $routes->get('/administrador/dashboard', 'Administrator::dashboard');
+    // produto
 $routes->get('/administrador/cadastro-produto', 'Administrator::cadastroProduto');
-$routes->get('/administrador/cadastro-capas-produto/(:any)', 'Administrator::cadastroCapasProduto/$1');
-$routes->get('/administrador/cadastro-opcoes-adicionais', 'Administrator::cadastroOpcaoAdicional');
 $routes->get('/administrador/lista-produto', 'Administrator::listaProduto');
+$routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProduto/$1');
+$routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
+$routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
+$routes->post('/administrador/desativar-produto', 'Administrator::desativarProduto');
+    // capas produto
+$routes->get('/administrador/cadastro-capas-produto/(:any)', 'Administrator::cadastroCapasProduto/$1');
+$routes->get('/administrador/lista-capas-produto/(:any)', 'Administrator::listaCapasProduto/$1');
+$routes->get('/administrador/editar-capa-produto/(:any)', 'Administrator::editarCapaProduto/$1');
+$routes->post('/administrador/alterar-capa-produto', 'Administrator::alterarCapaProduto');
+$routes->post('/administrador/insere-capas-produto', 'Administrator::insereCapasProduto');
+$routes->post('/administrador/desativar-capa-produto', 'Administrator::desativarCapaProduto');
+    // opcoes adicionais
+$routes->get('/administrador/cadastro-opcoes-adicionais', 'Administrator::cadastroOpcaoAdicional');
+$routes->get('/administrador/lista-opcoes-adicionais', 'Administrator::listaOpcoesAdicionais');
+$routes->get('/administrador/editar-opcoes-adicionais/(:any)', 'Administrator::editarOpcoesAdicionais/$1');
+$routes->post('/administrador/alterar-opcoes-adicionais', 'Administrator::alterarOpcoesAdicionais');
+$routes->post('/administrador/insere-opcoes-adicionais', 'Administrator::insereOpcaoAdicional');
+$routes->post('/administrador/desativar-opcoes-adicionais', 'Administrator::desativarOpcoesAdicionais');
+    // usuarios
 $routes->get('/administrador/lista-usuario', 'Administrator::listaUsuario');
+$routes->post('/administrador/desativar-usuario', 'Administrator::desativarUsuario');
+    // categorias
 $routes->get('/administrador/cadastro-categoria', 'Administrator::cadastroCategoria');
 $routes->get('/administrador/lista-categoria', 'Administrator::listaCategoria');
 $routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCategoria/$1');
 $routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
-$routes->get('/administrador/editar-produto/(:any)', 'Administrator::editarProduto/$1');
-$routes->post('/administrador/alterar-produto', 'Administrator::alterarProduto');
-$routes->get('/administrador/editar-usuario', 'Administrator::editarUsuario');
-$routes->post('/administrador/insere-produto', 'Administrator::insereProduto');
-$routes->post('/administrador/insere-capas-produto', 'Administrator::insereCapasProduto');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
-$routes->post('/administrador/insere-opcoes-adicionais', 'Administrator::insereOpcaoAdicional');
-$routes->get('/administrador/lista-opcoes-adicionais', 'Administrator::listaOpcoesAdicionais');
-$routes->get('/administrador/editar-opcoes-adicionais/(:any)', 'Administrator::editarOpcoesAdicionais/$1');
-$routes->post('/administrador/alterar-opcoes-adicionais', 'Administrator::alterarOpcoesAdicionais');
 $routes->post('/administrador/desativar-categoria', 'Administrator::desativarCategoria');
-$routes->post('/administrador/desativar-produto', 'Administrator::desativarProduto');
-$routes->post('/administrador/desativar-usuario', 'Administrator::desativarUsuario');
-$routes->post('/administrador/desativar-opcoes-adicionais', 'Administrator::desativarOpcoesAdicionais');
-
 
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
