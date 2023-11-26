@@ -122,7 +122,7 @@ class Administrator extends BaseController
                     produto.CATEGORIA
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-                $builder->orderBy('ID', 'ASC');
+                $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
     
                 $query = $builder->get()->getResultArray();
@@ -160,7 +160,7 @@ class Administrator extends BaseController
                     usuario.ATIVO
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-                $builder->orderBy('ID', 'ASC');
+                $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
     
                 $query = $builder->get()->getResultArray();
@@ -249,7 +249,7 @@ class Administrator extends BaseController
                 tipo_categoria_produto.TIPO_CATEGORIA,
 
             ');
-            $builder->orderBy('ID', 'ASC');
+            $builder->orderBy('ID', 'DESC');
             $builder->limit(10); 
 
             $query = $builder->get()->getResultArray();
