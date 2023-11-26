@@ -37,7 +37,7 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
             </div>
         <?php endif; ?>
 
-        <form class="teste" method="post" action="<?= base_url('/administrador/insere-produto') ?>">
+        <form class="teste" method="post" action="<?= base_url('/administrador/insere-produto') ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 mt-2 mb-3">
                     <label for="text" class="preencher">NOME DO PRODUTO</label>
@@ -97,7 +97,10 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                     </select>
                 </div>
 
-                <div class="col-sm-12 col-md-4 mb-3"></div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <label for="text" class="preencher">QUANTIDADE NO ESTOQUE</label>
+                    <input type="number" class="form-control" name="quantidade" placeholder="Quantidade" required>
+                </div>
 
                 <div class="col-md-6 mb-3">
                     <label for="" class="form-label">DESCRIÇÃO TÉCNICA</label>
@@ -134,6 +137,10 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
                         <input type="file" class="form-control " name="foto-produto" id="inputGroupFile02" required>
                     </div>
                 </div>
+                <?php $message_image_failed = session()->getFlashdata('imagem-invalida'); ?>
+                <?php if ($message_image_failed) : ?>
+                    <p style="color: red"><?= $message_image_failed; ?></p>
+                <?php endif; ?>
             </div>
             <!-- ../row -->
 
@@ -144,6 +151,7 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
             </div>
         </form>
     </div>
-    <?= view("include/footer") ?>
+</div>
+<?= view("include/footer") ?>
 
-    <?= view("include/scripts") ?>
+<?= view("include/scripts") ?>

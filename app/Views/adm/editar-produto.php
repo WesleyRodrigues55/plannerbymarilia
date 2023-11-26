@@ -134,8 +134,7 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
             </div>
         </form>
     </div>
+</div>
+<?= view("include/footer") ?>
 
-
-    <?= view("include/footer") ?>
-
-    <?= view("include/scripts") ?>
+<?= view("include/scripts") ?>

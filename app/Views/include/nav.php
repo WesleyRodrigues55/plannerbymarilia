@@ -1,10 +1,10 @@
 <header>
-    <div class="text-center py-3 header-top">
-        <span><b>SONHE, PLANEJE E REALIZE!</b></span>
+    <div class="text-center py-1 header-top">
+        <span>SONHE, PLANEJE E REALIZE!</span>
     </div>
     <div class="border-header"></div>
 
-    <div class="container d-flex justify-content-between align-items-center my-4">
+    <div class="container d-flex justify-content-between align-items-center">
         <form action="" action="" class="w-25 form-search-nav" style="position: relative">
             <input type="search" class="input-navegacao" name="pesquisa-nav" placeholder="Buscar">
             <img src="<?= base_url('assets/icons/lupa.png') ?>" style="position: absolute; top: 50%; right: 120px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Search" />
@@ -12,28 +12,35 @@
 
         <div class="w-50 text-center box-logo-header">
             <a href="<?= base_url('') ?>">
-                <img class="" src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto">
+                <img class="w-100" src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" style="max-width: 400px">
             </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
-                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
+                <a href="<?= base_url('login') ?>" class="d-flex gap-2 align-items-center input-rosa border-0">
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Iniciar Sessão
                 </a>
 
-                <!-- COM LOGIN -->
+            <!-- COM LOGIN -->
             <?php else : ?>
-                <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
-                    <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    Carrinho
-                </a>
-                <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
-                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    Perfil
-                </a>
+                <?php if (session()->get('nivel') == 1) : ?>
+                    <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        Carrinho
+                    </a>
+                    <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        Perfil
+                    </a>
+                <?php else : ?>
+                    <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        Painel Administrativo
+                    </a>
+                <?php endif; ?>
                 <a href=<?= base_url('user/logout') ?> class="d-flex flex-column align-items-center">
                     <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Logout
@@ -57,18 +64,28 @@
 
                     <!-- COM LOGIN -->
                     <?php else : ?>
-                        <li class="visao-mobile-icons">
-                            <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
-                                <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                                <span class="p-small">Carrinho</span>
-                            </a>
-                        </li>
-                        <li class="visao-mobile-icons">
-                            <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
-                                <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                                <span class="p-small">Perfil</span>
-                            </a>
-                        </li>
+                        <?php if (session()->get('nivel') == 1) : ?>
+                            <li class="visao-mobile-icons">
+                                <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
+                                    <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                    <span class="p-small">Carrinho</span>
+                                </a>
+                            </li>
+                            <li class="visao-mobile-icons">
+                                <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
+                                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                    <span class="p-small">Perfil</span>
+                                </a>
+                            </li> 
+                        <?php else: ?>
+                            <li class="visao-mobile-icons">
+                                <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex flex-column align-items-center">
+                                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                    <span class="p-small">Painel Administrativo</span>
+                                </a>
+                            </li> 
+                        <?php endif; ?>
+
                     <?php endif; ?>
                     
                 </div>
@@ -99,18 +116,27 @@
 
                             <!-- COM LOGIN -->
                             <?php else : ?>
-                                <li class="visao-mobile-icons">
-                                    <a href="<?= base_url('carrinho') ?>" class="d-flex align-items-center gap-2">
-                                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                                        Carrinho de compras
-                                    </a>
-                                </li>
-                                <li class="visao-mobile-icons">
-                                    <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex align-items-center gap-2">
-                                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                                        Perfil
-                                    </a>
-                                </li>
+                                <?php if (session()->get('nivel') == 1) : ?>
+                                    <li class="visao-mobile-icons">
+                                        <a href="<?= base_url('carrinho') ?>" class="d-flex align-items-center gap-2">
+                                            <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                            Carrinho de compras
+                                        </a>
+                                    </li>
+                                    <li class="visao-mobile-icons">
+                                        <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex align-items-center gap-2">
+                                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                            Perfil
+                                        </a>
+                                    </li>
+                                <?php else : ?>
+                                    <li class="visao-mobile-icons">
+                                        <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex align-items-center gap-2">
+                                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                                            Painel Administrativo
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 <li class="visao-mobile-icons">
                                     <a href="user/logout" class="d-flex align-items-center gap-2">
                                         <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">

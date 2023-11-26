@@ -9,18 +9,18 @@
 
 
 <?= view("include/head", $data) ?>
-    <?= view("include/nav") ?>
+<?= view("include/nav") ?>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4">Editar Endereço</h1>
+<main class="container my-5">
+    <h1 class="text-center mb-4">Editar Endereço</h1>
 
-        <?php $message_success = session()->getFlashdata('endereco-success'); ?>
-        <?php $message_failed = session()->getFlashdata('endereco-failed'); ?>
-        <?php if ($message_failed): ?>
-            <div class="alert alert-danger mt-5 text-center" role="alert">
-                <?= $message_failed; ?>
-            </div>
-        <?php endif; ?>
+    <?php $message_success = session()->getFlashdata('endereco-success'); ?>
+    <?php $message_failed = session()->getFlashdata('endereco-failed'); ?>
+    <?php if ($message_failed): ?>
+        <div class="alert alert-danger mt-5 text-center" role="alert">
+            <?= $message_failed; ?>
+        </div>
+    <?php endif; ?>
 
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
@@ -29,7 +29,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="post" action="<?= base_url('/comprando/editar-endereco-de-entrega') ?>">
+    <form method="post" action="<?= base_url('/comprando/editar-endereco-de-entrega') ?>">
 
             <div class="row">
                 <div class="col-md-12">
@@ -81,18 +81,21 @@
                         <input type="radio" id="local" name="local" value="casa" checked tabindex="6"> Casa
                     <?php endif ?>
 
-                    <?php if ($dados_usuario[0]['LOCAL_ENTREGA'] == "trabalho"): ?>
-                        <input type="radio" id="local" name="local" value="trabalho" checked tabindex="6"> Trabalho
-                    <?php else:  ?>
-                        <br><input type="radio" id="local" name="local" value="trabalho"> Trabalho
-                    <?php endif ?>
+                <?php if ($dados_usuario[0]['LOCAL_ENTREGA'] == "trabalho"): ?>
+                    <input type="radio" id="local" name="local" value="trabalho" checked tabindex="6"> Trabalho
+                <?php else: ?>
+                    <br><input type="radio" id="local" name="local" value="trabalho"> Trabalho
+                <?php endif ?>
 
-                </div>
-                <div class="col-md-12 my-2">
-                    <label for="">INFORMACÕES ADICIONAIS *</label>
-                    <input type="text" id="informacoes" name="informacoes" value="<?= $dados_usuario[0]['INFORMACOES_ADICIONAIS'] ?>" class="form-control" placeholder="Descrição da fachada, pontos de referência, informações de segurança etc." tabindex="7" required>
-                </div>
             </div>
+            <div class="col-md-12 my-2">
+                <label for="">INFORMACÕES ADICIONAIS *</label>
+                <input type="text" id="informacoes" name="informacoes"
+                    value="<?= $dados_usuario[0]['INFORMACOES_ADICIONAIS'] ?>" class="form-control"
+                    placeholder="Descrição da fachada, pontos de referência, informações de segurança etc." tabindex="7"
+                    required>
+            </div>
+        </div>
 
             <div class="d-flex justify-content-center mt-4 gap-2">
                 <input type="submit" class="input-rosa" value="Editar">
@@ -102,8 +105,7 @@
     
     </main>
 
-    <?= view("include/footer") ?>
+<?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
 <?= view("comprando/scripts/script-cadastro-cep") ?>
-
