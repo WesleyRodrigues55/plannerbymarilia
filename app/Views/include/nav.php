@@ -27,38 +27,38 @@ $data['link_css'] = "assets/css/nav.css";
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
                 <a href="<?= base_url('login') ?>" class="d-flex gap-2 align-items-center input-rosa border-0">
-                    <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center link-nav">
+
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Iniciar Sessão
+                </a>
+
+                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
+                    <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Cadastrar-se
+                </a>
+
+                <!-- COM LOGIN -->
+            <?php else : ?>
+                <?php if (session()->get('nivel') == 1) : ?>
+                    <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        Carrinho
+                    </a>
+                    <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
                         <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        Iniciar Sessão
+                        Perfil
                     </a>
-
-                    <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
-                        <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        Cadastrar-se
-                    </a>
-
-                    <!-- COM LOGIN -->
                 <?php else : ?>
-                    <?php if (session()->get('nivel') == 1) : ?>
-                        <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/carrinho-compras.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            Carrinho
-                        </a>
-                        <a href="<?= base_url('perfil/perfil-usuario') ?>" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            Perfil
-                        </a>
-                    <?php else : ?>
-                        <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex flex-column align-items-center">
-                            <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                            Painel Administrativo
-                        </a>
-                    <?php endif; ?>
-                    <a href=<?= base_url('user/logout') ?> class="d-flex flex-column align-items-center">
-                        <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                        Logout
+                    <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex flex-column align-items-center">
+                        <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                        Painel Administrativo
                     </a>
                 <?php endif; ?>
+                <a href=<?= base_url('user/logout') ?> class="d-flex flex-column align-items-center">
+                    <img src="<?= base_url('assets/icons/logout.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Logout
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 
