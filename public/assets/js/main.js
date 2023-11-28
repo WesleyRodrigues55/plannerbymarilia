@@ -144,3 +144,19 @@ $(document).on('submit', '#AlterarSenhaUsuarioLogado', function(event) {
         }
     })
 })
+
+// Altera quantidade item estoque
+$(document).on('submit', '#AlterarQuantidadeItemEstoque', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+    console.log(formData)
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/alterar-estoque',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-alterar-quantidade-estoque');
+        }
+    })
+})
