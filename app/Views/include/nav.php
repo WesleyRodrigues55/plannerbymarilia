@@ -1,8 +1,15 @@
+<?php
+$data['link_css'] = "assets/css/nav.css";
+
+?>
+
 <header>
+    <!-- <div class="text-center py-3 header-top">
+        <span id="mensagem" class="mensagem"><b>SONHE, PLANEJE E REALIZE!</b></span>
     <div class="text-center py-1 header-top">
         <span>SONHE, PLANEJE E REALIZE!</span>
     </div>
-    <div class="border-header"></div>
+    <div class="border-header"></div> -->
 
     <div class="container d-flex justify-content-between align-items-center">
         <form action="" action="" class="w-25 form-search-nav" style="position: relative">
@@ -20,11 +27,17 @@
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
                 <a href="<?= base_url('login') ?>" class="d-flex gap-2 align-items-center input-rosa border-0">
+
                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Iniciar Sessão
                 </a>
 
-            <!-- COM LOGIN -->
+                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
+                    <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
+                    Cadastrar-se
+                </a>
+
+                <!-- COM LOGIN -->
             <?php else : ?>
                 <?php if (session()->get('nivel') == 1) : ?>
                     <a href="<?= base_url('carrinho') ?>" class="d-flex flex-column align-items-center">
@@ -62,7 +75,7 @@
                             </a>
                         </li>
 
-                    <!-- COM LOGIN -->
+                        <!-- COM LOGIN -->
                     <?php else : ?>
                         <?php if (session()->get('nivel') == 1) : ?>
                             <li class="visao-mobile-icons">
@@ -76,18 +89,18 @@
                                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                                     <span class="p-small">Perfil</span>
                                 </a>
-                            </li> 
-                        <?php else: ?>
+                            </li>
+                        <?php else : ?>
                             <li class="visao-mobile-icons">
                                 <a href="<?= base_url('/administrador/dashboard') ?>" class="d-flex flex-column align-items-center">
                                     <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
                                     <span class="p-small">Painel Administrativo</span>
                                 </a>
-                            </li> 
+                            </li>
                         <?php endif; ?>
 
                     <?php endif; ?>
-                    
+
                 </div>
                 <div class="header-item-center">
                     <div class="overlay"></div>
@@ -114,7 +127,8 @@
                                     </a>
                                 </li>
 
-                            <!-- COM LOGIN -->
+
+                                <!-- COM LOGIN -->
                             <?php else : ?>
                                 <?php if (session()->get('nivel') == 1) : ?>
                                     <li class="visao-mobile-icons">
@@ -149,7 +163,7 @@
                                 <a href="#">PLANNERS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
+                                        <li class="nav-categorias"><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
                                         <li><a href="#">Item 02</a></li>
                                         <li><a href="#">Item 03</a></li>
                                         <li><a href="#">Item 04</a></li>
@@ -210,14 +224,14 @@
                 </div>
                 <div class="header-item-right">
                     <a href="#" class="menu-icon"><i class="ion ion-md-search"></i></a>
-                        <a href="#" class="menu-icon"><i class="ion ion-md-heart"></i></a>
-                        <a href="#" class="menu-icon"><i class="ion ion-md-cart"></i></a>
-                        <button type="button" class="menu-mobile-trigger">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
+                    <a href="#" class="menu-icon"><i class="ion ion-md-heart"></i></a>
+                    <a href="#" class="menu-icon"><i class="ion ion-md-cart"></i></a>
+                    <button type="button" class="menu-mobile-trigger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </div>
         </div>

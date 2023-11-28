@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Listar Adicional";
 $data['link_css'] = "assets/css/lista-produto.css";
 ?>
 
@@ -35,51 +35,51 @@ $data['link_css'] = "assets/css/lista-produto.css";
         </thead>
 
         <thead>
-        
+
             <tr>
                 <td colspan="4">
                     <?php $message_empty = session()->getFlashdata('list-empty'); ?>
-                    <?php if ($message_empty): ?>
+                    <?php if ($message_empty) : ?>
                         <div class="alert alert-danger mt-5 text-center" role="alert">
                             <?= $message_empty; ?>
                             <br>Para cadastrar uma opção adicional, clique em: <a href="<?= base_url('/administrador/cadastro-opcoes-adicionais'); ?>">Insere Adicional</a>.
                         </div>
-                    <?php else: ?>
-                        
-                        <?php foreach($opcoes_adicionais as $oadc):?>
-                            <tr>
-                                <td scope="col"><?= $oadc['ID'] ?></td>
-                                <td scope="col"><?= $oadc['NOME'] ?></td>
-                                <td scope="col"><?= "R$ " . number_format($oadc['PRECO'], 2, '.', '') ?></td>
-                                <td scope="col">
-                                    <a href="<?= base_url('administrador/editar-opcoes-adicionais/' . $oadc['ID']) ?>" class="input-simples">Editar</a>
-                                    <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $oadc['ID'] ?>">Excluir</a>
-                                </td>
-                            </tr>
-                            <div class="modal fade" id="staticBackdrop<?= $oadc['ID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Deseja realmente apagar essa categoria?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form method="post" id="excluirOpcoesAdicionais">
-                                            <input type="text" value="<?= $oadc['ID'] ?>" name="id-opcoes-adicionais" id="id-opcoes-adicionais" readonly hidden>
-                                            <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                                            </form>
-                                            <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php else : ?>
+
+                        <?php foreach ($opcoes_adicionais as $oadc) : ?>
+            <tr>
+                <td scope="col"><?= $oadc['ID'] ?></td>
+                <td scope="col"><?= $oadc['NOME'] ?></td>
+                <td scope="col"><?= "R$ " . number_format($oadc['PRECO'], 2, '.', '') ?></td>
+                <td scope="col">
+                    <a href="<?= base_url('administrador/editar-opcoes-adicionais/' . $oadc['ID']) ?>" class="input-simples">Editar</a>
+                    <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $oadc['ID'] ?>">Excluir</a>
                 </td>
             </tr>
-        </thead>    
+            <div class="modal fade" id="staticBackdrop<?= $oadc['ID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente apagar essa categoria?
+                        </div>
+                        <div class="modal-footer">
+                            <form method="post" id="excluirOpcoesAdicionais">
+                                <input type="text" value="<?= $oadc['ID'] ?>" name="id-opcoes-adicionais" id="id-opcoes-adicionais" readonly hidden>
+                                <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
+                            </form>
+                            <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </td>
+    </tr>
+        </thead>
     </table>
 </div>
 <?= view("include/footer") ?>

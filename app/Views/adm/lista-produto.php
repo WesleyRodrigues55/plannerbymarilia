@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Listar Produto";
 $data['link_css'] = "assets/css/lista-produto-adm.css";
 ?>
 
@@ -37,25 +37,25 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
         <thead>
             <td colspan="6">
                 <?php $message_empty = session()->getFlashdata('list-empty'); ?>
-                <?php if ($message_empty): ?>
+                <?php if ($message_empty) : ?>
                     <div class="alert alert-danger mt-5 text-center" role="alert">
                         <?= $message_empty; ?>
                         <br>Para cadastrar um produto, clique em: <a href="<?= base_url('/administrador/cadastro-produto'); ?>">Insere Produto</a>.
                     </div>
-                <?php else: ?>
-                    <?php foreach($produtos as $produto): ?>
+                <?php else : ?>
+                    <?php foreach ($produtos as $produto) : ?>
                         <tr>
                             <td scope="col"><?= $produto['ID'] ?></td>
                             <td scope="col"><?= $produto['NOME'] ?></td>
                             <td scope="col"><?= $produto['CATEGORIA'] ?></td>
                             <td scope="col"><?= "R$ " . number_format($produto['PRECO'], 2, '.', '') ?></td>
                             <td scope="col">
-                                    <a href="<?= base_url('administrador/cadastro-capas-produto/' . $produto['ID']) ?>" class="input-simples">Cadastrar capas</a>
-                                    <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
-                                    <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $produto['ID']?>">Excluir</a>
-                                </td>
+                                <a href="<?= base_url('administrador/cadastro-capas-produto/' . $produto['ID']) ?>" class="input-simples">Cadastrar capas</a>
+                                <a href="<?= base_url('administrador/editar-produto/' . $produto['ID']) ?>" class="input-simples">Editar</a>
+                                <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $produto['ID'] ?>">Excluir</a>
+                            </td>
                         </tr>
-                        <div class="modal fade" id="staticBackdrop<?= $produto['ID']?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop<?= $produto['ID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -66,8 +66,8 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                                     </div>
                                     <div class="modal-footer">
                                         <form method="post" id="excluirProduto">
-                                        <input type="text" value="<?= $produto['ID'] ?>" name="id-produto" id="id-produto" readonly hidden>
-                                        <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
+                                            <input type="text" value="<?= $produto['ID'] ?>" name="id-produto" id="id-produto" readonly hidden>
+                                            <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
                                         </form>
                                         <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
                                     </div>
@@ -78,7 +78,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                 <?php endif; ?>
             </td>
         </thead>
-        
+
     </table>
 </div>
 <?= view("include/footer") ?>

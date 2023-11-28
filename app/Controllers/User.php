@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use CodeIgniter\I18n\Time;
 use Config\Services;
 
@@ -31,7 +32,7 @@ class User extends BaseController
 
     //REALIZAR TRATATIVA DAS SENHAS IGUAIS NO JS -------------------------------------------------------------------------------
     public function cadastroUsuario()
-    {  
+    {
         //USER
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
@@ -100,7 +101,7 @@ class User extends BaseController
                     return redirect()->back();
                 }
             }
-        
+
             // Verificar se o e-mail já existe
             if ($email) {
                 $db = \Config\Database::connect();
@@ -139,7 +140,6 @@ class User extends BaseController
             $db->close();
             session()->setFlashdata('success-register', 'Conta criada com sucesso!');
             return redirect()->to('login');
-            
         } catch (\Exception $e) {
 
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -157,7 +157,7 @@ class User extends BaseController
         $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
         $builder->where('USUARIO', $usuario);
         $builder->where('ATIVO', 1);
-        
+
         $result = $builder->get()->getRow();
 
         if ($result && password_verify($senha, $result->SENHA)) {
@@ -256,11 +256,13 @@ class User extends BaseController
         return session()->has('usuario');
     }
 
-    public function validaLoginAdm(){
-        return session()->has('usuario') && session()->get('nivel') == 2? true : false;
+    public function validaLoginAdm()
+    {
+        return session()->has('usuario') && session()->get('nivel') == 2 ? true : false;
     }
 
-    public function getPessoaByIdUsuario($id_usuario) {
+    public function getPessoaByIdUsuario($id_usuario)
+    {
         $db      = \Config\Database::connect();
         $builder = $db->table('usuario');
         $builder->where('ID', $id_usuario);
@@ -270,7 +272,8 @@ class User extends BaseController
         return $id_pessoa;
     }
 
-    public function getPessoa($id_usuario) {
+    public function getPessoa($id_usuario)
+    {
         $id_pessoa = $this->getPessoaByIdUsuario($id_usuario);
         $db      = \Config\Database::connect();
         $builder = $db->table('pessoa');
@@ -293,16 +296,15 @@ class User extends BaseController
 
         $usuario_selecionado = $user->getPessoa($id_usuario);
 
-        if ($usuario_selecionado !== null ) {
+        if ($usuario_selecionado !== null) {
             $data = [
                 "usuario_selecionado" => $usuario_selecionado[0],
             ];
-        
+
             return view('perfil-usuario/perfil', $data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-
     }
 
     public function alterarPessoa()
@@ -340,7 +342,7 @@ class User extends BaseController
             'TELEFONE_01' => $telefone_01,
             'CELULAR' => $celular,
         ];
-        
+
         try {
             $db = \Config\Database::connect();
             $builder = $db->table('pessoa');
@@ -353,7 +355,6 @@ class User extends BaseController
                     'success' => true,
                     'message' => 'Alteração falhou.'
                 );
-                
             } else {
                 $response = array(
                     'success' => true,
@@ -361,11 +362,9 @@ class User extends BaseController
                 );
             }
             echo json_encode($response);
-
         } catch (\Exception $e) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-    
     }
 
     public function AlterarUsuarioLogado()
@@ -383,7 +382,7 @@ class User extends BaseController
         $data = [
             'SENHA' => $senha,
         ];
-        
+
         try {
             $db = \Config\Database::connect();
             $builder = $db->table('usuario');
@@ -396,7 +395,6 @@ class User extends BaseController
                     'success' => true,
                     'message' => 'Alteração falhou.'
                 );
-                
             } else {
                 $response = array(
                     'success' => true,
@@ -404,10 +402,8 @@ class User extends BaseController
                 );
             }
             echo json_encode($response);
-
         } catch (\Exception $e) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-    
     }
 }
