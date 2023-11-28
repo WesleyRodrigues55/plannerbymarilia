@@ -10,8 +10,37 @@ $data['link_css'] = "assets/css/home.css";
 <!-- conteúdo home vai aqui -->
 <main>
     <header>
-        <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100 banner-desktop" alt="">
-        <img src="<?= base_url('assets/img/banner-home-mobile.png') ?>" class="w-100 banner-mobile" alt="">
+        <!-- <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100 banner-desktop" alt="">
+        <img src="<?= base_url('assets/img/banner-home-mobile.png') ?>" class="w-100 banner-mobile" alt=""> -->
+        <div class="single-item-banner banner-desktop">
+            <!-- PRIMEIRO BANNER DESKTOP -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home.png') ?>" class="w-100 " alt="">
+            </div>
+            <!-- SEGUNDO BANNER DESKTOP -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home-2.png') ?>" class="w-100 " alt="">
+            </div>
+            <!-- TERCEIRO BANNER DESKTOP -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home-3.png') ?>" class="w-100 " alt="">
+            </div>
+        </div>
+
+        <div class="single-item-banner-mobile banner-mobile">
+            <!-- PRIMEIRO BANNER MOBILE -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home-mobile.png') ?>" class="w-100 banner-mobile" alt="">
+            </div>
+            <!-- SEGUNDO BANNER MOBILE -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home-mobile-2.png') ?>" class="w-100 banner-mobile" alt="">
+            </div>
+            <!-- TERCEIRO BANNER MOBILE -->
+            <div class="text-center">
+                <img src="<?= base_url('assets/img/banner-home-mobile-3.png') ?>" class="w-100 banner-mobile" alt="">
+            </div>
+        </div>
     </header>
     <?= view("include/produtos-mais-vendidos", $mais_vendidos) ?>
 
@@ -77,12 +106,6 @@ $data['link_css'] = "assets/css/home.css";
 
 </main>
 
-<div class="whats">
-    <a href="https://wa.me/5515996625568" target="_blank">
-        <img src="<?= base_url('assets/img/whatsapp.png') ?>" alt="Fale Conosco pelo Whatsapp" width="50">
-    </a>
-
-</div>
 
 <?= view("include/footer") ?>
 
