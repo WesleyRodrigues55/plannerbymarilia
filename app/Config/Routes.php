@@ -58,7 +58,9 @@ $routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCat
 $routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 $routes->post('/administrador/desativar-categoria', 'Administrator::desativarCategoria');
-
+    // Estoque
+$routes->get('/administrador/lista-estoque', 'Administrator::listaEstoque');
+$routes->post('/administrador/alterar-estoque', 'Administrator::alterarQuantidadeEstoque');
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
 $routes->post('/testimony/salvar', 'Testimony::salvar');
