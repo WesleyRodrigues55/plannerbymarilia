@@ -367,6 +367,13 @@ class BuyCart extends BaseController
         $usuario = new User();
         $id_usuario = $usuario->idUser();
         $id_produto = $this->request->getPost('id-produto');
+        $layout_planner = $this->request->getPost('layout-planner');
+        $nome-capa = $this->request->getPost('nome-capa');
+        $fonte-capa = $this->request->getPost('fonte-capa');
+        $divisorias = $this->request->getPost('divisorias');
+        $cantoneiras = $this->request->getPost('cantoneiras');
+        $preco-final = $this->request->getPost('preco-final');
+        $preco-original-produto = $this->request->getPost('preco-original-produto');
 
         try {
             $id_carrinho_compra = $this->getIdCarrinhoCompra($id_usuario);

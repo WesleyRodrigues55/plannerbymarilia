@@ -82,6 +82,8 @@ $routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCa
 $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
 
+$routes->post('/carrinho/teste', 'BuyCart::testeForm');
+
 // Comprando
 $routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
 $routes->get('/comprando/escolhendo-endereco-de-entrega/(:any)', 'DeliveryAdress::escolherEnderecoEntrega/$1');
