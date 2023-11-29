@@ -33,7 +33,7 @@ class Product extends BaseController
     
             return view('produtos/planners', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } 
     }
     public function cadernos() {
@@ -63,7 +63,7 @@ class Product extends BaseController
     
             return view('produtos/cadernos', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         
     }
@@ -95,7 +95,7 @@ class Product extends BaseController
 
             return view('produtos/agendas', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -126,7 +126,7 @@ class Product extends BaseController
 
             return view('produtos/blocos', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -317,7 +317,7 @@ class Product extends BaseController
             ];
             return view('produtos/produto-selecionado', $data);
         } catch (\Exception $e) {
-            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }   
     }
 
@@ -339,6 +339,59 @@ class Product extends BaseController
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
         } 
+    }
+
+    public function getCategorias() {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tipo_categoria_produto');
+        $builder->where('ATIVO', 1);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    
+    public function getCategoriaById($id) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('tipo_categoria_produto');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function getOpcoesById($id) {
+        $db = \Config\Database::connect();
+        $builder = $db->table('opcoes_adicionais');
+        $builder->where('ATIVO', 1);
+        $builder->where('ID', $id);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function getProdutoById($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('produto');
+        $builder->where('ID', $id);
+        $builder->where('ATIVO', 1);
+
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        $categorias = $this->getCategorias();
+
+        if ($query == null || $categorias == null) {
+            //produto não existe - fazer página de erro
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $data = [
+            'produto_selecionado' => $query,
+            'categorias' => $categorias
+        ];
+        return $data;
     }
 
 

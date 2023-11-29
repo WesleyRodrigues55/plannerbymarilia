@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Lista Usuario";
 $data['link_css'] = "assets/css/lista-usuario.css";
 ?>
 
@@ -26,41 +26,57 @@ $data['link_css'] = "assets/css/lista-usuario.css";
     <table class="tabela table table-hover text-center mt-3" style="margin-bottom: 10em;">
         <thead class="table-dark">
             <tr>
-                <th scope="col">Nome </th>
-                <th scope="col">Senha</th>
-                <th scope="col">CPF</th>
-                <th scope="col">Permissão</th>
-                <th scope="col">Status</th>
+                <th scope="col">ID </th>
+                <th scope="col">Pessoa ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ativo</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
 
         <thead>
-            <tr>
-                <td scope="col">Wesley </td>
-                <td scope="col">123</td>
-                <td scope="col">33367723-73</td>
-                <td scope="col">Administrador</td>
-                <td scope="col">Ativo</td>
-                <td>
-                    <a class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Excluir</a>
-                </td>
-            </tr>
+            <td colspan="6">
+                <?php $message_empty = session()->getFlashdata('list-empty'); ?>
+                <?php if ($message_empty) : ?>
+                    <div class="alert alert-danger mt-5 text-center" role="alert">
+                        <?= $message_empty; ?>
+                        <br>Para cadastrar um usuario, clique em: <a href="<?= base_url('/login/cadastro-usuario'); ?>">Insere Usuario</a>.
+                    </div>
+                <?php else : ?>
+                    <?php foreach ($usuario as $user) : ?>
+                        <tr>
+                            <td scope="col"><?= $user['ID'] ?></td>
+                            <td scope="col"><?= $user['PESSOA_ID'] ?></td>
+                            <td scope="col"><?= $user['USUARIO'] ?></td>
+                            <td scope="col"><?= $user['ATIVO'] ?></td>
+
+                            <td scope="col">
+                                <a href="" class="input-simples" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $user['ID'] ?>">Excluir</a>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="staticBackdrop<?= $user['ID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Deseja realmente apagar esse usuario?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" id="excluirUsuario">
+                                            <input type="text" value="<?= $user['ID'] ?>" name="id-user" id="id-user" readonly hidden>
+                                            <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
+                                        </form>
+                                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </td>
         </thead>
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"> </div>
-                    <div class="modal-body">
-                        Deseja realmente apagar esse usuário?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                        <a href="<?= base_url('administrador/lista-categoria') ?>" class="btn btn input-rosa">VOLTAR</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </table>
 </div>
 <?= view("include/footer") ?>

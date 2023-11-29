@@ -1,5 +1,5 @@
 <?php
-    $data['title'] = 'Carrinho de Compras';
+    $data['title'] = 'Escolhendo Endereço de Entrega';
     $data['link_css'] = "assets/css/carrinho.css";
 ?>
 
@@ -32,15 +32,15 @@
                         </div>
                         <hr>
                         <div class="d-block">
-                            <a href="">Editar</a>
+                            <a href="<?= base_url('comprando/editando-endereco-de-entrega/'. $du['ID'] . '/' . $du['USUARIO_ID'] . '/' . $id_carrinho) ?>">Editar</a>
                         </div>
                     </div>
                 </div>
             <?php endforeach ?>
 
-            <div class="d-flex justify-content mt-4 gap-2">
-                <input type="submit" class="input-simples" value="Continuar">
+            <div class="d-flex justify-content-between mt-4 gap-2">
                 <a href="<?= base_url('/comprando/cadastro-endereco-de-entrega/'. $id_carrinho . '/' . $du['USUARIO_ID']) ?>" class="input-simples">Adicionar Endereço</a>
+                <input type="submit" class="input-rosa" value="Continuar">
             </div>
         </form>
     </main>

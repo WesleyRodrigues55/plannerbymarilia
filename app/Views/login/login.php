@@ -8,10 +8,12 @@ $data['link_css'] = "assets/css/login.css";
 
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
     <a href="<?= base_url('home') ?>">
-        <img src="<?= base_url('assets/img/logo-projeto-svg.svg') ?>" alt="logo-projeto" class="logo">
+        <img src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" class="w-100" style="max-width: 400px">
     </a>
-    <h1 class="titulo">Acesse sua Conta</h1>
 
+    
+    <h1 class="titulo">Acesse sua Conta</h1>
+    
     <div class="usuario-senha">
         <?php $message_failed = session()->getFlashdata('login-failed'); ?>
         <?php if ($message_failed) : ?>
@@ -53,8 +55,11 @@ $data['link_css'] = "assets/css/login.css";
     </div>
 </div>
 
+<?= view("include/scripts") ?>
+
 <script>
-    document.getElementById("showPassword").addEventListener("click", function() {
+    // Icone do password, ocultando e aparecendo senha
+    document.getElementById("showPassword").addEventListener("click", () => {
         var passwordInput = document.getElementById("password");
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
@@ -64,5 +69,3 @@ $data['link_css'] = "assets/css/login.css";
     });
 </script>
 
-
-<?= view("include/scripts") ?>

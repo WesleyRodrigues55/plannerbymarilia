@@ -40,7 +40,7 @@
 
                 
                 <div class="d-flex justify-content-end mt-4">
-                    <input type="submit" class="input-simples" value="Continuar">
+                    <input type="submit" class="input-rosa" value="Continuar">
                 </div>
             </form>
         <?php endif ?>
