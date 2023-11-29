@@ -24,14 +24,14 @@
     <link rel="stylesheet" href="<?= base_url($link_css) ?>">
 
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
 
     <!-- slick -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
     <!-- Masks -->
-    <script src="<?= base_url("assets/js/masks.js") ?>"></script>
+    <script src="<?= base_url("assets/js/masks.js") ?>" defer></script>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-
+    document.getElementById('item1').style.display = "block"
     verticalTabs = document.querySelectorAll(".vertical-tabs a")
 
 
