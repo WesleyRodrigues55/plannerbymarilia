@@ -1,13 +1,6 @@
 /*Titulo do container */
 .titulo-perfil {
     color: var(--cor-rosa-principal);
-    /* padding-bottom: 1em; */
-    padding-top: 0.5em;
-}
-
-/* Quando passado o mouse em cima do titulo */
-.titulo-perfil:hover {
-    color: var(--cor-rosa-secundario);
 }
 
 /* Organização dos botões */
@@ -118,4 +111,16 @@ button {
     margin-top: 1em;
     border-radius: 8px;
 
+}
+
+.excluir-depoimentos {
+    color: var(--cor-rosa-principal);
+    border: 1px solid var(--cor-rosa-principal);
+    padding: 0.5em;
+    border-radius: 8px;
+}
+
+.excluir-depoimentos:hover {
+    background-color: var(--cor-rosa-secundario);
+    color: var(--cor-branco);
 }

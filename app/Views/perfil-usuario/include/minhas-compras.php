@@ -1,10 +1,8 @@
 <?php
 $data['link_css'] = "assets/css/perfil.css";
 ?>
-<style>
-    /* aqui vai meu conteudo de style */
-</style>
-<h1 class="titulo-perfil">Minhas compras</h1>
+
+<h2 class="mb-2 mt-2 titulo-perfil">Minhas Compras</h2>
 <table class="tabela table table-hover text-center mt-3" style="margin-bottom: 10em;">
     <thead class="table-danger">
         <tr>
