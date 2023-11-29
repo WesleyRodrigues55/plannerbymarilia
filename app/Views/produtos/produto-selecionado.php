@@ -8,24 +8,6 @@
 <?= view("include/nav") ?>
 
 <main class="container my-5">
-
-
-    <?php if (session()->has('usuario')): ?>
-    <form id="adicionaProdutoCarrinho" method="post">
-        <!-- <form action="carrinho/adiciona-produto-carrinho" method="post"> -->
-        <input type="text" name="id-produto" value="<?= $produto_selecionado[0]['ID'] ?>" id="" hidden readonly>
-        <input type="text" name="slug" value="<?= $produto_selecionado[0]['SLUG'] ?>" id="" hidden readonly>
-        <button type="submit" id="submit" name="submit" style="border: none; background: #fff;">
-            <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
-        </button>
-    </form>
-    <?php else: ?>
-    <button type="submit" id="submit" name="submit" class="faca-login"
-        id="faca-login-<?= $produto_selecionado[0]['SLUG'] ?>" style="border: none; background: #fff;">
-        <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:36px; height: 36px">
-    </button>
-    <?php endif; ?>
-
     <div class="row my-5">
         <div class="col-12 col-md-6">
             <div class="slider-container p-4">
@@ -67,13 +49,7 @@
             <div class="p-4">
                 <h1><b><?=  $produto_selecionado[0]['NOME']?></b></h1>
 
-                <?php 
-                    // echo "<pre>";
-                    // var_dump($produto_selecionado[0]);
-                    // var_dump($opcoes_adicionais);
-                ?>  
-
-                <!-- <form method="post" action="<?php //base_url('carrinho/teste') ?>"> -->
+                <!-- <form method="post" action="<?php //base_url('/carrinho/adiciona-produto-carrinho') ?>"> -->
                 <form method="post" id="adicionaProdutoCarrinho">
 
                     <?php if (strpos($produto_selecionado[0]['CATEGORIA'], "caderno") === 0 || strpos($produto_selecionado[0]['CATEGORIA'], "bloco") === 0): ?>
@@ -96,12 +72,12 @@
 
                     <div class="my-4">
                         <label for="name" class="preencher"><b>Digite o nome para a capa</b></label>
-                        <input type="text" class="form-control" id="name" name="nome-capa" placeholder="Digite o seu nome">
+                        <input type="text" class="form-control" id="name" name="nome-capa" placeholder="Digite o seu nome" required>
                     </div>
 
                     <div class="my-4">
                         <label for="fonte" class="preencher"><b>Escolha a fonte do nome</b></label>
-                        <select class="select form-control" name="fonte-capa" id="fonte" class="form-select">
+                        <select class="select form-control" name="fonte-capa" id="fonte" class="form-select" required>
                             <option selected>Selecione</option>
                             <option value="fonte1">Nome</option>
                         </select>
@@ -164,18 +140,15 @@
                     </div>
 
                     <div class="mt-4">
-                        <input type="submit" class="btn input-rosa px-5" value="COMPRAR TESTE">
+                        <!-- <input type="submit" class="btn input-rosa px-5" value="COMPRAR TESTE"> -->
 
                         <?php if (session()->has('usuario')): ?>
-                            <form id="adicionaProdutoCarrinho" method="post">
-                                <!-- <form action="carrinho/adiciona-produto-carrinho" method="post"> -->
-                                <input type="text" name="id-produto" value="<?= $produto_selecionado[0]['ID'] ?>" id="" hidden readonly>
-                                <input type="text" name="slug" value="<?= $produto_selecionado[0]['SLUG'] ?>" id="" hidden readonly>
-                                <button type="submit" class="btn input-rosa px-5 w-100 d-flex align-items-center justify-content-center gap-2">
-                                    <span>Comprar</span>
-                                    <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:24px; height: 24px">
-                                </button>
-                            </form>
+                            <input type="text" name="id-produto" value="<?= $produto_selecionado[0]['ID'] ?>" id="" hidden readonly>
+                            <input type="text" name="slug" value="<?= $produto_selecionado[0]['SLUG'] ?>" id="" hidden readonly>
+                            <button type="submit" class="btn input-rosa px-5 w-100 d-flex align-items-center justify-content-center gap-2">
+                                <span>Comprar</span>
+                                <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:24px; height: 24px">
+                            </button>
                         <?php else: ?>
                             <button type="submit" class="btn input-rosa px-5 w-100 d-flex align-items-center justify-content-center gap-2 faca-login" id="faca-login-<?= $produto_selecionado[0]['SLUG'] ?>">
                                 <span>Comprar</span>
