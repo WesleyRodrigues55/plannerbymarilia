@@ -177,7 +177,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center">
-                    <h2 class="h2-titles mt-5"><b>INFORMAÇÕES PARA ENTREGA</b></h2>
+                    <h2 class="h2-titles mt-5"><b>INFORMAÇÕES RESIDENCIAIS</b></h2>
                 </div>
 
                 <div class="row">
