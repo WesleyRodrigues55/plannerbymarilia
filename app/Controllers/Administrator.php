@@ -1047,10 +1047,9 @@ class Administrator extends BaseController
 
     public function alterarQuantidadeEstoque()
     {
-        $estoque = new Stock();
         $quantidade = $this->request->getPost('qtd-estoque');
         $id_qtd_estoque = $this->request->getPost('id-estoque');
-        return var_dump($quantidade);
+
         $data = [
             'QUANTIDADE' => $quantidade,
         ];

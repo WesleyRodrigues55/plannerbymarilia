@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Listar Estoque";
 $data['link_css'] = "assets/css/lista-produto.css";
 ?>
 
@@ -62,6 +62,7 @@ $data['link_css'] = "assets/css/lista-produto.css";
                                         <div class="modal-header">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <form method="post"  id="AlterarQuantidadeItemEstoque">
                                             <div class="modal-body">
                                                 Editar quantidade estoque do item:  <?=($est['NOME_PRODUTO']);?>
                                             </div>
@@ -73,13 +74,15 @@ $data['link_css'] = "assets/css/lista-produto.css";
                                             </div>
                                             
                                             <div class="modal-footer">
-                                                <form method="post" action="<?= base_url('/administrador/alterar-estoque'); ?>" id="AlterarQuantidadeItemEstoque">
+                                                
                                                 <input type="text" value="<?= $est['ID'] ?>" name="id-estoque" id="id-estoque" readonly hidden>
-                                                <button type="submit" class="btn btn input-rosa" data-bs-dismiss="modal">CONFIRMAR</button>
-                                                </form>
+                                                <button type="submit" class="btn btn input-rosa">CONFIRMAR</button>
+                                                
                                                 <button type="button" class="btn btn input-rosa" data-bs-dismiss="modal">FECHAR</button>
                                             </div>
+                                            </form>
                                         </div>
+                                        
                                     </div>
                              </div>
                          <?php endforeach; ?>
