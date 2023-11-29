@@ -33,6 +33,10 @@ $data['link_css'] = "assets/css/lista-produto.css";
             <h2>Usuários</h2>
             <p><a href="<?= base_url('administrador/lista-usuario') ?>" class="input-simples-outline">Listar Usuario</a></p>
         </div>
+        <div class="col-md-4 mb-4">
+            <h2>Estoque</h2>
+            <p><a href="<?= base_url('administrador/lista-estoque') ?>" class="input-simples-outline">Listar Estoque</a></p>
+        </div>
     </div>
 </div>
 
