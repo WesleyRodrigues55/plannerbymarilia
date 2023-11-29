@@ -19,20 +19,20 @@ $data['link_css'] = "assets/css/nav.css";
 
         <div class="w-50 text-center box-logo-header">
             <a href="<?= base_url('') ?>">
-                <img class="w-100" src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" style="max-width: 400px">
+                <img class="w-100" src="<?= base_url('assets/img/logo-2.png') ?>" alt="logo-projeto" style="max-width: 300px">
             </a>
         </div>
 
         <div class="d-flex w-25 justify-content-end content-icons-nav content-icons-nav-desktop">
             <!-- SEM LOGIN -->
             <?php if (!session()->has('usuario')) : ?>
-                <a href="<?= base_url('login') ?>" class="d-flex gap-2 align-items-center input-rosa border-0">
+                <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center link-nav p-small">
 
-                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                    Iniciar Sessão
+                    <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav link-nav " style="width: 32px">
+                    Login
                 </a>
 
-                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav">
+                <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center link-nav p-small">
                     <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 32px">
                     Cadastrar-se
                 </a>
@@ -70,8 +70,14 @@ $data['link_css'] = "assets/css/nav.css";
                     <?php if (!session()->has('usuario')) : ?>
                         <li class="visao-mobile-icons">
                             <a href="<?= base_url('login') ?>" class="d-flex flex-column align-items-center">
-                                <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 32px">
-                                <span class="p-small">Iniciar Sessão</span>
+                                <img src="<?= base_url('assets/icons/user.png') ?>" alt="" class="icon-nav" style="width: 24px">
+                                <span class="p-small">Login</span>
+                            </a>
+                        </li>
+                        <li class="visao-mobile-icons">
+                            <a href="<?= base_url('login/cadastro-usuario') ?>" class="d-flex flex-column align-items-center">
+                                <img src="<?= base_url('assets/icons/cadastro.png') ?>" alt="" class="icon-nav" style="width: 24px">
+                                <span class="p-small">Cadastrar-se</span>
                             </a>
                         </li>
 
@@ -160,61 +166,61 @@ $data['link_css'] = "assets/css/nav.css";
                             <?php endif; ?>
 
                             <li class="menu-item-has-children">
-                                <a href="#">PLANNERS<img src="#" alt=""></a>
+                                <a href="#" class="p-small">PLANNERS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li class="nav-categorias"><a href="<?= base_url('/planners')  ?>">Ver planners</a></li>
-                                        <li><a href="#">Item 02</a></li>
-                                        <li><a href="#">Item 03</a></li>
-                                        <li><a href="#">Item 04</a></li>
+                                        <li class="nav-categorias"><a href="<?= base_url('/planners')   ?>" class="p-small">Ver planners</a></li>
+                                        <li><a href="#" class="p-small">Item 02</a></li>
+                                        <li><a href="#" class="p-small">Item 03</a></li>
+                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>
 
                             <li class="menu-item-has-children">
-                                <a href="#">AGENDA<img src="#" alt=""></a>
+                                <a href="#" class="p-small">AGENDA<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="<?= base_url('/agendas')  ?>">Ver agendas</a></li>
-                                        <li><a href="#">Item 02</a></li>
-                                        <li><a href="#">Item 03</a></li>
-                                        <li><a href="#">Item 04</a></li>
+                                        <li><a href="<?= base_url('/agendas')  ?>" class="p-small">Ver agendas</a></li>
+                                        <li><a href="#" class="p-small">Item 02</a></li>
+                                        <li><a href="#" class="p-small">Item 03</a></li>
+                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>
 
                             <li class="menu-item-has-children">
-                                <a href="#">BLOCO DE NOTAS<img src="#" alt=""></a>
+                                <a href="#" class="p-small">BLOCO DE NOTAS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="<?= base_url('/blocos')  ?>">Ver blocos</a></li>
-                                        <li><a href="#">Item 02</a></li>
-                                        <li><a href="#">Item 03</a></li>
-                                        <li><a href="#">Item 04</a></li>
+                                        <li><a href="<?= base_url('/blocos')  ?>" class="p-small">Ver blocos</a></li>
+                                        <li><a href="#" class="p-small">Item 02</a></li>
+                                        <li><a href="#" class="p-small">Item 03</a></li>
+                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>
 
                             <li class="menu-item-has-children">
-                                <a href="#">CADERNOS<img src="#" alt=""></a>
+                                <a href="#" class="p-small">CADERNOS<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="<?= base_url('/cadernos')  ?>">Ver cadernos</a></li>
-                                        <li><a href="#">Item 02</a></li>
-                                        <li><a href="#">Item 03</a></li>
-                                        <li><a href="#">Item 04</a></li>
+                                        <li><a href="<?= base_url('/cadernos')  ?>" class="p-small">Ver cadernos</a></li>
+                                        <li><a href="#" class="p-small">Item 02</a></li>
+                                        <li><a href="#" class="p-small">Item 03</a></li>
+                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>
 
                             <li class="menu-item-has-children">
-                                <a href="#">PRONTA ENTREGA<img src="#" alt=""></a>
+                                <a href="#" class="p-small">PRONTA ENTREGA<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#">Item 01</a></li>
-                                        <li><a href="#">Item 02</a></li>
-                                        <li><a href="#">Item 03</a></li>
-                                        <li><a href="#">Item 04</a></li>
+                                        <li><a href="#" class="p-small">Item 01</a></li>
+                                        <li><a href="#" class="p-small">Item 02</a></li>
+                                        <li><a href="#" class="p-small">Item 03</a></li>
+                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>

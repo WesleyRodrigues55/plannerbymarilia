@@ -37,20 +37,14 @@
 }
 
 .banner-desktop {
-    display: block;
+    display: block !important;
 }
 
 .banner-mobile {
-    display: none;
+    display: none !important;
 }
 
-.whats {
-    position: fixed;
-    bottom: 4em;
-    margin-right: 1em;
-    right: 1em;
-    z-index: 9999;
-}
+
 
 @media screen and (max-width: 768px) {
     .box-slider-depoimentos .container {
@@ -58,10 +52,10 @@
     }
 
     .banner-desktop {
-        display: none;
+        display: none !important;
     }
 
     .banner-mobile {
-        display: block;
+        display: block !important;
     }
 }
