@@ -144,3 +144,25 @@ $(document).on('submit', '#AlterarSenhaUsuarioLogado', function(event) {
         }
     })
 })
+
+// Altera quantidade item estoque
+$(document).on('submit', '#AlterarQuantidadeItemEstoque', function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+
+    $.ajax({
+        type: 'POST',
+        url: '/administrador/alterar-estoque',
+        data: formData,
+        success: function(response) {
+            // response = JSON.parse(response);
+            openToast('open-toast-alterar-quantidade-estoque');
+            $('#AlterarQuantidadeItemEstoque').modal('hide');
+
+            // Adiciona um atraso de 2 segundos antes de recarregar a página
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+        }
+    })
+})

@@ -43,6 +43,13 @@
   </div>
 </footer>
 
+<div class="whats">
+  <a href="https://wa.me/5515991263437" target="_blank">
+    <img src="<?= base_url('assets/img/whatsapp.png') ?>" alt="Fale Conosco pelo Whatsapp" width="50">
+  </a>
+
+</div>
+
 <!-- mensagem pop-up adicioanndo item carrinho -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div id="open-toast-cart" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
@@ -175,8 +182,8 @@
     </div>
     <div class="toast-body">
       <p class="p-small">
-      Suas informações foram alteradas com sucesso!
-    </p>
+        Suas informações foram alteradas com sucesso!
+      </p>
     </div>
   </div>
 </div>
@@ -192,8 +199,8 @@
     </div>
     <div class="toast-body">
       <p class="p-small">
-      Sua Senha foi alterada com Sucesso!
-    </p>
+        Sua Senha foi alterada com Sucesso!
+      </p>
     </div>
   </div>
 </div>
@@ -209,7 +216,24 @@
     </div>
     <div class="toast-body">
       <p class="p-small">
-      Capa do produto desativada com Sucesso!
+        Capa do produto desativada com Sucesso!
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up alterar quantidade estoque-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-alterar-quantidade-estoque" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Estoque alterado com sucesso!
     </p>
     </div>
   </div>
