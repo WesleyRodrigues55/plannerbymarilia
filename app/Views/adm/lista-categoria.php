@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Listar Categoria";
+$data['title'] = "Lista Categoria";
 $data['link_css'] = "assets/css/lista-produto.css";
 ?>
 
