@@ -1,33 +1,32 @@
 <?php
 $data['link_css'] = "assets/css/perfil.css";
 ?>
-<style>
-    /* aqui vai meu conteudo de style */
-</style>
 
-
-<div class="container">
-    <h1 class="titulo-perfil">Meus Depoimentos</h1>
+<div class="container p-4">
+    <h2 class="mb-2 titulo-perfil">Meus Depoimentos</h2>
+    <hr>
     <div class="">
-        <div class="col-md-10 coluna-depoimentos">
-            <div class="card mb-3 teste-background">
-                <div class="card-body">
-                    <h5 class="card-title"><b>Depoimento 1</b></h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod.</p>
-                    <p class="card-text"><b>Data: 01/11/2023</b></p>
-                    <a class="btn input-rosa">Editar</a>
+        <div class="card mb-3 teste-background">
+            <div class="card-body">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <span class="card-text p-small"><i>Data: 01/11/2023</i></span>
+                    <a class="p-small d-flex justify-content-end excluir-depoimentos" href="">Excluir</a>
                 </div>
+                <hr>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod.</p>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-10 ml-md-5 coluna-depoimentos ">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title"><b>Depoimento 2</b></h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod.</p>
-                    <p class="card-text"><b>Data: 01/11/2023</b></p>
-                    <a class="btn input-rosa">Editar</a>
+    <div class="">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <span class="card-text p-small"><i>Data: 01/11/2023</i></span>
+                    <a class="p-small d-flex justify-content-end excluir-depoimentos" href="">Excluir</a>
                 </div>
+                <hr>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod.</p>
             </div>
         </div>
     </div>

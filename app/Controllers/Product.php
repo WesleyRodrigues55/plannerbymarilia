@@ -307,7 +307,6 @@ class Product extends BaseController
             $opcoes_adicionais = $this->getOpcoesAdicionais();
 
             if ($query == null || $opcoes_adicionais == null) {
-                //produto não existe - fazer página de erro
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 
@@ -331,7 +330,6 @@ class Product extends BaseController
             $db->close();
 
             if ($query == null) {
-                //produto não existe - fazer página de erro
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 

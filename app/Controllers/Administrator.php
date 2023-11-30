@@ -411,7 +411,7 @@ class Administrator extends BaseController
                     produto.CATEGORIA
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-                $builder->orderBy('ID', 'ASC');
+                $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
     
                 $query = $builder->get()->getResultArray();
@@ -448,7 +448,7 @@ class Administrator extends BaseController
                     usuario.ATIVO
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
-                $builder->orderBy('ID', 'ASC');
+                $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
     
                 $query = $builder->get()->getResultArray();
@@ -537,7 +537,7 @@ class Administrator extends BaseController
                 tipo_categoria_produto.TIPO_CATEGORIA,
 
             ');
-            $builder->orderBy('ID', 'ASC');
+            $builder->orderBy('ID', 'DESC');
             $builder->limit(10); 
 
             $query = $builder->get()->getResultArray();
@@ -1001,6 +1001,82 @@ class Administrator extends BaseController
                 session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
             }
             return redirect()->to('/administrador/lista-opcoes-adicionais');
+
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
+        
+        
+    }
+    
+    public function listaEstoque()
+    {
+        $user = new User();
+        if (!$user->validaLoginAdm())
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('estoque');
+            $builder->select('
+                estoque.ID,
+                estoque.PRODUTO_ID, 
+                estoque.QUANTIDADE, 
+                produto.NOME as NOME_PRODUTO'
+            );
+            $builder->join('produto', 'produto.ID = estoque.PRODUTO_ID');
+            $builder->orderBy('estoque.PRODUTO_ID', 'DESC');
+            $builder->limit(10);
+
+            $query = $builder->get()->getResultArray();
+            $db->close();
+            // echo "<pre>";  
+            // return var_dump($query);
+            if (empty($query)) {
+                session()->setFlashdata('list-empty', 'A lista está vazia.');
+                return view('/adm/lista-estoque');
+            }
+            $data = ['estoque' => $query];
+
+            return view('/adm/lista-estoque', $data);
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        }
+    }
+
+    public function alterarQuantidadeEstoque()
+    {
+        $quantidade = $this->request->getPost('qtd-estoque');
+        $id_qtd_estoque = $this->request->getPost('id-estoque');
+
+        $data = [
+            'QUANTIDADE' => $quantidade,
+        ];
+
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('estoque');
+            $builder->where('ID', $id_qtd_estoque);
+            $builder->update($data);
+            $db->close();
+
+            if (!$builder) {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção falhou.'
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => 'Remoção bem-sucedida.'
+                );
+
+            }
+            
+            echo json_encode($response);
+
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();

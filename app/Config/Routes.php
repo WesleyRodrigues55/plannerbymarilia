@@ -58,7 +58,9 @@ $routes->get('/administrador/editar-categoria/(:any)', 'Administrator::editarCat
 $routes->post('/administrador/alterar-categoria', 'Administrator::alterarCategoria');
 $routes->post('/administrador/insere-categoria', 'Administrator::inserirCategoria');
 $routes->post('/administrador/desativar-categoria', 'Administrator::desativarCategoria');
-
+    // Estoque
+$routes->get('/administrador/lista-estoque', 'Administrator::listaEstoque');
+$routes->post('/administrador/alterar-estoque', 'Administrator::alterarQuantidadeEstoque');
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
 $routes->post('/testimony/salvar', 'Testimony::salvar');
@@ -79,6 +81,8 @@ $routes->post('/carrinho/subtrai-quantidade', 'BuyCart::subtraiQuantidade');
 $routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCarrinho');
 $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
+
+$routes->post('/carrinho/teste', 'BuyCart::testeForm');
 
 // Comprando
 $routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
