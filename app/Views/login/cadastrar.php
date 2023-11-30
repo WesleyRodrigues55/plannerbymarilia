@@ -53,19 +53,18 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" id="" name="senha"
-                            placeholder="Digite sua senha" required>
-                        <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
-
+                        <input type="password" class="form-control" id="senha" name="senha"
+                            placeholder="Digite sua senha" value="" required>
+                            <i>Força da senha: conter maíuscula, numerais e caractere especial</i><br>
+                            <div id="mensagemSenha"></div>
+                        
                     </div>
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">CONFIRMAR SENHA*</label>
                         <input type="password" class="form-control" id="confirma" name="confirmarSenha"
-                            placeholder="Confirme sua senha" required onchange="confereSenha();">
-                        <div class="invalid-feedback" id="message">
-                            <span>Senhas não conferem</span>.
-                        </div>
+                            placeholder="Confirme sua senha" required>
+                        <div id="mensagemSenhaConfirma"></div>
                     </div>
                 </div>
                 <!-- ../row -->
@@ -294,3 +293,52 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 <?= view("include/footer") ?>
 
 <?= view("include/scripts") ?>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        var senhaInput = document.getElementById('senha');
+        var senhaConfirmaInput = document.getElementById('confirma');
+        var mensagemSenha = document.getElementById('mensagemSenha');
+        var mensagemSenhaConfirma = document.getElementById('mensagemSenhaConfirma');
+        var btnSubmit = document.getElementById('btnSubmit');
+
+        senhaInput.addEventListener('input', function() {
+            var senha = senhaInput.value;
+
+            // Expressão regular para validar senha
+            var regex = /^(?=.*[A-Z])(?=(?:.*[0-9]){3}).{8,}$/;
+
+            // Verifica se a senha atende aos critérios
+            if (regex.test(senha)) {
+                // A senha é válida
+                mensagemSenha.textContent = 'Senha válida';
+                mensagemSenha.style.color = "green";
+                mensagemSenha.classList.remove('invalida');
+                mensagemSenha.classList.add('valida');
+                btnSubmit.disabled = false; // Habilita o botão
+            } else {
+                // A senha não atende aos critérios
+                mensagemSenha.textContent = 'Senha inválida';
+                mensagemSenha.style.color = "red";
+                mensagemSenha.classList.remove('valida');
+                mensagemSenha.classList.add('invalida');
+                btnSubmit.disabled = true;
+            }
+        });
+
+        senhaConfirmaInput.addEventListener('input', function() {
+            var senhaConfirma = senhaConfirmaInput.value;
+
+            if (senhaConfirma != senhaInput.value) {
+                mensagemSenhaConfirma.textContent = 'Senhas não estão iguais!'
+                mensagemSenhaConfirma.style.color = "red"
+                btnSubmit.disabled = true; // Habilita o botão
+
+            } else {
+                mensagemSenhaConfirma.textContent = 'Senhas iguais!'
+                mensagemSenhaConfirma.style.color = "green"
+                btnSubmit.disabled = false; // Habilita o botão
+            }
+        })
+    });
+</script>
