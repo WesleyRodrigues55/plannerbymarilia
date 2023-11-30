@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Editar Produto";
 $data['link_css'] = "assets/css/cadastro-adm.css";
 ?>
 
@@ -12,6 +12,31 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
         <div class="text-center">
             <h2 class="h2-titles mt-5"><b>EDITAR PRODUTO</b></h2>
         </div>
+
+        <?php $message_success = session()->getFlashdata('att-product-success'); ?>
+        <?php $message_failed = session()->getFlashdata('att-produtc-failed'); ?>
+        <?php $message_failed_product = session()->getFlashdata('product-exists'); ?>
+
+        <?php if ($message_failed_product) : ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?= $message_failed_product; ?>
+                <br><br><a href="<?= base_url('/administrador/lista-produto') ?>" class="input-rosa m-2">Clique aqui</a> para conferir
+            </div>
+        <?php endif; ?>
+
+        <?php if ($message_failed) : ?>
+            <div class="alert alert-danger mt-5 text-center" role="alert">
+                <?php $message_failed; ?>
+
+            </div>
+        <?php endif; ?>
+
+        <?php if ($message_success) : ?>
+            <div class="alert alert-success mt-5 text-center" role="alert">
+                <?= $message_success; ?>
+                <br><br><a href="<?= base_url('/administrador/lista-produto') ?>" class="input-rosa m-2">Clique aqui</a> para conferir
+            </div>
+        <?php endif; ?>
 
         <form method="post" action="<?= base_url("/administrador/alterar-produto") ?>">
             <div class="row">

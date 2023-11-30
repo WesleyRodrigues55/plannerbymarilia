@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Página Inicial";
+$data['title'] = "Editar Capa Produto";
 $data['link_css'] = "assets/css/cadastro-adm.css";
 ?>
 
