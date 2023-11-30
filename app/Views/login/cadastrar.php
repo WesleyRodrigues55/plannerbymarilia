@@ -26,10 +26,11 @@ $data['link_css'] = "assets/css/cadastro-user.css";
             <?php endif; ?>
 
 
-            <?php if ($message_success): ?>
-                <div class="alert alert-success mt-5 text-center" role="alert">
-                    <?= $message_success; ?>
-                </div>
+            <<?php if ($message_success) : ?>
+            <div class="alert alert-success mt-5 text-center" role="alert">
+                <?= $message_success; ?>
+                <br><br><a href="<?= base_url('/login') ?>" class="input-rosa m-2">Clique aqui</a> para realizar o Login
+            </div>
             <?php endif; ?>
 
             <?php if ($message_failed_cpf): ?>
@@ -177,7 +178,7 @@ $data['link_css'] = "assets/css/cadastro-user.css";
                 <!-- ../row -->
 
                 <div class="text-center">
-                    <h2 class="h2-titles mt-5"><b>INFORMAÇÕES PARA ENTREGA</b></h2>
+                    <h2 class="h2-titles mt-5"><b>INFORMAÇÕES RESIDENCIAIS</b></h2>
                 </div>
 
                 <div class="row">

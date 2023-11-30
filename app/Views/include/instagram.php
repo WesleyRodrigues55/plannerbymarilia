@@ -117,8 +117,8 @@
         <!-- <script type="text/javascript" src="https://instaembedcode.com/in.js"></script> -->
     </section>
 
-    <div class="text-center mt-5">
+    <!-- <div class="text-center mt-5">
         <a class="btn input-rosa px-5" href="">ACESSE O INSTAGRAM</a></button>
-    </div>
+    </div> -->
 
 </div>
