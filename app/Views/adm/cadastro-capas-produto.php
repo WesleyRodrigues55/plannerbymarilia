@@ -24,7 +24,7 @@ $data['link_css'] = "assets/css/cadastro-adm.css";
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br>Para conferir, clique em:  <a href="<?= base_url('/administrador/lista-capas-produto/'. $id_produto); ?>">Lista Capas do Produto</a>.
+                <br><br><a href="<?= base_url('/administrador/lista-capas-produto/'. $id_produto) ?>" class="input-rosa m-2">Clique aqui</a> para conferir
             </div>
         <?php endif; ?>
 

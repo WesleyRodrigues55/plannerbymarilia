@@ -512,7 +512,7 @@ class Administrator extends BaseController
             if (!$builder) {
                 session()->setFlashdata('register-category-failed', 'Tivemos um erro em salvar sua categoria, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria salvo com sucesso!');
+                session()->setFlashdata('register-category-success', 'categoria salva com sucesso!');
             }
             return redirect()->back();
 
@@ -587,6 +587,16 @@ class Administrator extends BaseController
         ];
 
         try {
+            if ($tipo_categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('tipo_categoria_produto');
+                if ($builder->where('TIPO_CATEGORIA', $tipo_categoria)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('category-exists', 'Categoria já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
             $builder->where('ID', $id_categoria);
@@ -594,11 +604,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('att-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+                session()->setFlashdata('att-category-success', 'categoria atualizada com sucesso!');
             }
-            return redirect()->to('/administrador/lista-categoria');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -755,6 +765,20 @@ class Administrator extends BaseController
         ];
 
         try {
+
+            if ($nome && $categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('produto');
+                $builder->where('NOME', $nome);
+                $builder->where('CATEGORIA', $categoria);
+
+                if ($builder->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('product-exists', 'Produto já cadastrado!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->where('ID', $id_produto);
@@ -762,11 +786,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-product-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
+                session()->setFlashdata('att-produtc-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-product-success', 'produto salvo com sucesso!');
+                session()->setFlashdata('att-product-success', 'produto salvo com sucesso!');
             }
-            return redirect()->to('/administrador/lista-produto');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -989,6 +1013,16 @@ class Administrator extends BaseController
         ];
 
         try {
+            if ($nome) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('opcoes_adicionais');
+                if ($builder->where('NOME', $nome)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('option-exists', 'Adicional já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('opcoes_adicionais');
             $builder->where('ID', $id_opcoes_adicionais);
@@ -996,11 +1030,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('att-adicional-failed', 'Tivemos um erro em atualizar seu adicional, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+                session()->setFlashdata('att-adcional-success', 'Adicional atualizada com sucesso!');
             }
-            return redirect()->to('/administrador/lista-opcoes-adicionais');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
