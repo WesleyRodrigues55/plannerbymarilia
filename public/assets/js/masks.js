@@ -100,6 +100,12 @@ $(document).ready(function () {
     $(this).val(valorFormatado);
   });
 
+  $('#senha').on('input', function () {
+    var valorDigitado = $(this).val();
+    var valorFormatado = isStrongPassword(valorDigitado);
+    $(this).val(valorFormatado);
+  });
+
 
 
 });
@@ -256,6 +262,8 @@ $(document).ready(function () {
 
 //PW VALIDATION
 
+var senhaForte = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
 function confereSenha() {
   const senha = document.querySelector('input[name=senha]');
   const confirma = document.querySelector('input[name=confirmarSenha]');
@@ -264,8 +272,43 @@ function confereSenha() {
   if (confirma.value === senha.value) {
     invalid.style.display = 'none';
     document.getElementById("btnSubmit").disabled = false;
-  } else {
+  }
+  
+ 
+
+  else {
     document.getElementById("btnSubmit").disabled = true;
     invalid.style.display = 'block'
   }
 }
+
+function isStrongPassword() {
+  const senha2 = document.querySelector('input[name=senha]');
+  const invalid2 = document.querySelector('.red-word')
+
+  if (senha2.length < 8) {
+    invalid2.style.display = 'block'
+  }
+  if (!/[A-Z]/.test(senha2)) {
+    invalid2.style.display = 'block'
+  }
+
+  if (!/[a-z]/.test(senha2)) {
+    invalid2.style.display = 'block'
+  }
+
+  if (!/\d/.test(senha2)) {
+    invalid2.style.display = 'block'
+  }
+  if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(senha2)) {
+    invalid2.style.display = 'block'
+  }  
+    return  invalid2.style.display = 'none' ;
+}
+
+// Example usage:
+// var password = "StrongP@ssw0rd";
+// if (isStrongPassword(password)) {
+//   console.log("Password is strong!");
+// } else {
+//   console.log("Password is weak. Please use a stronger password.");

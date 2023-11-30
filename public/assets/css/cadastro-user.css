@@ -17,6 +17,10 @@
     margin-top: .25em;
 }
 
+.red-word{
+    color: #DC3E50;
+}
+
 @media screen and (max-width: 768px) {
     .cadastro {
         padding: 32px 16px;

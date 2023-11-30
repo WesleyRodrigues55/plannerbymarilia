@@ -52,9 +52,12 @@ $data['link_css'] = "assets/css/cadastro-user.css";
 
                     <div class="col-md-12">
                         <label for="password" class="preencher">SENHA*</label>
-                        <input type="password" class="form-control" id="" name="senha"
-                            placeholder="Digite sua senha" required>
-                        <p>Força da senha: conter maíuscula, numerais e caractere especial</p>
+                        <input type="password" class="form-control" id="senhaStrong" name="senha" placeholder="Digite sua senha"
+                            onchange="isStrongPassword();" required>
+                        <!-- <div class="red-word" id="message">
+                            <span>Senha muito fraca! Por favor, respeite os requisitos de senha.</span>.
+                        </div> -->
+                        <p>Força da senha: ao menos 8 dígitos, conter maíuscula, numerais e caractere especial</p>
 
                     </div>
 
