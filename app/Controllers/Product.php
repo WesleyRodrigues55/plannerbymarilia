@@ -305,19 +305,40 @@ class Product extends BaseController
             $query = $builder->get()->getResultArray();
             $db->close();
             $opcoes_adicionais = $this->getOpcoesAdicionais();
-
+            $capas_internas = $this->getCapasInternas($id);
             if ($query == null || $opcoes_adicionais == null) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
 
             $data = [
                 'produto_selecionado' => $query,
-                'opcoes_adicionais' => $opcoes_adicionais
+                'opcoes_adicionais' => $opcoes_adicionais,
+                'capas_internas_produto' => $capas_internas,
             ];
             return view('produtos/produto-selecionado', $data);
         } catch (\Exception $e) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }   
+    }
+
+    private function getCapasInternas($id_produto) {
+        try {
+            $db = \Config\Database::connect();
+            $builder = $db->table('capas_produtos');
+            $builder->where('PRODUTO_ID', $id_produto);
+            $builder->where('ATIVO', 1);
+
+            $query = $builder->get()->getResultArray();
+            $db->close();
+
+            if ($query == null) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            }
+
+            return $query;
+        } catch (\Exception $e) {
+            echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
+        } 
     }
 
     private function getOpcoesAdicionais() {

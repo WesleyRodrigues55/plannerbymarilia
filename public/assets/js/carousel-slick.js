@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     $('.single-item-banner').slick({
         slidesToShow: 1,
@@ -58,22 +58,22 @@ $(document).ready(function () {
         slidesToShow: 3,
         slidesToScroll: 1,
         asNavFor: '.slider-for',
-        arros: true,
-        dots: true,
+        arrows: true,
+        dots: false,
         centerMode: true,
         focusOnSelect: true,
         responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 2,
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                }
             }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-            }
-        }
         ]
     });
 

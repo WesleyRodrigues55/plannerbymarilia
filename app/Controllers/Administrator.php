@@ -62,7 +62,7 @@ class Administrator extends BaseController
                 if ($img->isValid() && !$img->hasMoved())
                 {
                     $novoNome = uniqid() . '_' . $img->getName();
-                    $img->move(ROOTPATH . 'public/assets/img/produtos/capas', $novoNome);
+                    $img->move(ROOTPATH . 'public/assets/img/produtos/capas-internas', $novoNome);
                     $nomesDosArquivos[] = $novoNome;
                 }
                 else
@@ -177,7 +177,7 @@ class Administrator extends BaseController
             if ($img->isValid() && !$img->hasMoved())
             {
                 $novoNome = uniqid() . '_' . $img->getName();
-                $img->move(ROOTPATH . 'public/assets/img/produtos/capas/', $novoNome);
+                $img->move(ROOTPATH . 'public/assets/img/produtos/capas-internas/', $novoNome);
                 return $novoNome;
             }
             else
@@ -284,7 +284,7 @@ class Administrator extends BaseController
             if ($img->isValid() && !$img->hasMoved())
             {
                 $novoNome = uniqid() . '_' . $img->getName();
-                $img->move(ROOTPATH . 'public/assets/img/produtos', $novoNome);
+                $img->move(ROOTPATH . 'public/assets/img/produtos/capas-externas', $novoNome);
                 return $novoNome;
             }
             else
