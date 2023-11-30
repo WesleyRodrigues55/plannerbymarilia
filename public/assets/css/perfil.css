@@ -124,3 +124,17 @@ button {
     background-color: var(--cor-rosa-secundario);
     color: var(--cor-branco);
 }
+
+.bg-perfil {
+    width: 100%;
+    height: 200px;
+    background-size: contai;
+    background: url('../img/banner-perfil.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-perfil img {
+    opacity: 0.8;
+}
