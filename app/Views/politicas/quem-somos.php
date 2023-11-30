@@ -14,7 +14,7 @@ $data['link_css'] = "assets/css/quem-somos.css";
 
         
         <div class="row my-5">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-12">
 
                 <h2 class="h2-titles"><b>O INÍCIO</b></h2>
                 <p>
@@ -28,15 +28,13 @@ $data['link_css'] = "assets/css/quem-somos.css";
                 </p>
             </div>
 
-            <div class="col-12 col-md-6">
-                <img src="<?= base_url('assets/img/inicio-quemSomos.png') ?>" alt="" style="width:740px; height: 330px">
-            </div>
+           
         </div>
 
         <div class="row my-5">
             
-            <div class="col-12 col-md-6">
-                <img src="" alt="" style="">
+            <div class="col-12 col-md-6" style = "position: relative"> 
+                <img src="<?= base_url('assets/img/equipe.jpg') ?>" alt="" style="width:100%; height: 360px; object-fit: contain">
             </div>
 
             <div class="col-12 col-md-6">

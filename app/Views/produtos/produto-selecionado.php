@@ -48,9 +48,7 @@
                 <!-- <form method="post" action="<?php //base_url('/carrinho/adiciona-produto-carrinho') ?>"> -->
                 <form method="post" id="adicionaProdutoCarrinho">
 
-                    <?php if (strpos($produto_selecionado[0]['CATEGORIA'], "caderno") === 0 || strpos($produto_selecionado[0]['CATEGORIA'], "bloco") === 0): ?>
-                        <div></div>
-                    <?php else: ?>
+                    <?php if (strpos($produto_selecionado[0]['CATEGORIA'], "planner") === 0): ?>
                         <div class="my-4">
                             <b>Escolha o layout do seu planner</b><br>
                             <div class="form-check">
