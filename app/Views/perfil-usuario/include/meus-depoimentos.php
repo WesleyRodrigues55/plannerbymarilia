@@ -2,10 +2,9 @@
 $data['link_css'] = "assets/css/perfil.css";
 ?>
 
-
-
 <div class="container p-4">
     <h2 class="mb-2 titulo-perfil">Meus Depoimentos</h2>
+    <hr>
     <div class="">
         <div class="card mb-3 teste-background">
             <div class="card-body">
