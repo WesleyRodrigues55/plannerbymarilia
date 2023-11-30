@@ -19,7 +19,7 @@
                     <div class="w-100 box-item-carrinho">
                         <div class="d-flex align-items-center">
                             <div class="box-img-carrinho">
-                                <img src="<?= base_url('assets/img/teste/'.$cc['IMAGEM']) ?>" alt="img-produto">
+                                <img src="<?= base_url('assets/img/produtos/capas-externas/'.$cc['IMAGEM']) ?>" alt="img-produto">
                             </div>
                             <div>
                                 <b><?= $cc['NOME_PRODUTO'] ?></b>

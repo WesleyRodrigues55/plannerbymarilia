@@ -8,39 +8,35 @@
 <?= view("include/nav") ?>
 
 <main class="container my-5">
+
+<?php
+// echo "<pre>";
+// var_dump($capas_internas_produto);
+
+?>
     <div class="row my-5">
         <div class="col-12 col-md-6">
             <div class="slider-container p-4">
                 <div class="slider-for">
                     <div class="d-flex justify-content-center">
-                        <img src="<?= base_url('assets/img/capas/planner20.png') ?>" alt="">
+                        <img src="<?= base_url('assets/img/produtos/capas-externas/'. $produto_selecionado[0]['IMAGEM']) ?>" alt="">
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="<?= base_url('assets/img/capas/planner21.png') ?>" alt="">
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="<?= base_url('assets/img/capas/planner22.png') ?>" alt="">
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <img src="<?= base_url('assets/img/capas/planner23.png') ?>" alt="">
-                    </div>
+                    <?php foreach ($capas_internas_produto as $cip): ?>
+                        <div class="d-flex justify-content-center">
+                            <img src="<?= base_url('assets/img/produtos/capas-internas/'.$cip['IMAGEM_CAPA']) ?>" alt="">
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 <br>
                 <div class="slider-nav">
-                    <div>
-                        <img src="<?= base_url('assets/img/capas/planner20.png') ?>" alt="" style="width:150px; height: 150px">
-                    </div>
-                    <div>
-                        <img src="<?= base_url('assets/img/capas/planner21.png') ?>" alt="" style="width:150px; height: 150px">
-                    </div>
-                    <div>
-                        <img src="<?= base_url('assets/img/capas/planner22.png') ?>" alt="" style="width:150px; height: 150px">
-                    </div>
-                    <div>
-                        <img src="<?= base_url('assets/img/capas/planner23.png') ?>" alt="" style="width:150px; height: 150px">
-                    </div>
-
-                    <!-- Adicione mais miniaturas conforme necessário -->
+                        <div class="d-flex justify-content-center">
+                            <img src="<?= base_url('assets/img/produtos/capas-externas/'. $produto_selecionado[0]['IMAGEM']) ?>" alt="" style="width:150px; height: 150px">
+                        </div>
+                    <?php foreach ($capas_internas_produto as $cip): ?>
+                        <div>
+                            <img src="<?= base_url('assets/img/produtos/capas-internas/'.$cip['IMAGEM_CAPA']) ?>" alt="" style="width:150px; height: 150px">
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -81,15 +77,6 @@
                             <option selected>Selecione</option>
                             <option value="fonte1">Nome</option>
                         </select>
-                    </div>
-
-                    <div class="my-4">
-                        <b>Contém elástico de fechamento?</b><br>
-                        <?php if ($produto_selecionado[0]['DESCRICAO_ELASTICO'] == "sim") : ?>
-                            <span>Sim</span>
-                        <?php else: ?>
-                            <span>Não</span>
-                        <?php endif; ?>
                     </div>
 
                     <div class="my-4">
@@ -164,33 +151,17 @@
         <!-- end col -->
 
         <div class="col-md-12">
-            <h2>Descrições sobre o produto</h2>
+            <h2 class="mt-4">Descrições sobre o produto</h2>
             <p><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?><p></p>
 
-            <p>
-                <b></b>
-                <span><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?></span>
-            </p>
 
-            <p>
-                <b></b>
-                <span><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?></span>
-            </p>
+            <h2 class="mt-4">Contém elástico de fechamento?</h2>
+            <?php if ($produto_selecionado[0]['DESCRICAO_ELASTICO'] == "sim") : ?>
+                <p>Sim</p>
+            <?php else: ?>
+                <p>Não</p>
+            <?php endif; ?>
 
-            <p>
-                <b></b>
-                <span><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?></span>
-            </p>
-
-            <p>
-                <b></b>
-                <span><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?></span>
-            </p>
-
-            <p>
-                <b></b>
-                <span><?= $produto_selecionado[0]['DESCRICAO_TECNICA'] ?></span>
-            </p>
         </div>
     </div>
     <!-- end row -->

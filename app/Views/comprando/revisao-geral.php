@@ -49,7 +49,7 @@
                         <hr>
                         <?php foreach ($itens_carrinho as $ic): ?>
                             <div class="d-flex gap-2 align-items-center my-2">
-                                <img src="<?= base_url('assets/img/teste/'. $ic['IMAGEM']) ?>" alt="" style="width: 60px; border-radius: 100%">
+                                <img src="<?= base_url('assets/img/produtos/capas-externas/'. $ic['IMAGEM']) ?>" alt="" style="width: 60px; border-radius: 100%">
                                 <div>
                                     <span class="p-small"><b><?= $ic['NOME_PRODUTO'] ?></b></span><br>
                                     <span class="p-small">Quantidade: <?= $ic['QUANTIDADE'] ?></span>
