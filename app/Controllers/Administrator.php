@@ -532,6 +532,10 @@ class Administrator extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
             $builder->where('ATIVO', 1);
+            // $searchTerm = $this->request->getGet('search');
+            // if (!empty($searchTerm)) {
+            //     $builder->like('TIPO_CATEGORIA', $searchTerm);
+            // }
             $builder->select('
                 tipo_categoria_produto.ID,
                 tipo_categoria_produto.TIPO_CATEGORIA,
@@ -542,6 +546,11 @@ class Administrator extends BaseController
 
             $query = $builder->get()->getResultArray();
             $db->close();
+
+            // if (!empty($searchTerm)) {
+            //     session()->setFlashdata('list-nao-encontrado', 'Nenhum resultado encontrado para a pesquisa: ' . $searchTerm);
+            //     return view('/adm/lista-categoria');
+            // }
 
             if (empty($query)) {
                 session()->setFlashdata('list-empty', 'A lista está vazia.');
