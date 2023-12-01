@@ -170,9 +170,11 @@ $data['link_css'] = "assets/css/nav.css";
                                 <div class="menu-subs menu-column-1">
                                     <ul>
                                         <li class="nav-categorias"><a href="<?= base_url('/planners')   ?>" class="p-small">Ver planners</a></li>
-                                        <li><a href="#" class="p-small">Item 02</a></li>
-                                        <li><a href="#" class="p-small">Item 03</a></li>
-                                        <li><a href="#" class="p-small">Item 04</a></li>
+                                        <li><a href="#" class="p-small">Planner Anual</a></li>
+                                        <li><a href="#" class="p-small">Planner Mensal</a></li>
+                                        <li><a href="#" class="p-small">Planner Diário</a></li>
+                                        <li><a href="#" class="p-small">Planner Pet</a></li>
+                                        <li><a href="#" class="p-small">Planner Financeiro</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -182,9 +184,8 @@ $data['link_css'] = "assets/css/nav.css";
                                 <div class="menu-subs menu-column-1">
                                     <ul>
                                         <li><a href="<?= base_url('/agendas')  ?>" class="p-small">Ver agendas</a></li>
-                                        <li><a href="#" class="p-small">Item 02</a></li>
-                                        <li><a href="#" class="p-small">Item 03</a></li>
-                                        <li><a href="#" class="p-small">Item 04</a></li>
+                                        <li><a href="#" class="p-small">Agenda Anual - 1 dia/pg</a></li>
+                                        <li><a href="#" class="p-small">Agenda Anual - 2 dia/pg</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -194,9 +195,9 @@ $data['link_css'] = "assets/css/nav.css";
                                 <div class="menu-subs menu-column-1">
                                     <ul>
                                         <li><a href="<?= base_url('/blocos')  ?>" class="p-small">Ver blocos</a></li>
-                                        <li><a href="#" class="p-small">Item 02</a></li>
-                                        <li><a href="#" class="p-small">Item 03</a></li>
-                                        <li><a href="#" class="p-small">Item 04</a></li>
+                                        <li><a href="#" class="p-small">Bloco A6</a></li>
+                                        <li><a href="#" class="p-small">Bloco Diário</a></li>
+                                        <li><a href="#" class="p-small">Bloco Semanal</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -206,9 +207,6 @@ $data['link_css'] = "assets/css/nav.css";
                                 <div class="menu-subs menu-column-1">
                                     <ul>
                                         <li><a href="<?= base_url('/cadernos')  ?>" class="p-small">Ver cadernos</a></li>
-                                        <li><a href="#" class="p-small">Item 02</a></li>
-                                        <li><a href="#" class="p-small">Item 03</a></li>
-                                        <li><a href="#" class="p-small">Item 04</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -217,10 +215,10 @@ $data['link_css'] = "assets/css/nav.css";
                                 <a href="#" class="p-small">PRONTA ENTREGA<img src="#" alt=""></a>
                                 <div class="menu-subs menu-column-1">
                                     <ul>
-                                        <li><a href="#" class="p-small">Item 01</a></li>
-                                        <li><a href="#" class="p-small">Item 02</a></li>
-                                        <li><a href="#" class="p-small">Item 03</a></li>
-                                        <li><a href="#" class="p-small">Item 04</a></li>
+                                        <li><a href="#" class="p-small">Lista de Tarefas</a></li>
+                                        <li><a href="#" class="p-small">Lista de Compras</a></li>
+                                        <li><a href="#" class="p-small">Bloco Diário</a></li>
+                                        <li><a href="#" class="p-small">Bloco Semanal</a></li>
                                     </ul>
                                 </div>
                             </li>
