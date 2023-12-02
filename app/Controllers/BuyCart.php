@@ -254,17 +254,22 @@ class BuyCart extends BaseController
         return $preco_produto;
     }
 
-    public function temProdutoCarrinho($id_produto, $id_carrinho_compra) {
+    public function temProdutoCarrinho($id_produto, $id_carrinho_compra, $layout_planner, $nome_capa, $fonte, $divisorias, $cantoneiras) {
         $db = \Config\Database::connect();
         $builder = $db->table('itens_carrinho');
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
+        $builder->where('LAYOUT_PLANNER', $layout_planner);
+        $builder->where('NOME_CAPA', $nome_capa);
+        $builder->where('FONTE', $fonte);
+        $builder->where('DIVISORIAS', $divisorias);
+        $builder->where('CANTONEIRAS', $cantoneiras);
         $tem_produto_carrinho =  $builder->get()->getResultArray();
         $db->close();
         return $tem_produto_carrinho;
     }
 
-    public function updateItemCarrinho($id_produto, $id_carrinho_compra) {
+    public function updateItemCarrinho($id_produto, $id_carrinho_compra, $layout_planner, $nome_capa, $fonte, $preco_final, $divisorias, $cantoneiras) {
         $this->removeQuantidadeEstoque($id_produto);
         
         $db = \Config\Database::connect();
@@ -272,20 +277,40 @@ class BuyCart extends BaseController
 
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
+        $builder->where('LAYOUT_PLANNER', $layout_planner);
+        $builder->where('NOME_CAPA', $nome_capa);
+        $builder->where('FONTE', $fonte);
+        $builder->where('DIVISORIAS', $divisorias);
+        $builder->where('CANTONEIRAS', $cantoneiras);
         $quantidade_atual = $builder->get()->getRow()->QUANTIDADE;
 
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
+        $builder->where('LAYOUT_PLANNER', $layout_planner);
+        $builder->where('NOME_CAPA', $nome_capa);
+        $builder->where('FONTE', $fonte);
+        $builder->where('DIVISORIAS', $divisorias);
+        $builder->where('CANTONEIRAS', $cantoneiras);
         $preco_unitario = $builder->get()->getRow()->PRECO_UNITARIO;
 
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
+        $builder->where('LAYOUT_PLANNER', $layout_planner);
+        $builder->where('NOME_CAPA', $nome_capa);
+        $builder->where('FONTE', $fonte);
+        $builder->where('DIVISORIAS', $divisorias);
+        $builder->where('CANTONEIRAS', $cantoneiras);
         $subtotal = $builder->get()->getRow()->SUBTOTAL;
         
         $builder->set('QUANTIDADE', $quantidade_atual + 1);
-        $builder->set('SUBTOTAL', $preco_unitario + $subtotal);
+        $builder->set('SUBTOTAL', $preco_final + $subtotal);
         $builder->where('PRODUTO_ID', $id_produto);
         $builder->where('CARRINHO_DE_COMPRA_ID', $id_carrinho_compra);
+        $builder->where('LAYOUT_PLANNER', $layout_planner);
+        $builder->where('NOME_CAPA', $nome_capa);
+        $builder->where('FONTE', $fonte);
+        $builder->where('DIVISORIAS', $divisorias);
+        $builder->where('CANTONEIRAS', $cantoneiras);
         $builder->update();
         $db->close();
 
@@ -317,14 +342,19 @@ class BuyCart extends BaseController
         $builder->update();
     }
 
-    public function inserePrimeiroItemNoCarrinho($ultimo_id_novo_carrinho_inserido, $id_produto, $preco_produto) {
-        $this->removeQuantidadeEstoque($id_produto);
+    public function inserePrimeiroItemNoCarrinho($data_insere_primeiro_produto_carrinho) {
+        $this->removeQuantidadeEstoque($data_insere_primeiro_produto_carrinho['id_produto']);
         $data = [
-            'CARRINHO_DE_COMPRA_ID' => (int) $ultimo_id_novo_carrinho_inserido,
-            'PRODUTO_ID' => (int) $id_produto,
+            'CARRINHO_DE_COMPRA_ID' => (int) $data_insere_primeiro_produto_carrinho['ultimo_id_novo_carrinho_inserido'],
+            'PRODUTO_ID' => (int) $data_insere_primeiro_produto_carrinho['id_produto'],
             'QUANTIDADE' => 1,
-            'PRECO_UNITARIO' => (float) $preco_produto,
-            'SUBTOTAL' => (float) $preco_produto
+            'LAYOUT_PLANNER' => $data_insere_primeiro_produto_carrinho['layout_planner'],
+            'NOME_CAPA' => $data_insere_primeiro_produto_carrinho['nome_capa'],
+            'FONTE' => $data_insere_primeiro_produto_carrinho['fonte'],
+            'DIVISORIAS' => $data_insere_primeiro_produto_carrinho['divisorias'],
+            'CANTONEIRAS' => $data_insere_primeiro_produto_carrinho['cantoneiras'],
+            'PRECO_UNITARIO' => (float) $data_insere_primeiro_produto_carrinho['preco_produto'],
+            'SUBTOTAL' => (float) $data_insere_primeiro_produto_carrinho['subtotal']
         ];
 
         $db = \Config\Database::connect();
@@ -340,14 +370,19 @@ class BuyCart extends BaseController
         echo json_encode($response);
     }
 
-    public function insereItemNoCarrinho($id_carrinho_compra, $id_produto, $preco_produto) {
-        $this->removeQuantidadeEstoque($id_produto);
+    public function insereItemNoCarrinho($data_insere_produto_carrinho) {
+        $this->removeQuantidadeEstoque($data_insere_produto_carrinho['id_produto']);
         $data = [
-            'CARRINHO_DE_COMPRA_ID' => (int) $id_carrinho_compra,
-            'PRODUTO_ID' => (int) $id_produto,
+            'CARRINHO_DE_COMPRA_ID' => (int) $data_insere_produto_carrinho['id_carrinho_compra'],
+            'PRODUTO_ID' => (int) $data_insere_produto_carrinho['id_produto'],
             'QUANTIDADE' => 1,
-            'PRECO_UNITARIO' => (float) $preco_produto,
-            'SUBTOTAL' => (float) $preco_produto
+            'LAYOUT_PLANNER' => $data_insere_produto_carrinho['layout_planner'],
+            'NOME_CAPA' => $data_insere_produto_carrinho['nome_capa'],
+            'FONTE' => $data_insere_produto_carrinho['fonte'],
+            'DIVISORIAS' => $data_insere_produto_carrinho['divisorias'],
+            'CANTONEIRAS' => $data_insere_produto_carrinho['cantoneiras'],
+            'PRECO_UNITARIO' => (float) $data_insere_produto_carrinho['preco_produto'],
+            'SUBTOTAL' => (float) $data_insere_produto_carrinho['subtotal']
         ];
 
         $db = \Config\Database::connect();
@@ -368,6 +403,26 @@ class BuyCart extends BaseController
         $id_usuario = $usuario->idUser();
         $id_produto = $this->request->getPost('id-produto');
 
+        // vai para itens
+        $layout_planner = $this->request->getPost('layout-planner');
+        $nome_capa = $this->request->getPost('nome-capa');
+        $fonte = $this->request->getPost('fonte-capa');
+        $divisorias = $this->request->getPost('divisorias');
+        $cantoneiras = $this->request->getPost('cantoneiras');
+        $preco_final = $this->request->getPost('preco-final');
+        $preco_original_produto = $this->request->getPost('preco-original-produto');
+
+        if ($cantoneiras == "10.00") {
+            $cantoneiras = 1;
+        } else {
+            $cantoneiras = 0;
+        }
+        if ($divisorias == "18.00") {
+            $divisorias = 1;
+        } else {
+            $divisorias = 0;
+        }
+
         try {
             $id_carrinho_compra = $this->getIdCarrinhoCompra($id_usuario);
             
@@ -375,12 +430,20 @@ class BuyCart extends BaseController
                 try {
                     // pega o último id inserido no novo carrinho "EM ABERTO"
                     $ultimo_id_novo_carrinho_inserido = $this->ultimoIdInseridoCarrinhoCompras($id_usuario);
-                    
-                    // pega o preco do produto convertido em float
-                    $preco_produto = $this->getValorProdutoSelecionado($id_produto);
 
-                    // insere o primeiro item no carrinho
-                    $this->inserePrimeiroItemNoCarrinho($ultimo_id_novo_carrinho_inserido, $id_produto, $preco_produto);
+                    $data_insere_primeiro_produto_carrinho = [
+                        'ultimo_id_novo_carrinho_inserido' => $ultimo_id_novo_carrinho_inserido,
+                        'id_produto' => $id_produto,
+                        'layout_planner' => $layout_planner,
+                        'nome_capa' => $nome_capa,
+                        'fonte' => $fonte,
+                        'divisorias' => $divisorias,
+                        'cantoneiras' =>  $cantoneiras,
+                        'preco_produto' => $preco_original_produto,
+                        'subtotal' => $preco_final
+                    ];
+                    // insere o primeiro item no carrinho e retorna o id do item inserido
+                    $this->inserePrimeiroItemNoCarrinho($data_insere_primeiro_produto_carrinho);         
         
                     // adicioanr mensagem para alert em que "vai para o carrinho ou continua comprando"
                     return redirect()->back();
@@ -390,24 +453,33 @@ class BuyCart extends BaseController
                     echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
                 } 
             } else {
-                // pega o valor do produto selecionado
-                $preco_produto = $this->getValorProdutoSelecionado($id_produto);
-
                 // verificar se o item adicionado tem no carrinho
-                $tem_produto_carrinho = $this->temProdutoCarrinho($id_produto, $id_carrinho_compra);
+                $tem_produto_carrinho = $this->temProdutoCarrinho($id_produto, $id_carrinho_compra, $layout_planner, $nome_capa, $fonte, $divisorias, $cantoneiras);
 
                 // se tem item no carrinho ele dá update
                 if ($tem_produto_carrinho) {
                     //faz o update na quantidade do produto que já existe no carrinho
-                    $this->updateItemCarrinho($id_produto, $id_carrinho_compra);
+                    $this->updateItemCarrinho($id_produto, $id_carrinho_compra, $layout_planner, $nome_capa, $fonte, $preco_final, $divisorias, $cantoneiras);
                 } else {
+                    $data_insere_produto_carrinho = [
+                        'id_carrinho_compra' => $id_carrinho_compra,
+                        'id_produto' => $id_produto,
+                        'layout_planner' => $layout_planner,
+                        'nome_capa' => $nome_capa,
+                        'fonte' => $fonte,
+                        'divisorias' => $divisorias,
+                        'cantoneiras' =>  $cantoneiras,
+                        'preco_produto' => $preco_original_produto,
+                        'subtotal' => $preco_final
+                    ];
                     //insere o produto que ainda não existia no carrinho
-                    $this->insereItemNoCarrinho($id_carrinho_compra, $id_produto, $preco_produto);
+                    $this->insereItemNoCarrinho($data_insere_produto_carrinho);
                 }
             }
+
             $response = array(
                 'success' => true,
-                'message' => 'Remoção bem-sucedida.'
+                'message' => 'Produto adicionado no carrinho.'
             );
         
             echo json_encode($response);
@@ -745,6 +817,19 @@ class BuyCart extends BaseController
         $builder = $db->table('detalhes_do_pedido');
         $builder->where('ID', $id_detalhes_pedido);
         $builder->where('USUARIO_ID', $id_usuario);
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
+    public function getComprasUsuarioById($id_usuario) {
+        $db = \Config\Database::connect();
+        // $builder->select('
+
+        // ');
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('USUARIO_ID', $id_usuario);
+        // $builder->join('carrinho_de_compras', 'detalhes_do_pedido.CARRINHO_DE_COMPRAS_ID = carrinho_de_compras.ID');
         $query = $builder->get()->getResultArray();
         $db->close();
         return $query;

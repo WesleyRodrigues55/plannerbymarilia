@@ -107,18 +107,10 @@
                 </p>
             </div>
         </blockquote>
-        <!-- <script async src="https://www.instagram.com/embed.js"></script> -->
-        <div style="overflow: auto; position: absolute; height: 0pt; width: 0pt;">
-            <a
-                href="https://instaembedcode.com/">
-                Instagram embed code generator
-            </a>
-        </div>
-        <!-- <script type="text/javascript" src="https://instaembedcode.com/in.js"></script> -->
     </section>
 
-    <div class="text-center mt-5">
+    <!-- <div class="text-center mt-5">
         <a class="btn input-rosa px-5" href="">ACESSE O INSTAGRAM</a></button>
-    </div>
+    </div> -->
 
 </div>

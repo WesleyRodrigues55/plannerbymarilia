@@ -20,7 +20,7 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br>Para editar seus depoimentos ou excluílos, acesse <a href="<?= base_url('perfil/meus-depoimentos'); ?>">Meus depoimentos</a>.
+                <br>Para editar seus depoimentos ou excluílos, acesse <a href="<?= base_url('/perfil/perfil-usuario#tab3'); ?>" class="input-rosa">Meus depoimentos</a>.
             </div>
         <?php endif; ?>
        
@@ -42,35 +42,29 @@
             <div class="row">
                 <div class=" col-md-6">
                     <label for="nome" class="preencher">NOME*</label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o seu nome" required>
-                    <div class="invalid-feedback">
-                        Por favor preencha o seu nome.
-                    </div>
+                    <input type="text" class="form-control" name="nome" value="<?= session()->get('nome') ?>" id="nome" placeholder="Digite o seu nome" required>
                 </div>
 
                 <div class=" col-md-6">
                     <label for="email" class="preencher">EMAIL*</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="email@dominio.com.br" required>
-                    <div class="invalid-feedback">
-                        Por favor preencha o seu email.
-                    </div>
+                    <input type="email" class="form-control" name="email" value="<?= session()->get('usuario') ?>" id="email" placeholder="email@dominio.com.br" required>
                 </div>
 
                 <div class="col-md-6">
                     <label for="telefone" class="preencher">TELEFONE</label>
-                    <input type="text" name="telefone" class="form-control" id="telefone" required>
+                    <input type="text" name="telefone" value="<?= session()->get('celular') ?>" class="form-control" id="celular" maxlength="11">
                 </div>
 
                 <div class="col-md-6">
-                    <label for="instagram" class="preencher">INSTAGRAM</label>
-                    <input type="text" class="form-control" name="instagram" id="instagram" required>
+                    <label for="instagram" class="preencher">INSTAGRAM*</label>
+                    <input type="text" class="form-control" name="instagram" id="instagram" placeholder="Exemplo: planner.bymarilia" required>
                 </div>
 
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="name" class="preencher">MENSAGEM</label>
+                    <label for="name" class="preencher">MENSAGEM*</label>
                     <textarea class="form-control message-field" name="mensagem" id="name" rows="5" required></textarea>
                 </div>
             </div>

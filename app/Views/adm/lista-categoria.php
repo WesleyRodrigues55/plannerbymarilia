@@ -1,5 +1,5 @@
 <?php
-$data['title'] = "Listar Categoria";
+$data['title'] = "Lista Categoria";
 $data['link_css'] = "assets/css/lista-produto.css";
 ?>
 
@@ -14,11 +14,10 @@ $data['link_css'] = "assets/css/lista-produto.css";
 
     <nav class="navbar mt-10 bg-white">
         <div class="container-fluid">
-            <form class="d-flex gap-2" role="search">
-                <input class="form-control" type="search" placeholder="Pesquise a categoria" aria-label="Search">
+            <form class="d-flex gap-2" role="search" method="get" action="<?= base_url('administrador/lista-categoria') ?>">
+                <input class="form-control" type="search" name="search" placeholder="Pesquise a categoria" aria-label="Search">
                 <button class="btn btn input-rosa" type="submit">Pesquisar</button>
                 <a href="<?= base_url('administrador/dashboard') ?>" class="input-rosa">Voltar</a>
-
             </form>
         </div>
     </nav>
@@ -41,7 +40,8 @@ $data['link_css'] = "assets/css/lista-produto.css";
                     <?php if ($message_empty) : ?>
                         <div class="alert alert-danger mt-5 text-center" role="alert">
                             <?= $message_empty; ?>
-                            <br>Para cadastrar uma categoria, clique em: <a href="<?= base_url('/administrador/cadastro-categoria'); ?>">Insere Categoria</a>.
+                            <br><br><a href="<?= base_url('/administrador/cadastro-categoria') ?>" class="input-rosa m-2">Clique aqui</a> para cadastrar uma categoria
+            </div>
                         </div>
                     <?php else : ?>
 

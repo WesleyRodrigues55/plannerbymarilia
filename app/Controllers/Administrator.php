@@ -62,7 +62,7 @@ class Administrator extends BaseController
                 if ($img->isValid() && !$img->hasMoved())
                 {
                     $novoNome = uniqid() . '_' . $img->getName();
-                    $img->move(ROOTPATH . 'public/assets/img/produtos/capas', $novoNome);
+                    $img->move(ROOTPATH . 'public/assets/img/produtos/capas-internas', $novoNome);
                     $nomesDosArquivos[] = $novoNome;
                 }
                 else
@@ -177,7 +177,7 @@ class Administrator extends BaseController
             if ($img->isValid() && !$img->hasMoved())
             {
                 $novoNome = uniqid() . '_' . $img->getName();
-                $img->move(ROOTPATH . 'public/assets/img/produtos/capas/', $novoNome);
+                $img->move(ROOTPATH . 'public/assets/img/produtos/capas-internas/', $novoNome);
                 return $novoNome;
             }
             else
@@ -284,7 +284,7 @@ class Administrator extends BaseController
             if ($img->isValid() && !$img->hasMoved())
             {
                 $novoNome = uniqid() . '_' . $img->getName();
-                $img->move(ROOTPATH . 'public/assets/img/produtos', $novoNome);
+                $img->move(ROOTPATH . 'public/assets/img/produtos/capas-externas', $novoNome);
                 return $novoNome;
             }
             else
@@ -404,6 +404,8 @@ class Administrator extends BaseController
                 $db = \Config\Database::connect();
                 $builder = $db->table('produto');
                 $builder->where('ATIVO', 1);
+
+
                 $builder->select('
                     produto.ID,
                     produto.NOME,
@@ -412,8 +414,12 @@ class Administrator extends BaseController
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'DESC');
-                $builder->limit(10); 
-    
+                $builder->limit(15); 
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
+
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -450,7 +456,10 @@ class Administrator extends BaseController
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
-    
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('USUARIO', $searchTerm);
+                }
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -512,7 +521,7 @@ class Administrator extends BaseController
             if (!$builder) {
                 session()->setFlashdata('register-category-failed', 'Tivemos um erro em salvar sua categoria, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria salvo com sucesso!');
+                session()->setFlashdata('register-category-success', 'categoria salva com sucesso!');
             }
             return redirect()->back();
 
@@ -532,6 +541,7 @@ class Administrator extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
             $builder->where('ATIVO', 1);
+             
             $builder->select('
                 tipo_categoria_produto.ID,
                 tipo_categoria_produto.TIPO_CATEGORIA,
@@ -539,6 +549,11 @@ class Administrator extends BaseController
             ');
             $builder->orderBy('ID', 'DESC');
             $builder->limit(10); 
+
+            $searchTerm = $this->request->getGet('search');
+            if (!empty($searchTerm)) {
+                $builder->like('TIPO_CATEGORIA', $searchTerm);
+            }
 
             $query = $builder->get()->getResultArray();
             $db->close();
@@ -587,6 +602,16 @@ class Administrator extends BaseController
         ];
 
         try {
+            if ($tipo_categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('tipo_categoria_produto');
+                if ($builder->where('TIPO_CATEGORIA', $tipo_categoria)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('category-exists', 'Categoria já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
             $builder->where('ID', $id_categoria);
@@ -594,11 +619,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('att-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+                session()->setFlashdata('att-category-success', 'categoria atualizada com sucesso!');
             }
-            return redirect()->to('/administrador/lista-categoria');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -755,6 +780,20 @@ class Administrator extends BaseController
         ];
 
         try {
+
+            if ($nome && $categoria) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('produto');
+                $builder->where('NOME', $nome);
+                $builder->where('CATEGORIA', $categoria);
+
+                if ($builder->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('product-exists', 'Produto já cadastrado!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('produto');
             $builder->where('ID', $id_produto);
@@ -762,11 +801,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-product-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
+                session()->setFlashdata('att-produtc-failed', 'Tivemos um erro em salvar seu produto, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-product-success', 'produto salvo com sucesso!');
+                session()->setFlashdata('att-product-success', 'produto salvo com sucesso!');
             }
-            return redirect()->to('/administrador/lista-produto');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -888,7 +927,10 @@ class Administrator extends BaseController
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'ASC');
                 $builder->limit(10); 
-    
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -989,6 +1031,16 @@ class Administrator extends BaseController
         ];
 
         try {
+            if ($nome) {
+                $db = \Config\Database::connect();
+                $builder = $db->table('opcoes_adicionais');
+                if ($builder->where('NOME', $nome)->countAllResults() > 0) {
+                    $db->close();
+                    session()->setFlashdata('option-exists', 'Adicional já cadastrada!');
+                    return redirect()->back();
+                }
+            }
+
             $db = \Config\Database::connect();
             $builder = $db->table('opcoes_adicionais');
             $builder->where('ID', $id_opcoes_adicionais);
@@ -996,11 +1048,11 @@ class Administrator extends BaseController
             $db->close();
 
             if (!$builder) {
-                session()->setFlashdata('register-category-failed', 'Tivemos um erro em atualizar sua categoria, por favor tente novamente!');
+                session()->setFlashdata('att-adicional-failed', 'Tivemos um erro em atualizar seu adicional, por favor tente novamente!');
             } else {
-                session()->setFlashdata('register-category-success', 'categoria atualizada com sucesso!');
+                session()->setFlashdata('att-adcional-success', 'Adicional atualizada com sucesso!');
             }
-            return redirect()->to('/administrador/lista-opcoes-adicionais');
+            return redirect()->back();
 
         } catch (\Exception $e) {
             echo 'Erro na conexão com o banco de dados: ' . $e->getMessage();
@@ -1028,7 +1080,10 @@ class Administrator extends BaseController
             $builder->join('produto', 'produto.ID = estoque.PRODUTO_ID');
             $builder->orderBy('estoque.PRODUTO_ID', 'DESC');
             $builder->limit(10);
-
+            $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
             $query = $builder->get()->getResultArray();
             $db->close();
             // echo "<pre>";  

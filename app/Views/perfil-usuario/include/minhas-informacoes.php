@@ -4,6 +4,7 @@ $data['link_css'] = "assets/css/perfil.css";
 
 <div class="container">
     <h2 class="mb-2 mt-2 titulo-perfil">Minhas informações</h2>
+    <hr>
     <form id="AlterarUsuarioLogado" method="post">
         <div class="row">
             <div class="mb-2 col-md-6">

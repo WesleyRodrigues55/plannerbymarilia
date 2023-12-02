@@ -5,33 +5,33 @@
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
         <h5 class="link-footer">INFORMAÇÕES</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Política da Loja</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Política de Privacidade</a></li>
+          <li class="nav-item mb-2"><a href="/politicas/politica-loja" class="nav-link p-0 text-body-secondary">Política da Loja</a></li>
+          <li class="nav-item mb-2"><a href="/politicas/politica-privacidade" class="nav-link p-0 text-body-secondary">Política de Privacidade</a></li>
         </ul>
       </div>
 
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
         <h5 class="link-footer">INSTITUCIONAL</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Quem Somos</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Depoimentos</a></li>
+          <li class="nav-item mb-2"><a href="/politicas/quem-somos" class="nav-link p-0 text-body-secondary">Quem Somos</a></li>
+          <li class="nav-item mb-2"><a href="/depoimentos-clientes" class="nav-link p-0 text-body-secondary">Depoimentos</a></li>
         </ul>
       </div>
 
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
         <h5 class="link-footer">MINHA CONTA</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Meu perfil</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Carrinho</a></li>
+          <li class="nav-item mb-2"><a href="/perfil/perfil-usuario" class="nav-link p-0 text-body-secondary">Meu perfil</a></li>
+          <li class="nav-item mb-2"><a href="/carrinho" class="nav-link p-0 text-body-secondary">Carrinho</a></li>
         </ul>
       </div>
 
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
         <h5 class="link-footer">CONTATO</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Seg à Sex - das 9h as 17h </a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Whatsapp (XX)0000-0000</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">planner.bymarilia@gmail.com</a></li>
+          <li class="nav-item mb-2"><a class="nav-link p-0 text-body-secondary">Seg à Sex - das 9h as 17h </a></li>
+          <li class="nav-item mb-2"><a href="https://wa.me/5515991263437" target="_blank" class="nav-link p-0 text-body-secondary">Whatsapp (15)99126-3437</a></li>
+          <li class="nav-item mb-2"><a  href="mailto:plannerbymarilia@gmail.com" class="nav-link p-0 text-body-secondary">planner.bymarilia@gmail.com</a></li>
         </ul>
       </div>
     </div>
@@ -68,7 +68,7 @@
   </div>
 </div>
 
-<!-- mensagem pop-up precisa fazer login-->
+<!-- mensagem pop-up precisa fazer login quando clicado em carrinho-->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div id="open-toast-login" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
@@ -80,6 +80,24 @@
     <div class="toast-body">
       <p class="p-small">
         Você precisa fazer login para adicionar um item no carrinho.
+        <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up precisa fazer login quando clicado em depoimentos-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-login-depoimentos" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+        Você precisa fazer login para adicionar um depoimento.
         <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
       </p>
     </div>
@@ -234,6 +252,23 @@
     <div class="toast-body">
       <p class="p-small">
       Estoque alterado com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up desativar depoimento -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-desativar-depoimento" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Depoimento desativado!
     </p>
     </div>
   </div>

@@ -22,7 +22,7 @@
             <?php foreach($agendas as $a):  ?>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 my-2">
                     <div class="card h-100">
-                        <img src="<?= base_url('assets/img/teste/'. $a['IMAGEM']) ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
+                        <img src="<?= base_url('assets/img/produtos/capas-externas/'. $a['IMAGEM']) ?>" class="bd-placeholder-img card-img-top" width="100%" height="100%">
                         <div class="card-body card-products">
                             <h3><?php echo $a['NOME']; ?></h3>
                             <p class="card-text">

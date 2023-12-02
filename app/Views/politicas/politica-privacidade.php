@@ -65,7 +65,8 @@ $data['link_css'] = "assets/css/politicas.css";
                         outra operação prevista nos termos da legislação aplicável;</li>
                     <li>d. “Leis de Proteção de Dados” significa todas as disposições legais que regulem o Tratamento de
                         Dados Pessoais, incluindo, porém sem se limitar, a Lei nº 13.709/18, Lei Geral de Proteção de
-                        Dados Pessoais (“LGPD”);</li>
+                        Dados Pessoais (“LGPD”). Para maiores informações sobre a LGPD acesse o site:   <a href="https://www.gov.br/esporte/pt-br/acesso-a-informacao/lgpd" style="text-decoration: underline;">
+                        https://www.gov.br/esporte/pt-br/acesso-a-informacao/lgpd</a></li>
                 </ul>
 
                 <br><h2><b>2. Uso de Dados Pessoais</b></h2>
