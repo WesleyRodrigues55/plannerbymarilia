@@ -13,6 +13,10 @@ Portanto, com o objetivo de melhorar as vendas, contato com o cliente, acessibil
 Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das tarefas é um desafio contínuo em nossa sociedade moderna, onde as demandas pessoais e profissionais frequentemente se sobrepõem.  
 
 
+## ATENÇÃO
+
+- Algumas funcionalinas ainda não estão funcional, caso encontre algum erro, melhoria ou falta de alguma funcionalidade, entre em contato conosco.
+
 
 ## Requisitos para o projeto
 
@@ -20,7 +24,7 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 *Verifique a porta em que seu projeto foi instalado, o projeto usa a padrão 3306 do MySql, caso seja outra porta em uso, sigas os passos abaixo:
 - Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele altere a porta para a que esteja usando.
 
-- Baixe o script SQL (será disponibilizado em breve) e importe no mysql.
+- Baixe o [script SQL](https://github.com/WesleyRodrigues55/plannerbymarilia/blob/main/plannerbymarilia.sql) e importe no mysql.
 
 - É necessário ter o composer instalado em sua máquina, pode baixar o composer pelo link [Composer](https://getcomposer.org/download/)
 
@@ -40,7 +44,8 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 
 ## Configuração
 
-Há um arquivo `env-example` na raíz do projeto, renomeie para `.env`
+Há um arquivo `env-example` na raíz do projeto, renomeie para `.env`, nele apenas precisa da integração das KEY para a API do mercado pago.
+Poderá saber mais das integrações [clicando aqui](https://www.mercadopago.com.br/developers/pt/docs/checkout-bricks/payment-brick/payment-submission/pix#bookmark_mostre_o_status_do_pagamento)
 
 
 ## Requisitos do servidor
