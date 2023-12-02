@@ -21,6 +21,7 @@ $routes->get('/user/logout', 'User::logout');
 $routes->get('/perfil/meus-depoimentos', 'User::meusDepoimentos');
 $routes->get('/perfil/perfil-usuario', 'User::perfilUsuario');
 $routes->post('/user/cadastroUsuario', 'User::cadastroUsuario');
+$routes->post('/user/desativa-depoimento', 'User::desativaDepoimento');
 
 $routes->post('/user/alterar-pessoa', 'User::alterarPessoa');
 $routes->post('/user/alterar-usuario', 'User::AlterarUsuarioLogado');
@@ -61,6 +62,7 @@ $routes->post('/administrador/desativar-categoria', 'Administrator::desativarCat
     // Estoque
 $routes->get('/administrador/lista-estoque', 'Administrator::listaEstoque');
 $routes->post('/administrador/alterar-estoque', 'Administrator::alterarQuantidadeEstoque');
+
 // Depoimento
 $routes->get('/depoimentos-clientes', 'Testimony::depoimentosClientes');
 $routes->post('/testimony/salvar', 'Testimony::salvar');
@@ -82,7 +84,7 @@ $routes->post('/carrinho/adiciona-produto-carrinho', 'BuyCart::adicionaProdutoCa
 $routes->get('/carrinho/load-content-carrinho', 'BuyCart::loadContentCarrinho');
 $routes->post('/carrinho/remove-item-carrinho', 'BuyCart::removeItemCarrinho');
 
-$routes->post('/carrinho/teste', 'BuyCart::testeForm');
+// $routes->post('/carrinho/teste', 'BuyCart::testeForm');
 
 // Comprando
 $routes->get('/comprando/endereco-de-entrega/(:any)', 'DeliveryAdress::enderecoDeEntrega/$1');
@@ -109,3 +111,8 @@ $routes->get('/payment/get-payment/(:any)', 'PaymentMethod::getStatusPayment/$1'
 $routes->get('/politicas/politica-loja', 'Home::politicaLoja');
 $routes->get('/politicas/politica-privacidade', 'Home::politicaPrivacidade');
 $routes->get('/politicas/quem-somos', 'Home::quemSomos');
+
+
+
+
+$routes->get('/teste', 'Home::teste');

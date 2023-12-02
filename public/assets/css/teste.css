@@ -4,11 +4,11 @@ section {
     border-top: 1px solid #ddd;
 }
 
-input[type="radio"] {
+input {
     display: none;
 }
 
-.label-tab {
+label {
     display: inline-block;
     margin: 0 0 -1px;
     padding: 15px 25px;
@@ -18,21 +18,21 @@ input[type="radio"] {
     border: 1px solid transparent;
 }
 
-.label-tab:before {
+label:before {
     font-family: fontawesome;
     font-weight: normal;
     margin-right: 10px;
 }
 
-.label-tab:hover {
-    opacity: 0.9;
+label:hover {
+    color: #888;
     cursor: pointer;
 }
 
 input:checked+label {
-    color: var(--cor-preto);
+    color: #555;
     border: 1px solid #ddd;
-    border-top: 2px solid var(--cor-rosa-principal);
+    border-top: 2px solid orange;
     border-bottom: 1px solid #fff;
 }
 
@@ -44,17 +44,17 @@ input:checked+label {
 }
 
 @media screen and (max-width: 650px) {
-    /* .label-tab {
+    /* label {
     font-size: 0;
   } */
-    .label-tab:before {
+    label:before {
         margin: 0;
         font-size: 0;
     }
 }
 
 @media screen and (max-width: 400px) {
-    .label-tab {
+    label {
         padding: 15px;
     }
 }

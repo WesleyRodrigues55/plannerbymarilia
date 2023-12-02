@@ -83,7 +83,7 @@ $data['link_css'] = "assets/css/home.css";
                     <div class="p-4 text-center borda-depoimentos">
                         <p><?php echo $d['DEPOIMENTO']; ?></p>
                         <a href="https://www.instagram.com/<?php echo $d['INSTAGRAM']; ?>" target="_blank">
-                            <h3>@<?php echo $d['NOME']; ?></h3>
+                            <h3>@<?php echo $d['INSTAGRAM']; ?></h3>
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -92,7 +92,11 @@ $data['link_css'] = "assets/css/home.css";
             <p class="text-center">OU</p>
 
             <div class="text-center">
-                <a class="btn input-simples-outline px-5" href="/depoimentos-clientes">DEIXE UM DEPOIMENTO</a></button>
+                <?php if (session()->has('usuario')): ?>
+                    <a class="btn input-simples-outline px-5" href="/depoimentos-clientes">DEIXE UM DEPOIMENTO</a></button>
+                <?php else: ?>
+                    <a class="btn input-simples-outline px-5" href="javascript:void(0)" id="faca-login">DEIXE UM DEPOIMENTO</a></button>
+                <?php endif; ?>
             </div>
 
         </div>

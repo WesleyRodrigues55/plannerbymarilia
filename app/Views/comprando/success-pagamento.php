@@ -19,7 +19,7 @@
                 <p>Clique no botão abaixo e acesse suas compras.</p>
 
                 <!-- fazer link para perfil/minhas-compras -->
-                <button class="input-simples-outline w-100">Acessar minhas compras</button>
+                <a href="<?= base_url('perfil/perfil-usuario#tab4') ?>" class="input-simples-outline w-100" >Acessar minhas compras</a>
             </div>
         </div>
     </main>

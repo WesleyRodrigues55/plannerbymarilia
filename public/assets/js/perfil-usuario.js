@@ -1,6 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 
-    document.getElementById('item1').style.display = "block"
+    const item1 = document.getElementById('item1')
+    if (item1) {
+        item1.style.display = "block"
+    }
     verticalTabs = document.querySelectorAll(".vertical-tabs a")
 
 
@@ -36,8 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('item4').style.display = "none"
             document.getElementById('item3').style.display = "block"
             anchor('content3', 'item3')
-        }
-        else if (clickItem == 'content4') {
+        } else if (clickItem == 'content4') {
             document.getElementById('item1').style.display = "none"
             document.getElementById('item2').style.display = "none"
             document.getElementById('item3').style.display = "none"
