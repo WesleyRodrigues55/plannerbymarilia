@@ -404,6 +404,8 @@ class Administrator extends BaseController
                 $db = \Config\Database::connect();
                 $builder = $db->table('produto');
                 $builder->where('ATIVO', 1);
+
+
                 $builder->select('
                     produto.ID,
                     produto.NOME,
@@ -412,8 +414,12 @@ class Administrator extends BaseController
                 ');
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'DESC');
-                $builder->limit(10); 
-    
+                $builder->limit(15); 
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
+
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -450,7 +456,10 @@ class Administrator extends BaseController
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'DESC');
                 $builder->limit(10); 
-    
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('USUARIO', $searchTerm);
+                }
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -532,10 +541,7 @@ class Administrator extends BaseController
             $db = \Config\Database::connect();
             $builder = $db->table('tipo_categoria_produto');
             $builder->where('ATIVO', 1);
-            // $searchTerm = $this->request->getGet('search');
-            // if (!empty($searchTerm)) {
-            //     $builder->like('TIPO_CATEGORIA', $searchTerm);
-            // }
+             
             $builder->select('
                 tipo_categoria_produto.ID,
                 tipo_categoria_produto.TIPO_CATEGORIA,
@@ -544,13 +550,13 @@ class Administrator extends BaseController
             $builder->orderBy('ID', 'DESC');
             $builder->limit(10); 
 
+            $searchTerm = $this->request->getGet('search');
+            if (!empty($searchTerm)) {
+                $builder->like('TIPO_CATEGORIA', $searchTerm);
+            }
+
             $query = $builder->get()->getResultArray();
             $db->close();
-
-            // if (!empty($searchTerm)) {
-            //     session()->setFlashdata('list-nao-encontrado', 'Nenhum resultado encontrado para a pesquisa: ' . $searchTerm);
-            //     return view('/adm/lista-categoria');
-            // }
 
             if (empty($query)) {
                 session()->setFlashdata('list-empty', 'A lista está vazia.');
@@ -921,7 +927,10 @@ class Administrator extends BaseController
                 //FAZER QUERY QUE CONSULTE A TABELA DE VENDAS E FILTRE OS PRODUTOS QUE FORAM MAIS VENDIDOS 
                 $builder->orderBy('ID', 'ASC');
                 $builder->limit(10); 
-    
+                $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
                 $query = $builder->get()->getResultArray();
                 $db->close();
     
@@ -1071,7 +1080,10 @@ class Administrator extends BaseController
             $builder->join('produto', 'produto.ID = estoque.PRODUTO_ID');
             $builder->orderBy('estoque.PRODUTO_ID', 'DESC');
             $builder->limit(10);
-
+            $searchTerm = $this->request->getGet('search');
+                if (!empty($searchTerm)) {
+                    $builder->like('NOME', $searchTerm);
+                }
             $query = $builder->get()->getResultArray();
             $db->close();
             // echo "<pre>";  
