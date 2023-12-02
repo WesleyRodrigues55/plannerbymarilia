@@ -14,8 +14,8 @@ $data['link_css'] = "assets/css/lista-usuario.css";
 
     <nav class="navbar mt-10 bg-white">
         <div class="container-fluid">
-            <form class="d-flex gap-2" role="search">
-                <input class="form-control" type="search" placeholder="Pesquise o usuario" aria-label="Search">
+            <form class="d-flex gap-2" role="search" method="get" action="<?= base_url('administrador/lista-usuario') ?>">
+                <input class="form-control" type="search" name="search" placeholder="Pesquise o item" aria-label="Search">
                 <button class="btn btn input-rosa" type="submit">Pesquisar</button>
                 <a href="<?= base_url('administrador/dashboard') ?>" class="input-rosa">Voltar</a>
             </form>
@@ -40,7 +40,6 @@ $data['link_css'] = "assets/css/lista-usuario.css";
                 <?php if ($message_empty) : ?>
                     <div class="alert alert-danger mt-5 text-center" role="alert">
                         <?= $message_empty; ?>
-                        <br>Para cadastrar um usuario, clique em: <a href="<?= base_url('/login/cadastro-usuario'); ?>">Insere Usuario</a>.
                     </div>
                 <?php else : ?>
                     <?php foreach ($usuario as $user) : ?>

@@ -14,11 +14,10 @@ $data['link_css'] = "assets/css/lista-produto.css";
 
     <nav class="navbar mt-10 bg-white">
         <div class="container-fluid">
-            <form class="d-flex gap-2" role="search">
-                <input class="form-control" type="search" placeholder="Pesquise o item" aria-label="Search">
+            <form class="d-flex gap-2" role="search" method="get" action="<?= base_url('administrador/lista-estoque') ?>">
+                <input class="form-control" type="search" name="search" placeholder="Pesquise o item" aria-label="Search">
                 <button class="btn btn input-rosa" type="submit">Pesquisar</button>
                 <a href="<?= base_url('administrador/dashboard') ?>" class="input-rosa">Voltar</a>
-
             </form>
         </div>
     </nav>
