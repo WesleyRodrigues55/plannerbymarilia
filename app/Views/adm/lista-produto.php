@@ -14,8 +14,8 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
 
     <nav class="navbar mt-10 bg-white">
         <div class="container-fluid">
-            <form class="d-flex gap-2" role="search">
-                <input class="form-control" type="search" placeholder="Pesquise o produto" aria-label="Search">
+            <form class="d-flex gap-2" role="search" method="get" action="<?= base_url('administrador/lista-produto') ?>">
+                <input class="form-control" type="search" name="search" placeholder="Pesquise o item" aria-label="Search">
                 <button class="btn btn input-rosa" type="submit">Pesquisar</button>
                 <a href="<?= base_url('administrador/dashboard') ?>" class="input-rosa">Voltar</a>
             </form>
@@ -40,7 +40,7 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                 <?php if ($message_empty) : ?>
                     <div class="alert alert-danger mt-5 text-center" role="alert">
                         <?= $message_empty; ?>
-                        <br>Para cadastrar um produto, clique em: <a href="<?= base_url('/administrador/cadastro-produto'); ?>">Insere Produto</a>.
+                        <br><br><a href="<?= base_url('/administrador/cadastro-produto') ?>" class="input-rosa m-2">Clique aqui</a> para cadastrar um item
                     </div>
                 <?php else : ?>
                     <?php foreach ($produtos as $produto) : ?>
@@ -78,7 +78,6 @@ $data['link_css'] = "assets/css/lista-produto-adm.css";
                 <?php endif; ?>
             </td>
         </thead>
-
     </table>
 </div>
 <?= view("include/footer") ?>
