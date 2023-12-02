@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+use App\Controllers\Testimony;
+use App\Controllers\BuyCart;
 
 use CodeIgniter\I18n\Time;
 use Config\Services;
@@ -154,15 +156,27 @@ class User extends BaseController
         // Consulta SQL personalizada
         $db = \Config\Database::connect();
         $builder = $db->table('usuario');
-        $builder->select('ID, PESSOA_ID, SENHA, USUARIO, ATIVO, NIVEL');
-        $builder->where('USUARIO', $usuario);
-        $builder->where('ATIVO', 1);
+        $builder->select('
+            usuario.ID, 
+            usuario.PESSOA_ID, 
+            usuario.SENHA, 
+            usuario.USUARIO, 
+            usuario.ATIVO, 
+            usuario.NIVEL, 
+            pessoa.NOME, 
+            pessoa.CELULAR
+        ');
+        $builder->join('pessoa', 'pessoa.ID = usuario.PESSOA_ID');
+        $builder->where('usuario.USUARIO', $usuario);
+        $builder->where('usuario.ATIVO', 1);
 
         $result = $builder->get()->getRow();
 
         if ($result && password_verify($senha, $result->SENHA)) {
             session()->set([
                 'id' => $result->ID,
+                'nome' => $result->NOME,
+                'celular' => $result->CELULAR,
                 'usuario' => $result->USUARIO,
                 'pessoa_id' => $result->PESSOA_ID,
                 'nivel' => $result->NIVEL,
@@ -287,6 +301,8 @@ class User extends BaseController
     public function perfilUsuario()
     {
         $user = new User();
+        $buy_cart = new BuyCart();
+        $testimony = new Testimony();
 
         if (!$user->validaLogin()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -295,10 +311,14 @@ class User extends BaseController
         $id_usuario = session()->get('id');
 
         $usuario_selecionado = $user->getPessoa($id_usuario);
+        $depoimentos_usuario = $testimony->getDepoimentosPorIdUsuario($id_usuario);
+        $compras_usuario = $buy_cart->getComprasUsuarioById($id_usuario);
 
         if ($usuario_selecionado !== null) {
             $data = [
                 "usuario_selecionado" => $usuario_selecionado[0],
+                "depoimentos_usuario" => $depoimentos_usuario,
+                "compras_usuario" => $compras_usuario
             ];
 
             return view('perfil-usuario/perfil', $data);
@@ -405,5 +425,27 @@ class User extends BaseController
         } catch (\Exception $e) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+    }
+
+    public function desativaDepoimento() {
+        $id_depoimento = $this->request->getPost('id-depoimento');
+        $item_tab = $this->request->getPost('item-tab');
+        $data = [ 'ATIVO' => 0 ];
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('depoimentos');
+        $builder->where('ID', $id_depoimento);
+        $builder->update($data);
+        $db->close();
+
+        if (!$builder) {
+            //mensagem de removido com session
+            session()->setFlashdata('query-depoimentos-failed', 'Error ao desativar depoimento.');
+        } else {
+            //mensagem de removido com session
+            session()->setFlashdata('query-depoimentos-success', 'Depoimento desativado com sucesso!');
+        }
+        
+        return redirect()->to('perfil/perfil-usuario#'.$item_tab);
     }
 }

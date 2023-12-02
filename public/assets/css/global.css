@@ -20,7 +20,6 @@
 @import url("assets/css/lista-usuario.css");
 @import url("assets/css/perfil.css");
 @import url("assets/css/produto-selecionado.css");
-
 :root {
     --cor-branco: #FFFFFF;
     --cor-preto: #000000;
@@ -247,7 +246,6 @@ a:hover {
     margin: 16px 0;
 }
 
-
 .whats {
     position: fixed;
     bottom: 4em;
@@ -260,12 +258,10 @@ a:hover {
     .box-logo-header {
         width: 100% !important;
     }
-
     .form-search-nav,
     .content-icons-nav-desktop {
         display: none !important;
     }
-
     .visao-mobile-icons {
         display: block !important;
     }
@@ -286,9 +282,11 @@ nav {
     .menu-nav {
         display: block !important;
     }
-
     .instagram-media {
         width: 100% !important;
     }
 }
 
+.toast-container {
+    z-index: 9999 !important;
+}

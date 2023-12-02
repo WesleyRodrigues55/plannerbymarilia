@@ -135,7 +135,7 @@
                                 <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:24px; height: 24px">
                             </button>
                         <?php else: ?>
-                            <button type="submit" class="btn input-rosa px-5 w-100 d-flex align-items-center justify-content-center gap-2 faca-login" id="faca-login-<?= $produto_selecionado[0]['SLUG'] ?>">
+                            <button class="btn input-rosa px-5 w-100 d-flex align-items-center justify-content-center gap-2 faca-login" id="faca-login-<?= $produto_selecionado[0]['SLUG'] ?>">
                                 <span>Comprar</span>
                                 <img src="<?= base_url('assets/img/shopping-cart.png') ?>" alt="" style="width:24px; height: 24px">
                             </button>

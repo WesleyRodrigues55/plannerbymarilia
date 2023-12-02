@@ -822,4 +822,17 @@ class BuyCart extends BaseController
         return $query;
     }
 
+    public function getComprasUsuarioById($id_usuario) {
+        $db = \Config\Database::connect();
+        // $builder->select('
+
+        // ');
+        $builder = $db->table('detalhes_do_pedido');
+        $builder->where('USUARIO_ID', $id_usuario);
+        // $builder->join('carrinho_de_compras', 'detalhes_do_pedido.CARRINHO_DE_COMPRAS_ID = carrinho_de_compras.ID');
+        $query = $builder->get()->getResultArray();
+        $db->close();
+        return $query;
+    }
+
 }

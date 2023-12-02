@@ -68,7 +68,7 @@
   </div>
 </div>
 
-<!-- mensagem pop-up precisa fazer login-->
+<!-- mensagem pop-up precisa fazer login quando clicado em carrinho-->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div id="open-toast-login" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
@@ -80,6 +80,24 @@
     <div class="toast-body">
       <p class="p-small">
         Você precisa fazer login para adicionar um item no carrinho.
+        <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up precisa fazer login quando clicado em depoimentos-->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-login-depoimentos" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+        Você precisa fazer login para adicionar um depoimento.
         <br><a href="<?= base_url('/login') ?>" class="p-small" style="text-decoration: underline">Clique aqui</a> para fazer o login.
       </p>
     </div>
@@ -234,6 +252,23 @@
     <div class="toast-body">
       <p class="p-small">
       Estoque alterado com sucesso!
+    </p>
+    </div>
+  </div>
+</div>
+
+<!-- mensagem pop-up desativar depoimento -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="open-toast-desativar-depoimento" class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="<?= base_url('favicon.ico') ?>" class="rounded me-2" alt="...">
+      <strong class="me-auto">Planner By marília</strong>
+      <small>Agora</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="p-small">
+      Depoimento desativado!
     </p>
     </div>
   </div>
