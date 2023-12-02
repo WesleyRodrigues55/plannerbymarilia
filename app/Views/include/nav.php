@@ -12,9 +12,11 @@ $data['link_css'] = "assets/css/nav.css";
     <div class="border-header"></div> -->
 
     <div class="container d-flex justify-content-between align-items-center">
-        <form action="" action="" class="w-25 form-search-nav" style="position: relative">
-            <input type="search" class="input-navegacao" name="pesquisa-nav" placeholder="Buscar">
-            <img src="<?= base_url('assets/icons/lupa.png') ?>" style="position: absolute; top: 50%; right: 120px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Search" />
+        <form method="GET" id="pesquisarNav" class="w-25 form-search-nav" style="position: relative">
+            <div>
+                <input type="search" class="input-navegacao" value="" name="pesquisa-nav" placeholder="Buscar">
+                <img src="<?= base_url('assets/icons/lupa.png') ?>" style="position: absolute; top: 50%; right: 120px; transform: translateY(-50%); height: 20px; width: 20px;" alt="Ícone Search" />
+            </div>
         </form>
 
         <div class="w-50 text-center box-logo-header">
