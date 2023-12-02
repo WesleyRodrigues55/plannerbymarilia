@@ -25,6 +25,15 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 - Abra a pasta config do projeto no caminho `cd app/Config/` e encontre o arquivo Database.php e abra-o, nele altere a porta para a que esteja usando.
 
 - Baixe o [script SQL](https://github.com/WesleyRodrigues55/plannerbymarilia/blob/main/plannerbymarilia.sql) e importe no mysql.
+Há 2 usuário fictícios nesse banco 1 ADM e outro Usuário de teste.
+- Login ADM:
+administrador@gmail.com
+Administrador123@
+
+- Login Usuário Teste:
+teste@gmail.com
+Teste123@
+
 
 - É necessário ter o composer instalado em sua máquina, pode baixar o composer pelo link [Composer](https://getcomposer.org/download/)
 
