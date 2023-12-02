@@ -20,7 +20,7 @@
         <?php if ($message_success): ?>
             <div class="alert alert-success mt-5 text-center" role="alert">
                 <?= $message_success; ?>
-                <br>Para editar seus depoimentos ou excluílos, acesse <a href="<?= base_url('perfil/meus-depoimentos'); ?>">Meus depoimentos</a>.
+                <br>Para editar seus depoimentos ou excluílos, acesse <a href="<?= base_url('/perfil/perfil-usuario#tab3'); ?>" class="input-rosa">Meus depoimentos</a>.
             </div>
         <?php endif; ?>
        

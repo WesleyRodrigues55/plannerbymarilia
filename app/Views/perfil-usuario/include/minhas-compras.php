@@ -30,7 +30,7 @@ $data['link_css'] = "assets/css/perfil.css";
             <?php endforeach; ?>
             <?php if (!$compras_usuario): ?>
                 <tr>
-                    <td colspan="3">Nada pro aqui.</td>
+                    <td colspan="3">Nada por aqui.</td>
                 </tr>
             <?php endif; ?>
         </thead>
