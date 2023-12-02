@@ -15,7 +15,7 @@ Esse crescimento se dá também pelo fato de que gestão eficaz do tempo e das t
 
 ## ATENÇÃO
 
-- Algumas funcionalinas ainda não estão funcional, caso encontre algum erro, melhoria ou falta de alguma funcionalidade, entre em contato conosco.
+- Algumas funcionalidades ainda não estão OK, caso encontre algum erro, melhoria ou falta de alguma coisa, entre em contato conosco.
 
 
 ## Requisitos para o projeto
